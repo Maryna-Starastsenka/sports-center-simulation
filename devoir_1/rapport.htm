@@ -39,7 +39,7 @@
   <p>
     <span style="font-weight: bold;">Nom: </span>Maryna Starastsenka
     <br />
-    <span style="font-weight: bold;">Matricule: </span>6402
+    <span style="font-weight: bold;">Matricule: </span>20166402
     <br />
     <span style="font-weight: bold;">Courriel: </span>maryna.starastsenka@umontreal.ca
     <br />
@@ -180,7 +180,7 @@
     <span style="font-weight: bold;">Scénarios alternatifs :</span>
     <span style="font-weight: bold;">Postconditions :</span>Le client a maintenant un numéro de membre unique qui lui donne accès au gym. </pre>
 
-    <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Demande d'accès au gym
+  <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Demande d'accès au gym
     <span style="font-weight: bold;">But :</span> Le client se présente à la réception et demande l'accès au gym.
     <span style="font-weight: bold;">Préconditions :</span> Le client doit être membre
     <span style="font-weight: bold;">Acteurs :</span> Le membre (principal), Agent à la réception(secondaire)
@@ -200,7 +200,7 @@
     4.b.1 L'agent refuse l'accès au membre.
     <span style="font-weight: bold;">Postconditions :</span> </pre>
 
-    <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Inscription à une séance
+  <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Inscription à une séance
     <span style="font-weight: bold;">But :</span>  Participer à un cours de sport ou obtenir un service d'un professionnel.
     <span style="font-weight: bold;">Préconditions :</span> Le client doit être membre
     <span style="font-weight: bold;">Acteurs :</span> Le membre (principal), Agent à la réception(secondaire), Répertoire de service.
@@ -208,7 +208,7 @@
     1. Le logiciel affiche le menu
     2. L'agent choisit Consultation des séances.
     3. Le Répertoire des Services renvoie les services disponibles.
-    4. Le membre choisit une séance. 
+    4. Le membre choisit une séance.
       4.1 Le membre donne son numéro pour l'inscription.
       4.2 Le logiciel confirme la disponibilité du service.
       4.3 Le logiciel enregistre les données.
@@ -218,6 +218,59 @@
       4.3.a Le logiciel renvoie "Capacité maximale atteinte".
       4.4.a Le logiciel retourne l'étape 3.
     <span style="font-weight: bold;">Postconditions :</span> </pre>
+
+    <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Confirmation de la présence
+      <span style="font-weight: bold;">But :</span> Le membre se présente à la réception pour confirmer sa présence avant le début de séance.
+      <span style="font-weight: bold;">Préconditions :</span> Le membre doit être inscrit à une séance.
+      <span style="font-weight: bold;">Acteurs :</span> Le membre (principal), Agent à la réception(secondaire), Répertoire de service.
+      <span style="font-weight: bold;">Scénario principal :</span>
+      1. Le logiciel affiche le menu
+      2. L'agent choisit Consultation des séances.
+      3. L'agent entre le Code du service à 7 chiffres.
+      4. Le Répertoire des Services renvoie le séance rechérchée.
+      5. L'agent appuit sur Confirmer la présence.
+      6. L'agent entre le code du membre.
+      7. L'agent appuit sur enregistrer.
+      8. Le logiciel envoie les données au Centre de Données.
+        8.1 Le logiciel reçoit la confirmation de la part du Centre de Données.
+        8.2 Le logiciel affiche "Validé".
+      <span style="font-weight: bold;">Scénarios alternatifs :</span> ramifications du déroulement principal, alternatives possible à certaines étapes
+        4a.1 Le Répertoire des Services ne trouve pas le code rechérché et renvoie "Code du service incorrect".
+        4a.2 Le logiciel retourne à l'étape 3.
+        8a.1 Centre de Données ne trouve pas l'inscription du membre à la séance.
+        8a.2 Le logiciel affiche "Refusé".
+      <span style="font-weight: bold;">Postconditions :</span> </pre>
+
+    <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Inscription de professionnel
+      <span style="font-weight: bold;">But :</span> Le professionnel s'inscrit pour pouvoir fournir des services au gym.
+      <span style="font-weight: bold;">Préconditions :</span> Aucune
+      <span style="font-weight: bold;">Acteurs :</span> Professionnel (principal), Agent à la réception (secondaire)
+      <span style="font-weight: bold;">Scénario principal :</span>
+      1. Le logiciel affiche le menu.
+      2. L'agent choisit Inscription d'un nouveau professionnnel dans le logiciel.
+      3. Le logiciel affiche le formulaire d'inscription.
+      4. L'agent entre les informations fournies par le professionnel.
+      5. L'agent appuit sur enregistrer.
+      6. Le logiciel envoie les données au Centre de données.
+      7. Le logiciel fournit un numéro unique au nouveau professionnel.
+      <span style="font-weight: bold;">Scénarios alternatifs :</span>
+      <span style="font-weight: bold;">Postconditions :</span>Le client a maintenant un numéro de membre unique qui lui donne accès au gym. </pre>
+
+    <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Création d'une séance de service
+      <span style="font-weight: bold;">But :</span>  Le professionnel crée une séance pour pouvoir fournir un service dans le gym.
+      <span style="font-weight: bold;">Préconditions :</span> Le professionnel doit être enregistré dans le gym.
+      <span style="font-weight: bold;">Acteurs :</span> Le professionnel (principal), Agent à la réception (secondaire), Répertoire de service.
+      <span style="font-weight: bold;">Scénario principal :</span>
+      1. Le logiciel affiche le menu
+      2. //je vais finir le cas
+      3.
+
+      <span style="font-weight: bold;">Scénarios alternatifs :</span> ramifications du déroulement principal, alternatives possible à certaines étapes
+
+      <span style="font-weight: bold;">Postconditions :</span> </pre>
+
+
+
   <h2>Tâche 4 : Risques</h2>
 
 
