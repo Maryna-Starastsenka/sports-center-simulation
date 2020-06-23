@@ -153,20 +153,19 @@
     Tâche 1 : Glossaire</h2>
   <p>
     Glossaire des termes clés<br>
+    <span style="font-weight: bold;">Code de service :</span> Code unique utilisé pour référencer un service offert par un professionnel.<br>
 
-    Membre : Client qui a accès illimité aux salles de sports et aux servicces d'un professionnel.<br>
+    <span style="font-weight: bold;">Membre :</span> Client qui a accès illimité aux salles de sports et aux services d'un professionnel.<br>
 
-    Numéro de membre : Numéro unique qui identifie un membre. <br>
+    <span style="font-weight: bold;">Numéro de membre :</span> Numéro unique qui identifie un membre. <br>
 
-    Professionnel : Expert en exercice physqiue ou en santé qui offre un service aux membres.<br>
+    <span style="font-weight: bold;">Numéro de professionnel :</span> Numéro unique qui permet d'identifier un professionnel.<br>
 
-    Numéro de professionnel : Numéro unique qui permet d'identifier un professionnel.<br>
+    <span style="font-weight: bold;">Professionnel :</span> Expert en exercice physqiue ou en santé qui offre un service aux membres.<br>
 
-    Séance : Service hebdomadaire offert par un professionnel pour les membres de #GYM. <br>
+    <span style="font-weight: bold;">Séance :</span> Service hebdomadaire offert par un professionnel pour les membres de #GYM. <br><br>
 
-    Code de service : Code unique utilisé pour référencer un service offert par un professionnel.<br><br>
-
-
+    (REMARQUE: ajouter Capacité maximale ?)<br>
     En fait c'est peut-être plus les termes spécifiques à un gym qu'il faut définir tel que
     ( expert en exercice physique (yoga, cross-fit, etc.), expert de la santé physique (nutritionniste, physiothérapeute, massothérapeute), etc. ??)
   </p>
@@ -268,6 +267,8 @@
       <span style="font-weight: bold;">Scénarios alternatifs :</span>
       <span style="font-weight: bold;">Postconditions :</span>Le client a maintenant un numéro de membre unique qui lui donne accès au gym. </pre>
 
+
+
     <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Création d'une séance de service
       <span style="font-weight: bold;">But :</span>  Le professionnel crée une séance pour pouvoir fournir un service dans le gym.
       <span style="font-weight: bold;">Préconditions :</span> Le professionnel doit être enregistré dans le gym.
@@ -315,17 +316,17 @@
     <p> IDÉES D'AUTRES CAS D'UTILISATION : modifier les données personnelles d'un membre. Annulation d'un service. Annulation d'un abonnement.
 
   <h2>Tâche 4 : Risques</h2>
-  <p>
-    1. Risque sévère
-        - Fuite des données des utilisateurs
+  <pre style="font-family: 'Open Sans';">
+    <span style="font-weight: bold;">1. Risque sévère :</span>
+        - Fuite des données des utilisateurs.
         - Ressource humaine pour la production du livrable insuffisante (2 personnes pour un projet de 3 personnes).
-    2. Risque important
+    <span style="font-weight: bold;">2. Risque important :</span>
         - Une personne non-membre pourrait utilisé le code d'une personne membre pour s'autentifier sans abonnement.
-    3. Risque éloigné
-        - L'interface du logiciel doit être assez instinctive pour être utilisé par un employé du gym qui n'est pas expert en informatique.
-    4. Obstacle mineur
-        La complexité du code doit être tel qu'une personne non-membre ne puisse en donner un au hasard et et tomber sur le code d'un vrai membre.
-  <p>
+    <span style="font-weight: bold;">3. Risque éloigné :</span>
+        - L'interface du logiciel doit être assez intuitive pour être utilisée par un employé du gym qui n'est pas expert en informatique.
+    <span style="font-weight: bold;">4. Obstacle mineur :</span>
+        - La complexité du code doit être telle qu'une personne non-membre ne puisse en donner un au hasard et et tomber sur le code d'un vrai membre.
+  </pre>
 
   <h2>Tâche 5 : Exigences non-fonctionnelles</h2>
 
@@ -333,6 +334,8 @@
     Identifions les besoins non-fonctionnels du système.
   </p>
   <pre style="font-family: 'Open Sans';">
+    <span style="font-weight: bold;">Utilisation :</span> Le système doit avoir une interface convivial.
+
     <span style="font-weight: bold;">Fiabilité :</span>
     1. Le système doit être disponible 99.999% lors des heures d'ouverture du gym.
     2. Le système doit garantir la sécurité des données des membres et des professionnels.
