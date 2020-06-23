@@ -208,7 +208,7 @@
     3.3.a Le cas d'utilisation retourne à l'étape 3.
     3.2.b Le logiciel ne voit pas d'abonnement valide.
     3.3.b Le logiciel affiche «Membre suspendu».
-    4.b.1 L'agent refuse l'accès au membre.
+    4.b. L'agent refuse l'accès au membre.
     <span style="font-weight: bold;">Postconditions :</span> </pre>
 
   <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Inscription à une séance
@@ -248,8 +248,8 @@
       <span style="font-weight: bold;">Scénarios alternatifs :</span> ramifications du déroulement principal, alternatives possible à certaines étapes
       4a. Le Répertoire des Services ne trouve pas le code rechérché et renvoie "Code du service incorrect".
         4a.1. Le logiciel retourne à l'étape 3.
-      8a. Centre de Données ne trouve pas l'inscription du membre à la séance.
-        8a.1. Le logiciel affiche "Refusé".
+      8b. Centre de Données ne trouve pas l'inscription du membre à la séance.
+        8b.1. Le logiciel affiche "Refusé".
       <span style="font-weight: bold;">Postconditions :</span> </pre>
 
     <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Inscription de professionnel
@@ -269,8 +269,8 @@
 
 
 
-    <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Création d'une séance de service
-      <span style="font-weight: bold;">But :</span>  Le professionnel crée une séance pour pouvoir fournir un service dans le gym.
+    <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Création d'une séance
+      <span style="font-weight: bold;">But :</span>  Le professionnel crée une séance pour pouvoir fournir un service dans le gym ou consulte les inscriptions à une séance.
       <span style="font-weight: bold;">Préconditions :</span> Le professionnel doit être enregistré dans le gym.
       <span style="font-weight: bold;">Acteurs :</span> Le professionnel (principal), Agent à la réception (secondaire), Répertoire de service.
       <span style="font-weight: bold;">Scénario principal :</span>
@@ -286,17 +286,17 @@
       <span style="font-weight: bold;">Scénarios alternatifs :</span> ramifications du déroulement principal, alternatives possible à certaines étapes
       4a. Le Répertoire des Services ne trouve pas le Numéro du professionnel et renvoie "Numéro du professionnel incorrect".
         4a.1. Le logiciel retourne à l'étape 3.
-      5a. L'agent choisit une séance et appuit sur "Consulter les inscriptions".
-        5a.1. Les inscriptions s'affichent sur l'écran
-      <span style="font-weight: bold;">Postconditions :</span> </pre>
+      5b. L'agent choisit une séance et appuit sur "Consulter les inscriptions".
+        5b.1. Les inscriptions s'affichent sur l'écran
+      <span style="font-weight: bold;">Postconditions : Une nouvelle séance est créé dans le Répertoire de service.</span> </pre>
 
-      <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Modification et suppression d'une séance de service
-        <span style="font-weight: bold;">But :</span>  Le professionnel met à jour ou supprime une séance.
+      <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Gestion d'une séance de service
+        <span style="font-weight: bold;">But :</span>  Le professionnel met à jour, consulte ou supprime une séance.
         <span style="font-weight: bold;">Préconditions :</span> Le professionnel doit être enregistré dans le gym, la séance doit être créée dans le système.
         <span style="font-weight: bold;">Acteurs :</span> Le professionnel (principal), Agent à la réception (secondaire), Répertoire de service.
         <span style="font-weight: bold;">Scénario principal :</span>
         1. Le logiciel affiche le menu.
-        2. L'agent shoisit Consultation des séances.
+        2. L'agent choisit Consultation des séances.
         3. L'agent entre le Code du service.
         4. Le Répertoire de Services renvoie la séance recherchée.
         5. L'agent choisit "Modifier une séance".
@@ -307,13 +307,37 @@
         <span style="font-weight: bold;">Scénarios alternatifs :</span> ramifications du déroulement principal, alternatives possible à certaines étapes
         4a. Le Répertoire des Services ne trouve pas le Code du service et renvoie "Code du service incorrect".
           4a.1. Le logiciel retourne à l'étape 3.
-        5a. L'agent choisit "Supprimer une séance"
-          5a.1. L'agent appuit sur "Confirmer"
-          5a.2. Le logiciel supprime les données du Centre de Données.
-          5a.3. Le logiciel affiche "Validé".
-        <span style="font-weight: bold;">Postconditions :</span> </pre>
+        4c. L'agent consulte les inscriptions à la séance
+        5b. L'agent choisit "Supprimer une séance"
+          5b.1. L'agent appuit sur "Confirmer"
+          5b.2. Le logiciel supprime les données du Centre de Données.
+          5b.3. Le logiciel affiche "Validé".
+        <span style="font-weight: bold;">Postconditions : Modifiction ou suppression d'une séance</span> </pre>
+        
+        <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Gestion d'un compte membre ou professionnel.
+        <span style="font-weight: bold;">But :</span>  Modifier les données personnelles d'un membre ou d'un professionnel lorsque celles-ci changent ou suspendre les activités au gym.
+        <span style="font-weight: bold;">Préconditions :</span> Le professionnel ou le membre doivent être enregistrés dans le logiciel
+        <span style="font-weight: bold;">Acteurs :</span> Le professionnel (principal), Membre (principal) Agent à la réception (secondaire).
+        <span style="font-weight: bold;">Scénario principal :</span>
+        1. Le logiciel affiche le menu.
+        2. L'agent choisit Modification des données
+        3. L'agent entre le Numéro du membre ou professionnel.
+        4. Le Répertoire de Services affiche les données
+        5. L'agent choisit "Modifier les données".
+        6. L'agent modifie la ou les données.
+        6. L'agent appuit sur Enregistrer.
+        7. Le logiciel valide la modification.
+        <span style="font-weight: bold;">Scénarios alternatifs :</span> ramifications du déroulement principal, alternatives possible à certaines étapes
+        3a. Le logiciel ne trouve pas le Numéro et renvoie "Numéro incorrect".
+        4a. Le logiciel retourne à l'étape 2.
+        5b. L'agent choisit "Annuler un abonnement"
+          5b.1. L'agent appuit sur "Confirmer"
+          5b.2. Le logiciel modifie la condition du membre ou du professionnel à "Suspendu".
+          5b.3. Le logiciel affiche "Validé".
+        <span style="font-weight: bold;">Postconditions : L'abonnement du membre ou le service du professionnel est suspendu.</span> </pre>
 
-    <p> IDÉES D'AUTRES CAS D'UTILISATION : modifier les données personnelles d'un membre. Annulation d'un service. Annulation d'un abonnement.
+
+    <p> 
 
   <h2>Tâche 4 : Risques</h2>
   <pre style="font-family: 'Open Sans';">
