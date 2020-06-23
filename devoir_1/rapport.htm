@@ -277,7 +277,7 @@
       2. L'agent shoisit Consultation des séances.
       3. L'agent entre le Numéro du professionnel.
       4. Le Répertoire de Services renvoie les séances du professionnel.
-      5. L'agent shoisit "Ajouter une séance".
+      5. L'agent choisit "Ajouter une séance".
         5.1. L'agent entre les informations concernant la nouvelle séance à ajouter.
         5.2. L'agent appuit sur Enregistrer.
         5.3. Le logiciel envoie les données au Centre de Données.
@@ -285,11 +285,34 @@
       <span style="font-weight: bold;">Scénarios alternatifs :</span> ramifications du déroulement principal, alternatives possible à certaines étapes
       4a. Le Répertoire des Services ne trouve pas le Numéro du professionnel et renvoie "Numéro du professionnel incorrect".
         4a.1. Le logiciel retourne à l'étape 3.
-      5a. L'agent shoisit une séance et appuit sur "Consulter les inscriptions".
+      5a. L'agent choisit une séance et appuit sur "Consulter les inscriptions".
         5a.1. Les inscriptions s'affichent sur l'écran
       <span style="font-weight: bold;">Postconditions :</span> </pre>
 
-    <p> IDÉES D'AUTRES CAS D'UTILISATION : modifier les données personnelles d'un membre. Annulation d'un service. Annulation d'un abonnement. 
+      <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Modification et suppression d'une séance de service
+        <span style="font-weight: bold;">But :</span>  Le professionnel met à jour ou supprime une séance.
+        <span style="font-weight: bold;">Préconditions :</span> Le professionnel doit être enregistré dans le gym, la séance doit être créée dans le système.
+        <span style="font-weight: bold;">Acteurs :</span> Le professionnel (principal), Agent à la réception (secondaire), Répertoire de service.
+        <span style="font-weight: bold;">Scénario principal :</span>
+        1. Le logiciel affiche le menu.
+        2. L'agent shoisit Consultation des séances.
+        3. L'agent entre le Code du service.
+        4. Le Répertoire de Services renvoie la séance recherchée.
+        5. L'agent choisit "Modifier une séance".
+          5.1. L'agent met à jour une séance à existante.
+          5.2. L'agent appuit sur Enregistrer.
+          5.3. Le logiciel met à jour les données au Centre de Données.
+          5.4. Le logiciel affiche "Validé".
+        <span style="font-weight: bold;">Scénarios alternatifs :</span> ramifications du déroulement principal, alternatives possible à certaines étapes
+        4a. Le Répertoire des Services ne trouve pas le Code du service et renvoie "Code du service incorrect".
+          4a.1. Le logiciel retourne à l'étape 3.
+        5a. L'agent choisit "Supprimer une séance"
+          5a.1. L'agent appuit sur "Confirmer"
+          5a.2. Le logiciel supprime les données du Centre de Données.
+          5a.3. Le logiciel affiche "Validé".
+        <span style="font-weight: bold;">Postconditions :</span> </pre>
+
+    <p> IDÉES D'AUTRES CAS D'UTILISATION : modifier les données personnelles d'un membre. Annulation d'un service. Annulation d'un abonnement.
 
   <h2>Tâche 4 : Risques</h2>
   <p>
@@ -297,7 +320,7 @@
         - Fuite des données des utilisateurs
         - Ressource humaine pour la production du livrable insuffisante (2 personnes pour un projet de 3 personnes).
     2. Risque important
-        - Une personne non-membre pourrait utilisé le code d'une personne membre pour s'autentifier sans abonnement.              
+        - Une personne non-membre pourrait utilisé le code d'une personne membre pour s'autentifier sans abonnement.
     3. Risque éloigné
         - L'interface du logiciel doit être assez instinctive pour être utilisé par un employé du gym qui n'est pas expert en informatique.
     4. Obstacle mineur
@@ -306,7 +329,7 @@
 
   <h2>Tâche 5 : Exigences non-fonctionnelles</h2>
 
-  <p> 
+  <p>
     Identifions les besoins non-fonctionnels du système.
   </p>
   <pre style="font-family: 'Open Sans';">
