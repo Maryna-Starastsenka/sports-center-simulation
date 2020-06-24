@@ -147,7 +147,7 @@
   <h2>
     Hypothèses</h2>
   <p>
-    Puisque le «Centre de données» et le «Répertoire de services» font partie du logiciel, <br>
+    Puisque le «Centre de Données» et le «Répertoire des Services» font partie du logiciel, <br>
     ils seront mentionnés, mais ne seront pas des acteurs dans les cas d'utilisation.
     Nous avons supposé qu'il faudrait quatre différents fichiers pour conserver les données. <br>
       <ul>
@@ -156,23 +156,29 @@
         <li> Horaire des services : Contient les informations et l'horaire sur les services du jour.</li>
         <li> Services fournis au gym : contient toutes les informations sur les différentes séances et services hebdomadaires offert au gym.</li>
       </ul>
-    <br> Dans ce rapport nous feront surtout mention du Centre de données et du Répertoire des services qui font la gestion des fichiers. <br>
-    Puisqu'il est spécifié dans la description des besoins qu'un membre s'inscrit «pour le jour même», nous avons considérer qu'il 
+    <br> Dans ce rapport nous feront surtout mention du Centre de Données et du Répertoire des Services qui font la gestion des fichiers. <br>
+    Puisqu'il est spécifié dans la description des besoins qu'un membre s'inscrit «pour le jour même», nous avons considérer qu'il
     faudrait <br> deux fichiers pour les services. Cela permettra par la même occasion d'avoir un horaire des séances de la journée même. <br><br>
-    
+
     Il n'y a aucune information sur la façon dont les paiements et les abonnnements fonctionnent.<br> Il aurait pu être utile dans le cas d'un
-    abonnement mensuel de suspendre l'abonnement automatiquement dans le logiciel s'il n'est pas renouvelé. <br> Cependant, dans le cas présent 
+    abonnement mensuel de suspendre l'abonnement automatiquement dans le logiciel s'il n'est pas renouvelé. <br> Cependant, dans le cas présent
     nous allons considérer que tous les membres seront suspendus manuellement. <br> <br>
-    
-    
+
+
   </p>
   <h2>
     Tâche 1 : Glossaire</h2>
   <p>
     Glossaire des termes clés<br>
+    <span style="font-weight: bold;">Agent à la réception :</span> Personne employée par le gym en charge d'interagir avec les clients et le logiciel.<br>
+
     <span style="font-weight: bold;">Code de service :</span> Code unique utilisé pour référencer un service offert par un professionnel.<br>
 
+    <span style="font-weight: bold;">Capacité maximale :</span> Quantité maximale de membres qui peuvent accéder à une séance.<br>
+
     <span style="font-weight: bold;">Membre :</span> Client qui a accès illimité aux salles de sports et aux services d'un professionnel.<br>
+
+    <span style="font-weight: bold;">Membre suspendu :</span> Membre qui n'a plus accès au gym. <br>
 
     <span style="font-weight: bold;">Numéro de membre :</span> Numéro unique qui identifie un membre. <br>
 
@@ -181,13 +187,6 @@
     <span style="font-weight: bold;">Professionnel :</span> Expert en exercice physique ou en santé qui offre un service aux membres.<br>
 
     <span style="font-weight: bold;">Séance :</span> Service hebdomadaire offert par un professionnel pour les membres de #GYM. <br>
-    
-    <span style="font-weight: bold;">Membre suspendu :</span> Membre qui n'a plus accès au gym. <br>
-    
-    <span style="font-weight: bold;">Capacité maximale :</span> Quantité maximale de membres qui peuvent accéder à une séance.<br>
-    
-    <span style="font-weight: bold;">Agent à la réception :</span> Personne employée par le gym en charge d'interagir avec les clients et le logiciel.<br>
-    
     <br>
   </p>
 
@@ -207,15 +206,15 @@
     3. Le logiciel affiche le formulaire d'inscription.
     4. L'agent entre les informations que le client lui fournit.
     5. L'agent appuit sur enregistrer.
-    6. Le logiciel envoie les données au Centre de données.
+    6. Le logiciel envoie les données au Centre de Données.
     7. Le logiciel fournit un numéro unique au nouveau membre.
     <span style="font-weight: bold;">Scénarios alternatifs :</span>
-    <span style="font-weight: bold;">Postconditions :</span>Le client a maintenant un numéro de membre unique qui lui donne accès au gym. </pre>
+    <span style="font-weight: bold;">Postconditions :</span> Le client a maintenant un numéro de membre unique qui lui donne accès au gym. </pre>
 
   <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Demande d'accès au gym
     <span style="font-weight: bold;">But :</span> Le client se présente à la réception et demande l'accès au gym.
-    <span style="font-weight: bold;">Préconditions :</span> Le client doit être membre
-    <span style="font-weight: bold;">Acteurs :</span> Le membre (principal), Agent à la réception(secondaire)
+    <span style="font-weight: bold;">Préconditions :</span> Le client doit être membre.
+    <span style="font-weight: bold;">Acteurs :</span> Membre (principal), Agent à la réception (secondaire)
     <span style="font-weight: bold;">Scénario principal :</span>
     1. Le logiciel affiche le menu
     2. L'agent choisit Validation du numéro de membre.
@@ -224,7 +223,7 @@
       3.2. Le logiciel vérifie que le membre n'est pas suspendu.
       3.3. Le logiciel affiche «Numéro valide».
     4. L'agent confirme et permet l'accès au membre.
-    <span style="font-weight: bold;">Scénarios alternatifs :</span> ramifications du déroulement principal, alternatives possible à certaines étapes
+    <span style="font-weight: bold;">Scénarios alternatifs :</span>
     3.1.a Le logiciel ne trouve pas le numéro et renvoie «Numéro invalide».
     3.2.a Le cas d'utilisation retourne à l'étape 3.
     3.2.b L'abonnement n'est plus valide.
@@ -233,9 +232,9 @@
     <span style="font-weight: bold;">Postconditions :</span> </pre>
 
   <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Inscription à une séance
-    <span style="font-weight: bold;">But :</span>  Participer à  une séance ou obtenir un service d'un professionnel.
+    <span style="font-weight: bold;">But :</span> Participer à une séance ou obtenir un service d'un professionnel.
     <span style="font-weight: bold;">Préconditions :</span> Le client doit être membre.
-    <span style="font-weight: bold;">Acteurs :</span> Le membre (principal), Agent à la réception(secondaire).
+    <span style="font-weight: bold;">Acteurs :</span> Membre (principal), Agent à la réception (secondaire).
     <span style="font-weight: bold;">Scénario principal :</span>
     1. Le logiciel affiche le menu
     2. L'agent choisit Consultation des services.
@@ -245,8 +244,7 @@
       4.2 Le membre donne son numéro pour l'inscription.
       4.3 Le logiciel enregistre les données.
     5. Le logiciel confirme l'inscription.
-    <span style="font-weight: bold;">Scénarios alternatifs :</span> ramifications du déroulement principal, alternatives possible à certaines étapes
-      4.1.a Le logiciel infirme la disponibilité de la séance.
+    <span style="font-weight: bold;">Scénarios alternatifs :</span>
       4.2.a Le logiciel renvoie "Capacité maximale atteinte".
       4.3.a Le logiciel retourne l'étape 3.
       4.2.b Le numéro de membre n'est pas valide.
@@ -256,7 +254,7 @@
     <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Confirmation de la présence
       <span style="font-weight: bold;">But :</span> Le membre se présente à la réception pour confirmer sa présence avant le début d'une séance.
       <span style="font-weight: bold;">Préconditions :</span> Le membre doit être inscrit à une séance.
-      <span style="font-weight: bold;">Acteurs :</span> Le membre (principal), Agent à la réception(secondaire).
+      <span style="font-weight: bold;">Acteurs :</span> Membre (principal), Agent à la réception (secondaire).
       <span style="font-weight: bold;">Scénario principal :</span>
       1. Le logiciel affiche le menu.
       2. L'agent consulte les inscriptions aux séances.
@@ -265,10 +263,10 @@
       5. L'agent appuit sur Confirmer la présence.
       6. L'agent entre le code du membre.
       7. L'agent appuit sur enregistrer.
-      8. Le logiciel envoie les données au Centre de données.
+      8. Le logiciel envoie les données au Centre de Données.
         8.1 Le logiciel reçoit la confirmation de la part du Centre de Données.
         8.2 Le logiciel affiche "Validé".
-      <span style="font-weight: bold;">Scénarios alternatifs :</span> ramifications du déroulement principal, alternatives possible à certaines étapes
+      <span style="font-weight: bold;">Scénarios alternatifs :</span>
       4a. Le Répertoire des Services ne trouve pas le code recherché et renvoie "Code du service incorrect".
         4a.1. Le logiciel retourne à l'étape 3.
       8b. Le Centre de Données ne trouve pas l'inscription du membre à la séance.
@@ -285,10 +283,10 @@
       3. Le logiciel affiche le formulaire d'inscription.
       4. L'agent entre les informations fournies par le professionnel.
       5. L'agent appuit sur enregistrer.
-      6. Le logiciel envoie les données au Centre de données.
+      6. Le logiciel envoie les données au Centre de Données.
       7. Le logiciel fournit un numéro unique au nouveau professionnel.
       <span style="font-weight: bold;">Scénarios alternatifs :</span>
-      <span style="font-weight: bold;">Postconditions :</span>Le client a maintenant un numéro de membre unique qui lui donne accès au gym. </pre>
+      <span style="font-weight: bold;">Postconditions :</span> Le professionnel a maintenant un numéro du professionnel unique qui lui donne la possibilité de fournir des services au gym. </pre>
 
 
 
@@ -306,15 +304,15 @@
         5.2. L'agent appuit sur Enregistrer.
         5.3. Le logiciel envoie les données au Centre de Données.
         5.4. Le logiciel affiche "Validé".
-      <span style="font-weight: bold;">Scénarios alternatifs :</span> ramifications du déroulement principal, alternatives possible à certaines étapes
+      <span style="font-weight: bold;">Scénarios alternatifs :</span>
       4a. Le Centre de données ne trouve pas le Numéro du professionnel et renvoie "Numéro du professionnel incorrect".
       5a. Le logiciel retourne à l'étape 3.
-      <span style="font-weight: bold;">Postconditions : Une nouvelle séance est créé dans le Répertoire de service.</span> </pre>
+      <span style="font-weight: bold;">Postconditions :</span> Une nouvelle séance avec le Code du service unique est créée dans le Répertoire de service.</span> </pre>
 
       <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Gestion d'une séance de service
         <span style="font-weight: bold;">But :</span>  Le professionnel met à jour, consulte ou supprime une séance.
         <span style="font-weight: bold;">Préconditions :</span> Le professionnel doit être enregistré dans le gym, la séance doit être créée dans le système.
-        <span style="font-weight: bold;">Acteurs :</span> Le professionnel (principal), Agent à la réception (secondaire).
+        <span style="font-weight: bold;">Acteurs :</span> Professionnel (principal), Agent à la réception (secondaire).
         <span style="font-weight: bold;">Scénario principal :</span>
         1. Le logiciel affiche le menu.
         2. L'agent choisit Consultation des séances.
@@ -325,19 +323,18 @@
           5.2. L'agent appuit sur Enregistrer.
           5.3. Le logiciel met à jour les données au Centre de Données.
         6. Le logiciel affiche "Validé".
-        <span style="font-weight: bold;">Scénarios alternatifs :</span> 
+        <span style="font-weight: bold;">Scénarios alternatifs :</span>
         4a. Le Répertoire des Services ne trouve pas le Code du service et renvoie "Code du service incorrect".
         5a. Le logiciel retourne à l'étape 3.
         4b. L'agent consulte les inscriptions à la séance
         5c. L'agent choisit "Supprimer une séance"
           5c.1. L'agent appuit sur "Confirmer"
-          5c.2. Le logiciel supprime les données du Centre de Données et du Répertoire de services.
-          5c.3. Le logiciel affiche "Validé".
-        <span style="font-weight: bold;">Postconditions : Modifiction ou suppression d'une séance</span> </pre>
-        
+          5c.2. Le logiciel supprime les données du Centre de Données et du Répertoire des Services.
+        <span style="font-weight: bold;">Postconditions :</span> Modifiction ou suppression d'une séance. </pre>
+
         <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Gestion d'un compte membre ou professionnel.
         <span style="font-weight: bold;">But :</span>  Modifier les données personnelles d'un membre ou d'un professionnel lorsque celles-ci changent ou suspendre les activités au gym.
-        <span style="font-weight: bold;">Préconditions :</span> Le professionnel ou le membre doivent être enregistrés dans le logiciel
+        <span style="font-weight: bold;">Préconditions :</span> Professionnel ou le membre doivent être enregistrés dans le logiciel
         <span style="font-weight: bold;">Acteurs :</span> Le professionnel (principal), Membre (principal) Agent à la réception (secondaire).
         <span style="font-weight: bold;">Scénario principal :</span>
         1. Le logiciel affiche le menu.
@@ -348,7 +345,7 @@
         6. L'agent modifie la ou les données.
         6. L'agent appuit sur Enregistrer.
         7. Le logiciel valide la modification.
-        <span style="font-weight: bold;">Scénarios alternatifs :</span> 
+        <span style="font-weight: bold;">Scénarios alternatifs :</span>
         3a. Le logiciel ne trouve pas le Numéro et renvoie "Numéro incorrect".
         4a. Le logiciel retourne à l'étape 2.
         5b. L'agent choisit Suspendre le compte
@@ -358,7 +355,7 @@
         <span style="font-weight: bold;">Postconditions : L'abonnement du membre ou le service du professionnel est suspendu.</span> </pre>
 
 
-    <p> 
+    <p>
 
   <h2>Tâche 4 : Risques</h2>
   <pre style="font-family: 'Open Sans';">
