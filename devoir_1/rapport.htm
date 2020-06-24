@@ -149,12 +149,13 @@
   <p>
     Puisque le «Centre de Données» et le «Répertoire des Services» font partie du logiciel, <br>
     ils seront mentionnés, mais ne seront pas des acteurs dans les cas d'utilisation.
-    Nous avons supposé qu'il faudrait quatre différents fichiers pour conserver les données. <br>
+    Nous avons supposé qu'il faudrait cinq différents fichiers pour conserver les données. <br>
       <ul>
         <li> Liste des membres : contient les informations personnnelles des membres. </li>
         <li> Liste des professionnels : contient les informations personnelles des professionnels, leur domaine d'expertise et leurs séances. </li>
-        <li> Horaire des services : Contient les informations et l'horaire sur les services du jour.</li>
+        <li> Horaire des services : contient les informations et l'horaire sur les services du jour.</li>
         <li> Services fournis au gym : contient toutes les informations sur les différentes séances et services hebdomadaires offert au gym.</li>
+        <li> Liste des inscriptions : contient les informations sur les inscriptions des membres aux séances fournies par les professionnels.</li>
       </ul>
     <br> Dans ce rapport nous feront surtout mention du Centre de Données et du Répertoire des Services qui font la gestion des fichiers. <br>
     Puisqu'il est spécifié dans la description des besoins qu'un membre s'inscrit «pour le jour même», nous avons considérer qu'il
@@ -257,7 +258,7 @@
       <span style="font-weight: bold;">Acteurs :</span> Membre (principal), Agent à la réception (secondaire).
       <span style="font-weight: bold;">Scénario principal :</span>
       1. Le logiciel affiche le menu.
-      2. L'agent consulte les inscriptions aux séances.
+      2. L'agent choisit Consultation des inscriptions.
       3. L'agent entre le Code du service à 7 chiffres.
       4. Le Répertoire des Services renvoie la séance recherchée.
       5. L'agent appuit sur Confirmer la présence.
@@ -335,12 +336,12 @@
         <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Gestion d'un compte membre ou professionnel.
         <span style="font-weight: bold;">But :</span>  Modifier les données personnelles d'un membre ou d'un professionnel lorsque celles-ci changent ou suspendre les activités au gym.
         <span style="font-weight: bold;">Préconditions :</span> Professionnel ou le membre doivent être enregistrés dans le logiciel
-        <span style="font-weight: bold;">Acteurs :</span> Le professionnel (principal), Membre (principal) Agent à la réception (secondaire).
+        <span style="font-weight: bold;">Acteurs :</span> Professionnel (principal), Membre (principal), Agent à la réception (secondaire).
         <span style="font-weight: bold;">Scénario principal :</span>
         1. Le logiciel affiche le menu.
         2. L'agent choisit Modification des données
         3. L'agent entre le Numéro du membre ou professionnel.
-        4. Le Répertoire de Services affiche les données du membre ou du professionnel.
+        4. Le Centre de Données affiche les données du membre ou du professionnel.
         5. L'agent choisit "Modifier les données".
         6. L'agent modifie la ou les données.
         6. L'agent appuit sur Enregistrer.
@@ -352,9 +353,22 @@
           5b.1. L'agent appuit sur "Confirmer"
           5b.2. Le logiciel modifie la condition du membre ou du professionnel à "Suspendu".
           5b.3. Le logiciel affiche "Validé".
-        <span style="font-weight: bold;">Postconditions : L'abonnement du membre ou le service du professionnel est suspendu.</span> </pre>
+        <span style="font-weight: bold;">Postconditions :</span> L'abonnement du membre ou le service du professionnel est suspendu ou les données d'un membre ou d'un professionnel sont modifées. </pre>
 
-
+      <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Consultation des inscriptions 
+        <span style="font-weight: bold;">But :</span> Le professionnel se présente à la réception pour consulter les inscriptions à ses séances.
+        <span style="font-weight: bold;">Préconditions :</span> Le professionnel doit avoir le Numéro du professionnel.
+        <span style="font-weight: bold;">Acteurs :</span> Professionnel (principal), Agent à la réception (secondaire).
+        <span style="font-weight: bold;">Scénario principal :</span>
+        1. Le logiciel affiche le menu.
+        2. L'agent choisit Consultation des inscriptions.
+        3. L'agent entre le Noméro du professionnel.
+        4. Le Centre de Données renvoie les inscriptions accosiées au professionnel.
+        <span style="font-weight: bold;">Scénarios alternatifs :</span>
+        4a. Le Centre de Données ne trouve pas le Noméro du professionnel et renvoie "Numéro du professionnel incorrect".
+          4a.1. Le logiciel retourne à l'étape 3.
+        4b. Le Centre de Données ne trouve pas les inscriptions accosiées au professionnel et renvoie "Aucune inscription disponible".
+        <span style="font-weight: bold;">Postconditions :</span> </pre>
     <p>
 
   <h2>Tâche 4 : Risques</h2>
@@ -396,7 +410,8 @@
     Nous proposons de construire le système en mode interactif qui nécessite l’intervention manuelle d’un agent à la réception. Le système est utilisé sur demande des membres et des professionnels du gym.<br>
     Le projet #GYM est informatisé au complet.<br>
     Les données sur les membres, les professionnels et les services sont stockées dans des fichiers (au format CSV, par exemple).
-    Le matériel nécessaire est un serveur de fichiers et un ordinateur pour un agent d’entrée de gamme (4 Go de RAM et un disque dur de 120 Go). Un disque dur externe est demandé pour la sauvegarde des données. Le système #GYM doit interagir avec le serveur de fichiers.
+    Le matériel nécessaire est un serveur de fichiers et un ordinateur pour un agent d’entrée de gamme (4 Go de RAM et un disque dur de 120 Go). Un disque dur externe est demandé pour la sauvegarde des données.<br>
+    Le système #GYM doit interagir avec le serveur de fichiers.
   </p>
 
   <h2>Tâche 7 : Diagramme d'activité UML</h2>
