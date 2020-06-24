@@ -310,7 +310,7 @@
       5a. Le logiciel retourne à l'étape 3.
       <span style="font-weight: bold;">Postconditions :</span> Une nouvelle séance avec le Code du service unique est créée dans le Répertoire de service.</span> </pre>
 
-      <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Gestion d'une séance
+      <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Gestion d'une séance de service
         <span style="font-weight: bold;">But :</span>  Le professionnel met à jour, consulte ou supprime une séance.
         <span style="font-weight: bold;">Préconditions :</span> Le professionnel doit être enregistré dans le gym, la séance doit être créée dans le système.
         <span style="font-weight: bold;">Acteurs :</span> Professionnel (principal), Agent à la réception (secondaire).
@@ -339,23 +339,24 @@
         <span style="font-weight: bold;">Acteurs :</span> Professionnel (principal), Membre (principal), Agent à la réception (secondaire).
         <span style="font-weight: bold;">Scénario principal :</span>
         1. Le logiciel affiche le menu.
-        2. L'agent choisit Modification des données
+        2. L'agent choisit Consulter les données d'un membre ou d'un professionnel.
         3. L'agent entre le Numéro du membre ou professionnel.
         4. Le Centre de Données affiche les données du membre ou du professionnel.
-        5. L'agent choisit "Modifier les données".
-        6. L'agent modifie la ou les données.
-        6. L'agent appuit sur Enregistrer.
-        7. Le logiciel valide la modification.
+        5. L'agent choisit "Modifier le compte".
+          5.1. L'agent modifie la ou les données.
+          5.2. L'agent appuit sur "Enregistrer".
+          5.3. Le logiciel valide la modification.
+        6. Le logiciel envoie les modifications au Centre de Données.
         <span style="font-weight: bold;">Scénarios alternatifs :</span>
         3a. Le logiciel ne trouve pas le Numéro et renvoie "Numéro incorrect".
         4a. Le logiciel retourne à l'étape 2.
-        5b. L'agent choisit Suspendre le compte
+        5b. L'agent choisit "Suspendre le compte".
           5b.1. L'agent appuit sur "Confirmer"
           5b.2. Le logiciel modifie la condition du membre ou du professionnel à "Suspendu".
           5b.3. Le logiciel affiche "Validé".
         <span style="font-weight: bold;">Postconditions :</span> L'abonnement du membre ou le service du professionnel est suspendu ou les données d'un membre ou d'un professionnel sont modifées. </pre>
 
-      <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Consultation des inscriptions 
+      <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Consultation des inscriptions
         <span style="font-weight: bold;">But :</span> Le professionnel se présente à la réception pour consulter les inscriptions à ses séances.
         <span style="font-weight: bold;">Préconditions :</span> Le professionnel doit avoir le Numéro du professionnel.
         <span style="font-weight: bold;">Acteurs :</span> Professionnel (principal), Agent à la réception (secondaire).
@@ -407,7 +408,7 @@
   <h2>Tâche 6 : Analyse</h2>
 
    <p>
-    Nous proposons de construire le système en mode interactif. Il nécessite l’intervention manuelle d’un agent à la réception. Le système est utilisé sur demande des membres et des professionnels du gym.<br>
+    Nous proposons de construire le système en mode interactif qui nécessite l’intervention manuelle d’un agent à la réception. Le système est utilisé sur demande des membres et des professionnels du gym.<br>
     Le projet #GYM est informatisé au complet.<br>
     Les données sur les membres, les professionnels et les services sont stockées dans des fichiers (au format CSV, par exemple).
     Le matériel nécessaire est un serveur de fichiers et un ordinateur pour un agent d’entrée de gamme (4 Go de RAM et un disque dur de 120 Go). Un disque dur externe est demandé pour la sauvegarde des données.<br>
