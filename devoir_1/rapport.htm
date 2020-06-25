@@ -265,14 +265,15 @@
       6. L'agent appuit sur Confirmer la présence.
       7. Le logiciel envoie les données au Centre de Données.
         7.1 Le logiciel reçoit la confirmation de la part du Centre de Données.
-      8. Le logiciel affiche "Validé".
+        7.2. Le logiciel affiche "Validé".
+        7.3. Le logiciel crée un enregistrement sur le disque.
       <span style="font-weight: bold;">Scénarios alternatifs :</span>
       4a. Le Répertoire des Services ne trouve pas le code recherché et renvoie "Code du service incorrect".
         4a.1. Le logiciel retourne à l'étape 3.
-      5b. Le Répertoire des Services ne trouve pas le numéro de membre et renvoie "Numéro de membre incorrect".
+      5b. Le Répertoire des Services ne trouve pas le numéro de membre et renvoie "Numéro de membre invalide".
         5b.1. Le logiciel retourne à l'étape 5.
       7c. Le Centre de Données ne trouve pas l'inscription du membre à la séance.
-        7c.1. Le logiciel affiche "Refusé".
+        7c.1. Le logiciel affiche "Le membre n'est pas inscrit".
       <span style="font-weight: bold;">Postconditions :</span> </pre>
 
     <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Inscription de professionnel
