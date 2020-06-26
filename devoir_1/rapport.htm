@@ -163,7 +163,7 @@
 
     Il n'y a aucune information sur la façon dont les paiements et les abonnnements fonctionnent.<br> Il aurait pu être utile dans le cas d'un
     abonnement mensuel de suspendre l'abonnement automatiquement dans le logiciel s'il n'est pas renouvelé. <br> Cependant, dans le cas présent
-    nous allons considérer que tous les membres seront suspendus manuellement.<br> Nous allons aussi considérer que les données du membre ne seront 
+    nous allons considérer que tous les membres seront suspendus manuellement.<br> Nous allons aussi considérer que les données du membre ne seront
     pas supprimées,son abonnement sera seulement suspendu.    <br> <br>
 
 
@@ -200,7 +200,7 @@
 
   <h2>Tâche 3 : Cas d'utilisation</h2>
 
-  
+
 
   <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Demande d'accès au gym
     <span style="font-weight: bold;">But :</span> Le client se présente à la réception et demande l'accès au gym.
@@ -252,7 +252,7 @@
     3. L'agent entre le Code du service à 7 chiffres .
     4. Le Répertoire des Services renvoie la séance recherchée.
     5. L'agent entre le code du membre.
-    6. L'agent appuit sur Confirmer la présence.
+    6. L'agent appuie sur "Confirmer la présence".
     7. Le logiciel envoie les données au Centre de Données.
       7.1. Le logiciel reçoit la confirmation de la part du Centre de Données.
       7.2. Le logiciel crée un enregistrement sur le disque.
@@ -265,7 +265,7 @@
     7c. Le Centre de Données ne trouve pas l'inscription du membre à la séance.
       7c.1. Le logiciel affiche "Le membre n'est pas inscrit".
     <span style="font-weight: bold;">Postconditions :</span> </pre>
-     
+
   <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Création d'un compte
     <span style="font-weight: bold;">But :</span> Un client ou un professionnel s'inscrit pour avoir un compte au gym.
     <span style="font-weight: bold;">Préconditions :</span> Aucune
@@ -276,7 +276,7 @@
     3. L'agent choisit Inscription d'un nouveau membre ou professionnel dans le logiciel.
     4. Le logiciel affiche le formulaire d'inscription.
     5. L'agent entre les informations que le client lui fournit.
-    6. L'agent appuit sur enregistrer.
+    6. L'agent appuie sur "Enregistrer".
     7. Le logiciel envoie les données au Centre de Données.
     8. Le logiciel fournit un numéro unique au nouveau membre ou professionnel.
     <span style="font-weight: bold;">Scénarios alternatifs :</span>
@@ -293,14 +293,14 @@
     4. Le Centre de Données affiche les données du membre ou du professionnel.
     5. L'agent choisit "Modifier le compte".
     6. L'agent modifie la ou les données.
-    7. L'agent appuit sur "Enregistrer".
+    7. L'agent appuie sur "Enregistrer".
       7.1. Le logiciel valide la modification.
       7.2. Le logiciel envoie les modifications au Centre de Données.
     <span style="font-weight: bold;">Scénarios alternatifs :</span>
     3a. Le logiciel ne trouve pas le Numéro et renvoie "Numéro incorrect".
     4a. Le logiciel retourne à l'étape 2.
-    <span style="font-weight: bold;">Postconditions :</span> Les modifications sont apportés dans le Centre de données </pre>    
-    
+    <span style="font-weight: bold;">Postconditions :</span> Les modifications sont apportés dans le Centre de données </pre>
+
   <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Suspendre un compte
     <span style="font-weight: bold;">But :</span> Suspendre l'accès d'un membre au gym ou les services d'un professionnel.
     <span style="font-weight: bold;">Préconditions :</span> Le professionnel ou le membre doit être enregistré dans le logiciel
@@ -318,7 +318,7 @@
     3a. Le logiciel ne trouve pas le Numéro et renvoie "Numéro incorrect".
     4a. Le logiciel retourne à l'étape 2.
     <span style="font-weight: bold;">Postconditions :</span> L'abonnement du membre ou le service du professionnel est suspendu.
-    
+
   <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Création d'un service.
     <span style="font-weight: bold;">But :</span>  Le professionnel offre un nouveau service lors de séances hebdomadaires au gym.
     <span style="font-weight: bold;">Préconditions :</span> Le professionnel doit être enregistré dans le gym.
@@ -326,35 +326,37 @@
     <span style="font-weight: bold;">Scénario principal :</span>
     1. Le logiciel affiche le menu.
     2. L'agent choisit Gestion d'un service.
-    3. L'agent entre le Numéro du professionnel.
-    4. Le Répertoire de Services renvoie les services du professionnel.
+    3. L'agent choisit Nouveau service
+    4. L'agent entre le Numéro du professionnel.
+    5. Le Répertoire de Services renvoie les services du professionnel.
     5. L'agent choisit "Ajouter un service".
     6. L'agent entre les informations concernant les nouvelles séances.
-    7. L'agent appuit sur Enregistrer.
+    7. L'agent appuie sur "Enregistrer".
       7.1. Le logiciel envoie les données au Répertoire des services.
-    8. Le logiciel affiche "Validé".
+    8. Le logiciel affiche "Enregistré".
     <span style="font-weight: bold;">Scénarios alternatifs :</span>
-    4a. Le Centre de données ne trouve pas le Numéro du professionnel et renvoie "Numéro du professionnel incorrect".
-    5a. Le logiciel retourne à l'étape 3.
+    5a. Le Centre de données ne trouve pas le Numéro du professionnel et renvoie "Numéro du professionnel incorrect".
+      5a.1. Le logiciel retourne à l'étape 3.
     <span style="font-weight: bold;">Postconditions :</span> Un nouveau service avec un Code de service unique est créé dans le Répertoire des services.</span> </pre>
 
-  <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Mis à jour d'un service
+  <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Mise à jour d'un service
     <span style="font-weight: bold;">But :</span>  Le professionnel met à jour un service.
     <span style="font-weight: bold;">Préconditions :</span> Le professionnel doit être enregistré dans le gym, le service doit être créé dans le système.
     <span style="font-weight: bold;">Acteurs :</span> Professionnel (principal), Agent à la réception (secondaire).
     <span style="font-weight: bold;">Scénario principal :</span>
     1. Le logiciel affiche le menu.
     2. L'agent choisit Gestion d'un service.
-    3. L'agent entre le Code du service.
-    4. Le Répertoire de Services renvoie le service recherché.
-    5. L'agent choisit "Modifier le service".
-    6. L'agent met à jour le service.
-    7. L'agent appuit sur Enregistrer.
-      7.1. Le logiciel met à jour les données dans le Centre de Données.
-    8. Le logiciel affiche "Validé".
+    3. L'agent choisit Service Existant.
+    4. L'agent entre le Code du service.
+    5. Le Répertoire de Services renvoie le service recherché.
+    6. L'agent choisit "Modifier le service".
+    7. L'agent met à jour le service.
+    8. L'agent appuie sur "Enregistrer".
+      8.1. Le logiciel met à jour les données dans le Centre de Données.
+    8. Le logiciel affiche "Modifié".
     <span style="font-weight: bold;">Scénarios alternatifs :</span>
-    4a. Le Répertoire des Services ne trouve pas le Code du service et renvoie "Code du service incorrect".
-    5a. Le logiciel retourne à l'étape 3.
+    5a. Le Répertoire des Services ne trouve pas le Code du service et renvoie "Code du service incorrect".
+      5a.1. Le logiciel retourne à l'étape 3.
     <span style="font-weight: bold;">Postconditions :</span> Modification du service dans le système. </pre>
 
   <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Suppression un service
@@ -364,15 +366,16 @@
     <span style="font-weight: bold;">Scénario principal :</span>
     1. Le logiciel affiche le menu.
     2. L'agent choisit Gestion d'un service.
-    3. L'agent entre le Code du service.
-    4. Le Répertoire de Services renvoie le service recherché.
-    5. L'agent choisit "Supprimer une service"
-      5.1. L'agent appuit sur "Confirmer"
-      5.2. Le logiciel supprime les données du Centre de Données et du Répertoire des Services.
-    6. Le logiciel affiche "Validé".
+    3. L'agent choisit Service Existant.
+    4. L'agent entre le Code du service.
+    5. Le Répertoire de Services renvoie le service recherché.
+    6. L'agent choisit "Supprimer le service"
+      6.1. L'agent appuie sur "Confirmer"
+      6.2. Le logiciel supprime les données du Centre de Données et du Répertoire des Services.
+    7. Le logiciel affiche "Supprimé".
     <span style="font-weight: bold;">Scénarios alternatifs :</span>
-    4a. Le Répertoire des Services ne trouve pas le Code du service et renvoie "Code du service incorrect".
-    5a. Le logiciel retourne à l'étape 3.
+    5a. Le Répertoire des Services ne trouve pas le Code du service et renvoie "Code du service incorrect".
+    6a. Le logiciel retourne à l'étape 3.
     <span style="font-weight: bold;">Postconditions :</span> Suppression du service dans le système. </pre>
 
   <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Consultation des inscriptions
