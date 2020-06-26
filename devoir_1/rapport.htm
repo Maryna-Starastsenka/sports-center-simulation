@@ -28,27 +28,27 @@
   <h2>
     Information générale</h2>
   <p>
-    <span style="font-weight: bold;">Nom: </span>Alex Defoy
+    <span style="font-weight: bold;">Nom : </span>Alex Defoy
     <br />
-    <span style="font-weight: bold;">Matricule: </span>20131653
+    <span style="font-weight: bold;">Matricule : </span>20131653
     <br />
-    <span style="font-weight: bold;">Courriel: </span>alex.defoy@umontreal.ca
+    <span style="font-weight: bold;">Courriel : </span>alex.defoy@umontreal.ca
     <br />
-    <span style="font-weight: bold;">temps mis: </span>22 heures
+    <span style="font-weight: bold;">Temps mis : </span>22 heures
   </p>
   <p>
-    <span style="font-weight: bold;">Nom: </span>Maryna Starastsenka
+    <span style="font-weight: bold;">Nom : </span>Maryna Starastsenka
     <br />
-    <span style="font-weight: bold;">Matricule: </span>20166402
+    <span style="font-weight: bold;">Matricule : </span>20166402
     <br />
-    <span style="font-weight: bold;">Courriel: </span>maryna.starastsenka@umontreal.ca
+    <span style="font-weight: bold;">Courriel : </span>maryna.starastsenka@umontreal.ca
     <br />
-    <span style="font-weight: bold;">temps mis: </span>25 heures
+    <span style="font-weight: bold;">Temps mis : </span>25 heures
   </p>
   <h2>
     Distribution des tâches</h2>
   <p>
-    <span style="font-weight: bold;">Soumetteur: Defoy Alex</span>
+    <span style="font-weight: bold;">Soumetteur : Defoy Alex</span>
   </p>
   <table cellpadding="7px">
     <thead>
@@ -70,10 +70,10 @@
           Glossaire
         </td>
         <td>
-          Description (100%)
+          Termes clés du système avec brève description (100%)
         </td>
         <td>
-          Description (0%)
+          (0%)
         </td>
       </tr>
       <tr>
@@ -81,10 +81,10 @@
           Diagramme de cas d'utilisation UML
         </td>
         <td>
-          Description (50%)
+          Diagramme de cas d'utilisation UML (50%)
         </td>
         <td>
-          Description (50%)
+          Diagramme de cas d'utilisation UML optimisé (50%)
         </td>
       </tr>
       <tr>
@@ -92,10 +92,10 @@
           Cas d'utilisation
         </td>
         <td>
-          Description (50%)
+          Démande d'accès au gym, Inscription à une séance, Création d'un compte, Modification d'un compte, Suspension d'un compte (50%)
         </td>
         <td>
-          Description (50%)
+          Création d'un service, Mise à jour d'un service, Supression d'un service, Confirmation de la présence, Consultation des inscriptions (50%)
         </td>
       </tr>
       <tr>
@@ -103,10 +103,10 @@
           Risques
         </td>
         <td>
-          Description (100%)
+          Risques potentiels du projet dans l'ordre de sévérité (100%)
         </td>
         <td>
-          Description (0%)
+          (0%)
         </td>
       </tr>
       <tr>
@@ -114,10 +114,10 @@
           Exigences non-fonctionnelles
         </td>
         <td>
-          Description (0%)
+          (0%)
         </td>
         <td>
-          Description (100%)
+          Besoins non-fonctionnels du système (100%)
         </td>
       </tr>
       <tr>
@@ -125,10 +125,10 @@
           Analyse
         </td>
         <td>
-          Description (0%)
+          (0%)
         </td>
         <td>
-          Description (100%)
+          Analyse, infrastructure nécessaire pour mettre le système en opération (100%)
         </td>
       </tr>
       <tr>
@@ -136,10 +136,10 @@
           Diagramme d'activité UML
         </td>
         <td>
-          Description (50%)
+          Diagramme d'activité principal, diagrammes d'activité pour les CU Inscription à une séance, Gestion d'un membre (50%)
         </td>
         <td>
-          Description (50%)
+          Diagramme d'activité principal, diagrammes d'activité pour les CU Gestion d'un service, Confirmation de la présence (50%)
         </td>
       </tr>
     </tbody>
@@ -148,29 +148,29 @@
     Hypothèses</h2>
   <p>
     Nous supposons que le centre sportif #GYM est un nouveau business qui n’a pas encore implémenté de système de gestion des membres, des professionnels, des services et des inscriptions.<br>
-    Nous n’avons donc pas d’exigences non-fonctionnels et risques liés à l’implémentation du système dans l’infrastructure existante.<br>
-    La migration des données n’est pas requise non plus. 
+    Nous n’avons donc pas d’exigences non-fonctionnelles et risques liés à l’implémentation du système dans l’infrastructure existante.<br>
+    La migration des données n’est pas requise non plus.
     En addition, on suppose qu’il s’agit d’un seul centre sportif et non d’une chaîne. <br>
     On le prend en considération en faisant l’analyse du système.<br><br>
-  
-    Puisque le «Centre de Données» et le «Répertoire des Services» font partie du logiciel, <br>
+
+    Puisque le « Centre de Données » et le « Répertoire des Services » font partie du logiciel, <br>
     ils seront mentionnés, mais ne seront pas des acteurs dans les cas d'utilisation.
-    Nous avons supposé qu'il faudrait cinq différents fichiers pour conserver les données. <br>
+    Nous avons supposé qu'il faudrait cinq fichiers différents pour conserver les données. <br>
       <ul>
-        <li> Liste des membres : contient les informations personnnelles des membres. </li>
+        <li> Liste des membres : contient les informations personnelles des membres. </li>
         <li> Liste des professionnels : contient les informations personnelles des professionnels, leur domaine d'expertise et leurs séances. </li>
         <li> Horaire des séances : contient les informations et l'horaire sur les services du jour.</li>
-        <li> Services fournis au gym : contient toute l'information sur les différentes services offert au gym.</li>
-        <li> Liste des inscriptions : contient les informations sur les inscriptions des membres aux séances fournies par les professionnels.</li>
+        <li> Services fournis au gym : contient toute l'information sur les différents services offert au gym.</li>
+        <li> Liste des inscriptions : contient les informations sur les inscriptions des membres aux séances des services fournies par les professionnels.</li>
       </ul>
-    <br> Dans ce rapport nous feront surtout mention du Centre de Données et du Répertoire des Services qui font la gestion des fichiers. <br>
-    Puisqu'il est spécifié dans la description des besoins qu'un membre s'inscrit «pour le jour même», nous avons considérer qu'il
+    <br> Dans ce rapport nous ferons surtout mention du Centre de Données et du Répertoire des Services qui font la gestion des fichiers. <br>
+    Puisqu'il est spécifié dans la description des besoins qu'un membre s'inscrit « pour le jour même », nous avons considéré qu'il
     faudrait <br> un fichier pour les séances de la journée même (Horaire). <br><br>
 
     Il n'y a aucune information sur la façon dont les paiements et les abonnnements fonctionnent.<br> Il aurait pu être utile dans le cas d'un
     abonnement mensuel de suspendre l'abonnement automatiquement dans le logiciel s'il n'est pas renouvelé. <br> Cependant, dans le cas présent
     nous allons considérer que tous les membres seront suspendus manuellement.<br> Nous allons aussi considérer que les données du membre ne seront
-    pas supprimées,son abonnement sera seulement suspendu.    <br> <br>
+    pas supprimées. Son abonnement sera seulement suspendu. <br> <br>
   </p>
 
   <h2>
@@ -242,18 +242,18 @@
     3. L'agent entre le numéro de validation dans le logiciel.
       3.1. Le logiciel vérifie le numéro dans la liste de membre.
       3.2. Le logiciel vérifie que le membre n'est pas suspendu.
-      3.3. Le logiciel affiche «Numéro valide».
+      3.3. Le logiciel affiche « Numéro valide ».
     4. L'agent confirme et permet l'accès au membre.
     <span style="font-weight: bold;">Scénarios alternatifs :</span>
-    3.1.a Le logiciel ne trouve pas le numéro et renvoie «Numéro invalide».
+    3.1.a Le logiciel ne trouve pas le numéro et renvoie « Numéro invalide ».
     3.2.a Le cas d'utilisation retourne à l'étape 3.
     3.2.b L'abonnement n'est plus valide.
-    3.3.b Le logiciel affiche «Membre suspendu».
+    3.3.b Le logiciel affiche « Membre suspendu ».
     4.b. L'agent refuse l'accès au membre.
     <span style="font-weight: bold;">Postconditions :</span> </pre>
 
   <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Inscription à une séance
-    <span style="font-weight: bold;">But :</span> Un membre s'inscrit pour participer à une séance offert par un professionnel.
+    <span style="font-weight: bold;">But :</span> Un membre s'inscrit pour participer à une séance offerte par un professionnel.
     <span style="font-weight: bold;">Préconditions :</span> Le client doit être membre.
     <span style="font-weight: bold;">Acteurs :</span> Membre (principal), Agent à la réception (secondaire).
     <span style="font-weight: bold;">Scénario principal :</span>
@@ -267,7 +267,7 @@
     6. Le logiciel confirme l'inscription.
     <span style="font-weight: bold;">Scénarios alternatifs :</span>
       4.1.a Le logiciel renvoie "Capacité maximale atteinte".
-      4.2.a Le logiciel retourne l'étape 3.
+      4.2.a Le logiciel retourne à l'étape 3.
       5.b Le numéro de membre n'est pas valide.
       6.b Le logiciel retourne à l'étape 5 et demande le numéro de membre.
     <span style="font-weight: bold;">Postconditions: Le membre est inscrit à une séance.</span> </pre>
@@ -279,7 +279,7 @@
     <span style="font-weight: bold;">Scénario principal :</span>
     1. Le logiciel affiche le menu.
     2. L'agent choisit Confirmation de la présence.
-    3. L'agent entre le Code du service à 7 chiffres .
+    3. L'agent entre le Code du service à 7 chiffres.
     4. Le Répertoire des Services renvoie la séance recherchée.
     5. L'agent entre le code du membre.
     6. L'agent appuie sur "Confirmer la présence".
@@ -322,18 +322,18 @@
     3. L'agent entre le Numéro du membre ou professionnel.
     4. Le Centre de Données affiche les données du membre ou du professionnel.
     5. L'agent choisit "Modifier le compte".
-    6. L'agent modifie la ou les données.
+    6. L'agent modifie la ou les donnée(s).
     7. L'agent appuie sur "Enregistrer".
       7.1. Le logiciel valide la modification.
       7.2. Le logiciel envoie les modifications au Centre de Données.
     <span style="font-weight: bold;">Scénarios alternatifs :</span>
     3a. Le logiciel ne trouve pas le Numéro et renvoie "Numéro incorrect".
     4a. Le logiciel retourne à l'étape 2.
-    <span style="font-weight: bold;">Postconditions :</span> Les modifications sont apportés dans le Centre de données </pre>
+    <span style="font-weight: bold;">Postconditions :</span> Les modifications sont apportées dans le Centre de données. </pre>
 
   <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Suspendre un compte
     <span style="font-weight: bold;">But :</span> Suspendre l'accès d'un membre au gym ou les services d'un professionnel.
-    <span style="font-weight: bold;">Préconditions :</span> Le professionnel ou le membre doit être enregistré dans le logiciel
+    <span style="font-weight: bold;">Préconditions :</span> Le professionnel ou le membre doit être enregistré dans le logiciel.
     <span style="font-weight: bold;">Acteurs :</span> Professionnel (principal), Membre (principal), Agent à la réception (secondaire).
     <span style="font-weight: bold;">Scénario principal :</span>
     1. Le logiciel affiche le menu.
@@ -341,7 +341,7 @@
     3. L'agent entre le Numéro du membre ou professionnel.
     4. Le Centre de Données affiche les données du membre ou du professionnel.
     5. L'agent choisit "Suspendre le compte".
-      5.1. L'agent appuit sur "Confirmer"
+      5.1. L'agent appuie sur "Confirmer"
       5.2. Le logiciel modifie la condition du membre ou du professionnel à "Suspendu" dans le Centre de données.
     6. Le logiciel affiche "Validé".
     <span style="font-weight: bold;">Scénarios alternatifs :</span>
@@ -370,7 +370,7 @@
     <span style="font-weight: bold;">Postconditions :</span> Un nouveau service avec un Code de service unique est créé dans le Répertoire des services.</span> </pre>
 
   <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Mise à jour d'un service
-    <span style="font-weight: bold;">But :</span>  Le professionnel met à jour un service.
+    <span style="font-weight: bold;">But :</span> Le professionnel met à jour un service.
     <span style="font-weight: bold;">Préconditions :</span> Le professionnel doit être enregistré dans le gym, le service doit être créé dans le système.
     <span style="font-weight: bold;">Acteurs :</span> Professionnel (principal), Agent à la réception (secondaire).
     <span style="font-weight: bold;">Scénario principal :</span>
@@ -389,7 +389,7 @@
       5a.1. Le logiciel retourne à l'étape 3.
     <span style="font-weight: bold;">Postconditions :</span> Modification du service dans le système. </pre>
 
-  <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Suppression un service
+  <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Suppression d'un service
     <span style="font-weight: bold;">But :</span>  Le professionnel supprime un service qu'il n'offrira plus.
     <span style="font-weight: bold;">Préconditions :</span> Le professionnel doit être enregistré dans le gym, le service doit être créé dans le système.
     <span style="font-weight: bold;">Acteurs :</span> Professionnel (principal), Agent à la réception (secondaire).
@@ -399,8 +399,8 @@
     3. L'agent choisit Service Existant.
     4. L'agent entre le Code du service.
     5. Le Répertoire de Services renvoie le service recherché.
-    6. L'agent choisit "Supprimer le service"
-      6.1. L'agent appuie sur "Confirmer"
+    6. L'agent choisit "Supprimer le service".
+      6.1. L'agent appuie sur "Confirmer".
       6.2. Le logiciel supprime les données du Centre de Données et du Répertoire des Services.
     7. Le logiciel affiche "Supprimé".
     <span style="font-weight: bold;">Scénarios alternatifs :</span>
@@ -429,7 +429,7 @@
         - Perte des données des membres et des professionnels.
         - Ressources humaines insuffisantes pour la production du logiciel en temps (2 personnes pour un projet de 3 personnes).
     <span style="font-weight: bold;">2. Risque important :</span>
-        - Une personne non-membre pourrait utiliser le code d'une personne membre pour s'autentifier sans abonnement.
+        - Une personne non-membre pourrait utiliser le code d'une personne membre pour s'authentifier sans abonnement.
     <span style="font-weight: bold;">3. Risque éloigné :</span>
         - L'interface du logiciel trop peu intuitive pour être utilisée par un employé du gym qui n'est pas expert en informatique.
     <span style="font-weight: bold;">4. Obstacle mineur :</span>
@@ -449,7 +449,7 @@
     2. Le système doit garantir la sécurité des données des membres et des professionnels.
     3. Le système peut perdre seulement l'information de la saisie courante (avant l'enregistrement).
     4. Le démarrage du système ne doit pas dépasser 10s.
-    5. Le système doit être adaptable au besoins futurs du gym
+    5. Le système doit être adaptable aux besoins futurs du gym.
 
     <span style="font-weight: bold;">Performance :</span> Le système doit répondre aux actions des utilisateurs en moins de 0.5s.
 
@@ -461,7 +461,7 @@
     Nous proposons de construire le système en mode interactif qui nécessite l’intervention manuelle d’un agent à la réception. Le système est utilisé sur demande des membres et des professionnels du gym.<br>
     Le projet #GYM est informatisé au complet.<br>
     Les données sur les membres, les professionnels et les services sont stockées dans des fichiers (au format CSV, par exemple).
-    Le matériel nécessaire est un serveur de fichiers et un ordinateur pour un agent d’entrée de gamme (4 Go de RAM et un disque dur de 120 Go). Un disque dur externe est demandé pour la sauvegarde des données.<br>
+    Le matériel nécessaire est un serveur de fichiers et un ordinateur d’entrée de gamme pour un agent (4 Go de RAM et un disque dur de 120 Go). Un disque dur externe est requis pour la sauvegarde des données.<br>
     Le système #GYM doit interagir avec le serveur de fichiers.
   </p>
 
@@ -502,11 +502,18 @@
   <figure>
     <img src="images/Diagramme_activite_confirmation_presence.png" alt="Diagramme d'activité UML pour le CU Confirnation de présence" style="width:40%">
     <figcaption>
-      <i>Figure 7.5 - <a href="Analyse\tache7_diagramme_activite_confirmation_presence.vpp"> Diagramme d'activité UML</a> pour le cas d'utilisation Confirnation de présence</i>
+      <i>Figure 7.5 - <a href="Analyse\tache7_diagramme_activite_confirmation_presence.vpp"> Diagramme d'activité UML</a> pour le cas d'utilisation Confirmation de la présence</i>
     </figcaption>
   </figure> <br>
 
   <h2>Collaboration</h2>
+
+  <figure>
+    <img src="images/Statistiques_bitbucket.png" alt="Statistiques du dépôt BitBucket" style="width:80%">
+    <figcaption>
+      <i>Figure 8.1 - Statistiques du dépôt BitBucket</i>
+    </figcaption>
+  </figure> <br>
 
 </body>
 
