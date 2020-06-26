@@ -165,11 +165,11 @@
     abonnement mensuel de suspendre l'abonnement automatiquement dans le logiciel s'il n'est pas renouvelé. <br> Cependant, dans le cas présent
     nous allons considérer que tous les membres seront suspendus manuellement.<br> Nous allons aussi considérer que les données du membre ne seront
     pas supprimées,son abonnement sera seulement suspendu.    <br> <br>
-
-
   </p>
+
   <h2>
     Tâche 1 : Glossaire</h2>
+
   <p>
     Glossaire des termes clés<br>
     <span style="font-weight: bold;">Agent à la réception :</span> Personne employée par le gym en charge d'interagir avec les clients et le logiciel.<br>
@@ -188,19 +188,43 @@
 
     <span style="font-weight: bold;">Professionnel :</span> Expert en exercice physique ou en santé qui offre un service aux membres.<br>
 
+    <span style="font-weight: bold;">Séance :</span> Période durant laquelle un professionnel offre un service pour les membres de #GYM. <br>
+
     <span style="font-weight: bold;">Service :</span> Domaine d'expertise qu'un expert peut offrir à un client pendant des séances. <br>
 
-    <span style="font-weight: bold;">Séance :</span> Période durant laquelle un professionnel offre un service pour les membres de #GYM. <br>
     <br>
   </p>
 
 
   <h2>Tâche 2 : Diagramme de cas d'utilisation UML</h2>
 
+  <p>
+    Représentons ci-dessous <a href="tache2_diagramme_cas_utilisation.vpp"> le diagramme de cas d'utilisation UML</a> du système #GYM.
+  </p>
+
+  <figure>
+    <img src="images/Diagramme_de_cas_utilisation_UML.png" alt="Diagramme de cas d'utilisation UML" style="width:65%">
+    <figcaption>
+      <i>Figure 2.1 - Diagramme de cas d'utilisation UML</i>
+    </figcaption>
+  </figure>
+
+   <p>
+      Remarquons que les cas d'utilisation "Création d'un compte", "Modification d'un compte" et "Suspension d'un compte" peuvent être réunis
+      dans le cas d'utilisation "Gestion d'un compte" afin d'optimiser le diagramme initial. Nous pouvons égalemet réunir les cas d'utilisation
+      "Création d'un service", "Mise à jour d'un service", "Suppression d'un service" en un seul cas d'utilisation "Gestion d'un service".
+      Représentons <a href="tache2_diagramme_cas_utilisation_optimise.vpp">le diagramme de cas d'utilisation UML optimisé</a>.
+   </p>
+
+   <figure>
+     <img src="images/Diagramme_de_cas_utilisation UML_optimise.png" alt="Diagramme de cas d'utilisation UML optimisé" style="width:65%">
+     <figcaption>
+       <i>Figure 2.2 - Diagramme de cas d'utilisation UML optimisé</i>
+     </figcaption>
+   </figure>
+
 
   <h2>Tâche 3 : Cas d'utilisation</h2>
-
-
 
   <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Demande d'accès au gym
     <span style="font-weight: bold;">But :</span> Le client se présente à la réception et demande l'accès au gym.
@@ -317,7 +341,7 @@
     <span style="font-weight: bold;">Scénarios alternatifs :</span>
     3a. Le logiciel ne trouve pas le Numéro et renvoie "Numéro incorrect".
     4a. Le logiciel retourne à l'étape 2.
-    <span style="font-weight: bold;">Postconditions :</span> L'abonnement du membre ou le service du professionnel est suspendu.
+    <span style="font-weight: bold;">Postconditions :</span> L'abonnement du membre ou le service du professionnel est suspendu.</pre>
 
   <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Création d'un service.
     <span style="font-weight: bold;">But :</span>  Le professionnel offre un nouveau service lors de séances hebdomadaires au gym.
@@ -404,8 +428,7 @@
         - L'interface du logiciel trop peu intuitive pour être utilisée par un employé du gym qui n'est pas expert en informatique.
     <span style="font-weight: bold;">4. Obstacle mineur :</span>
         - Une personne non-membre pourrait donner un code de membre au hasard et tomber sur le code d'un vrai
-          membre parce que le code n'est pas assez complexe.
-  </pre>
+          membre parce que le code n'est pas assez complexe. </pre>
 
   <h2>Tâche 5 : Exigences non-fonctionnelles</h2>
 
@@ -424,8 +447,7 @@
 
     <span style="font-weight: bold;">Performance :</span> Le système doit répondre aux actions des utilisateurs en moins de 0.5s.
 
-    <span style="font-weight: bold;">Implémentation :</span> Le système doit être testé sur une console Java.
-  </pre>
+    <span style="font-weight: bold;">Implémentation :</span> Le système doit être testé sur une console Java. </pre> <br>
 
   <h2>Tâche 6 : Analyse</h2>
 
@@ -439,7 +461,44 @@
 
   <h2>Tâche 7 : Diagramme d'activité UML</h2>
 
+  <p>
+    Produisons le modèle d'analyse dynamique du système #GYM illustrant le flux des différentes activités et actions du système.
+  </p>
 
+  <figure>
+    <img src="images/Diagramme_activite_principal.png" alt="Diagramme d'activité UML principal" style="width:65%">
+    <figcaption>
+      <i>Figure 7.1 - <a href="tache7_diagramme_activite_principal.vpp"> Diagramme d'activité UML principal</a></i>
+    </figcaption>
+  </figure> <br>
+
+  <figure>
+    <img src="images/Diagramme_activite_gestion_compte.png" alt="Diagramme d'activité UML pour le CU Gestion d'un compte" style="width:70%">
+    <figcaption>
+      <i>Figure 7.2 - <a href="tache7_diagramme_activite_gestion_compte.vpp"> Diagramme d'activité UML</a> pour le cas d'utilisation Gestion d'un compte (ajouter/mettre à jour/supprimer un membre)</i>
+    </figcaption>
+  </figure> <br>
+
+  <figure>
+    <img src="images/Diagramme_activite_gestion_service.png" alt="Diagramme d'activité UML pour le CU Gestion d'un service" style="width:80%">
+    <figcaption>
+      <i>Figure 7.3 - <a href="tache7_diagramme_activite_gestion_service.vpp"> Diagramme d'activité UML</a> pour le cas d'utilisation Gestion d'un service (ajouter/mettre à jour/supprimer un service)</i>
+    </figcaption>
+  </figure> <br>
+
+  <figure>
+    <img src="images/Diagramme_activite_inscription_seance.png" alt="Diagramme d'activité UML pour le CU Inscription à une séance" style="width:40%">
+    <figcaption>
+      <i>Figure 7.4 - <a href="tache7_diagramme_activite_inscription_seance.vpp"> Diagramme d'activité UML</a> pour le cas d'utilisation Inscription à une séance</i>
+    </figcaption>
+  </figure> <br>
+
+  <figure>
+    <img src="images/Diagramme_activite_confirmation_presence.png" alt="Diagramme d'activité UML pour le CU Confirnation de présence" style="width:40%">
+    <figcaption>
+      <i>Figure 7.5 - <a href="tache7_diagramme_activite_confirmation_presence.vpp"> Diagramme d'activité UML</a> pour le cas d'utilisation Confirnation de présence</i>
+    </figcaption>
+  </figure> <br>
 
   <h2>Collaboration</h2>
 
