@@ -34,7 +34,7 @@
     <br />
     <span style="font-weight: bold;">Courriel: </span>alex.defoy@umontreal.ca
     <br />
-    <span style="font-weight: bold;">temps mis: </span>14 heures
+    <span style="font-weight: bold;">temps mis: </span>22 heures
   </p>
   <p>
     <span style="font-weight: bold;">Nom: </span>Maryna Starastsenka
@@ -43,12 +43,12 @@
     <br />
     <span style="font-weight: bold;">Courriel: </span>maryna.starastsenka@umontreal.ca
     <br />
-    <span style="font-weight: bold;">temps mis: </span>** heures
+    <span style="font-weight: bold;">temps mis: </span>25 heures
   </p>
   <h2>
     Distribution des tâches</h2>
   <p>
-    <span style="font-weight: bold;">Soumetteur: Nom Prénom</span>
+    <span style="font-weight: bold;">Soumetteur: Defoy Alex</span>
   </p>
   <table cellpadding="7px">
     <thead>
@@ -147,6 +147,12 @@
   <h2>
     Hypothèses</h2>
   <p>
+    Nous supposons que le centre sportif #GYM est un nouveau business qui n’a pas encore implémenté de système de gestion des membres, des professionnels, des services et des inscriptions.<br>
+    Nous n’avons donc pas d’exigences non-fonctionnels et risques liés à l’implémentation du système dans l’infrastructure existante.<br>
+    La migration des données n’est pas requise non plus. 
+    En addition, on suppose qu’il s’agit d’un seul centre sportif et non d’une chaîne. <br>
+    On le prend en considération en faisant l’analyse du système.<br><br>
+  
     Puisque le «Centre de Données» et le «Répertoire des Services» font partie du logiciel, <br>
     ils seront mentionnés, mais ne seront pas des acteurs dans les cas d'utilisation.
     Nous avons supposé qu'il faudrait cinq différents fichiers pour conserver les données. <br>
@@ -199,7 +205,7 @@
   <h2>Tâche 2 : Diagramme de cas d'utilisation UML</h2>
 
   <p>
-    Représentons ci-dessous <a href="tache2_diagramme_cas_utilisation.vpp"> le diagramme de cas d'utilisation UML</a> du système #GYM.
+    Représentons ci-dessous <a href="Exigences\tache2_diagramme_cas_utilisation.vpp"> le diagramme de cas d'utilisation UML</a> du système #GYM.
   </p>
 
   <figure>
@@ -211,9 +217,9 @@
 
    <p>
       Remarquons que les cas d'utilisation "Création d'un compte", "Modification d'un compte" et "Suspension d'un compte" peuvent être réunis
-      dans le cas d'utilisation "Gestion d'un compte" afin d'optimiser le diagramme initial. Nous pouvons égalemet réunir les cas d'utilisation
+      dans le cas d'utilisation "Gestion d'un compte" afin d'optimiser le diagramme initial.<br> Nous pouvons égalemet réunir les cas d'utilisation
       "Création d'un service", "Mise à jour d'un service", "Suppression d'un service" en un seul cas d'utilisation "Gestion d'un service".
-      Représentons <a href="tache2_diagramme_cas_utilisation_optimise.vpp">le diagramme de cas d'utilisation UML optimisé</a>.
+      Représentons <a href="Exigences\tache2_diagramme_cas_utilisation_optimise.vpp">le diagramme de cas d'utilisation UML optimisé</a>.
    </p>
 
    <figure>
@@ -468,35 +474,35 @@
   <figure>
     <img src="images/Diagramme_activite_principal.png" alt="Diagramme d'activité UML principal" style="width:65%">
     <figcaption>
-      <i>Figure 7.1 - <a href="tache7_diagramme_activite_principal.vpp"> Diagramme d'activité UML principal</a></i>
+      <i>Figure 7.1 - <a href="Analyse\tache7_diagramme_activite_principal.vpp"> Diagramme d'activité UML principal</a></i>
     </figcaption>
   </figure> <br>
 
   <figure>
     <img src="images/Diagramme_activite_gestion_compte.png" alt="Diagramme d'activité UML pour le CU Gestion d'un compte" style="width:70%">
     <figcaption>
-      <i>Figure 7.2 - <a href="tache7_diagramme_activite_gestion_compte.vpp"> Diagramme d'activité UML</a> pour le cas d'utilisation Gestion d'un compte (ajouter/mettre à jour/supprimer un membre)</i>
+      <i>Figure 7.2 - <a href="Analyse\tache7_diagramme_activite_gestion_compte.vpp"> Diagramme d'activité UML</a> pour le cas d'utilisation Gestion d'un compte (ajouter/mettre à jour/supprimer un membre)</i>
     </figcaption>
   </figure> <br>
 
   <figure>
     <img src="images/Diagramme_activite_gestion_service.png" alt="Diagramme d'activité UML pour le CU Gestion d'un service" style="width:80%">
     <figcaption>
-      <i>Figure 7.3 - <a href="tache7_diagramme_activite_gestion_service.vpp"> Diagramme d'activité UML</a> pour le cas d'utilisation Gestion d'un service (ajouter/mettre à jour/supprimer un service)</i>
+      <i>Figure 7.3 - <a href="Analyse\tache7_diagramme_activite_gestion_service.vpp"> Diagramme d'activité UML</a> pour le cas d'utilisation Gestion d'un service (ajouter/mettre à jour/supprimer un service)</i>
     </figcaption>
   </figure> <br>
 
   <figure>
     <img src="images/Diagramme_activite_inscription_seance.png" alt="Diagramme d'activité UML pour le CU Inscription à une séance" style="width:40%">
     <figcaption>
-      <i>Figure 7.4 - <a href="tache7_diagramme_activite_inscription_seance.vpp"> Diagramme d'activité UML</a> pour le cas d'utilisation Inscription à une séance</i>
+      <i>Figure 7.4 - <a href="Analyse\tache7_diagramme_activite_inscription_seance.vpp"> Diagramme d'activité UML</a> pour le cas d'utilisation Inscription à une séance</i>
     </figcaption>
   </figure> <br>
 
   <figure>
     <img src="images/Diagramme_activite_confirmation_presence.png" alt="Diagramme d'activité UML pour le CU Confirnation de présence" style="width:40%">
     <figcaption>
-      <i>Figure 7.5 - <a href="tache7_diagramme_activite_confirmation_presence.vpp"> Diagramme d'activité UML</a> pour le cas d'utilisation Confirnation de présence</i>
+      <i>Figure 7.5 - <a href="Analyse\tache7_diagramme_activite_confirmation_presence.vpp"> Diagramme d'activité UML</a> pour le cas d'utilisation Confirnation de présence</i>
     </figcaption>
   </figure> <br>
 
