@@ -184,7 +184,7 @@
 
     <span style="font-weight: bold;">Capacité maximale :</span> Quantité maximale de membres qui peuvent accéder à une séance.<br>
 
-    <span style="font-weight: bold;">Membre :</span> Client qui a accès illimité aux salles de sports et aux services d'un professionnel.<br>
+    <span style="font-weight: bold;">Membre :</span> Personne qui a accès illimité aux salles de sports et aux services d'un professionnel.<br>
 
     <span style="font-weight: bold;">Membre suspendu :</span> Membre qui n'a plus accès au gym ou aux services. <br>
 
@@ -199,7 +199,7 @@
     <span style="font-weight: bold;">Service :</span> Domaine d'expertise qu'un expert peut offrir à un client pendant des séances. <br>
 
     <span style="font-weight: bold;">Centre de données :</span> ¸Serveur qui contient tous l’information de la logique d’affaire de #GYM.Contient les données sur les membres, 
-                                                                les professionnels, les services et la gestion desinscriptions. <br>
+                                                                les professionnels, les services et la gestion des inscriptions. <br>
     
     <span style="font-weight: bold;">Répertoire des Services: :</span> Base de données de tous les services offerts et leur séances. <br>
     
@@ -207,7 +207,17 @@
 
     <span style="font-weight: bold;">Informations personnelles : </span>  Informations fournies par les clients lors de l’adhésion au #GYM <br>
     
-     <span style="font-weight: bold;">Requête:</span> Demande effectuée au système afin d'obtenir certaines informations. <br>
+    <span style="font-weight: bold;">Client:</span> Membre ou professionnel <br>  
+    
+    <span style="font-weight: bold;">Compte:</span> Objet enregistré dans Centre de données qui contient les informationssur un client. <br>    
+    
+    <span style="font-weight: bold;">Requête:</span> Demande effectuée au système afin d'obtenir certaines informations. <br>
+    
+    <span style="font-weight: bold;">Inscription:</span> Ajout d'un client dans le Centre de données ou d'un membre à une séance. <br>
+    
+   <span style="font-weight: bold;">#GYM (centre sportif):</span> Installations qui comporte une salle des machines, une piscine, une salle multisport
+                                                                  et qui offre des services en exercice physique et en santé. Comporte une réception
+                                                                  qui accueil les clients.<br>
     
     <br>
   </p>
@@ -279,10 +289,12 @@
     6. Le logiciel confirme l'inscription.
     <span style="font-weight: bold;">Scénarios alternatifs :</span>
       4.a.1 Le client ne trouve pas de séances intéressantes.
+      4.a.2 Fin de l'inscription.
       4.1.b.1 Le logiciel renvoie "Capacité maximale atteinte".
-      4.1.b.2 Le logiciel retourne à l'étape 3.
+      4.1.b.2 Le logiciel retourne à l'étape 2.
       5.1.c.1 Le numéro de membre n'est pas valide.
-      5..1.c.2 Le logiciel retourne à l'étape 5 et demande le numéro de membre.
+      5.1.c.2 Le logiciel retourne à l'étape 5 et demande le numéro de membre.
+      5.1.d.2 On annule la demande d'inscription.
     <span style="font-weight: bold;">Postconditions: Le membre est inscrit à une séance.</span> </pre>
 
   <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Confirmation de la présence
@@ -291,21 +303,23 @@
     <span style="font-weight: bold;">Acteurs :</span> Membre (principal), Agent à la réception (secondaire).
     <span style="font-weight: bold;">Scénario principal :</span>
     1. Le logiciel affiche le menu.
-    2. L'agent choisit Consultation du Répertoire des services.
-    3. L'agent choisit la séance.
-    4. Le Répertoire des Services affiche la séance recherchée.
-    5. L'agent entre le code du membre.
-      5.1 Le logiciel valie le code du membre.
+    2. L'agent choisit Consultation du Répertoire des services
+    3. Le Répertoire des Services renvoie les séances disponibles.
+    4. Sélection de la séance.
+    5. Le Répertoire des Services affiche la séance recherchée.
     6. L'agent appuie sur "Confirmer la présence".
-    7. Le logiciel envoie les données au Centre de Données.
-      7.1. Le logiciel reçoit la confirmation de la part du Centre de Données.
-      7.2. Le logiciel crée un enregistrement sur le disque.
-    8. Le logiciel affiche "Validé".
+    7. L'agent entre le numéro du membre.
+      7.1 Le logiciel valide le numéro du membre.
+    8. Le logiciel envoie les données au Centre de Données.
+      8.1. Le logiciel reçoit la confirmation de la part du Centre de Données.
+      8.2. Le logiciel crée un enregistrement sur le disque.
+    9. Le logiciel affiche "Validé".
     <span style="font-weight: bold;">Scénarios alternatifs :</span>
-    5b. Le Répertoire des Services ne trouve pas le numéro de membre et renvoie "Numéro de membre invalide".
-      5b.1. Le logiciel retourne à l'étape 5.
-    7c. Le Centre de Données ne trouve pas l'inscription du membre à la séance.
-      7c.1. Le logiciel affiche "Le membre n'est pas inscrit".
+      7.1.a.1 Le Répertoire des Services ne trouve pas le numéro de membre et renvoie "Numéro de membre invalide".
+      7.1.a.2 Le logiciel retourne à l'étape 7.
+      7.1.b.2 On annule la demande de confirmation
+      8.1.c.1 Le Centre de Données ne trouve pas l'inscription du membre à la séance.
+      8.1.c.2. Le logiciel affiche Accès refusé et termine la Confirmation de la présence.
     <span style="font-weight: bold;">Postconditions :</span> </pre>
 
   <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Création d'un compte
@@ -332,7 +346,7 @@
     1. Le logiciel affiche le menu.
     2. L'agent choisit Gestion d'un compte.
     3. L'agent entre le Numéro du membre ou professionnel.
-      3.1 Le logiciel valide le numéro de memrbe
+      3.1 Le logiciel valide le numéro de membre
     4. Le Centre de Données affiche les données du membre ou du professionnel.
     5. L'agent choisit "Modifier le compte".
     6. L'agent modifie la ou les donnée(s).
@@ -340,8 +354,9 @@
       7.1. Le logiciel valide la modification.
       7.2. Le logiciel envoie les modifications au Centre de Données.
     <span style="font-weight: bold;">Scénarios alternatifs :</span>
-    3.1.a.1 Le logiciel ne trouve pas le Numéro et renvoie "Numéro incorrect".
-    3.1.a.2 Le logiciel retourne à l'étape 2.
+      3.1.a.1 Le logiciel ne trouve pas le Numéro et renvoie "Numéro incorrect".
+      3.1.a.2 Le logiciel retourne à l'étape 2.
+      3.1.b.2 Annuler la modification.
     <span style="font-weight: bold;">Postconditions :</span> Les modifications sont apportées dans le Centre de données. </pre>
 
   <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Suspendre un compte
@@ -352,14 +367,16 @@
     1. Le logiciel affiche le menu.
     2. L'agent choisit Gestion d'un compte.
     3. L'agent entre le Numéro du membre ou professionnel.
+      3.1 Le logiciel valide le numéro de membre
     4. Le Centre de Données affiche les données du membre ou du professionnel.
     5. L'agent choisit "Suspendre le compte".
       5.1. L'agent appuie sur "Confirmer"
       5.2. Le logiciel modifie la condition du membre ou du professionnel à "Suspendu" dans le Centre de données.
     6. Le logiciel affiche "Validé".
     <span style="font-weight: bold;">Scénarios alternatifs :</span>
-    3a. Le logiciel ne trouve pas le Numéro et renvoie "Numéro incorrect".
-    4a. Le logiciel retourne à l'étape 2.
+      3.1.a.1 Le logiciel ne trouve pas le Numéro et renvoie "Numéro incorrect".
+      3.1.a.2 Le logiciel retourne à l'étape 2.
+      3.1.b.2 Annuler la modification
     <span style="font-weight: bold;">Postconditions :</span> L'abonnement du membre ou le service du professionnel est suspendu.</pre>
 
   <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Création d'un service.
@@ -369,56 +386,63 @@
     <span style="font-weight: bold;">Scénario principal :</span>
     1. Le logiciel affiche le menu.
     2. L'agent choisit Gestion d'un service.
-    3. L'agent choisit Nouveau service
-    4. L'agent entre le Numéro du professionnel.
-    5. Le Répertoire de Services renvoie les services du professionnel.
-    5. L'agent choisit "Ajouter un service".
-    6. L'agent entre les informations concernant les nouvelles séances.
-    7. L'agent appuie sur "Enregistrer".
-      7.1. Le logiciel envoie les données au Répertoire des services.
-    8. Le logiciel affiche "Enregistré".
+    3. L'agent entre le numéro du professionnel.
+      3.1 Le logiciel valide le numéro du professionnel.
+    4. L'agent choisit Nouveau service
+    5. L'agent entre les informations concernant les nouvelles séances.
+    6. L'agent appuie sur "Enregistrer".
+      6.1. Le logiciel envoie les données au Répertoire des services.
+    7. Le logiciel affiche "Enregistré".
     <span style="font-weight: bold;">Scénarios alternatifs :</span>
-    5a. Le Centre de données ne trouve pas le Numéro du professionnel et renvoie "Numéro du professionnel incorrect".
-      5a.1. Le logiciel retourne à l'étape 3.
+      3.1.a.1 Le Centre de données ne trouve pas le Numéro du professionnel et renvoie "Numéro du professionnel incorrect".
+      3.1.a.2 Le logiciel retourne à l'étape 3.
     <span style="font-weight: bold;">Postconditions :</span> Un nouveau service avec un Code de service unique est créé dans le Répertoire des services.</span> </pre>
 
   <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Mise à jour d'un service
     <span style="font-weight: bold;">But :</span> Le professionnel met à jour un service.
-    <span style="font-weight: bold;">Préconditions :</span> Le professionnel doit être enregistré dans le gym, le service doit être créé dans le système.
+    <span style="font-weight: bold;">Préconditions :</span> Le professionnel doit être enregistré dans le gym, Le service doit être créé dans le système.
     <span style="font-weight: bold;">Acteurs :</span> Professionnel (principal), Agent à la réception (secondaire).
     <span style="font-weight: bold;">Scénario principal :</span>
     1. Le logiciel affiche le menu.
     2. L'agent choisit Gestion d'un service.
-    3. L'agent choisit Service Existant.
-    4. L'agent entre le Code du service.
-    5. Le Répertoire de Services renvoie le service recherché.
-    6. L'agent choisit "Modifier le service".
-    7. L'agent met à jour le service.
-    8. L'agent appuie sur "Enregistrer".
-      8.1. Le logiciel met à jour les données dans le Centre de Données.
-    8. Le logiciel affiche "Modifié".
+    3. L'agent entre le numéro du professionnel.
+      3.1 Le logiciel valide le numéro du professionnel.
+    4. L'agent choisit Service Existant.
+    5. Le logiciel affiche les services du professionnel.
+    6. L'agent sélectionne le service à modifier.
+    7. L'agent choisit "Modifier le service".
+    8. L'agent met à jour le service.
+    9. L'agent appuie sur "Enregistrer".
+      9.1. Le logiciel met à jour les données dans le Centre de Données.
+    10. Le logiciel affiche "Modifié".
     <span style="font-weight: bold;">Scénarios alternatifs :</span>
-    5a. Le Répertoire des Services ne trouve pas le Code du service et renvoie "Code du service incorrect".
-      5a.1. Le logiciel retourne à l'étape 3.
+      3.1.a.1 Le Centre de données ne trouve pas le Numéro du professionnel et renvoie "Numéro du professionnel incorrect".
+      3.1.a.2 Le logiciel retourne à l'étape 3.
+      5b.1 Le Répertoire des Services ne trouve pas de service.
+      5b.2 Le logiciel affiche Aucun service. 
     <span style="font-weight: bold;">Postconditions :</span> Modification du service dans le système. </pre>
 
   <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Suppression d'un service
     <span style="font-weight: bold;">But :</span>  Le professionnel supprime un service qu'il n'offrira plus.
-    <span style="font-weight: bold;">Préconditions :</span> Le professionnel doit être enregistré dans le gym, le service doit être créé dans le système.
+    <span style="font-weight: bold;">Préconditions :</span> Le professionnel doit être inscrit #GYM, le service doit être créé dans le système.
     <span style="font-weight: bold;">Acteurs :</span> Professionnel (principal), Agent à la réception (secondaire).
     <span style="font-weight: bold;">Scénario principal :</span>
     1. Le logiciel affiche le menu.
     2. L'agent choisit Gestion d'un service.
-    3. L'agent choisit Service Existant.
-    4. L'agent entre le Code du service.
-    5. Le Répertoire de Services renvoie le service recherché.
-    6. L'agent choisit "Supprimer le service".
-      6.1. L'agent appuie sur "Confirmer".
-      6.2. Le logiciel supprime les données du Centre de Données et du Répertoire des Services.
-    7. Le logiciel affiche "Supprimé".
+    3. L'agent entre le numéro du professionnel.
+      3.1 Le logiciel valide le numéro du professionnel.
+    4. L'agent choisit Service Existant.
+    5. Le logiciel affiche les services du professionnel.
+    6. L'agent sélectionne le service à supprimer.
+    7. L'agent choisit "Supprimer le service".
+      7.1. L'agent appuie sur "Confirmer".
+      7.2. Le logiciel supprime les données du Centre de Données et du Répertoire des Services.
+    8. Le logiciel affiche "Supprimé".
     <span style="font-weight: bold;">Scénarios alternatifs :</span>
-    5a. Le Répertoire des Services ne trouve pas le Code du service et renvoie "Code du service incorrect".
-    6a. Le logiciel retourne à l'étape 3.
+      3.1.a.1 Le Centre de données ne trouve pas le Numéro du professionnel et renvoie "Numéro du professionnel incorrect".
+      3.1.a.2 Le logiciel retourne à l'étape 3.
+      5b.1 Le Répertoire des Services ne trouve pas de service.
+      5b.2 Le logiciel affiche Aucun service. 
     <span style="font-weight: bold;">Postconditions :</span> Suppression du service dans le système. </pre>
 
   <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Consultation des inscriptions
@@ -440,15 +464,16 @@
   <h2>Tâche 4 : Risques</h2>
   <pre style="font-family: 'Open Sans';">
     <span style="font-weight: bold;">1. Risque sévère :</span>
-        - Perte des données des membres et des professionnels.
-        - Ressources humaines insuffisantes pour la production du logiciel en temps (2 personnes pour un projet de 3 personnes).
+      ***  - Ressources humaines insuffisantes pour la production du logiciel en temps (2 personnes pour un projet de 3 personnes).
     <span style="font-weight: bold;">2. Risque important :</span>
         - Une personne non-membre pourrait utiliser le code d'une personne membre pour s'authentifier sans abonnement.
+        - Pas de techniques pour retrouver le numéro d'un client si on le perd.
     <span style="font-weight: bold;">3. Risque éloigné :</span>
-        - L'interface du logiciel trop peu intuitive pour être utilisée par un employé du gym qui n'est pas expert en informatique.
+      ***  - L'interface du logiciel trop peu intuitive pour être utilisée par un employé du gym qui n'est pas expert en informatique.
+           - Un professionnel donne un service pour lequel il n'a pas les compétences.
     <span style="font-weight: bold;">4. Obstacle mineur :</span>
-        - Une personne non-membre pourrait donner un code de membre au hasard et tomber sur le code d'un vrai
-          membre parce que le code n'est pas assez complexe. </pre>
+       *** - Une personne non-membre pourrait donner un code de membre au hasard et tomber sur le code d'un vrai
+          membre parce que le code n'est pas assez complexe. </pre> 
 
   <h2>Tâche 5 : Exigences non-fonctionnelles</h2>
 
@@ -476,7 +501,7 @@
     Le projet #GYM est informatisé au complet.<br>
     Les données sur les membres, les professionnels et les services sont stockées dans des fichiers (au format CSV, par exemple).
     Le matériel nécessaire est un serveur de fichiers et un ordinateur d’entrée de gamme pour un agent (4 Go de RAM et un disque dur de 120 Go). Un disque dur externe est requis pour la sauvegarde des données.<br>
-    Le système #GYM doit interagir avec le serveur de fichiers.
+   *** Le système #GYM doit interagir avec le serveur de fichiers.
   </p>
 
   <h2>Tâche 7 : Diagramme d'activité UML</h2>
