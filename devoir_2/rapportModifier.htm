@@ -235,21 +235,6 @@
     </figcaption>
   </figure>
 
-   <p>
-      Remarquons que les cas d'utilisation "Création d'un compte", "Modification d'un compte" et "Suspension d'un compte" peuvent être réunis
-      dans le cas d'utilisation "Gestion d'un compte" afin d'optimiser le diagramme initial.<br> Nous pouvons égalemet réunir les cas d'utilisation
-      "Création d'un service", "Mise à jour d'un service", "Suppression d'un service" en un seul cas d'utilisation "Gestion d'un service".
-      Représentons <a href="Exigences\tache2_diagramme_cas_utilisation_optimise.vpp">le diagramme de cas d'utilisation UML optimisé</a>.
-   </p>
-
-   <figure>
-     <img src="images/Diagramme_de_cas_utilisation UML_optimise.png" alt="Diagramme de cas d'utilisation UML optimisé" style="width:65%">
-     <figcaption>
-       <i>Figure 2.2 - Diagramme de cas d'utilisation UML optimisé</i>
-     </figcaption>
-   </figure>
-
-
   <h2>Tâche 3 : Cas d'utilisation</h2>
 
   <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Demande d'accès au gym
@@ -444,20 +429,20 @@
       5b.2 Le logiciel affiche Aucun service.
     <span style="font-weight: bold;">Postconditions :</span> Suppression du service dans le système. </pre>
 
-  <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Consultation des inscriptions
+  <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Consultation d'une séance
     <span style="font-weight: bold;">But :</span> Le professionnel se présente à la réception pour consulter les inscriptions à ses séances.
     <span style="font-weight: bold;">Préconditions :</span> Le professionnel doit avoir le Numéro du professionnel.
     <span style="font-weight: bold;">Acteurs :</span> Professionnel (principal), Agent à la réception (secondaire).
     <span style="font-weight: bold;">Scénario principal :</span>
     1. Le logiciel affiche le menu.
-    2. L'agent choisit Consultation des inscriptions.
+    2. L'agent choisit Consultation d'une séance.
     3. L'agent entre le Numéro du professionnel.
       3.1 Le logiciel valide le numéro du professionnel.
-    4. Le Centre de Données renvoie les inscriptions associées au professionnel.
+    4. Le Centre de Données renvoie les séances avec les inscriptions associées au professionnel.
     <span style="font-weight: bold;">Scénarios alternatifs :</span>
     4a. Le Centre de Données ne trouve pas le Numéro du professionnel et renvoie "Numéro du professionnel incorrect".
       4a.1. Le logiciel retourne à l'étape 3.
-    4b. Le Centre de Données ne trouve pas les inscriptions associées au professionnel et renvoie "Aucune inscription disponible".
+    4b. Le Centre de Données ne trouve pas les séances associées au professionnel et renvoie "Aucune séance disponible".
     <span style="font-weight: bold;">Postconditions :</span> </pre>
 
   <h2>Tâche 4 : Risques</h2>

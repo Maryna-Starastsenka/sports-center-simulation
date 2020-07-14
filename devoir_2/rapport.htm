@@ -143,6 +143,10 @@
 
     <pre style="font-family: 'Open Sans';">
     <span style="font-weight: bold;">2. Diagramme de cas d'utilisation UML </span>
+    Les modifications effectuées :
+        - Ajout d'un acteur "Client".
+        - Ajout des cas d'utilisation "Validé numéro membre" et "Consultation répertoire séances" qui sont inclus dans d'autres cas d'utilisation.
+        - Remplacement du cas d'utilisation "Consultation des inscription" par "Consultation d'une séance" ***TO DO : Modifier le CU***
     </pre>
 
     <pre style="font-family: 'Open Sans';">
@@ -156,6 +160,8 @@
         - Pas de techniques pour retrouver le numéro d'un client si on le perd.
     <span style="font-weight: bold;">Risque éloigné :</span>
         - Un professionnel donne un service pour lequel il n'a pas les compétences.
+
+    ****TO DO : jouter 2 risques*****
     </pre>
 
     <pre style="font-family: 'Open Sans';">
@@ -171,13 +177,27 @@
 
     <pre style="font-family: 'Open Sans';">
     <span style="font-weight: bold;">6. Analyse </span>
-      **** À ajouter l'intéraction du logiciel avec le serveur de fihiers******
+      **** TO DO : ajouter l'intéraction du logiciel avec le serveur de fihiers******
     </pre>
 
     <pre style="font-family: 'Open Sans';">
     <span style="font-weight: bold;">7. Diagramme d'activité UML </span>
+    Les modifications du diagramme d'activité UML principal :
+       - Ajout d'une option de menu "Valider numéro membre".
+       - Remplacement de la fin de flux par la fin d'activité quand "Quitter" est sélectionné.
+       - Ajout de "Revenir en arrière".
+
+    Les modifications du diagramme d'activité UML Gestion d'un Compte :
+       - Ajout de la fin d'activité pour pouvoir sortir du menu "Gestion d'un compte" si le numéro de client n'est pas valide.
+       - Ajout de noeuds de décision et de fins d'activité pour pouvoir annuler les actions.
+
+    Les modification du diagramme d'activité UML Gestion d'un service :
+
+    Les modification du diagramme d'activité UML Inscription à une séance :
+
+    Les modification du diagramme d'activité UML Confirmation de la présence :   
     </pre>
-  </p>
+
 
 
   <h2>Tâche 2 : Diagramme de classe UML </h2>
