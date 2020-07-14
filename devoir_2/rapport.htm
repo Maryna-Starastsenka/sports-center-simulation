@@ -188,17 +188,26 @@
        - Ajout de "Revenir en arrière".
 
     Les modifications du diagramme d'activité UML Gestion d'un Compte :
-       - Ajout de la fin d'activité pour pouvoir sortir du menu "Gestion d'un compte" si le numéro de client n'est pas valide.
-       - Ajout de noeuds de décision et de fins d'activité pour pouvoir annuler les actions.
+       - Ajout de noeud de fin d'activité pour pouvoir sortir du menu "Gestion d'un compte" si le numéro de client n'est pas valide.
+       - Ajout de noeuds de décision pour valider les informations sur le membre.
+       - Ajout de noeuds de décision pour pouvoir annuler l'activité si les informations sont invalides.
 
     Les modification du diagramme d'activité UML Gestion d'un service :
+       - Ajout la validation de numéro de professionel pour vérifier que le service à modifier/supprimer lui appartient.
+       - Ajout de noeud de décision pour finir l'activité si numéro de professionnel n'est pas valide.
+       - Ajour de noeud de décision pour pouvoir finir l'activité s'il n'y a pas de services liés au professionnel du centre sportif.
+       - Ajout de noeud de décision pour confirmer la suppression et la modification d'un service.
+       - Ajout de noeud de décision pour valider les informations sur le survice.
 
     Les modification du diagramme d'activité UML Inscription à une séance :
+       - Ajour de noeud de décision pour finir l'activité s'il n'y pas de séance ce jour ou le client n'est pas intéressé.
+       - Ajour de noeud de décision pour finir l'activité si le numéro de membre est invalide.
 
-    Les modification du diagramme d'activité UML Confirmation de la présence :   
+    Les modification du diagramme d'activité UML Confirmation de la présence :
+       - Ajour de noeud de décision pour finir l'activité si aucune séance est disponible dans la journée.
+       - Ajour de noeud de décision pour pouvoir finir l'activité si le numéro de membre est invalide.
+       - Ajour de noeud de décision pour pouvoir finir l'activité si le membre n'est pas inscrit à la séance.
     </pre>
-
-
 
   <h2>Tâche 2 : Diagramme de classe UML </h2>
 
