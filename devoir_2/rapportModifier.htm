@@ -184,41 +184,40 @@
 
     <span style="font-weight: bold;">Capacité maximale :</span> Quantité maximale de membres qui peuvent accéder à une séance.<br>
 
-    <span style="font-weight: bold;">Membre :</span> Personne qui a accès illimité aux salles de sports et aux services d'un professionnel.<br>
+    <span style="font-weight: bold;">Centre de données :</span> Serveur qui contient tous l’information de la logique d’affaire de #GYM : les données sur les membres,
+                                                                les professionnels, les services et la gestion des inscriptions. <br>
+
+    <span style="font-weight: bold;">Client :</span> Membre ou professionnel. <br>
+
+    <span style="font-weight: bold;">Compte :</span> Objet enregistré dans Centre de données qui contient les informationssur un client. <br>
+
+    <span style="font-weight: bold;">Confirmation de la présence :</span> : Action qu’effectue le membre pour indiquer que le service a été rendu en avance. <br>
+
+    <span style="font-weight: bold;">#GYM (centre sportif) :</span> Installations qui comporte une salle des machines, une piscine, une salle multisport
+                                                                   et qui offre des services en exercice physique et en santé. Comporte une réception
+                                                                   qui accueil les clients.<br>
+
+    <span style="font-weight: bold;">Informations personnelles :</span>  Informations fournies par les clients lors de l’adhésion au #GYM. <br>
+
+    <span style="font-weight: bold;">Inscription :</span> Ajout d'un client dans le Centre de données ou d'un membre à une séance. <br>
+
+    <span style="font-weight: bold;">Membre :</span> Personne qui a accès illimité aux salles de sports et aux services d'un professionnel. <br>
 
     <span style="font-weight: bold;">Membre suspendu :</span> Membre qui n'a plus accès au gym ou aux services. <br>
 
     <span style="font-weight: bold;">Numéro de membre :</span> Numéro unique qui identifie un membre. <br>
 
-    <span style="font-weight: bold;">Numéro de professionnel :</span> Numéro unique qui permet d'identifier un professionnel.<br>
+    <span style="font-weight: bold;">Numéro de professionnel :</span> Numéro unique qui permet d'identifier un professionnel. <br>
 
-    <span style="font-weight: bold;">Professionnel :</span> Expert en exercice physique ou en santé qui offre un service aux membres.<br>
+    <span style="font-weight: bold;">Professionnel :</span> Expert en exercice physique ou en santé qui offre un service aux membres. <br>
+
+    <span style="font-weight: bold;">Répertoire des Services :</span> Base de données de tous les services offerts et leur séances. <br>
+
+    <span style="font-weight: bold;">Requête :</span> Demande effectuée au système afin d'obtenir certaines informations. <br>
 
     <span style="font-weight: bold;">Séance :</span> Période durant laquelle un professionnel offre un service pour les membres de #GYM. <br>
 
-    <span style="font-weight: bold;">Service :</span> Domaine d'expertise qu'un expert peut offrir à un client pendant des séances. <br>
-
-    <span style="font-weight: bold;">Centre de données :</span> ¸Serveur qui contient tous l’information de la logique d’affaire de #GYM.Contient les données sur les membres, 
-                                                                les professionnels, les services et la gestion des inscriptions. <br>
-    
-    <span style="font-weight: bold;">Répertoire des Services: :</span> Base de données de tous les services offerts et leur séances. <br>
-    
-    <span style="font-weight: bold;">Confirmation de la présence :</span> : Action qu’effectue le membre pour indiquer que le service a été rendu en avance. <br>
-
-    <span style="font-weight: bold;">Informations personnelles : </span>  Informations fournies par les clients lors de l’adhésion au #GYM <br>
-    
-    <span style="font-weight: bold;">Client:</span> Membre ou professionnel <br>  
-    
-    <span style="font-weight: bold;">Compte:</span> Objet enregistré dans Centre de données qui contient les informationssur un client. <br>    
-    
-    <span style="font-weight: bold;">Requête:</span> Demande effectuée au système afin d'obtenir certaines informations. <br>
-    
-    <span style="font-weight: bold;">Inscription:</span> Ajout d'un client dans le Centre de données ou d'un membre à une séance. <br>
-    
-   <span style="font-weight: bold;">#GYM (centre sportif):</span> Installations qui comporte une salle des machines, une piscine, une salle multisport
-                                                                  et qui offre des services en exercice physique et en santé. Comporte une réception
-                                                                  qui accueil les clients.<br>
-    
+    <span style="font-weight: bold;">Service :</span> Domaine d'expertise qu'un expert peut offrir à un client pendant des séances. Comporte les entrainements et consultations des professionnels. <br>
     <br>
   </p>
 
@@ -419,7 +418,7 @@
       3.1.a.1 Le Centre de données ne trouve pas le Numéro du professionnel et renvoie "Numéro du professionnel incorrect".
       3.1.a.2 Le logiciel retourne à l'étape 3.
       5b.1 Le Répertoire des Services ne trouve pas de service.
-      5b.2 Le logiciel affiche Aucun service. 
+      5b.2 Le logiciel affiche Aucun service.
     <span style="font-weight: bold;">Postconditions :</span> Modification du service dans le système. </pre>
 
   <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Suppression d'un service
@@ -442,7 +441,7 @@
       3.1.a.1 Le Centre de données ne trouve pas le Numéro du professionnel et renvoie "Numéro du professionnel incorrect".
       3.1.a.2 Le logiciel retourne à l'étape 3.
       5b.1 Le Répertoire des Services ne trouve pas de service.
-      5b.2 Le logiciel affiche Aucun service. 
+      5b.2 Le logiciel affiche Aucun service.
     <span style="font-weight: bold;">Postconditions :</span> Suppression du service dans le système. </pre>
 
   <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Consultation des inscriptions
@@ -464,16 +463,16 @@
   <h2>Tâche 4 : Risques</h2>
   <pre style="font-family: 'Open Sans';">
     <span style="font-weight: bold;">1. Risque sévère :</span>
-      ***  - Ressources humaines insuffisantes pour la production du logiciel en temps (2 personnes pour un projet de 3 personnes).
+      *** - Ressources humaines insuffisantes pour la production du logiciel en temps (2 personnes pour un projet de 3 personnes).
     <span style="font-weight: bold;">2. Risque important :</span>
-        - Une personne non-membre pourrait utiliser le code d'une personne membre pour s'authentifier sans abonnement.
-        - Pas de techniques pour retrouver le numéro d'un client si on le perd.
+          - Une personne non-membre pourrait utiliser le code d'une personne membre pour s'authentifier sans abonnement.
+          - Pas de techniques pour retrouver le numéro d'un client si on le perd.
     <span style="font-weight: bold;">3. Risque éloigné :</span>
-      ***  - L'interface du logiciel trop peu intuitive pour être utilisée par un employé du gym qui n'est pas expert en informatique.
-           - Un professionnel donne un service pour lequel il n'a pas les compétences.
+      *** - L'interface du logiciel trop peu intuitive pour être utilisée par un employé du gym qui n'est pas expert en informatique.
+          - Un professionnel donne un service pour lequel il n'a pas les compétences.
     <span style="font-weight: bold;">4. Obstacle mineur :</span>
-       *** - Une personne non-membre pourrait donner un code de membre au hasard et tomber sur le code d'un vrai
-          membre parce que le code n'est pas assez complexe. </pre> 
+      *** - Une personne non-membre pourrait donner un code de membre au hasard et tomber sur le code d'un vrai
+          membre parce que le code n'est pas assez complexe. </pre>
 
   <h2>Tâche 5 : Exigences non-fonctionnelles</h2>
 
@@ -485,14 +484,18 @@
 
     <span style="font-weight: bold;">Fiabilité :</span>
     1. Le système doit être disponible 99.999% lors des heures d'ouverture du gym.
-    2. Le système doit garantir la sécurité des données des membres et des professionnels.
-    3. Le système peut perdre seulement l'information de la saisie courante (avant l'enregistrement).
-    4. Le démarrage du système ne doit pas dépasser 10s.
-    5. Le système doit être adaptable aux besoins futurs du gym.
+    2. Le système peut perdre seulement l'information de la saisie courante (avant l'enregistrement).
 
-    <span style="font-weight: bold;">Performance :</span> Le système doit répondre aux actions des utilisateurs en moins de 0.5s.
+    <span style="font-weight: bold;">Securité :</span> Le système doit garantir la sécurité des données des membres et des professionnels.
 
-    <span style="font-weight: bold;">Implémentation :</span> Le système doit être testé sur une console Java. </pre> <br>
+    <span style="font-weight: bold;">Supportabilité :</span> Le système doit être adaptable aux besoins futurs du gym.
+
+    <span style="font-weight: bold;">Performance :</span>
+    1. Le système doit répondre aux actions des utilisateurs en moins de 0.5s.
+    2. Le démarrage du système ne doit pas dépasser 10s.
+
+    <span style="font-weight: bold;">Implémentation :</span> Le système doit être testé sur une console Java.
+    </pre><br>
 
   <h2>Tâche 6 : Analyse</h2>
 
@@ -501,7 +504,7 @@
     Le projet #GYM est informatisé au complet.<br>
     Les données sur les membres, les professionnels et les services sont stockées dans des fichiers (au format CSV, par exemple).
     Le matériel nécessaire est un serveur de fichiers et un ordinateur d’entrée de gamme pour un agent (4 Go de RAM et un disque dur de 120 Go). Un disque dur externe est requis pour la sauvegarde des données.<br>
-   *** Le système #GYM doit interagir avec le serveur de fichiers.
+   ****À ajouter**** Le système #GYM doit interagir avec le serveur de fichiers.
   </p>
 
   <h2>Tâche 7 : Diagramme d'activité UML</h2>

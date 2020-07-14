@@ -1,0 +1,202 @@
+<html>
+
+<head>
+  <title>IFT2255</title>
+  <style type="text/css">
+    table {
+      border: outset 2px black;
+      border-collapse: collapse;
+    }
+
+    th {
+      border-bottom: double 2px black;
+    }
+
+    td {
+      border-bottom: solid 1px black;
+    }
+
+    .first_col {
+      border-right: double 2px black;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 style="text-align: center;">
+    IFT 2255 - Devoir 2</h1>
+  <h2>
+    Information générale</h2>
+  <p>
+    <span style="font-weight: bold;">Nom : </span>Alex Defoy
+    <br />
+    <span style="font-weight: bold;">Matricule : </span>20131653
+    <br />
+    <span style="font-weight: bold;">Courriel : </span>alex.defoy@umontreal.ca
+    <br />
+    <span style="font-weight: bold;">Temps mis : </span>-- heures
+  </p>
+  <p>
+    <span style="font-weight: bold;">Nom : </span>Maryna Starastsenka
+    <br />
+    <span style="font-weight: bold;">Matricule : </span>20166402
+    <br />
+    <span style="font-weight: bold;">Courriel : </span>maryna.starastsenka@umontreal.ca
+    <br />
+    <span style="font-weight: bold;">Temps mis : </span>-- heures
+  </p>
+  <h2>
+    Distribution des tâches</h2>
+  <p>
+    <span style="font-weight: bold;">Soumetteur : Defoy Alex</span>
+  </p>
+  <table cellpadding="7px">
+    <thead>
+      <tr>
+        <th class="first_col">
+          Tâche
+        </th>
+        <th>
+          Alex
+        </th>
+        <th>
+          Maryna
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="first_col">
+          Mise à jour des artéfacts
+        </td>
+        <td>
+          (%)
+        </td>
+        <td>
+          (%)
+        </td>
+      </tr>
+      <tr>
+        <td class="first_col">
+          Diagramme de classe UML
+        </td>
+        <td>
+          (%)
+        </td>
+        <td>
+          (%)
+        </td>
+      </tr>
+      <tr>
+        <td class="first_col">
+          Diagrammes de séquence UML
+        </td>
+        <td>
+          (%)
+        </td>
+        <td>
+          (%)
+        </td>
+      </tr>
+      <tr>
+        <td class="first_col">
+          Production du prototype
+        </td>
+        <td>
+          (%)
+        </td>
+        <td>
+          (%)
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <h2>
+    Hypothèses</h2>
+  <p>
+    Si jamais on doit faire l'hypothèse sur les choses pertinentes.
+  </p>
+
+  <h2>
+    Tâche 1 : Mise à jour des artéfacts</h2>
+
+    <pre style="font-family: 'Open Sans';">
+    <span style="font-weight: bold;">1. Glossaire </span>
+    Ajout des termes clés suivants :
+      <span style="font-weight: bold;">- Centre de données :</span> Serveur qui contient tous l’information de la logique d’affaire de #GYM :
+      les données sur les membres, les professionnels, les services et la gestion des inscriptions.
+      <span style="font-weight: bold;">- Client :</span> Membre ou professionnel.
+      <span style="font-weight: bold;">- Compte :</span> Objet enregistré dans Centre de données qui contient les informations sur un client.
+      <span style="font-weight: bold;">- Confirmation de la présence :</span> Action qu’effectue le membre pour indiquer que le service a été rendu en avance.
+      <span style="font-weight: bold;">- #GYM (centre sportif) :</span> Installations qui comporte une salle des machines, une piscine, une salle multisport
+      et qui offre des services en exercice physique et en santé. Comporte une réception qui accueil les clients.
+      <span style="font-weight: bold;">- Informations personnelles :</span> Informations fournies par les clients lors de l’adhésion au #GYM.
+      <span style="font-weight: bold;">- Inscription :</span> Ajout d'un client dans le Centre de données ou d'un membre à une séance.
+      <span style="font-weight: bold;">- Répertoire des Services :</span> Base de données de tous les services offerts et leur séances.
+      <span style="font-weight: bold;">- Requête :</span> Demande effectuée au système afin d'obtenir certaines informations.
+      <span style="font-weight: bold;">- Service :</span> Domaine d'expertise qu'un expert peut offrir à un client pendant des séances.
+      Comporte les entrainements et consultations des professionnels.
+    </pre>
+
+    <pre style="font-family: 'Open Sans';">
+    <span style="font-weight: bold;">2. Diagramme de cas d'utilisation UML </span>
+    </pre>
+
+    <pre style="font-family: 'Open Sans';">
+    <span style="font-weight: bold;">3. Cas d'utilisation </span>
+    </pre>
+
+    <pre style="font-family: 'Open Sans';">
+    <span style="font-weight: bold;">4. Risques </span>
+    Représentons ci-dessous les risques ajoutés à la version initiale.
+    <span style="font-weight: bold;">Risque important :</span>
+        - Pas de techniques pour retrouver le numéro d'un client si on le perd.
+    <span style="font-weight: bold;">Risque éloigné :</span>
+        - Un professionnel donne un service pour lequel il n'a pas les compétences.
+    </pre>
+
+    <pre style="font-family: 'Open Sans';">
+    <span style="font-weight: bold;">5. Exigences non-fonctionnelles </span>
+    Les exigences non-fonctionnelles mentionnées dans groupe "Fiabilité" ont été regroupées selon leur nature.
+    <span style="font-weight: bold;">Fiabilité :</span>
+    1. Le système doit être disponible 99.999% lors des heures d'ouverture du gym.
+    2. Le système peut perdre seulement l'information de la saisie courante (avant l'enregistrement).
+    <span style="font-weight: bold;">Securité :</span> Le système doit garantir la sécurité des données des membres et des professionnels.
+    <span style="font-weight: bold;">Supportabilité :</span> Le système doit être adaptable aux besoins futurs du gym.
+    <span style="font-weight: bold;">Performance :</span> Le démarrage du système ne doit pas dépasser 10s.
+    </pre>
+
+    <pre style="font-family: 'Open Sans';">
+    <span style="font-weight: bold;">6. Analyse </span>
+      **** À ajouter l'intéraction du logiciel avec le serveur de fihiers******
+    </pre>
+
+    <pre style="font-family: 'Open Sans';">
+    <span style="font-weight: bold;">7. Diagramme d'activité UML </span>
+    </pre>
+  </p>
+
+
+  <h2>Tâche 2 : Diagramme de classe UML </h2>
+
+
+
+  <h2>Tâche 3 : Diagrammes de séquence UML </h2>
+
+
+
+  <h2>Tâche 4 : Production du prototype </h2>
+
+
+  <h2>Collaboration</h2>
+
+<figure>
+  <img src="images/Statistiques_bitbucket.png" alt="Statistiques du dépôt BitBucket" style="width:80%">
+  <figcaption>
+    <i>Figure 5.1 - Statistiques du dépôt BitBucket</i>
+  </figcaption>
+</figure> <br>
+
+</body>
+
+</html>
