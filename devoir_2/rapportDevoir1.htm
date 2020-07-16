@@ -218,6 +218,15 @@
     <span style="font-weight: bold;">Séance :</span> Période durant laquelle un professionnel offre un service pour les membres de #GYM. <br>
 
     <span style="font-weight: bold;">Service :</span> Domaine d'expertise qu'un expert peut offrir à un client pendant des séances. Comporte les entrainements et consultations des professionnels. <br>
+    
+    <span style="font-weight: bold;">Transfert électronique de fonds (TEF):</span> Fichier créé hebdomadairement qui contient le nom et le numéro d'un professionnel ainsi que le montant à lui payer pour une semaine.  <br>
+    
+    <span style="font-weight: bold;">Rapport de synthèse:</span>Rapport qui résume les comptes payables avec la liste des professionnels qui ont fourni des services pour une semaine.  <br>
+    
+    <span style="font-weight: bold;">Frais d'adhésion :</span> Montant mensuel à payer pour qu'un membre est accès au #GYM. <br>
+    
+    <span style="font-weight: bold;">RnB :</span> Compagnie responsable des procédures financières en lien avec les membres.<br>
+    
     <br>
   </p>
 
@@ -468,32 +477,36 @@
     4b. Le Centre de Données ne trouve pas les séances associées au professionnel et renvoie "Aucune séance disponible".
     <span style="font-weight: bold;">Postconditions :</span> </pre>
 
-    <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Génération de TEF
-    <span style="font-weight: bold;">But :</span> Générer l'enregistrement du transfert électronique de fond pour payer les professionnels.
+    <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Génération automatique des rapports
+    <span style="font-weight: bold;">But :</span> Générer l'enregistrement du transfert électronique de fond pour payer les professionnels et le rapport de synthèse.
     <span style="font-weight: bold;">Préconditions :</span>
     <span style="font-weight: bold;">Acteurs :</span> Temps
     <span style="font-weight: bold;">Scénario principal :</span>
-    1. Requête du Rapport de synthèse.
-    1. Le Répertoire de service fournit les services de la semaine.
-    2. Le logiciel crée un fichier de données de transfert de fond pour chaque professionnel.
-    3. Le logiciel enregistre les données dans le Centre de données.
-    <span style="font-weight: bold;">Scénarios alternatifs :</span>
-    <span style="font-weight: bold;">Postconditions : Fichiers TEF créés.</span> </pre>
-
-    <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Génération de Rapport de synthèse
-    <span style="font-weight: bold;">But :</span> Générer l'enregistrement du transfert électronique de fond pour payer les professionnels.
-    <span style="font-weight: bold;">Préconditions :</span>
-    <span style="font-weight: bold;">Acteurs :</span> Temps, gérant
-    <span style="font-weight: bold;">Scénario principal :</span>
-    1. Requête du Rapport de synthèse.
-    2. Le Répertoire de service fournit les données.
-    3. Le gerant choisit la période du rapport.
-    4. Le logiciel crée le rapport de synthèse.
-    5. Le logiciel enrégistre les données.
-    6. Confirmer l'envoi du rapport.
+    1. La Requête de génération de rapports est enclenché automatiquement le vendredi à minuit.
+    2. Le Répertoire de service fournit les services de la semaine.
+    3. Le logiciel crée un fichier de données de transfert de fond pour chaque professionnel.
+    4. Le logiciel enregistre les données.
+    5. Le logiciel crée le rapport de synthèse de la dernière semaine.
+    6. Le logiciel enregistre les données dans le Centre de données.
     7. Le logiciel envoie le rapport au gérant.
     <span style="font-weight: bold;">Scénarios alternatifs :</span>
-    6a. Revenir à l'étape 2.
+    <span style="font-weight: bold;">Postconditions : Fichiers TEF et Rapport de synthèse créés. Rapport de synthèse envoyé au gérant.</span> </pre>
+
+    <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Génération de Rapport de synthèse
+    <span style="font-weight: bold;">But :</span> Générer le rapport de synthèse à n'importe quel moment.
+    <span style="font-weight: bold;">Préconditions :</span>
+    <span style="font-weight: bold;">Acteurs :</span> Gérant
+    <span style="font-weight: bold;">Scénario principal :</span>
+    1. Requête du Rapport de synthèse.
+    2. Le Répertoire de service fournit les services de la semaine.
+    3. Le gérant choisit la période pour laquelle il désire le rapport.
+    4. Le logiciel crée le rapport de synthèse.
+    4. Le logiciel enrégistre les données.
+    5. Le logiciel envoie le rapport au gérant.
+    6. Confirmer l'envoi du rapport.
+    <span style="font-weight: bold;">Scénarios alternatifs :</span>
+    6.a.1. Le gérant choisit de produire un autre rapport.
+    6.a.2. Retour à l'étape 3.
     <span style="font-weight: bold;">Postconditions : Rapport envoyé au gérant.</span> </pre>
 
     <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Mise à jour du statut des membres
@@ -501,18 +514,15 @@
     <span style="font-weight: bold;">Préconditions :</span>
     <span style="font-weight: bold;">Acteurs :</span> RnB
     <span style="font-weight: bold;">Scénario principal :</span>
-    1. Requête de mise à jour du statut des membres.
-    2. Le logiciel recoit la liste des membres suspendus et rétablis de la part de RnB.
-    3. Le logiciel prend un numéru du membre dans la liste et l'envoie au Centre de Données.
+    1. Le logiciel recoit la liste des membres suspendus et rétablis de la part de RnB.
+    2. Requête de mise à jour du statut des membres.
+    3. Le logiciel prend un numéro du membre dans la liste et l'envoie au Centre de Données.
     4. Le Centre de Données retourne les informations sur le membre.
-    5. Le logiciel choisit une action "Suspendre de membre".
-    6. Les modifications sont envoyé au Centre de Données.
-    7. Finir les actions.
+    5. Le logiciel modifie le statut à  "suspendu" ou "valide".
+    6. Les modifications sont enregistrées dans le Centre de Données.
     <span style="font-weight: bold;">Scénarios alternatifs </span>
-    5a. Le logiciel choisit une action "Rétablir le membre de membre".
-    6a.Les modifications sont envoyé au Centre de Données.
-    7a. Finir les actions.
-    7b. Retourner à l'étape 2, s'il y a d'autres membres à traiter dans la liste.
+    6.a.1 Il y a d'autres membres à traiter dans la liste.
+    6.a.2 Retourner à l'étape 3.
     <span style="font-weight: bold;">Postconditions : Mise à jour de statut des membres (suspendu ou rétabli).</span> </pre>
 
   <h2>Tâche 4 : Risques</h2>
@@ -604,9 +614,9 @@
   </figure> <br>
 
   <figure>
-    <img src="images/Diagramme_activite_TEF.png" alt="Diagramme d'activité UML pour le CU Génération de TEF" style="width:13%">
+    <img src="images/Diagramme_activite_generation_rapports.png" alt="Diagramme d'activité UML pour le CU Génération automatique des rapports" style="width:13%">
     <figcaption>
-      <i>Figure 7.6 - <a href="Analyse\tache7_diagramme_activite_TEF.vpp"> Diagramme d'activité UML</a> pour le cas d'utilisation Génération de TEF</i>
+      <i>Figure 7.6 - <a href="Analyse\tache7_diagramme_activite_TEF.vpp"> Diagramme d'activité UML</a> pour le cas d'utilisation Génération automatique des rapports</i>
     </figcaption>
   </figure> <br>
 
