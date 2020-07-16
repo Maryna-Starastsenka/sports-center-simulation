@@ -153,6 +153,9 @@
       <span style="font-weight: bold;">- Requête :</span> Demande effectuée au système afin d'obtenir certaines informations.
       <span style="font-weight: bold;">- Service :</span> Domaine d'expertise qu'un expert peut offrir à un client pendant des séances.
       Comporte les entrainements et consultations des professionnels.
+      <span style="font-weight: bold;">-Rapport de synthèse:</span>Rapport qui résume les comptes payables avec la liste des professionnels qui ont fourni des services pour une semaine.  
+      <span style="font-weight: bold;">-Frais d'adhésion :</span> Montant mensuel à payer pour qu'un membre est accès au #GYM. 
+      <span style="font-weight: bold;">-RnB :</span> Compagnie responsable des procédures financières en lien avec les membres.
     </pre>
 
     <pre style="font-family: 'Open Sans';">
@@ -166,14 +169,11 @@
 
     <pre style="font-family: 'Open Sans';">
     <span style="font-weight: bold;">3. Description des cas d'utilisation </span>
-    Demande d'accès au gym :
-        ***TODO MAYBE? Ajouter la possibilité au client de payer son abonnement pour entrer?
-
     Inscription à une séance :
         Ajout de l'étape d'enregistrement de l'inscription.
         Ajout de la possibilité d'annuler la demande pour éviter des boucles infinies.
         Ajout de l'activité Consultation du répertoire des services.
-        Ajout du paiement pour le service. ***MODIFIER DIAGRAMME
+        Ajout du paiement pour le service.
 
     Confirmation de la présence :
         Utilisation de l'activité Consultation du répertoire des services.
@@ -184,7 +184,7 @@
     Création d'un compte :
         Ajout de la possibilité d'entrer des informations invalides.
         Ajout de l'nnulation de la création d'un compte à deux étapes pour éviter les boucles infinies.
-        Ajout de la demande de confirmation du paiement des frais d'adhésion. ***TODO Ajouter ça au diagramme.
+        Ajout de la demande de confirmation du paiement des frais d'adhésion.
     </pre>
 
     <pre style="font-family: 'Open Sans';">
@@ -193,8 +193,10 @@
     Voici les risques ajoutés ajoutés à la version précédente.
     <span style="font-weight: bold;">Risque important :</span>
         - Pas de techniques pour retrouver le numéro d'un client si on le perd.
+        - Pas de possibilité d'annuler une séance ou de rembourser les clients si le professionnel ne peut donner une séance.
     <span style="font-weight: bold;">Risque éloigné :</span>
         - Un professionnel donne un service pour lequel il n'a pas les compétences.
+        - Manque d'électricité au moment où le système doit faire les rapports le vendredi à minuit.
 
     ****TO DO : ajouter 2 risques*****
     </pre>
