@@ -111,20 +111,20 @@
       </tr>
     </tbody>
   </table>
-  
+
   TODO LIST
     Tâche 1
         1. Ajouter des nouveaux mots au glossaire : TEF, rapport de synthèse, frais d'adhésion?
-        2. Modifier le diagramme de cas d'utilisation selon les cas qui seront ajoutés
-        3. Ajouter les cas d'utilisation:  
+        2. Modifier le diagramme de cas d'utilisation selon les cas qui seront ajoutés (DONE, à réviser)
+        3. Ajouter les cas d'utilisation: (DONE, à réviser)
             Peaufiner les deux nouveaux cas d'utilisation (TEF, rapport de synthèse)
             Peut-être gérer les abonnements selon ce que RnB envoie?
-        4. Idées de risque : 
+        4. Idées de risque :
             Annulation d'une séance parce qu'un professionnel est indisponible?
             Manque d'électricité aux moments où le logiciel doit faire une action (vendredi soir minuit p.ex.)
         6. Modifier analyse
-        7. Modifier les diagrammes d'activité selon les nouveaux cas d'utilisation.
-  
+        7. Modifier les diagrammes d'activité selon les nouveaux cas d'utilisation.(DONE, à réviser)
+
   <h2>
     Hypothèses</h2>
   <p>
@@ -158,6 +158,7 @@
     <pre style="font-family: 'Open Sans';">
     <span style="font-weight: bold;">2. Diagramme de cas d'utilisation UML </span>
     Les modifications effectuées :
+        - Ajour des cas d'utilisation Génération de TEF, Génération de Rapport de synthèse, Mise à jour du statut des membres.
         - Ajout d'un acteur "Client".
         - Ajout des cas d'utilisation "Validé numéro membre" et "Consultation répertoire séances" qui sont inclus dans d'autres cas d'utilisation.
         - Remplacement du cas d'utilisation "Consultation des inscription" par "Consultation d'une séance" ***TO DO : Modifier le CU***
@@ -165,22 +166,22 @@
 
     <pre style="font-family: 'Open Sans';">
     <span style="font-weight: bold;">3. Description des cas d'utilisation </span>
-    Demande d'accès au gym : 
+    Demande d'accès au gym :
         ***TODO MAYBE? Ajouter la possibilité au client de payer son abonnement pour entrer?
-    
-    Inscription à une séance : 
+
+    Inscription à une séance :
         Ajout de l'étape d'enregistrement de l'inscription.
         Ajout de la possibilité d'annuler la demande pour éviter des boucles infinies.
         Ajout de l'activité Consultation du répertoire des services.
         Ajout du paiement pour le service. ***MODIFIER DIAGRAMME
-        
-    Confirmation de la présence : 
+
+    Confirmation de la présence :
         Utilisation de l'activité Consultation du répertoire des services.
         Modification de l'ordre des étapes pour être plus logique avec Inscription à une séance.
         Ajout du scénario d'annulation de la confirmation.
 
-    
-    Création d'un compte : 
+
+    Création d'un compte :
         Ajout de la possibilité d'entrer des informations invalides.
         Ajout de l'nnulation de la création d'un compte à deux étapes pour éviter les boucles infinies.
         Ajout de la demande de confirmation du paiement des frais d'adhésion. ***TODO Ajouter ça au diagramme.
@@ -188,7 +189,7 @@
 
     <pre style="font-family: 'Open Sans';">
     <span style="font-weight: bold;">4. Risques </span>
-    
+
     Voici les risques ajoutés ajoutés à la version précédente.
     <span style="font-weight: bold;">Risque important :</span>
         - Pas de techniques pour retrouver le numéro d'un client si on le perd.
@@ -225,22 +226,24 @@
        - Ajout de noeud de fin d'activité pour pouvoir sortir du menu "Gestion d'un compte" si le numéro de client n'est pas valide.
        - Ajout de noeuds de décision pour valider les informations sur le membre.
        - Ajout de noeuds de décision pour pouvoir annuler l'activité si les informations sont invalides.
+       - Ajout de paiement de frais d'adhésion pour assigner le numéro unique au niuveau membre.
 
     Les modification du diagramme d'activité UML Gestion d'un service :
        - Ajout la validation de numéro de professionel pour vérifier que le service à modifier/supprimer lui appartient.
        - Ajout de noeud de décision pour finir l'activité si numéro de professionnel n'est pas valide.
        - Ajour de noeud de décision pour pouvoir finir l'activité s'il n'y a pas de services liés au professionnel du centre sportif.
        - Ajout de noeud de décision pour confirmer la suppression et la modification d'un service.
-       - Ajout de noeud de décision pour valider les informations sur le survice.
+       - Ajout de noeud de décision pour valider les informations sur la service.
 
     Les modification du diagramme d'activité UML Inscription à une séance :
-       - Ajour de noeud de décision pour finir l'activité s'il n'y pas de séance ce jour ou le client n'est pas intéressé.
-       - Ajour de noeud de décision pour finir l'activité si le numéro de membre est invalide.
+       - Ajout de noeud de décision pour finir l'activité s'il n'y pas de séance ce jour ou le client n'est pas intéressé.
+       - Ajout de noeud de décision pour finir l'activité si le numéro de membre est invalide.
+       - Ajout de paiement pour les services lors de l'inscription à une séance.
 
     Les modification du diagramme d'activité UML Confirmation de la présence :
-       - Ajour de noeud de décision pour finir l'activité si aucune séance est disponible dans la journée.
-       - Ajour de noeud de décision pour pouvoir finir l'activité si le numéro de membre est invalide.
-       - Ajour de noeud de décision pour pouvoir finir l'activité si le membre n'est pas inscrit à la séance.
+       - Ajout de noeud de décision pour finir l'activité si aucune séance est disponible dans la journée.
+       - Ajout de noeud de décision pour pouvoir finir l'activité si le numéro de membre est invalide.
+       - Ajout de noeud de décision pour pouvoir finir l'activité si le membre n'est pas inscrit à la séance.
     </pre>
 
   <h2>Tâche 2 : Diagramme de classe UML </h2>
