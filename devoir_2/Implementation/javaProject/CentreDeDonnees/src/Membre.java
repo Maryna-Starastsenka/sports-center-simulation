@@ -1,33 +1,39 @@
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
 
 public class Membre extends Client {
-	private Inscription[] listeInscriptions;
-	private ConfirmationPresence[] listeConfirmations;
-	private int numeroMembre;
+
+	public static HashMap<String, Membre> listeMembres = new HashMap<>();
+//	public static HashMap<String, Membre> listeMembresSuspendus = new HashMap<>();
 	private boolean membreValide;
-	private String fichier;
+
+	//private String fichier;
+	//private Inscription[] listeInscriptions;
+	//private ConfirmationPresence[] listeConfirmations;
 	
-	
-	public Membre() {
-		
+	public Membre(String nom, Date dateNaissance, String adresse, String numeroPhone, String adresseCourriel, boolean membreValide) {
+		this.nom = nom;
+		this.dateNaissance = dateNaissance;
+		this.adresse = adresse;
+		this.numeroPhone = numeroPhone;
+		this.adresseCourriel = adresseCourriel;
+		this.membreValide = membreValide;
 	}
-	
-	public boolean validerMembre(){
-		return this.membreValide;
+
+	@Override
+	public String toString() {
+		return "Membre numéro : " + getNumero() + ".";
 	}
+
+	//public boolean validerMembre(){
+	//	return this.membreValide;
+	//}
 	
-	public void ajouterInscription(Inscription inscription) {
-		
-		
-	}
+	//public void ajouterInscription(Inscription inscription) { }
 	
-    public void ajouterConfirmation(ConfirmationPresence confirmation) {
-		
-		
-	}
+    //public void ajouterConfirmation(ConfirmationPresence confirmation) { }
     
-    public void validerOuSuspendre(boolean bool) {
-    	
-    	
-    }
+    //public void validerOuSuspendre(boolean bool) { }
 	
 }

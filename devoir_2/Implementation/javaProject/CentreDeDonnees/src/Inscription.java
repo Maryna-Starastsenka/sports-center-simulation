@@ -5,8 +5,8 @@ public class Inscription {
 	private String file;
 	private Date dateInscription;
 	private Date dateSeance;
-	private int numeroMembre;
-	private int numeroProfessionnel;
+	private String numeroMembre;
+	private String numeroProfessionnel;
 	private int codeService;
 	private String commentaires;
 	

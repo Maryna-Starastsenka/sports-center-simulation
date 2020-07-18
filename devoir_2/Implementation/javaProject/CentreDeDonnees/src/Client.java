@@ -1,19 +1,30 @@
+import java.util.Date;
+import java.util.Objects;
 
 public abstract class Client {
-	private String nom;
-	private int dateNaissance;
-	private String adresseCourriel;
-	private int numeroPhone;
-	private String adresse;
+	protected String nom;
+	protected Date dateNaissance;
+	protected String adresseCourriel;
+	protected String numeroPhone;
+	protected String adresse;
 
-	public Client() {
-		// TODO Auto-generated constructor stub
+	@Override
+	public int hashCode() {
+		return Math.abs(Objects.hash(nom, dateNaissance, adresseCourriel, numeroPhone, adresse) % 1000000000); // 9 chiffres max
 	}
-	
-	public void modifierCompte(String nom, int date, String courriel, int numero, String adresse) {
-		
-		
+
+	protected String getNumero() {
+		return String.format("%09d", this.hashCode());
 	}
-	
-	
+
+	//public void modifierCompte(String nom, int date, String courriel, int numero, String adresse) {
+
+	@Override
+	public String toString() {
+		return "Client numéro : " + getNumero() + ".";
+	}
+		
 }
+	
+	
+
