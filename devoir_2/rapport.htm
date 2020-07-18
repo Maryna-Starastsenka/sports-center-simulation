@@ -112,18 +112,30 @@
     </tbody>
   </table>
 
+<pre style="font-family: 'Open Sans';">
   TODO LIST
     Tâche 1
-        1. Ajouter des nouveaux mots au glossaire : TEF, rapport de synthèse, frais d'adhésion?
-        2. Modifier le diagramme de cas d'utilisation selon les cas qui seront ajoutés (DONE, à réviser)
-        3. Ajouter les cas d'utilisation: (DONE, à réviser)
+        1. Ajouter des nouveaux mots au glossaire : TEF, rapport de synthèse, frais d'adhésion, fais du séance (DONE)
+        2. Modifier le diagramme de cas d'utilisation selon les cas qui seront ajoutés (DONE)
+        3. Ajouter les cas d'utilisation: (REVISER)
             Peaufiner les deux nouveaux cas d'utilisation (TEF, rapport de synthèse)
             Peut-être gérer les abonnements selon ce que RnB envoie?
         4. Idées de risque :
             Annulation d'une séance parce qu'un professionnel est indisponible?
             Manque d'électricité aux moments où le logiciel doit faire une action (vendredi soir minuit p.ex.)
         6. Modifier analyse
-        7. Modifier les diagrammes d'activité selon les nouveaux cas d'utilisation.(DONE, à réviser)
+        7. Modifier les diagrammes d'activité selon les nouveaux cas d'utilisation.(DONE)
+
+    Tâche 2
+      1. Mettre à jour le diagramme des classes (garder les attributs/les méthodes essentiels + mentionnés dans la tâche 3)
+      2. Decrire les classes
+
+    Tâche 3
+      1. Vérivier la création des scénarios alternatifs
+      2. Remplacer la discriprion par les noms des méthodes ??
+      3. S'assurer que LifeLine est représenté par un acteur ou une instance de classe
+
+</pre>
 
   <h2>
     Hypothèses</h2>
@@ -147,15 +159,16 @@
       <span style="font-weight: bold;">- Confirmation de la présence :</span> Action qu’effectue le membre pour indiquer que le service a été rendu en avance.
       <span style="font-weight: bold;">- #GYM (centre sportif) :</span> Installations qui comporte une salle des machines, une piscine, une salle multisport
       et qui offre des services en exercice physique et en santé. Comporte une réception qui accueil les clients.
+      <span style="font-weight: bold;">- Frais de service :</span> Coût de service que le membre doit payer pour s'inscrire à la séance de service fourni par le professionnel.
+      <span style="font-weight: bold;">- Frais d'adhésion :</span> Montant mensuel à payer pour qu'un membre est accès au #GYM.
       <span style="font-weight: bold;">- Informations personnelles :</span> Informations fournies par les clients lors de l’adhésion au #GYM.
       <span style="font-weight: bold;">- Inscription :</span> Ajout d'un client dans le Centre de données ou d'un membre à une séance.
+      <span style="font-weight: bold;">- Rapport de synthèse:</span>Rapport qui résume les comptes payables avec la liste des professionnels qui ont fourni des services pour une semaine.
       <span style="font-weight: bold;">- Répertoire des Services :</span> Base de données de tous les services offerts et leur séances.
       <span style="font-weight: bold;">- Requête :</span> Demande effectuée au système afin d'obtenir certaines informations.
+      <span style="font-weight: bold;">- RnB :</span> Compagnie responsable des procédures financières en lien avec les membres.
       <span style="font-weight: bold;">- Service :</span> Domaine d'expertise qu'un expert peut offrir à un client pendant des séances.
       Comporte les entrainements et consultations des professionnels.
-      <span style="font-weight: bold;">-Rapport de synthèse:</span>Rapport qui résume les comptes payables avec la liste des professionnels qui ont fourni des services pour une semaine.  
-      <span style="font-weight: bold;">-Frais d'adhésion :</span> Montant mensuel à payer pour qu'un membre est accès au #GYM. 
-      <span style="font-weight: bold;">-RnB :</span> Compagnie responsable des procédures financières en lien avec les membres.
     </pre>
 
     <pre style="font-family: 'Open Sans';">
@@ -169,22 +182,26 @@
 
     <pre style="font-family: 'Open Sans';">
     <span style="font-weight: bold;">3. Description des cas d'utilisation </span>
+    Demande d'accès au gym :
+        - Ajout de la vérifiaction du statut de membre. Si le membre de suspendu, l'accès est refusé.
+        - Création du cas d'utilisation "Demande d'accès au gym pour un professionnel".
+
     Inscription à une séance :
-        Ajout de l'étape d'enregistrement de l'inscription.
-        Ajout de la possibilité d'annuler la demande pour éviter des boucles infinies.
-        Ajout de l'activité Consultation du répertoire des services.
-        Ajout du paiement pour le service.
+        - Ajout de l'étape d'enregistrement de l'inscription.
+        - Ajout de la possibilité d'annuler la demande pour éviter des boucles infinies.
+        - Ajout de l'activité Consultation du répertoire des services.
+        - Ajout du paiement pour le service.
 
     Confirmation de la présence :
-        Utilisation de l'activité Consultation du répertoire des services.
-        Modification de l'ordre des étapes pour être plus logique avec Inscription à une séance.
-        Ajout du scénario d'annulation de la confirmation.
+        - Utilisation de l'activité Consultation du répertoire des services.
+        - Modification de l'ordre des étapes pour être plus logique avec Inscription à une séance.
+        - Ajout du scénario d'annulation de la confirmation.
 
 
     Création d'un compte :
-        Ajout de la possibilité d'entrer des informations invalides.
-        Ajout de l'nnulation de la création d'un compte à deux étapes pour éviter les boucles infinies.
-        Ajout de la demande de confirmation du paiement des frais d'adhésion.
+        - Ajout de la possibilité d'entrer des informations invalides.
+        - Ajout de l'nnulation de la création d'un compte à deux étapes pour éviter les boucles infinies.
+        - Ajout de la demande de confirmation du paiement des frais d'adhésion.
     </pre>
 
     <pre style="font-family: 'Open Sans';">

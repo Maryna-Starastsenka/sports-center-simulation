@@ -197,6 +197,10 @@
                                                                    et qui offre des services en exercice physique et en santé. Comporte une réception
                                                                    qui accueil les clients.<br>
 
+    <span style="font-weight: bold;">Frais de service :</span> Coût de service que le membre doit payer pour s'inscrire à la séance de service fourni par le professionnel.<br>
+
+    <span style="font-weight: bold;">Frais d'adhésion :</span> Montant mensuel à payer pour qu'un membre est accès au #GYM. <br>
+
     <span style="font-weight: bold;">Informations personnelles :</span>  Informations fournies par les clients lors de l’adhésion au #GYM. <br>
 
     <span style="font-weight: bold;">Inscription :</span> Ajout d'un client dans le Centre de données ou d'un membre à une séance. <br>
@@ -213,20 +217,17 @@
 
     <span style="font-weight: bold;">Répertoire des Services :</span> Base de données de tous les services offerts et leur séances. <br>
 
+    <span style="font-weight: bold;">Rapport de synthèse:</span>Rapport qui résume les comptes payables avec la liste des professionnels qui ont fourni des services pour une semaine.  <br>
+
     <span style="font-weight: bold;">Requête :</span> Demande effectuée au système afin d'obtenir certaines informations. <br>
+
+    <span style="font-weight: bold;">RnB :</span> Compagnie responsable des procédures financières en lien avec les membres.<br>
 
     <span style="font-weight: bold;">Séance :</span> Période durant laquelle un professionnel offre un service pour les membres de #GYM. <br>
 
     <span style="font-weight: bold;">Service :</span> Domaine d'expertise qu'un expert peut offrir à un client pendant des séances. Comporte les entrainements et consultations des professionnels. <br>
-    
-    <span style="font-weight: bold;">Transfert électronique de fonds (TEF):</span> Fichier créé hebdomadairement qui contient le nom et le numéro d'un professionnel ainsi que le montant à lui payer pour une semaine.  <br>
-    
-    <span style="font-weight: bold;">Rapport de synthèse:</span>Rapport qui résume les comptes payables avec la liste des professionnels qui ont fourni des services pour une semaine.  <br>
-    
-    <span style="font-weight: bold;">Frais d'adhésion :</span> Montant mensuel à payer pour qu'un membre est accès au #GYM. <br>
-    
-    <span style="font-weight: bold;">RnB :</span> Compagnie responsable des procédures financières en lien avec les membres.<br>
-    
+
+    <span style="font-weight: bold;">Transfert électronique de fonds (TEF) :</span> Fichier créé hebdomadairement qui contient le nom et le numéro d'un professionnel ainsi que le montant à lui payer pour une semaine.  <br>
     <br>
   </p>
 
@@ -238,7 +239,7 @@
   </p>
 
   <figure>
-    <img src="images/Diagramme_de_cas_utilisation_UML.png" alt="Diagramme de cas d'utilisation UML" style="width:65%">
+    <img src="images/Diagramme_de_cas_utilisation_UML.png" alt="Diagramme de cas d'utilisation UML" style="width:85%">
     <figcaption>
       <i>Figure 2.1 - Diagramme de cas d'utilisation UML</i>
     </figcaption>
@@ -246,15 +247,15 @@
 
   <h2>Tâche 3 : Cas d'utilisation</h2>
 
-  <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Demande d'accès au gym
+  <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Demande d'accès au gym pour un membre
     <span style="font-weight: bold;">But :</span> Le client se présente à la réception et demande l'accès au gym.
     <span style="font-weight: bold;">Préconditions :</span> Le client doit être membre. L'abonnement doit être valide.
     <span style="font-weight: bold;">Acteurs :</span> Membre (principal), Agent à la réception (secondaire)
     <span style="font-weight: bold;">Scénario principal :</span>
     1. Le logiciel affiche le menu
     2. L'agent choisit Demande d'accès au gym.
-    3. L'agent entre le numéro de validation dans le logiciel.
-      3.1. Le logiciel vérifie le numéro dans la liste de membre.
+    3. L'agent entre le numéro unique du membre dans le logiciel.
+      3.1. Le logiciel vérifie le numéro dans la liste des membres.
       3.2. Le logiciel vérifie que le membre n'est pas suspendu.
       3.3. Le logiciel affiche « Numéro valide ».
     4. L'agent confirme et permet l'accès au membre.
@@ -265,6 +266,22 @@
       3.2b.2. Le logiciel affiche « Membre suspendu ».
       3.2b.3. L'agent refuse l'accès au membre.
     <span style="font-weight: bold;">Postconditions :</span> </pre>
+
+    <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Demande d'accès au gym pour un professionnel
+      <span style="font-weight: bold;">But :</span> Le client se présente à la réception et demande l'accès au gym.
+      <span style="font-weight: bold;">Préconditions :</span> Le client doit être membre. L'abonnement doit être valide.
+      <span style="font-weight: bold;">Acteurs :</span> Professionnel (principal), Agent à la réception (secondaire)
+      <span style="font-weight: bold;">Scénario principal :</span>
+      1. Le logiciel affiche le menu
+      2. L'agent choisit Demande d'accès au gym.
+      3. L'agent entre le numéro unique du professionnel dans le logiciel.
+        3.1. Le logiciel vérifie le numéro dans la liste des professionnels.
+        3.2. Le logiciel affiche « Numéro valide ».
+      4. L'agent confirme et permet l'accès au membre.
+      <span style="font-weight: bold;">Scénarios alternatifs :</span>
+        3.1a. Le logiciel ne trouve pas le numéro et renvoie « Numéro invalide ».
+        3.2a. Le cas d'utilisation retourne à l'étape 3.
+      <span style="font-weight: bold;">Postconditions :</span> </pre>
 
   <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Inscription à une séance
     <span style="font-weight: bold;">But :</span> Un membre s'inscrit pour participer à une séance offerte par un professionnel.
@@ -279,7 +296,7 @@
       5.1. Le logiciel confirme la disponibilité pour la séance.
     6. Le membre donne son numéro pour l'inscription.
       6.1. Le logiciel valide le numéro de membre.
-    7. Afficher le coût du service.
+    7. Afficher le frais du service.
     8. Le membre confirme l'inscription.
     9. Le membre effectue le paiement du service.
     10. Le logiciel enregistre l'inscription.
@@ -649,5 +666,4 @@
 
 </html>
 
-choisis Gestion service -> 
-
+choisis Gestion service ->
