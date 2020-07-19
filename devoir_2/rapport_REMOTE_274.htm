@@ -115,6 +115,14 @@
 <pre style="font-family: 'Open Sans';">
   TODO LIST
     Tâche 1
+        1. Ajouter des nouveaux mots au glossaire : TEF, rapport de synthèse, frais d'adhésion, fais du séance (DONE)
+        2. Modifier le diagramme de cas d'utilisation selon les cas qui seront ajoutés (DONE)
+        3. Ajouter les cas d'utilisation: (REVISER)
+            Peaufiner les deux nouveaux cas d'utilisation (TEF, rapport de synthèse)
+            Peut-être gérer les abonnements selon ce que RnB envoie?
+        4. Idées de risque :
+            Annulation d'une séance parce qu'un professionnel est indisponible?
+            Manque d'électricité aux moments où le logiciel doit faire une action (vendredi soir minuit p.ex.)
         6. Modifier analyse
         7. Modifier les diagrammes d'activité selon les nouveaux cas d'utilisation.(DONE)
 
@@ -167,10 +175,10 @@
     <pre style="font-family: 'Open Sans';">
     <span style="font-weight: bold;">2. Diagramme de cas d'utilisation UML </span>
     Les modifications effectuées :
-        - Ajout des cas d'utilisation Mise à jour du statut des membres et procédure comptable qui inclut Génération de TEF, Génération de Rapport de synthèse.
-        - Ajout des acteurs : client, RnB, gérant et temps.
+        - Ajout des cas d'utilisation Génération de TEF, Génération de Rapport de synthèse, Mise à jour du statut des membres.
+        - Ajout d'un acteur "Client".
         - Ajout des cas d'utilisation "Validé numéro membre" et "Consultation répertoire séances" qui sont inclus dans d'autres cas d'utilisation.
-        - Remplacement du cas d'utilisation "Consultation des inscription" par "Consultation d'une séance".
+        - Remplacement du cas d'utilisation "Consultation des inscription" par "Consultation d'une séance" ***TO DO : Modifier le CU***
     </pre>
 
     <pre style="font-family: 'Open Sans';">
@@ -180,35 +188,23 @@
         - Création du cas d'utilisation "Demande d'accès au gym pour un professionnel".
 
     Inscription à une séance :
-        - Ajout de plusieurs possibilités d'annuler la demande pour éviter des boucles infinies.
+        - Ajout de l'étape d'enregistrement de l'inscription.
+        - Ajout de la possibilité d'annuler la demande pour éviter des boucles infinies.
+        - Ajout de l'activité Consultation du répertoire des services.
         - Ajout du paiement pour le service.
 
     Confirmation de la présence :
+        - Utilisation de l'activité Consultation du répertoire des services.
+        - Modification de l'ordre des étapes pour être plus logique avec Inscription à une séance.
         - Ajout du scénario d'annulation de la confirmation.
-        - Afficher les séances du jour et choisir la séance concernée plutôt que 
-          de la rechercher par son code.
 
 
     Création d'un compte :
-        - Ajout de l'annulation de la création d'un compte à deux étapes pour éviter les boucles infinies.
-        - Ajout de la validation des informations
+        - Ajout de la possibilité d'entrer des informations invalides.
+        - Ajout de l'nnulation de la création d'un compte à deux étapes pour éviter les boucles infinies.
         - Ajout de la demande de confirmation du paiement des frais d'adhésion.
-    
-    Modification d'un compte : 
-        - Ajout de validation du numéro de membre ou professionnel.
-        - Il est possible de changer un compte pour membre pour suspendu.
-
-    Supprimer un compte : 
-        - Changer suspendre un compte pour supprimer un compte.
-        
-    Mise à jour d'un service : 
-        -Le service est trouvé avec le numéro du professinnel plutôt qu'avec le code de service.
-      
-    Suppression d'un service : 
-        -Le service est trouvé avec le numéro du professinnel plutôt qu'avec le code de service.
-    
-    Ajouts des cas d'utilisation suivant : Procédure comptable, Génération de Rapport de synthèse et Mise à jour du statut des membres.
-    
+        - Suspention du compte d'un membre est repmlacée par la suppression.
+        C'est possible de rendre le compte de membre suspendu en choisissant "Modifier".
     </pre>
 
     <pre style="font-family: 'Open Sans';">
@@ -220,6 +216,7 @@
         - Pas de possibilité d'annuler une séance ou de rembourser les clients si le professionnel ne peut donner une séance.
     <span style="font-weight: bold;">Risque éloigné :</span>
         - Un professionnel donne un service pour lequel il n'a pas les compétences.
+        - Manque d'électricité au moment où le système doit faire les rapports le vendredi à minuit.
 
     </pre>
 
@@ -241,11 +238,8 @@
 
     <pre style="font-family: 'Open Sans';">
     <span style="font-weight: bold;">7. Diagramme d'activité UML </span>
-    Les modifications aux diagrammes d'activité sont pour la plupart pareils aux changement des descriptions des CU.
-    
     Les modifications du diagramme d'activité UML principal :
        - Ajout d'une option de menu "Valider numéro membre".
-       - Ajout des nouveaux cas d'utilisation.
        - Remplacement de la fin de flux par la fin d'activité quand "Quitter" est sélectionné.
        - Ajout de "Revenir en arrière".
 
@@ -254,29 +248,24 @@
        - Ajout de noeuds de décision pour valider les informations sur le membre.
        - Ajout de noeuds de décision pour pouvoir annuler l'activité si les informations sont invalides.
        - Ajout de paiement de frais d'adhésion pour assigner le numéro unique au niuveau membre.
-       - Changement de suspension du compte pour suppression du compte.
-       - Ajout de noeuds de confirmations.
+       - Remplacement de l'action "Suspendre" par "Supprimer".
 
     Les modification du diagramme d'activité UML Gestion d'un service :
        - Ajout la validation de numéro de professionel pour vérifier que le service à modifier/supprimer lui appartient.
        - Ajout de noeud de décision pour finir l'activité si numéro de professionnel n'est pas valide.
-       - Ajout de noeud de décision pour pouvoir finir l'activité s'il n'y a pas de services liés au professionnel du centre sportif.
+       - Ajour de noeud de décision pour pouvoir finir l'activité s'il n'y a pas de services liés au professionnel du centre sportif.
        - Ajout de noeud de décision pour confirmer la suppression et la modification d'un service.
        - Ajout de noeud de décision pour valider les informations sur la service.
 
     Les modification du diagramme d'activité UML Inscription à une séance :
-       - On affiche seulement les séances disponibles (pas à capacité maximale).
        - Ajout de noeud de décision pour finir l'activité s'il n'y pas de séance ce jour ou le client n'est pas intéressé.
        - Ajout de noeud de décision pour finir l'activité si le numéro de membre est invalide.
-       - Ajout d'accès refusé si le membre est suspendu.
        - Ajout de paiement pour les services lors de l'inscription à une séance.
 
     Les modification du diagramme d'activité UML Confirmation de la présence :
        - Ajout de noeud de décision pour finir l'activité si aucune séance est disponible dans la journée.
        - Ajout de noeud de décision pour pouvoir finir l'activité si le numéro de membre est invalide.
        - Ajout de noeud de décision pour pouvoir finir l'activité si le membre n'est pas inscrit à la séance.
-       
-    Ajout des cas d'utilisation : Procédure comptable, Génération du rapport de synthèse et Mise à jour du statut des membres.
     </pre>
 
   <h2>Tâche 2 : Diagramme de classe UML </h2>
@@ -295,66 +284,56 @@
   Représentons si-dessous le diagramme de classe UML.
   </pre>
 
-   <figure>
-    <img src="images/diagramme_classe.png" alt="Diagramme de classes" style="width:65%">
+  <figure>
+    <img src="images/diagrammeClasse.png" alt="Diagramme de classe UML" style="width:30%">
     <figcaption>
-      <i>Figure 2.1 - <a href="Conception\diagrammeClasse.vpp"> Diagramme de classes</a></i>
+      <i>Figure 2.1 - <a href="Conception\diagrammeClasse.vpp"> Diagramme de classe UML</a> </i>
     </figcaption>
   </figure> <br>
-
 
   <h2>Tâche 3 : Diagrammes de séquence UML </h2>
-    
-    Pour les diagrammes de séquence, nous n'avons pas montrer tous les échanges entre l'acteur, l'interface utilisateur et le contrôleur.<br>
-    Par exemple, chaque fois qu'une donnée est entrer par l'utilisateur, le controleur appel InterfaceUtilisateur.getTexteConsole(). <br>
-    Ces appels de méthode sont redondants dans le diagramme de séquence et le rendaient plus chargé.
-    
-    Les numéros ne suivent pas toujours une bonne logique. Particulièrement lorsqu'on passe d'une alternative à une autre.<br> 
-    Il était toutefois impossible de les changer manuellement dans Visual Paradigm.<br><br>
-    
-    Les diagrammes de séquence sont représentés ci-dessous.<br><br>
-   <figure>
-    <img src="images/diagramme_sequence_gestion_membre.png" alt="Diagramme de séquence Gestion de client" style="width:65%">
-    <figcaption>
-      <i>Figure 3.1 - <a href="Conception\Diagramme_sequence_gestion_membre.vpp"> Diagramme de séquence pour la gestion des clients</a></i>
-    </figcaption>
-  </figure> <br>
 
-  
-   <figure>
-    <img src="images/diagramme_sequence_gestion_service.png" alt="Diagramme de séquence Gestion de service" style="width:65%">
-    <figcaption>
-      <i>Figure 3.2 - <a href="Conception\Diagramme_sequence_gestion_service.vpp"> Diagramme de séquence  pour la Gestion de service</a></i>
-    </figcaption>
-  </figure> <br>
+  Représentons si-dessous les diagrammes de séquence UML.
 
-
-   <figure>
-    <img src="images/diagramme_sequence_confirmer_presence.png" alt="Diagramme de séquence pour la Confirmation de présence" style="width:65%">
-    <figcaption>
-      <i>Figure 3.3 - <a href="Conception\diagramme_sequence_confirmer_presence.vpp"> Diagramme de séquence pour Confirmer la présence</a></i>
-    </figcaption>
-  </figure> <br>
-
-   <figure>
-    <img src="images/diagramme_sequence_inscription_seance.png" alt="Diagramme de séquence pour l'inscription à une séance" style="width:65%">
-    <figcaption>
-      <i>Figure 3.4 - <a href="Conception\diagramme_sequence_inscription_seance.vpp"> Diagramme de séquence pour l'inscription à une séance</a></i>
-    </figcaption>
-  </figure> <br>
-  
   <figure>
-    <img src="images/diagramme_sequence_procedure_comptable.png" alt="Diagramme de séquence pour la Procédure comptable" style="width:65%">
+    <img src="images/Diagramme_sequence_gestion_membre.png" alt="Diagramme de séquence gestion d'un membre" style="width:30%">
     <figcaption>
-      <i>Figure 3.5 - <a href="Conception\diagramme_sequence_procedure_comptable.vpp"> Diagramme de séquence pour la Procédure comptable</a></i>
+      <i>Figure 3.1 - <a href="Conception\Diagramme_sequence_gestion_membre.vpp"> Diagramme de séquence UML</a> pour le CU gestion d'un membre </i>
     </figcaption>
   </figure> <br>
 
+  <figure>
+    <img src="images/Diagramme_sequence_gestion_service.png" alt="Diagramme de séquence gestion d'un service" style="width:30%">
+    <figcaption>
+      <i>Figure 3.2 - <a href="Conception/Diagramme_sequence_gestion_service.vpp"> Diagramme de séquence UML</a> pour le CU gestion d'un service </i>
+    </figcaption>
+  </figure> <br>
 
-  <h2>Collaboration</h2>
+  <figure>
+    <img src="images/Diagramme_sequence_inscription_seance.png" alt="Diagramme de séquence inscription à une seance" style="width:30%">
+    <figcaption>
+      <i>Figure 3.3 - <a href="Conception/Diagramme_sequence_inscription_seance.vpp"> Diagramme de séquence UML</a> pour le CU inscription à une seance </i>
+    </figcaption>
+  </figure> <br>
+
+  <figure>
+    <img src="images/diagramme_sequence_confirmer_presence.png" alt="Diagramme de séquence confirmation de présence" style="width:30%">
+    <figcaption>
+      <i>Figure 3.4 - <a href="Conception/diagramme_sequence_confirmer_presence.vpp"> Diagramme de séquence UML</a> pour le CU confirmation de présence </i>
+    </figcaption>
+  </figure> <br>
+
+  <figure>
+    <img src="images/" alt="Diagramme de séquence procedure comptable" style="width:30%">
+    <figcaption>
+      <i>Figure 3.5 - <a href="Conception/"> Diagramme de séquence UML</a> pour le CU procedure comptable </i>
+    </figcaption>
+  </figure> <br>
 
   <h2>Tâche 4 : Production du prototype </h2>
 
+
+  <h2>Collaboration</h2>
 
 <figure>
   <img src="images/Statistiques_bitbucket.png" alt="Statistiques du dépôt BitBucket" style="width:80%">
@@ -362,8 +341,6 @@
     <i>Figure 5.1 - Statistiques du dépôt BitBucket</i>
   </figcaption>
 </figure> <br>
-
-
 
 </body>
 
