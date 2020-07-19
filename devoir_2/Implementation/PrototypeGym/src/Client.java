@@ -17,12 +17,12 @@ public abstract class Client {
 		return String.format("%09d", this.hashCode());
 	}
 
-	//public void modifierCompte(String nom, int date, String courriel, int numero, String adresse) {
-
 	@Override
 	public String toString() {
 		return "Client numéro : " + getNumero() + ".";
 	}
+
+	//public void modifierCompte(String nom, int date, String courriel, int numero, String adresse) { }
 		
 }
 	

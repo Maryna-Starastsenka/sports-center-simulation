@@ -1,52 +1,101 @@
+import java.sql.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+import java.util.*;
 
 public class Controleur {
-	private Membre[] listeMembres;
-	private Professionnel[] listeProfessionnels;
-	private Service[] listeServicesSemaine;
-
+	private CentreDonnees centreDonnees;
 
 	public Controleur() {
+		centreDonnees = new CentreDonnees();
 	}
 
 	public void start() {
-		InterfaceUtilisateur.afficherMenuPrincipal();
-		InterfaceUtilisateur.ReadCommandLine();
+//		InterfaceUtilisateur.menuCourant = NomsMenus.PRINCIPAL;
+		String entree;
+		do {
+			InterfaceUtilisateur.afficherMenuPrincipal();
+
+			entree = InterfaceUtilisateur.getTexteConsole().toUpperCase();
+			if (fermetureApplicationDemandee(entree)) {
+				System.exit(0);
+			}
+			gererMenuPrincipal(entree);
+		} while (true);
 	}
 
-	public boolean input(NomsMenus menu, String entreeConsole) {
-		String entreeMajuscule = entreeConsole.toUpperCase();
-		if (entreeMajuscule.equals("X")) {
-			System.exit(0);
-		}
+	private boolean fermetureApplicationDemandee(String entree) {
+		return entree.equals("X");
+	}
 
-		switch (menu) {
-			case PRINCIPAL:
-				gererMenuPrincipal(entreeMajuscule);
+	private void gererMenuPrincipal(String entreePrincipale) {
+		String entreeSecondaire;
+		switch (entreePrincipale) {
+			case "1":
+				InterfaceUtilisateur.afficherDemandeAcces();
+				entreeSecondaire = InterfaceUtilisateur.getTexteConsole();
+				if (!Arrays.asList("1","2","3","X").contains(entreeSecondaire)) {
+					gererMenuPrincipal(entreePrincipale);
+				} else {
+					gererMenuAccesGym(entreeSecondaire);
+				}
 				break;
-			case ACCES_GYM:
-				return gererMenuAccesGym(entreeMajuscule);
-			case GESTION_COMPTE:
-				gererGestionCompte(entreeMajuscule);
+			case "2":
+				InterfaceUtilisateur.afficherGestionCompte();
+				entreeSecondaire = InterfaceUtilisateur.getTexteConsole();
+				if (!Arrays.asList("1","2","3","X").contains(entreeSecondaire)) {
+					gererMenuPrincipal(entreePrincipale);
+				} else {
+					gererGestionCompte(entreeSecondaire);
+				}
+
 				break;
-			case GESTION_SERVICE:
-				gererGestionService(entreeMajuscule);
+			case "3":
+				InterfaceUtilisateur.afficher("Veuillez entrer le numéro de professionnel");
+				String idProfessionnel;
+				do {
+					idProfessionnel = InterfaceUtilisateur.getTexteConsole();
+				} while (!validerProfessionnel(idProfessionnel) /*|| fermetureApplicationDemandee(idProfessionnel)*/);
+
+				InterfaceUtilisateur.afficherGestionService();
+
+				entreeSecondaire = InterfaceUtilisateur.getTexteConsole();
+				if (!Arrays.asList("1","2","3","X").contains(entreeSecondaire)) {
+					gererMenuPrincipal(entreePrincipale);
+				} else {
+					gererGestionService(entreeSecondaire, idProfessionnel);
+				}
 				break;
-			case INSCRIPTION_SEANCE:
-				gererInscriptionSeance(entreeMajuscule);
+			case "4":
+				InterfaceUtilisateur.afficher("Séances disponibles ajourd'hui");
+
+
 				break;
-			case CONFIRMATION_PRESENCE:
-				gererConfirmationPresence(entreeMajuscule);
+			case "5":
 				break;
-			case CONSULTATION_SEANCE:
-				gererConsultationSeance(entreeMajuscule);
+			case "6":
 				break;
-			case PROCEDURE_COMPTABLE:
-				gererProcedureComptable(entreeMajuscule);
+			case "7":
+				break;
+			default:
+				break;
+		}
+	}
+
+	private boolean gererMenuAccesGym(String entree) {
+		switch (entree) {
+			case "1":
+				verifierAutorisationMembre();
+				resetEnFinDeTransaction();
+				break;
+			case "2":
+				verifierAutorisationProfessionnel();
+				resetEnFinDeTransaction();
+				break;
+			case "3":
+//				InterfaceUtilisateur.menuCourant = NomsMenus.PRINCIPAL;
+				InterfaceUtilisateur.afficherMenuPrincipal();
 				break;
 			default:
 				return false;
@@ -94,20 +143,185 @@ public class Controleur {
 		}
 	}
 
-	private void gererGestionService(String entree) {
+
+
+	private void gererGestionService(String entree, String idProfessionnel) {
 		switch (entree) {
 			case "1":
+				formulaireNouveauService(idProfessionnel);
+				break;
+			case "2":
+				List<Service> servicesDuProfessionnel = centreDonnees.getServices(idProfessionnel);
+				afficherServicesProfessionnel(servicesDuProfessionnel);
+				gererServiceExistant();
 
+				break;
+			case "3":
+				InterfaceUtilisateur.afficherMenuPrincipal();
 				break;
 			default:
 				break;
 		}
 	}
 
+	private void afficherServicesProfessionnel(List<Service> servicesDuProfessionnel) {
+		InterfaceUtilisateur.clearScreen();
+
+		InterfaceUtilisateur.afficher("------Services du professionnel------");
+		for (Service s : servicesDuProfessionnel) {
+			InterfaceUtilisateur.afficher("Service : " + s.getCode());
+		}
+	}
+
+	private void gererServiceExistant() {
+		InterfaceUtilisateur.afficher("Veuillez choisir un service :");
+		String serviceEntre = InterfaceUtilisateur.getTexteConsole();
+		Service serviceAModifier = centreDonnees.getService(serviceEntre);
+
+		InterfaceUtilisateur.afficher("1. Modifier :");
+		InterfaceUtilisateur.afficher("2. Supprimer :");
+
+		String modifOuSuppr = InterfaceUtilisateur.getTexteConsole();
+		switch (modifOuSuppr) {
+			case "1":
+				InterfaceUtilisateur.afficher("1. Modifier récurrence hebdo. Valeur actuelle : " + serviceAModifier.getRecurrenceHebdo());// todo faire les autres
+				InterfaceUtilisateur.afficher("2. Modifier heure du service. Valeur actuelle : " + serviceAModifier.getHeureService());
+				String modifChamps = InterfaceUtilisateur.getTexteConsole();
+				switch (modifChamps) {
+					case "1":
+						InterfaceUtilisateur.afficher("Entrez la nouvelle valeur :");
+						String nouvelleRecurrence= InterfaceUtilisateur.getTexteConsole();
+						serviceAModifier.setRecurrenceHebdo(nouvelleRecurrence);
+						InterfaceUtilisateur.afficher("Service modifié.");
+						resetEnFinDeTransaction();
+						break;
+
+					case "2":
+						InterfaceUtilisateur.afficher("Entrez la nouvelle valeur :");
+						String nouvelleHeure = InterfaceUtilisateur.getTexteConsole();
+						serviceAModifier.setHeureService(nouvelleHeure);
+						InterfaceUtilisateur.afficher("Service modifié.");
+						resetEnFinDeTransaction();
+						break;
+					default:
+						break;
+				}
+
+				break;
+			case "2":
+				centreDonnees.supprimerService(serviceEntre);
+				InterfaceUtilisateur.afficher("Service " + serviceEntre + " supprimé.");
+				resetEnFinDeTransaction();
+				break;
+			default:
+				break;
+		}
+	}
+
+	private void formulaireNouveauService(String idProfessionnel) {
+		InterfaceUtilisateur.clearScreen();
+
+		InterfaceUtilisateur.afficher("------Formulaire de nouveau service------");
+
+		String entree;
+
+		Date dateEtHeureActuelles = null;
+		Date dateDebutService = null;
+		Date dateFinService = null;
+		String heureService;
+		int recurrenceHebdo;
+		int capaciteMaximale;
+		String numeroProfessionnel = idProfessionnel;
+		String codeService;
+		double fraisService;
+		String commentaires;
+
+		do {
+			InterfaceUtilisateur.afficher("Veuillez entrer la date et l'heure actuelle (jj-mm-aaaa hh:mm:ss) :");
+			entree = InterfaceUtilisateur.getTexteConsole();
+		} while (false); //todo
+		try {
+			dateEtHeureActuelles = getDateEtHeureFromString(entree);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		do {
+			InterfaceUtilisateur.afficher("Veuillez entrer la date de début du service (jj-mm-aaaa) :");
+			entree = InterfaceUtilisateur.getTexteConsole();
+		} while (false); //todo
+		try {
+			dateDebutService = getDateFromString(entree);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		do {
+			InterfaceUtilisateur.afficher("Veuillez entrer la date de fin du service (jj-mm-aaaa) :");
+			entree = InterfaceUtilisateur.getTexteConsole();
+		} while (false); //todo
+		try {
+			dateFinService = getDateFromString(entree);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		do {
+			InterfaceUtilisateur.afficher("Veuillez entrer l'heure du service (hh:mm) :");
+			entree = InterfaceUtilisateur.getTexteConsole();
+		} while (false); //todo
+		heureService = getHoraire(entree);
+
+		do {
+			InterfaceUtilisateur.afficher("Veuillez entrer la récurrence hebdomadaire (1-7) :");
+			entree = InterfaceUtilisateur.getTexteConsole();
+		} while (false); //todo
+		recurrenceHebdo = getInt(entree);//getHoraire(entree);
+
+		do {
+			InterfaceUtilisateur.afficher("Veuillez entrer la capacité maximale (1-30) :");
+			entree = InterfaceUtilisateur.getTexteConsole();
+		} while (false); //todo
+		capaciteMaximale = getInt(entree);
+
+		do {
+			InterfaceUtilisateur.afficher("Veuillez entrer le code du service (XXXXXXX) :");
+			entree = InterfaceUtilisateur.getTexteConsole();
+		} while (false); //todo
+		codeService = entree;
+
+		do {
+			InterfaceUtilisateur.afficher("Veuillez entrer les frais du service (XXX.XX) :");
+			entree = InterfaceUtilisateur.getTexteConsole();
+		} while (false); //todo
+		fraisService = getDouble(entree);
+
+		do {
+			InterfaceUtilisateur.afficher("Veuillez entrer les commentaires :");
+			entree = InterfaceUtilisateur.getTexteConsole();
+		} while (false); //todo
+		commentaires = entree;
+
+		Service service = new Service(dateEtHeureActuelles,
+				dateDebutService,
+				dateFinService,
+				heureService,
+				recurrenceHebdo,
+				capaciteMaximale,
+				numeroProfessionnel,
+				codeService,
+				fraisService,
+				commentaires);
+		centreDonnees.ajouterService(service);
+
+		InterfaceUtilisateur.afficher("Service " + service.getCode() + " enregistré.");
+		resetEnFinDeTransaction();
+	}
+
 	private void gererGestionCompte(String entree) {
 		switch (entree) {
 			case "1":
-				formulaireInscription();
+				formulaireNouveauCompte();
 				break;
 			case "2":
 
@@ -120,7 +334,7 @@ public class Controleur {
 		}
 	}
 
-	private void formulaireInscription() {
+	private void formulaireNouveauCompte() {
 		InterfaceUtilisateur.clearScreen();
 		String entree2;
 
@@ -131,7 +345,7 @@ public class Controleur {
 		String numeroTelephone = null;
 		String adresse = null;
 
-		InterfaceUtilisateur.afficher("------Formulaire d'inscription------");
+		InterfaceUtilisateur.afficher("------Formulaire de nouveau compte------");
 
 		do {
 			InterfaceUtilisateur.afficher("Veuillez entrer le nom :");
@@ -142,7 +356,7 @@ public class Controleur {
 		do {
 			InterfaceUtilisateur.afficher("Veuillez entrer la date de naissance (jj-mm-aaaa):");
 			entree2 = InterfaceUtilisateur.getTexteConsole();
-		} while (!dateNaissanceValide(entree2));
+		} while (!dateValide(entree2));
 		try {
 			dateNaissance = getDateFromString(entree2);
 		} catch (ParseException e) {
@@ -152,7 +366,7 @@ public class Controleur {
 		do {
 			InterfaceUtilisateur.afficher("Veuillez entrer l'adresse :");
 			entree2 = InterfaceUtilisateur.getTexteConsole();
-		} while (!adressevalide(entree2));
+		} while (!adresseValide(entree2));
 		adresse = entree2;
 
 		do {
@@ -178,55 +392,13 @@ public class Controleur {
 		inscrireClient(typeClient, nom, dateNaissance, adresseCourriel, numeroTelephone, adresse);
 	}
 
-	private void gererMenuPrincipal(String entree) {
-		switch (entree) {
-			case "1":
-				InterfaceUtilisateur.afficherDemandeAcces();
-				break;
-			case "2":
-				InterfaceUtilisateur.afficherGestionCompte();
-				break;
-			case "3":
-				break;
-			case "4":
-				break;
-			case "5":
-				break;
-			case "6":
-				break;
-			case "7":
-				break;
-			default:
-				break;
-		}
-	}
-
-	private boolean gererMenuAccesGym(String entree) {
-		switch (entree) {
-			case "1":
-				verifierAutorisationMembre();
-				resetEnFinDeTransaction();
-				break;
-			case "2":
-				verifierAutorisationProfessionnel();
-				resetEnFinDeTransaction();
-				break;
-			case "3":
-				InterfaceUtilisateur.afficherMenuPrincipal();
-				break;
-			default:
-				return false;
-		}
-		return true;
-	}
-
 	private void verifierAutorisationProfessionnel() {
 		String idProfessionnel;
 		do {
 			InterfaceUtilisateur.afficher("Entrez l'identifiant du professionnel puis appuyez sur ENTREE :");
 			idProfessionnel = InterfaceUtilisateur.getTexteConsole();
 		} while (idProfessionnel.length() != 9);
-		if (Professionnel.listeProfessionnels.containsKey(idProfessionnel)) {
+		if (validerProfessionnel(idProfessionnel)) {
 			InterfaceUtilisateur.afficher("Le professionnel est autorisé à accéder au gym.");
 		} else {
 			InterfaceUtilisateur.afficher("Le professionnel n'est pas enregistré.");
@@ -239,36 +411,26 @@ public class Controleur {
 			InterfaceUtilisateur.afficher("Entrez l'identifiant du membre puis appuyez sur ENTREE :");
 			idMembre = InterfaceUtilisateur.getTexteConsole();
 		} while (idMembre.length() != 9);
-		if (Membre.listeMembres.containsKey(idMembre)) {
+		if (validerMembre(idMembre)) {
 			InterfaceUtilisateur.afficher("Le membre est autorisé à accéder au gym.");
 		} else {
 			InterfaceUtilisateur.afficher("Le membre n'est pas autorisé à accéder au gym.");
 		}
 	}
 
-
-	public boolean validerNumeroClient() {
-		return true; //todo
-	}
-	
-	public void genererRapportAutomatique() {
-		
-	}
-	
-	public void creerRapportSynthese() {
-		
-	}
-	
-    public void creerTEF() {
-		
+	public boolean validerMembre(String id) {
+		return centreDonnees.membreEstValide(id);
 	}
 
+	public boolean validerProfessionnel(String id) {
+		return centreDonnees.professionnelEstValide(id);
+	}
 
 	public boolean nomValide(String entree) {
 		return entree.length() >= 1;
 	}
 
-	public boolean dateNaissanceValide(String entree) {
+	public boolean dateValide(String entree) {
 		DateFormat format = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
 		try {
 			format.parse(entree);
@@ -283,12 +445,34 @@ public class Controleur {
 		return format.parse(stringDate);
 	}
 
+	public Date getDateEtHeureFromString(String stringDate) throws ParseException {
+		DateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.FRENCH);
+		return format.parse(stringDate);
+	}
+
+	public String getHoraire(String stringHoraire) {
+		// TODO utiliser un vrai type de temps
+//		DateFormat format = new SimpleDateFormat("mm:ss", Locale.FRENCH);
+//		return format.parse(stringDate);
+		return stringHoraire;
+	}
+
+	public int getInt(String stringInt) {
+		return Integer.parseInt(stringInt);
+	}
+
+	public double getDouble(String stringDouble) {
+		return Double.parseDouble(stringDouble);
+	}
+
 	public void inscrireClient(String typeMembre, String nom, Date dateNaissance, String adresseCourriel, String numeroPhone, String adresse) {
 		Client client = null;
 		switch (typeMembre) {
 			case "1":
 				Membre membreValide = new Membre(nom, dateNaissance, adresse, numeroPhone, adresseCourriel, true);
-				Membre.listeMembres.put(membreValide.getNumero(), membreValide);
+				if (!centreDonnees.membreEstValide(membreValide.getNumero())) {
+					centreDonnees.ajouterMembre(membreValide);
+				}
 				client = membreValide;
 				break;
 			case "2":
@@ -296,7 +480,9 @@ public class Controleur {
 				break;
 			case "3":
 				Professionnel professionnel = new Professionnel(nom, dateNaissance, adresse, numeroPhone, adresseCourriel);
-				Professionnel.listeProfessionnels.put(professionnel.getNumero(), professionnel);
+				if (!centreDonnees.professionnelEstValide(professionnel.getNumero())) {
+					centreDonnees.ajouterProfessionnel(professionnel);
+				}
 				client = professionnel;
 				break;
 			default:
@@ -313,11 +499,10 @@ public class Controleur {
 
 	public void resetEnFinDeTransaction() {
 		InterfaceUtilisateur.afficher("Appuyez sur ENTREE pour revenir à l'écran principal");
-		InterfaceUtilisateur.getTexteConsole(); // TODO peut-être en trop, à vérifier
-		InterfaceUtilisateur.afficherMenuPrincipal();
+		InterfaceUtilisateur.getTexteConsole();
 	}
 
-	public boolean adressevalide(String entree) {
+	public boolean adresseValide(String entree) {
 		return entree.length() >= 1;
 	}
 
@@ -333,5 +518,18 @@ public class Controleur {
 
 	public boolean typeMembreValide(String entree) {
 		return entree.equals("1") || entree.equals("2") || entree.equals("3");
+	}
+
+
+	public void genererRapportAutomatique() {
+
+	}
+
+	public void creerRapportSynthese() {
+
+	}
+
+	public void creerTEF() {
+
 	}
 }

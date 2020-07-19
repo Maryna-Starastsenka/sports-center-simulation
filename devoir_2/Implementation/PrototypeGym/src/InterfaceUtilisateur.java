@@ -4,20 +4,20 @@ import java.util.Scanner;
 
 public class InterfaceUtilisateur {
     static Controleur controleur;
-    static NomsMenus menuCourant = NomsMenus.PRINCIPAL;
+//    public static NomsMenus menuCourant = NomsMenus.PRINCIPAL;
 
     public InterfaceUtilisateur() {
     }
 
-    public static void ReadCommandLine() {
-        Scanner scanner = new Scanner(System.in);
-        String option;
-
-        do {
-            option = scanner.nextLine();
-            controleur.input(menuCourant, option);
-        } while (true);
-    }
+//    public static void ReadCommandLine() {
+//        Scanner scanner = new Scanner(System.in);
+//        String option;
+//
+//        do {
+//            option = scanner.nextLine();
+//            controleur.input(menuCourant, option);
+//        } while (true);
+//    }
 
     public static void clearScreen() {
         System.out.print("\033[H\033[2J");
@@ -25,7 +25,7 @@ public class InterfaceUtilisateur {
     }
 
     public static void afficherMenuPrincipal() {
-        menuCourant = NomsMenus.PRINCIPAL;
+//        menuCourant = NomsMenus.PRINCIPAL;
         StringBuilder sb = new StringBuilder();
         clearScreen();
         sb.append("---------------Accueil---------------\n");
@@ -42,7 +42,6 @@ public class InterfaceUtilisateur {
     }
 
     public static void afficherDemandeAcces() {
-        menuCourant = NomsMenus.ACCES_GYM;
         StringBuilder sb = new StringBuilder();
         clearScreen();
         sb.append("------Demande d'accès au gym------\n");
@@ -55,12 +54,23 @@ public class InterfaceUtilisateur {
     }
 
     public static void afficherGestionCompte() {
-        menuCourant = NomsMenus.GESTION_COMPTE;
         StringBuilder sb = new StringBuilder();
         clearScreen();
         sb.append("------Gestion d'un compte------\n");
         sb.append("1. Création d'un compte\n");
         sb.append("2. Gestion d'un compte existant\n");
+        sb.append("3. Retour au menu principal\n");
+        sb.append("X. Sortir");
+
+        System.out.println(sb.toString());
+    }
+
+    public static void afficherGestionService() {
+        StringBuilder sb = new StringBuilder();
+        clearScreen();
+        sb.append("------Gestion d'un service------\n");
+        sb.append("1. Création d'un nouveau service\n");
+        sb.append("2. Gestion d'un service existant\n");
         sb.append("3. Retour au menu principal\n");
         sb.append("X. Sortir");
 

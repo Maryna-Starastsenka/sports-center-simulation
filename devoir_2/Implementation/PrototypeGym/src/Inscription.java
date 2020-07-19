@@ -2,17 +2,21 @@ import java.util.Date;
 
 
 public class Inscription {
-	private String file;
-	private Date dateInscription;
+
+	private Date dateEtHeureActuelles;
 	private Date dateSeance;
-	private String numeroMembre;
 	private String numeroProfessionnel;
-	private int codeService;
+	private String numeroMembre;
+	private String codeService;
 	private String commentaires;
 	
-	
-	public Inscription() {
-		
-		
+	public Inscription(Date dateEtHeureActuelles, Date dateSeance, String numeroProfessionnel, String numeroMmemre,
+					   String codeService, String commentaires) {
+		this.dateEtHeureActuelles = dateEtHeureActuelles;
+		this.dateSeance = dateSeance;
+		this.numeroProfessionnel = numeroProfessionnel;
+		this.numeroMembre = numeroMmemre;
+		this.codeService = codeService;
+		this.commentaires = commentaires;
 	}
 }

@@ -2,8 +2,6 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class Professionnel extends Client {
-	public static HashMap<String, Professionnel> listeProfessionnels = new HashMap<>();
-
 	//private String fichier;
 	//private Service[] services;
 

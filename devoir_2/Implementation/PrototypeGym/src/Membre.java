@@ -4,8 +4,6 @@ import java.util.HashSet;
 
 public class Membre extends Client {
 
-	public static HashMap<String, Membre> listeMembres = new HashMap<>();
-//	public static HashMap<String, Membre> listeMembresSuspendus = new HashMap<>();
 	private boolean membreValide;
 
 	//private String fichier;
@@ -26,9 +24,7 @@ public class Membre extends Client {
 		return "Membre numéro : " + getNumero() + ".";
 	}
 
-	//public boolean validerMembre(){
-	//	return this.membreValide;
-	//}
+	//public boolean validerMembre(){ return this.membreValide; }
 	
 	//public void ajouterInscription(Inscription inscription) { }
 	
