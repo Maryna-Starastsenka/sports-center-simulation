@@ -70,10 +70,10 @@
           Mise à jour des artéfacts
         </td>
         <td>
-          (%)
+          Correction de la majorité du rapport.(70%)
         </td>
         <td>
-          (%)
+          Peaufinement et ajouts.(30%)
         </td>
       </tr>
       <tr>
@@ -81,10 +81,10 @@
           Diagramme de classe UML
         </td>
         <td>
-          (%)
+          Débuté le diagramme de classe avec l'idée générale.25(%)
         </td>
         <td>
-          (%)
+          Mis à jour constante du diagramme et ajout des attributs et méthodes.(75%)
         </td>
       </tr>
       <tr>
@@ -92,10 +92,10 @@
           Diagrammes de séquence UML
         </td>
         <td>
-          (%)
+          Principalement la gestion de services, Confirmer présence et Isncription séance(60%)
         </td>
         <td>
-          (%)
+          Principalement Gestion de membre et Procédure comptable.(40%)
         </td>
       </tr>
       <tr>
@@ -103,29 +103,17 @@
           Production du prototype
         </td>
         <td>
-          (%)
+          Structure générale (frame) (40%)
         </td>
         <td>
-          (%)
+          Codage des fonctions et interactions.(60%)
         </td>
       </tr>
     </tbody>
   </table>
 
 <pre style="font-family: 'Open Sans';">
-  TODO LIST
-    Tâche 1
-        6. Modifier analyse
-        7. Modifier les diagrammes d'activité selon les nouveaux cas d'utilisation.(DONE)
 
-    Tâche 2
-      1. Mettre à jour le diagramme des classes (garder les attributs/les méthodes essentiels + mentionnés dans la tâche 3)
-      2. Decrire les classes
-
-    Tâche 3
-      1. Vérivier la création des scénarios alternatifs
-      2. Remplacer la discriprion par les noms des méthodes ??
-      3. S'assurer que LifeLine est représenté par un acteur ou une instance de classe
 
 </pre>
 
@@ -309,8 +297,12 @@
     Par exemple, chaque fois qu'une donnée est entrer par l'utilisateur, le controleur appel InterfaceUtilisateur.getTexteConsole(). <br>
     Ces appels de méthode sont redondants dans le diagramme de séquence et le rendaient plus chargé.
     
-    Les numéros ne suivent pas toujours une bonne logique. Particulièrement lorsqu'on passe d'une alternative à une autre.<br> 
-    Il était toutefois impossible de les changer manuellement dans Visual Paradigm.<br><br>
+    De même, en générale les getters ne sont pas représentés dans les diagammes de séquence parce que ça rendrait les diagrammes trop chargés.<br>
+    
+    Les noms de méthode ne sont pas tous nommés tel quels. Souvent seulement la description de ce qu'elles font est fait. <br>
+    Par exemple : Construire nouveau service pour l'appel au constructeur de service.
+    
+    <br><br>
     
     Les diagrammes de séquence sont représentés ci-dessous.<br><br>
    <figure>
@@ -339,7 +331,7 @@
    <figure>
     <img src="images/diagramme_sequence_inscription_seance.png" alt="Diagramme de séquence pour l'inscription à une séance" style="width:65%">
     <figcaption>
-      <i>Figure 3.4 - <a href="Conception\diagramme_sequence_inscription_seance.vpp"> Diagramme de séquence pour l'inscription à une séance</a></i>
+      <i>Figure 3.4 - <a href="Conception\Diagramme_sequence_inscription_seance.vpp"> Diagramme de séquence pour l'inscription à une séance</a></i>
     </figcaption>
   </figure> <br>
   
@@ -351,10 +343,11 @@
   </figure> <br>
 
 
-  <h2>Collaboration</h2>
 
   <h2>Tâche 4 : Production du prototype </h2>
 
+
+  <h2>Collaboration</h2>
 
 <figure>
   <img src="images/Statistiques_bitbucket.png" alt="Statistiques du dépôt BitBucket" style="width:80%">
