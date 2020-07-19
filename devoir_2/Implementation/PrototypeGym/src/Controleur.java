@@ -1,9 +1,12 @@
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.TemporalAdjusters;
+import java.time.temporal.TemporalAmount;
 import java.util.*;
 
 public class Controleur {
@@ -134,7 +137,6 @@ public class Controleur {
 							break;
 					}
 				}
-				resetEnFinDeTransaction();
 				break;
 			case "5":
 				Gui.afficher("---Confirmation de la présence---");
@@ -176,7 +178,6 @@ public class Controleur {
 					}
 				}
 
-				resetEnFinDeTransaction();
 				break;
 			case "6":
 				Gui.afficher("---Consultation d'une séance---");
@@ -184,11 +185,34 @@ public class Controleur {
 				break;
 			case "7":
 				Gui.afficher("---Procédure comptable---");
+				Gui.afficher("Voulez-vous générer et afficher le rapport de synthèse ?");
+				Gui.afficher("1. Oui");
+				Gui.afficher("2. Non");
+				entreeSecondaire = Gui.getTexteConsole();
 
+				if (entreeSecondaire.equals("1")) {
+					var rapport = centreDonnees.genererRapportSynthese();
+					Gui.afficher("Liste des professionnels à payer :");
+
+					for (ProfessionnelTef pro : rapport.getProTef()) {
+						Gui.afficher(String.format("-%s (%s) doit recevoir %.2f$ pour les %s types de services qu'il a donnés cette semaine.",
+								pro.getNom(),
+								pro.getNumero(),
+								pro.getMontant(),
+								pro.getNombreServices()));
+					}
+					Gui.afficher("\n* Nombre total de professionnels à payer : " + rapport.getNombreTotalProfessionnels());
+					Gui.afficher("* Nombre total de services : " + rapport.getNombreTotalServices());
+					Gui.afficher("* Nombre total des frais à payer : " + rapport.getTotalFrais() + "$");
+				} else {
+					Gui.afficher("Annulation de la génération du rapport de synthèse.");
+					break;
+				}
 				break;
 			default:
 				break;
 		}
+		resetEnFinDeTransaction();
 	}
 
 	private void afficherToutesLesSeancesDuJour(LocalDate jour) {
@@ -225,22 +249,19 @@ public class Controleur {
 		}
 	}
 
-	private boolean gererMenuAccesGym(String entree) {
+	private void gererMenuAccesGym(String entree) {
 		switch (entree) {
 			case "1": // Membre
 				afficherAutorisationMembre();
-				resetEnFinDeTransaction();
 				break;
 			case "2": // Professionnel
 				afficherAutorisationProfessionnel();
-				resetEnFinDeTransaction();
 				break;
 			case "3": // Retour au menu principal par défaut
 				break;
 			default:
-				return false;
+				break;
 		}
-		return true;
 	}
 
 	private void gererProcedureComptable(String entree) {
@@ -332,7 +353,6 @@ public class Controleur {
 						String nouvelleRecurrence = Gui.getTexteConsole();
 						serviceAModifier.setRecurrenceHebdo(nouvelleRecurrence);
 						Gui.afficher("Service modifié.");
-						resetEnFinDeTransaction();
 						break;
 
 					case "2":
@@ -341,7 +361,6 @@ public class Controleur {
 						LocalTime nouvelleHeure = getHoraire(entree);
 						serviceAModifier.setHeureService(nouvelleHeure);
 						Gui.afficher("Service modifié.");
-						resetEnFinDeTransaction();
 						break;
 					default:
 						break;
@@ -351,7 +370,6 @@ public class Controleur {
 			case "2":
 				centreDonnees.supprimerService(serviceEntre);
 				Gui.afficher("Service " + serviceEntre + " supprimé.");
-				resetEnFinDeTransaction();
 				break;
 			default:
 				break;
@@ -452,7 +470,6 @@ public class Controleur {
 		centreDonnees.ajouterService(service);
 
 		Gui.afficher("Service " + service.getCode() + " enregistré.");
-		resetEnFinDeTransaction();
 	}
 
 	private void gererGestionCompte(String entree) {
@@ -531,14 +548,12 @@ public class Controleur {
 						String nouvelleAdresse = Gui.getTexteConsole();
 						professionnel.setAdresse(nouvelleAdresse);
 						Gui.afficher("Professionnel modifié.");
-						resetEnFinDeTransaction();
 						break;
 					case "2":
 						Gui.afficher("Veuillez entrer la nouvelle addresse courriel.");
 						String nouvelleAdresseCourriel = Gui.getTexteConsole();
 						professionnel.setAdresseCourriel(nouvelleAdresseCourriel);
 						Gui.afficher("Membre modifié.");
-						resetEnFinDeTransaction();
 						break;
 					case "3":
 						Gui.afficherMenuPrincipal();
@@ -555,7 +570,6 @@ public class Controleur {
 						case "1":
 							centreDonnees.supprimerProfessionnel(idProfessionnel);
 							Gui.afficher("Professionnel supprimé.");
-							resetEnFinDeTransaction();
 							break;
 						case "2":
 							Gui.afficherMenuPrincipal();
@@ -582,14 +596,12 @@ public class Controleur {
 					case "1":
 						membre.setMembreValide(!membre.getMembreValide());
 						Gui.afficher("Membre modifié.");
-						resetEnFinDeTransaction();
 						break;
 					case "2":
 						Gui.afficher("Veuillez entrer le nouveau numéro de téléphone.");
 						String nouveauNumeroTel = Gui.getTexteConsole();
 						membre.setNumeroPhone(nouveauNumeroTel);
 						Gui.afficher("Membre modifié.");
-						resetEnFinDeTransaction();
 						break;
 					case "3":
 						Gui.afficherMenuPrincipal();
@@ -605,8 +617,7 @@ public class Controleur {
 				switch (validationSuppression) {
 					case "1":
 						centreDonnees.supprimerMembre(idMembre);
-						Gui.afficher("Memebre supprimé.");
-						resetEnFinDeTransaction();
+						Gui.afficher("Membre supprimé.");
 						break;
 					case "2":
 						Gui.afficherMenuPrincipal();
@@ -778,7 +789,6 @@ public class Controleur {
 			} else {
 				Gui.afficher("Le client n'a pas été enregistré.");
 			}
-			resetEnFinDeTransaction();
 		}
 
 		private void resetEnFinDeTransaction () {
