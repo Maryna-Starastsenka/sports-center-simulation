@@ -195,7 +195,7 @@ public class Controleur {
 					Gui.afficher("Liste des professionnels à payer :");
 
 					for (ProfessionnelTef pro : rapport.getProTef()) {
-						Gui.afficher(String.format("-%s (%s) doit recevoir %.2f$ pour les %s types de services qu'il a donnés cette semaine.",
+						Gui.afficher(String.format("-%s (%s) doit recevoir %.2f$ pour les %s services qu'il a donnés cette semaine.",
 								pro.getNom(),
 								pro.getNumero(),
 								pro.getMontant(),
@@ -204,6 +204,9 @@ public class Controleur {
 					Gui.afficher("\n* Nombre total de professionnels à payer : " + rapport.getNombreTotalProfessionnels());
 					Gui.afficher("* Nombre total de services : " + rapport.getNombreTotalServices());
 					Gui.afficher("* Nombre total des frais à payer : " + rapport.getTotalFrais() + "$");
+
+					Gui.afficher("\nUne copie du rapport a été envoyée au gérant.");
+
 				} else {
 					Gui.afficher("Annulation de la génération du rapport de synthèse.");
 					break;
