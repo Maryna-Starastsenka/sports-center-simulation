@@ -41,8 +41,12 @@ public class CentreDonnees {
                 1, 30, professionnel1.getHashInString(), "2345678", 100.00, "Aucun commentaire");
         listeServices.put(service2.getCode(), service2);
 
-        Seance seance1 = new Seance(LocalDateTime.of(LocalDate.of(2020, 7, 19),LocalTime.of(18,45)), service1.getCode());
+        // crée une séance au jour d'exécution du programme pour les tests
+        Seance seance1 = new Seance(LocalDateTime.of(today(), LocalTime.of(12, 30)), service1.getCode());
         listeSeances.put(seance1.getHashInString(), seance1);
+
+        Seance seance2 = new Seance(LocalDateTime.of(today(), LocalTime.of(17, 20)), service2.getCode());
+        listeSeances.put(seance2.getHashInString(), seance2);
     }
 
     public void ajouterMembre(Membre membre) {
@@ -50,11 +54,15 @@ public class CentreDonnees {
     }
 
     public void ajouterProfessionnel(Professionnel professionnel) {
-        listeProfessionnels.put(professionnel.getHashInString(), professionnel);
+        if (!listeProfessionnels.containsKey(professionnel.getHashInString())) {
+            listeProfessionnels.put(professionnel.getHashInString(), professionnel);
+        }
     }
 
     public void ajouterService(Service service) {
-        listeServices.put(service.getCode(), service);
+        if (!listeServices.containsKey(service.getCode())) {
+            listeServices.put(service.getCode(), service);
+        }
     }
 
     public void inscrireMembreASeance(String membreId, String seanceID, String commentaires) {
@@ -67,7 +75,9 @@ public class CentreDonnees {
                 membreId,
                 seance.getCodeService(),
                 commentaires);
-        listeInscriptions.put("" + inscription.hashCode(), inscription);
+        if (!listeInscriptions.containsKey(inscription.getHashInString())) {
+            listeInscriptions.put(inscription.getHashInString(), inscription);
+        }
     }
 
     public boolean membreEstValide(String idMembre) {
@@ -140,5 +150,31 @@ public class CentreDonnees {
 
     public List<Service> getListeServices() {
         return listeServices.values().stream().collect(Collectors.toList());
+    }
+
+    public boolean membreExiste(String membreId) {
+        return listeMembres.containsKey(membreId);
+    }
+
+    public boolean inscriptionExiste(String membreId, String seanceId) {
+        List<Inscription> inscriptions = null;
+        if (listeServices.containsKey(getSeance(seanceId).getCodeService())) {
+            Service service = getService(getSeance(seanceId).getCodeService());
+             inscriptions = listeInscriptions
+                    .values()
+                    .stream()
+                    .filter(x -> x.getNumeroMembre().equals(membreId) && x.getCodeService().equals(service.getCode()))
+                    .collect(Collectors.toList());
+        }
+        return inscriptions != null && inscriptions.size() >= 1;
+    }
+
+    public void confirmationPresence(String seanceId, String membreId, String commentaire) {
+        String codeService = listeSeances.get(seanceId).getCodeService();
+        String numeroProfessionnel = listeServices.get(codeService).getNumeroProfessionnel();
+        ConfirmationPresence cp = new ConfirmationPresence(now(), membreId, numeroProfessionnel, codeService, commentaire);
+        if (!listeConfirmationsPresence.containsKey(cp.getHashInString())) {
+            listeConfirmationsPresence.put(cp.getHashInString(), cp);
+        }
     }
 }

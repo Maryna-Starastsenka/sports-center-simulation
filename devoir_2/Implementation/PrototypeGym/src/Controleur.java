@@ -79,53 +79,104 @@ public class Controleur {
 				Gui.afficher("Références des séances disponibles ajourd'hui, le " + CentreDonnees.today() + " :");
 				afficherToutesLesSeancesDuJour(CentreDonnees.today());
 
-				Gui.afficher("Veuillez entrer la référence de la séance à laquelle vous voulez inscrire un membre :");
+				Gui.afficher("Veuillez entrer la référence de la séance à laquelle vous voulez inscrire un membre ou appuyez sur ENTREE pour revenir au menu principal :");
 				String seanceId = Gui.getTexteConsole();
+				if (seanceId.equals("")) {
+					break;
+				}
 
 				afficherTousLesMembres();
 				Gui.afficher("Veuillez entrer le numéro du membre :");
 				String membreId = Gui.getTexteConsole();
 
-				Seance seance = centreDonnees.getSeance(seanceId);
-				Service service = centreDonnees.getService(seance.getCodeService());
-				Gui.afficher("Les frais à payer pour la séance sont de : " + service.getFraisService() + "$");
+				if (!centreDonnees.membreExiste(membreId)) {
+					Gui.afficher("Membre inconnu. Retour au menu principal.");
+					break;
+				} else if (!centreDonnees.getMembre(membreId).getMembreValide()) {
+					Gui.afficher("Membre suspendu. Retour au menu principal.");
+					break;
+				} else {
 
-				Gui.afficher("1. Continuer inscription");
-				Gui.afficher("2. Quitter et revenir au menu principal");
-				entreeSecondaire = Gui.getTexteConsole();
-				switch (entreeSecondaire) {
-					case "1":
-						Gui.afficher("Le paiement est-il valide ?");
-						Gui.afficher("1. Oui");
-						Gui.afficher("2. Non");
-						entreeSecondaire = Gui.getTexteConsole();
+					Seance seance = centreDonnees.getSeance(seanceId);
+					Service service = centreDonnees.getService(seance.getCodeService());
+					Gui.afficher("Les frais à payer pour la séance sont de : " + service.getFraisService() + "$");
 
-						if (entreeSecondaire.equals("1")) {
-							Gui.afficher("Veuillez entrer un commentaire (appuyez sur ENTREE si vous le ne souhaitez pas) :");
-							String commentaire = Gui.getTexteConsole();
+					Gui.afficher("1. Continuer inscription");
+					Gui.afficher("2. Quitter et revenir au menu principal");
+					entreeSecondaire = Gui.getTexteConsole();
+					switch (entreeSecondaire) {
+						case "1":
+							Gui.afficher("Le paiement est-il valide ?");
+							Gui.afficher("1. Oui");
+							Gui.afficher("2. Non");
+							entreeSecondaire = Gui.getTexteConsole();
 
-							centreDonnees.inscrireMembreASeance(membreId, seanceId, commentaire);
+							if (entreeSecondaire.equals("1")) {
+								Gui.afficher("Veuillez entrer un commentaire (appuyez sur ENTREE si vous le ne souhaitez pas) :");
+								String commentaire = Gui.getTexteConsole();
 
-							Gui.afficher("Le membre " +
-									membreId +
-									" a été inscrit à la séance " +
-									seanceId +
-									" qui aura lieu le " +
-									CentreDonnees.localDateTimeFormatter.format(centreDonnees.getSeance(seanceId).getDateTimeSeance()));
-						} else {
-							Gui.afficher("Annulation de l'inscription. Retour au menu principal.");
-						}
-						break;
-					case "2":
-						break;
-					default:
-						break;
+								centreDonnees.inscrireMembreASeance(membreId, seanceId, commentaire);
+
+								Gui.afficher("Le membre " +
+										membreId +
+										" a été inscrit à la séance " +
+										seanceId +
+										" qui aura lieu le " +
+										CentreDonnees.localDateTimeFormatter.format(centreDonnees.getSeance(seanceId).getDateTimeSeance()));
+							} else {
+								Gui.afficher("Annulation de l'inscription. Retour au menu principal.");
+							}
+
+							break;
+						case "2":
+							break;
+						default:
+							break;
+					}
 				}
 				resetEnFinDeTransaction();
 				break;
 			case "5":
 				Gui.afficher("---Confirmation de la présence---");
 
+				Gui.afficher("Références des séances disponibles ajourd'hui, le " + CentreDonnees.today() + " :");
+				afficherToutesLesSeancesDuJour(CentreDonnees.today());
+
+				Gui.afficher("Veuillez entrer la référence de la séance à laquelle vous voulez inscrire un membre ou appuyez sur ENTREE pour revenir au menu principal :");
+				seanceId = Gui.getTexteConsole();
+				if (seanceId.equals("")) {
+					break;
+				}
+
+				afficherTousLesMembres();
+				Gui.afficher("Veuillez entrer le numéro du membre :");
+				membreId = Gui.getTexteConsole();
+
+				if (!centreDonnees.membreExiste(membreId)) {
+					Gui.afficher("Membre inconnu.");
+					break;
+				} else if (!centreDonnees.inscriptionExiste(membreId, seanceId)) {
+					Gui.afficher("Le membre n'est pas inscrit. Accès refusé.");
+				} else {
+					Gui.afficher("Confirmer la présence ?");
+					Gui.afficher("1. Oui");
+					Gui.afficher("2. Non");
+					entreeSecondaire = Gui.getTexteConsole();
+
+					if (entreeSecondaire.equals("1")) {
+						Gui.afficher("Veuillez entrer un commentaire (appuyez sur ENTREE si vous le ne souhaitez pas) :");
+						String commentaire = Gui.getTexteConsole();
+
+						centreDonnees.confirmationPresence(seanceId, membreId, commentaire);
+						Gui.afficher("Présence validée.");
+
+					} else {
+						Gui.afficher("Annulation de la confirmation.");
+						break;
+					}
+				}
+
+				resetEnFinDeTransaction();
 				break;
 			case "6":
 				Gui.afficher("---Consultation d'une séance---");

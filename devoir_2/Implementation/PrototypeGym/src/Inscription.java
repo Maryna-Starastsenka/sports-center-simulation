@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Objects;
 
 
 public class Inscription {
@@ -20,5 +21,43 @@ public class Inscription {
 		this.numeroMembre = numeroMembre;
 		this.codeService = codeService;
 		this.commentaires = commentaires;
+	}
+
+	public LocalDateTime getDateEtHeureActuelles() {
+		return dateEtHeureActuelles;
+	}
+
+	public LocalDate getDateSeance() {
+		return dateSeance;
+	}
+
+	public String getNumeroProfessionnel() {
+		return numeroProfessionnel;
+	}
+
+	public String getNumeroMembre() {
+		return numeroMembre;
+	}
+
+	public String getCodeService() {
+		return codeService;
+	}
+
+	public String getCommentaires() {
+		return commentaires;
+	}
+
+	@Override
+	public int hashCode() {
+		return Math.abs(Objects.hash(dateEtHeureActuelles,
+				dateSeance,
+				numeroProfessionnel,
+				numeroMembre,
+				codeService,
+				commentaires) % 10000); // 4 chiffres max
+	}
+
+	public String getHashInString() {
+		return String.format("%04d", this.hashCode());
 	}
 }
