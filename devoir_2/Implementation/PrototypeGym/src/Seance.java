@@ -1,20 +1,29 @@
-import java.util.Date;
-import java.util.Enumeration;
+import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Seance {
-	private Date dateSeance;
+	private LocalDateTime dateSeance;
 	private String codeService;
 
-	public Seance(Date dateSeance, String codeService) {
+	public Seance(LocalDateTime dateSeance, String codeService) {
 		this.dateSeance = dateSeance;
 		this.codeService = codeService;
 	}
 
-	public Date getDateSeance() {
+	public LocalDateTime getDateTimeSeance() {
 		return dateSeance;
 	}
 
 	public String getCodeService() {
 		return codeService;
+	}
+
+	@Override
+	public int hashCode() {
+		return Math.abs(Objects.hash(dateSeance, codeService) % 10000); // 4 chiffres max
+	}
+
+	protected String getHashInString() {
+		return String.format("%04d", this.hashCode());
 	}
 }

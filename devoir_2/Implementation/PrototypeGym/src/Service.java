@@ -1,10 +1,11 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Date;
+import java.util.Objects;
 
 
 public class Service {
+	private String nomService;
 	private LocalDateTime dateEtHeureActuelles;
 	private LocalDate dateDebutService;
 	private LocalDate dateFinService;
@@ -16,17 +17,18 @@ public class Service {
 	private double fraisService;
 	private String commentaires;
 
-	public Service(LocalDateTime dateEtHeureActuelles,
-				  LocalDate dateDebutService,
-				  LocalDate dateFinService,
-				  LocalTime heureService,
-				  int recurrenceHebdo,
-				  int capaciteMaximale,
-				  String numeroProfessionnel,
-				  String codeService,
-				  double fraisService,
-				  String commentaires) {
-
+	public Service(String nomService,
+				   LocalDateTime dateEtHeureActuelles,
+				   LocalDate dateDebutService,
+				   LocalDate dateFinService,
+				   LocalTime heureService,
+				   int recurrenceHebdo,
+				   int capaciteMaximale,
+				   String numeroProfessionnel,
+				   String codeService,
+				   double fraisService,
+				   String commentaires) {
+		this.nomService = nomService;
 		this.dateEtHeureActuelles = dateEtHeureActuelles;
 		this.dateDebutService = dateDebutService;
 		this.dateFinService = dateFinService;
@@ -67,4 +69,25 @@ public class Service {
 		this.heureService = valeur;
 	}
 
+	@Override
+	public int hashCode() {
+		return Math.abs(Objects.hash(dateEtHeureActuelles,
+				dateDebutService,
+				dateFinService,
+				heureService,
+				recurrenceHebdo,
+				capaciteMaximale,
+				numeroProfessionnel,
+				codeService,
+				fraisService,
+				commentaires) % 10000); // 4 chiffres max
+	}
+
+	protected String getHashInString() {
+		return String.format("%04d", this.hashCode());
+	}
+
+	public String getNomService() {
+		return nomService;
+	}
 }

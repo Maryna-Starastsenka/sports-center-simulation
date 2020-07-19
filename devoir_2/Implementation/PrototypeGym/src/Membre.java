@@ -1,8 +1,4 @@
-import javax.swing.plaf.PanelUI;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
 
 public class Membre extends Client {
 
@@ -27,7 +23,7 @@ public class Membre extends Client {
 
 	@Override
 	public String toString() {
-		return "Membre numéro : " + getNumero() + ".";
+		return "Membre numéro : " + getHashInString() + ".";
 	}
 
 	//public boolean validerMembre(){ return this.membreValide; }

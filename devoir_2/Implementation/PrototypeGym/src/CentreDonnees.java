@@ -1,11 +1,8 @@
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,28 +23,51 @@ public class CentreDonnees {
 
     public CentreDonnees() {
         // valeurs par défaut
-        listeMembres.put("123456789", new Membre("Maryna", LocalDate.of(1989, 9, 28), "123 rue Martin, Montreal",
-                "123-123-1234", "maryna@udem.com", true));
-        listeProfessionnels.put("987654321", new Professionnel("Jean", LocalDate.of(1980, 12, 25),
-                "456 rue Michel, Laval", "987-987-9876", "Jean@udem.com"));
-        listeServices.put("1234567", new Service(LocalDateTime.of(LocalDate.of(2020, 1,1), LocalTime.of(8,0,0)),
+        Membre membre1 = new Membre("Maryna", LocalDate.of(1989, 9, 28), "123 rue Martin, Montreal",
+                "123-123-1234", "maryna@udem.com", true);
+        listeMembres.put(membre1.getHashInString(), membre1);
+
+        Professionnel professionnel1 = new Professionnel("Jean", LocalDate.of(1980, 12, 25),
+                "456 rue Michel, Laval", "987-987-9876", "Jean@udem.com");
+        listeProfessionnels.put(professionnel1.getHashInString(), professionnel1);
+
+        Service service1 = new Service("Zumba", LocalDateTime.of(LocalDate.of(2020, 1,1), LocalTime.of(8,0,0)),
                 LocalDate.of(2025, 12, 31), LocalDate.of(2020, 7, 19), LocalTime.of(22, 30),
-                7, 25, "987654321", "1234567", 63.25, "Rien à signaler"));
-        listeServices.put("2345678", new Service(LocalDateTime.of(LocalDate.of(2020, 3,1), LocalTime.of(7, 30, 0)),
+                7, 25, professionnel1.getHashInString(), "1234567", 63.25, "Rien à signaler");
+        listeServices.put(service1.getCode(), service1);
+
+        Service service2 = new Service("Yoga", LocalDateTime.of(LocalDate.of(2020, 3,1), LocalTime.of(7, 30, 0)),
                 LocalDate.of(2030, 11, 30), LocalDate.of(2020, 7, 19), LocalTime.of(18,20),
-                1, 30, "222222222", "2345678", 100.00, "Aucun commentaire"));
+                1, 30, professionnel1.getHashInString(), "2345678", 100.00, "Aucun commentaire");
+        listeServices.put(service2.getCode(), service2);
+
+        Seance seance1 = new Seance(LocalDateTime.of(LocalDate.of(2020, 7, 19),LocalTime.of(18,45)), service1.getCode());
+        listeSeances.put(seance1.getHashInString(), seance1);
     }
 
     public void ajouterMembre(Membre membre) {
-        listeMembres.put(membre.getNumero(), membre);
+        listeMembres.put(membre.getHashInString(), membre);
     }
 
     public void ajouterProfessionnel(Professionnel professionnel) {
-        listeProfessionnels.put(professionnel.getNumero(), professionnel);
+        listeProfessionnels.put(professionnel.getHashInString(), professionnel);
     }
 
     public void ajouterService(Service service) {
         listeServices.put(service.getCode(), service);
+    }
+
+    public void inscrireMembreASeance(String membreId, String seanceID, String commentaires) {
+        Seance seance = listeSeances.get(seanceID);
+        Service service = listeServices.get(seance.getCodeService());
+        Inscription inscription = new Inscription(
+                LocalDateTime.now(),
+                seance.getDateTimeSeance().toLocalDate(),
+                service.getNumeroProfessionnel(),
+                membreId,
+                seance.getCodeService(),
+                commentaires);
+        listeInscriptions.put("" + inscription.hashCode(), inscription);
     }
 
     public boolean membreEstValide(String idMembre) {
@@ -82,7 +102,7 @@ public class CentreDonnees {
         return listeSeances
                 .values()
                 .stream()
-                .filter(x -> x.getDateSeance().equals(date))
+                .filter(x -> x.getDateTimeSeance().toLocalDate().equals(date))
                 .collect(Collectors.toList());
     }
 
@@ -98,5 +118,27 @@ public class CentreDonnees {
         listeMembres.remove(idProfessionnel);
     }
 
+    public static LocalDate today() {
+        return LocalDate.now(zoneId) ;
+    }
 
+    public static LocalDateTime now() {
+        return LocalDateTime.now(zoneId) ;
+    }
+
+    public Seance getSeance(String id) {
+        return listeSeances.get(id);
+    }
+
+    public List<Membre> getListeMembre() {
+        return listeMembres.values().stream().collect(Collectors.toList());
+    }
+
+    public List<Professionnel> getListeProfessionnels() {
+        return listeProfessionnels.values().stream().collect(Collectors.toList());
+    }
+
+    public List<Service> getListeServices() {
+        return listeServices.values().stream().collect(Collectors.toList());
+    }
 }

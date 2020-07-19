@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Objects;
 
 public abstract class Client {
@@ -34,13 +33,13 @@ public abstract class Client {
 		return Math.abs(Objects.hash(nom, dateNaissance, adresseCourriel, numeroPhone, adresse) % 1000000000); // 9 chiffres max
 	}
 
-	protected String getNumero() {
+	protected String getHashInString() {
 		return String.format("%09d", this.hashCode());
 	}
 
 	@Override
 	public String toString() {
-		return "Client numéro : " + getNumero() + ".";
+		return "Client numéro : " + getHashInString() + ".";
 	}
 
 	//public void modifierCompte(String nom, int date, String courriel, int numero, String adresse) { }

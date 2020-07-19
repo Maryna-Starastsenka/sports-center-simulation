@@ -16,9 +16,9 @@ public class Controleur {
 	public void start() {
 		String entree;
 		do {
-			InterfaceUtilisateur.afficherMenuPrincipal();
+			Gui.afficherMenuPrincipal();
 
-			entree = InterfaceUtilisateur.getTexteConsole().toUpperCase();
+			entree = Gui.getTexteConsole().toUpperCase();
 			if (fermetureApplicationDemandee(entree)) {
 				System.exit(0);
 			}
@@ -34,8 +34,8 @@ public class Controleur {
 		String entreeSecondaire;
 		switch (entreePrincipale) {
 			case "1":
-				InterfaceUtilisateur.afficherDemandeAcces();
-				entreeSecondaire = InterfaceUtilisateur.getTexteConsole();
+				Gui.afficherDemandeAcces();
+				entreeSecondaire = Gui.getTexteConsole();
 				if (!Arrays.asList("1", "2", "3", "X").contains(entreeSecondaire)) {
 					gererMenuPrincipal(entreePrincipale);
 				} else {
@@ -43,8 +43,8 @@ public class Controleur {
 				}
 				break;
 			case "2":
-				InterfaceUtilisateur.afficherGestionCompte();
-				entreeSecondaire = InterfaceUtilisateur.getTexteConsole();
+				Gui.afficherGestionCompte();
+				entreeSecondaire = Gui.getTexteConsole();
 				if (!Arrays.asList("1", "2", "3", "X").contains(entreeSecondaire)) {
 					gererMenuPrincipal(entreePrincipale);
 				} else {
@@ -53,16 +53,20 @@ public class Controleur {
 
 				break;
 			case "3":
-				InterfaceUtilisateur.afficher("--------Gestion d'un service-------");
-				InterfaceUtilisateur.afficher("Veuillez entrer le numéro de professionnel");
+				Gui.afficher("--------Gestion d'un service-------");
+
+				afficherTousLesProfessionnels();
+
+				Gui.afficher("Veuillez entrer le numéro de professionnel");
+
 				String idProfessionnel;
 				do {
-					idProfessionnel = InterfaceUtilisateur.getTexteConsole();
+					idProfessionnel = Gui.getTexteConsole();
 				} while (!validerProfessionnel(idProfessionnel) /*|| fermetureApplicationDemandee(idProfessionnel)*/);
 
-				InterfaceUtilisateur.afficherGestionService();
+				Gui.afficherGestionService();
 
-				entreeSecondaire = InterfaceUtilisateur.getTexteConsole();
+				entreeSecondaire = Gui.getTexteConsole();
 				if (!Arrays.asList("1", "2", "3", "X").contains(entreeSecondaire)) {
 					gererMenuPrincipal(entreePrincipale);
 				} else {
@@ -70,28 +74,95 @@ public class Controleur {
 				}
 				break;
 			case "4":
-				InterfaceUtilisateur.afficher("---Inscription à une séance---");
-				InterfaceUtilisateur.afficher("Séances disponibles ajourd'hui");
+				Gui.afficher("---Inscription à une séance---");
 
-				LocalDate today = LocalDate.now(CentreDonnees.zoneId) ;
+				Gui.afficher("Références des séances disponibles ajourd'hui, le " + CentreDonnees.today() + " :");
+				var seances = centreDonnees.getListeSeances(CentreDonnees.today());
+				for (Seance s : seances) {
+					Gui.afficher(s.getHashInString() + " : le " + CentreDonnees.localDateTimeFormatter.format(s.getDateTimeSeance()));
+				}
+				Gui.afficher("Veuillez entrer la référence de la séance à laquelle vous voulez inscrire un membre :");
+				String seanceId = Gui.getTexteConsole();
 
-				centreDonnees.getListeSeances(today);
+				afficherTousLesMembres();
+				Gui.afficher("Veuillez entrer le numéro du membre :");
+				String membreId = Gui.getTexteConsole();
 
+				Seance seance = centreDonnees.getSeance(seanceId);
+				Service service = centreDonnees.getService(seance.getCodeService());
+				Gui.afficher("Les frais à payer pour la séance sont de : " + service.getFraisService() + "$");
+
+				Gui.afficher("1. Continuer inscription");
+				Gui.afficher("2. Quitter et revenir au menu principal");
+				entreeSecondaire = Gui.getTexteConsole();
+				switch (entreeSecondaire) {
+					case "1":
+						Gui.afficher("Le paiement est-il valide ?");
+						Gui.afficher("1. Oui");
+						Gui.afficher("2. Non");
+						entreeSecondaire = Gui.getTexteConsole();
+
+						if (entreeSecondaire.equals("1")) {
+							Gui.afficher("Veuillez entrer un commentaire (appuyez sur ENTREE si vous le ne souhaitez pas) :");
+							String commentaire = Gui.getTexteConsole();
+
+							centreDonnees.inscrireMembreASeance(membreId, seanceId, commentaire);
+
+							Gui.afficher("Le membre " +
+									membreId +
+									" a été inscrit à la séance " +
+									seanceId +
+									" qui aura lieu le " +
+									CentreDonnees.localDateTimeFormatter.format(centreDonnees.getSeance(seanceId).getDateTimeSeance()));
+						} else {
+							Gui.afficher("Annulation de l'inscription. Retour au menu principal.");
+						}
+						break;
+					case "2":
+						break;
+					default:
+						break;
+				}
+				resetEnFinDeTransaction();
 				break;
 			case "5":
-				InterfaceUtilisateur.afficher("---Confirmation de la présence---");
+				Gui.afficher("---Confirmation de la présence---");
 
 				break;
 			case "6":
-				InterfaceUtilisateur.afficher("---Consultation d'une séance---");
+				Gui.afficher("---Consultation d'une séance---");
 
 				break;
 			case "7":
-				InterfaceUtilisateur.afficher("---Procédure comptable---");
+				Gui.afficher("---Procédure comptable---");
 
 				break;
 			default:
 				break;
+		}
+	}
+
+	private void afficherTousLesMembres() {
+		Gui.afficher("Numéros des membres du centre de données (pour faciliter les tests) :");
+		var membres = centreDonnees.getListeMembre();
+		for (Membre m : membres) {
+			Gui.afficher(m.getHashInString());
+		}
+	}
+
+	private void afficherTousLesProfessionnels() {
+		Gui.afficher("Numéros des professionnels du centre de données (pour faciliter les tests) :");
+		var professionnels = centreDonnees.getListeProfessionnels();
+		for (Professionnel m : professionnels) {
+			Gui.afficher(m.getHashInString());
+		}
+	}
+
+	private void afficherTousLesServices() {
+		Gui.afficher("Numéros des services du centre de données (pour faciliter les tests) :");
+		var services = centreDonnees.getListeServices();
+		for (Service s : services) {
+			Gui.afficher(s.getCode());
 		}
 	}
 
@@ -173,44 +244,44 @@ public class Controleur {
 	}
 
 	private void afficherServicesProfessionnel(List<Service> servicesDuProfessionnel) {
-		InterfaceUtilisateur.clearScreen();
+		Gui.clearScreen();
 
-		InterfaceUtilisateur.afficher("------Services du professionnel------");
-		InterfaceUtilisateur.afficher("Liste des services disponibles :");
+		Gui.afficher("------Services du professionnel------");
+		Gui.afficher("Liste des services disponibles pour ce professionnel :");
 		for (Service s : servicesDuProfessionnel) {
-			InterfaceUtilisateur.afficher(s.getCode());
+			Gui.afficher(s.getCode() + " (" + s.getNomService() + ")");
 		}
 	}
 
 	private void gererServiceExistant() {
-		InterfaceUtilisateur.afficher("Veuillez choisir un service :");
-		String serviceEntre = InterfaceUtilisateur.getTexteConsole();
+		Gui.afficher("Veuillez choisir un service :");
+		String serviceEntre = Gui.getTexteConsole();
 		Service serviceAModifier = centreDonnees.getService(serviceEntre);
 
-		InterfaceUtilisateur.afficher("1. Modifier :");
-		InterfaceUtilisateur.afficher("2. Supprimer :");
+		Gui.afficher("1. Modifier :");
+		Gui.afficher("2. Supprimer :");
 
-		String modifOuSuppr = InterfaceUtilisateur.getTexteConsole();
+		String modifOuSuppr = Gui.getTexteConsole();
 		switch (modifOuSuppr) {
 			case "1":
-				InterfaceUtilisateur.afficher("1. Modifier récurrence hebdo. Valeur actuelle : " + serviceAModifier.getRecurrenceHebdo());// todo faire les autres
-				InterfaceUtilisateur.afficher("2. Modifier heure du service. Valeur actuelle : " + serviceAModifier.getHeureService());
-				String modifChamps = InterfaceUtilisateur.getTexteConsole();
+				Gui.afficher("1. Modifier récurrence hebdo. Valeur actuelle : " + serviceAModifier.getRecurrenceHebdo());// todo faire les autres
+				Gui.afficher("2. Modifier heure du service. Valeur actuelle : " + serviceAModifier.getHeureService());
+				String modifChamps = Gui.getTexteConsole();
 				switch (modifChamps) {
 					case "1":
-						InterfaceUtilisateur.afficher("Entrez la nouvelle valeur :");
-						String nouvelleRecurrence = InterfaceUtilisateur.getTexteConsole();
+						Gui.afficher("Entrez la nouvelle valeur :");
+						String nouvelleRecurrence = Gui.getTexteConsole();
 						serviceAModifier.setRecurrenceHebdo(nouvelleRecurrence);
-						InterfaceUtilisateur.afficher("Service modifié.");
+						Gui.afficher("Service modifié.");
 						resetEnFinDeTransaction();
 						break;
 
 					case "2":
-						InterfaceUtilisateur.afficher("Entrez la nouvelle valeur :");
-						String entree = InterfaceUtilisateur.getTexteConsole();
+						Gui.afficher("Entrez la nouvelle valeur :");
+						String entree = Gui.getTexteConsole();
 						LocalTime nouvelleHeure = getHoraire(entree);
 						serviceAModifier.setHeureService(nouvelleHeure);
-						InterfaceUtilisateur.afficher("Service modifié.");
+						Gui.afficher("Service modifié.");
 						resetEnFinDeTransaction();
 						break;
 					default:
@@ -220,7 +291,7 @@ public class Controleur {
 				break;
 			case "2":
 				centreDonnees.supprimerService(serviceEntre);
-				InterfaceUtilisateur.afficher("Service " + serviceEntre + " supprimé.");
+				Gui.afficher("Service " + serviceEntre + " supprimé.");
 				resetEnFinDeTransaction();
 				break;
 			default:
@@ -229,12 +300,13 @@ public class Controleur {
 	}
 
 	private void formulaireNouveauService(String idProfessionnel) {
-		InterfaceUtilisateur.clearScreen();
+		Gui.clearScreen();
 
-		InterfaceUtilisateur.afficher("------Formulaire de nouveau service------");
+		Gui.afficher("------Formulaire de nouveau service------");
 
 		String entree;
 
+		String nomService;
 		LocalDateTime dateEtHeureActuelles = null;
 		LocalDate dateDebutService = null;
 		LocalDate dateFinService = null;
@@ -246,19 +318,14 @@ public class Controleur {
 		double fraisService;
 		String commentaires;
 
-		do {
-			InterfaceUtilisateur.afficher("Veuillez entrer la date et l'heure actuelle (jj-mm-aaaa hh:mm:ss) :");
-			entree = InterfaceUtilisateur.getTexteConsole();
-		} while (false); //todo
-		try {
-			dateEtHeureActuelles = getDateEtHeureFromString(entree);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		Gui.afficher("Veuillez entrer le nom du service :");
+		nomService = Gui.getTexteConsole();
+
+		dateEtHeureActuelles = CentreDonnees.now();
 
 		do {
-			InterfaceUtilisateur.afficher("Veuillez entrer la date de début du service (jj-mm-aaaa) :");
-			entree = InterfaceUtilisateur.getTexteConsole();
+			Gui.afficher("Veuillez entrer la date de début du service (jj-mm-aaaa) :");
+			entree = Gui.getTexteConsole();
 		} while (false); //todo
 		try {
 			dateDebutService = getDateFromString(entree);
@@ -267,8 +334,8 @@ public class Controleur {
 		}
 
 		do {
-			InterfaceUtilisateur.afficher("Veuillez entrer la date de fin du service (jj-mm-aaaa) :");
-			entree = InterfaceUtilisateur.getTexteConsole();
+			Gui.afficher("Veuillez entrer la date de fin du service (jj-mm-aaaa) :");
+			entree = Gui.getTexteConsole();
 		} while (false); //todo
 		try {
 			dateFinService = getDateFromString(entree);
@@ -277,42 +344,43 @@ public class Controleur {
 		}
 
 		do {
-			InterfaceUtilisateur.afficher("Veuillez entrer l'heure du service (hh:mm) :");
-			entree = InterfaceUtilisateur.getTexteConsole();
+			Gui.afficher("Veuillez entrer l'heure du service (hh:mm) :");
+			entree = Gui.getTexteConsole();
 		} while (false); //todo
 		heureService = getHoraire(entree);
 
 		do {
-			InterfaceUtilisateur.afficher("Veuillez entrer la récurrence hebdomadaire (1-7) :");
-			entree = InterfaceUtilisateur.getTexteConsole();
+			Gui.afficher("Veuillez entrer la récurrence hebdomadaire (1-7) :");
+			entree = Gui.getTexteConsole();
 		} while (false); //todo
 		recurrenceHebdo = getInt(entree);//getHoraire(entree);
 
 		do {
-			InterfaceUtilisateur.afficher("Veuillez entrer la capacité maximale (1-30) :");
-			entree = InterfaceUtilisateur.getTexteConsole();
+			Gui.afficher("Veuillez entrer la capacité maximale (1-30) :");
+			entree = Gui.getTexteConsole();
 		} while (false); //todo
 		capaciteMaximale = getInt(entree);
 
 		do {
-			InterfaceUtilisateur.afficher("Veuillez entrer le code du service (XXXXXXX) :");
-			entree = InterfaceUtilisateur.getTexteConsole();
+			Gui.afficher("Veuillez entrer le code du service (XXXXXXX) :");
+			entree = Gui.getTexteConsole();
 		} while (false); //todo
 		codeService = entree;
 
 		do {
-			InterfaceUtilisateur.afficher("Veuillez entrer les frais du service (XXX.XX) :");
-			entree = InterfaceUtilisateur.getTexteConsole();
+			Gui.afficher("Veuillez entrer les frais du service (XXX.XX) :");
+			entree = Gui.getTexteConsole();
 		} while (false); //todo
 		fraisService = getDouble(entree);
 
 		do {
-			InterfaceUtilisateur.afficher("Veuillez entrer les commentaires :");
-			entree = InterfaceUtilisateur.getTexteConsole();
+			Gui.afficher("Veuillez entrer les commentaires :");
+			entree = Gui.getTexteConsole();
 		} while (false); //todo
 		commentaires = entree;
 
-		Service service = new Service(dateEtHeureActuelles,
+		Service service = new Service(nomService,
+				dateEtHeureActuelles,
 				dateDebutService,
 				dateFinService,
 				heureService,
@@ -324,7 +392,7 @@ public class Controleur {
 				commentaires);
 		centreDonnees.ajouterService(service);
 
-		InterfaceUtilisateur.afficher("Service " + service.getCode() + " enregistré.");
+		Gui.afficher("Service " + service.getCode() + " enregistré.");
 		resetEnFinDeTransaction();
 	}
 
@@ -344,46 +412,46 @@ public class Controleur {
 	}
 
 	private void gererCompreExistant() {
-		InterfaceUtilisateur.afficher("Veuillez choisir le type de compte");
-		InterfaceUtilisateur.afficher("1. Compte membre");
-		InterfaceUtilisateur.afficher("2. Compte professionnel");
-		String entree = InterfaceUtilisateur.getTexteConsole();
+		Gui.afficher("Veuillez choisir le type de compte");
+		Gui.afficher("1. Compte membre");
+		Gui.afficher("2. Compte professionnel");
+		String entree = Gui.getTexteConsole();
 		switch (entree) {
 			case "1":
-				InterfaceUtilisateur.afficher("Veuillez entrer le numéro du membre");
-				String idMembre = InterfaceUtilisateur.getTexteConsole();
+				Gui.afficher("Veuillez entrer le numéro du membre");
+				String idMembre = Gui.getTexteConsole();
 				Membre membre = centreDonnees.getMembre(idMembre);
 				String dateFormateMembre = new SimpleDateFormat("dd-MM-yyyy").format(membre.getDateNaissance());
 
-				InterfaceUtilisateur.afficher("Nom : " + membre.getNom() + "\n" + "Date de naissance : "
+				Gui.afficher("Nom : " + membre.getNom() + "\n" + "Date de naissance : "
 						+ dateFormateMembre + "\n" + "Adresse courriel : " + membre.getAdresseCourriel() + "\n"
 						+ "Numéro de téléphone : " + membre.getNumeroPhone() + "\n" + "Adresse : " + membre.getAdresse() + "\n"
 						+ "Membre valide : " + membre.getMembreValide() + "\n");
 
-				InterfaceUtilisateur.afficher("Veuillez choisir l'action");
-				InterfaceUtilisateur.afficher("1. Modifier.");
-				InterfaceUtilisateur.afficher("2. Supprimer.");
-				String action = InterfaceUtilisateur.getTexteConsole();
+				Gui.afficher("Veuillez choisir l'action");
+				Gui.afficher("1. Modifier.");
+				Gui.afficher("2. Supprimer.");
+				String action = Gui.getTexteConsole();
 				gererMembreExistant(action, membre, idMembre);
 				break;
 			case "2":
-				InterfaceUtilisateur.afficher("Veuillez entrer le numéro du professionnel");
-				String idProfessionnel = InterfaceUtilisateur.getTexteConsole();
+				Gui.afficher("Veuillez entrer le numéro du professionnel");
+				String idProfessionnel = Gui.getTexteConsole();
 				Professionnel professionnel = centreDonnees.getProfessionnel(idProfessionnel);
 				String dateFormateProf = new SimpleDateFormat("dd-MM-yyyy").format(professionnel.getDateNaissance());
 
-				InterfaceUtilisateur.afficher("Nom : " + professionnel.getNom() + "\n" + "Date de naissance : "
+				Gui.afficher("Nom : " + professionnel.getNom() + "\n" + "Date de naissance : "
 						+ dateFormateProf + "\n" + "Adresse courriel : " + professionnel.getAdresseCourriel() + "\n"
 						+ "Numéro de téléphone : " + professionnel.getNumeroPhone() + "\n" + "Adresse : " + professionnel.getAdresse() + "\n");
 
-				InterfaceUtilisateur.afficher("Veuillez choisir l'action");
-				InterfaceUtilisateur.afficher("1. Modifier.");
-				InterfaceUtilisateur.afficher("2. Supprimer.");
-				String actionProf = InterfaceUtilisateur.getTexteConsole();
+				Gui.afficher("Veuillez choisir l'action");
+				Gui.afficher("1. Modifier.");
+				Gui.afficher("2. Supprimer.");
+				String actionProf = Gui.getTexteConsole();
 				gererProfessionnelExistant(actionProf, professionnel, idProfessionnel);
 				break;
 			case "3":
-				InterfaceUtilisateur.afficherMenuPrincipal();
+				Gui.afficherMenuPrincipal();
 				break;
 			default:
 				break;
@@ -393,50 +461,50 @@ public class Controleur {
 	private void gererProfessionnelExistant (String action, Professionnel professionnel, String idProfessionnel) {
 		switch (action) {
 			case "1":
-				InterfaceUtilisateur.afficher("1. Modifier l'adresse.");// todo faire les autres
-				InterfaceUtilisateur.afficher("2. Modifier l'adresse courriel.");
-				InterfaceUtilisateur.afficher("3. Retour au menu principal.");
-				String modifProfessionnale = InterfaceUtilisateur.getTexteConsole();
+				Gui.afficher("1. Modifier l'adresse.");// todo faire les autres
+				Gui.afficher("2. Modifier l'adresse courriel.");
+				Gui.afficher("3. Retour au menu principal.");
+				String modifProfessionnale = Gui.getTexteConsole();
 
 				switch (modifProfessionnale) {
 					case "1":
-						InterfaceUtilisateur.afficher("Veuillez entrer la nouvelle addresse.");
-						String nouvelleAdresse = InterfaceUtilisateur.getTexteConsole();
+						Gui.afficher("Veuillez entrer la nouvelle addresse.");
+						String nouvelleAdresse = Gui.getTexteConsole();
 						professionnel.setAdresse(nouvelleAdresse);
-						InterfaceUtilisateur.afficher("Professionnel modifié.");
+						Gui.afficher("Professionnel modifié.");
 						resetEnFinDeTransaction();
 						break;
 					case "2":
-						InterfaceUtilisateur.afficher("Veuillez entrer la nouvelle addresse courriel.");
-						String nouvelleAdresseCourriel = InterfaceUtilisateur.getTexteConsole();
+						Gui.afficher("Veuillez entrer la nouvelle addresse courriel.");
+						String nouvelleAdresseCourriel = Gui.getTexteConsole();
 						professionnel.setAdresseCourriel(nouvelleAdresseCourriel);
-						InterfaceUtilisateur.afficher("Membre modifié.");
+						Gui.afficher("Membre modifié.");
 						resetEnFinDeTransaction();
 						break;
 					case "3":
-						InterfaceUtilisateur.afficherMenuPrincipal();
+						Gui.afficherMenuPrincipal();
 						break;
 					default:
 						break;
 				}
 				break;
 			case "2":
-				InterfaceUtilisateur.afficher("1. Valider suppression.");
-				InterfaceUtilisateur.afficher("2. Retour au menu principal.");
-				String validationSuppression = InterfaceUtilisateur.getTexteConsole();
+				Gui.afficher("1. Valider suppression.");
+				Gui.afficher("2. Retour au menu principal.");
+				String validationSuppression = Gui.getTexteConsole();
 					switch (validationSuppression) {
 						case "1":
 							centreDonnees.supprimerProfessionnel(idProfessionnel);
-							InterfaceUtilisateur.afficher("Professionnel supprimé.");
+							Gui.afficher("Professionnel supprimé.");
 							resetEnFinDeTransaction();
 							break;
 						case "2":
-							InterfaceUtilisateur.afficherMenuPrincipal();
+							Gui.afficherMenuPrincipal();
 						default:
 							break;
 					}
 			case "3":
-				InterfaceUtilisateur.afficherMenuPrincipal();
+				Gui.afficherMenuPrincipal();
 				break;
 			default:
 				break;
@@ -446,48 +514,48 @@ public class Controleur {
 	private void gererMembreExistant(String entree, Membre membre, String idMembre) {
 		switch (entree) {
 			case "1":
-				InterfaceUtilisateur.afficher("1. Modifier le statut du membre. Valeur actuelle : " + membre.getMembreValide());// todo faire les autres
-				InterfaceUtilisateur.afficher("2. Modifier le numéro de téléphone.");
-				InterfaceUtilisateur.afficher("3. Retour au menu principal.");
-				String modifMembre = InterfaceUtilisateur.getTexteConsole();
+				Gui.afficher("1. Modifier le statut du membre. Valeur actuelle : " + membre.getMembreValide());// todo faire les autres
+				Gui.afficher("2. Modifier le numéro de téléphone.");
+				Gui.afficher("3. Retour au menu principal.");
+				String modifMembre = Gui.getTexteConsole();
 
 				switch (modifMembre) {
 					case "1":
 						membre.setMembreValide(!membre.getMembreValide());
-						InterfaceUtilisateur.afficher("Membre modifié.");
+						Gui.afficher("Membre modifié.");
 						resetEnFinDeTransaction();
 						break;
 					case "2":
-						InterfaceUtilisateur.afficher("Veuillez entrer le nouveau numéro de téléphone.");
-						String nouveauNumeroTel = InterfaceUtilisateur.getTexteConsole();
+						Gui.afficher("Veuillez entrer le nouveau numéro de téléphone.");
+						String nouveauNumeroTel = Gui.getTexteConsole();
 						membre.setNumeroPhone(nouveauNumeroTel);
-						InterfaceUtilisateur.afficher("Membre modifié.");
+						Gui.afficher("Membre modifié.");
 						resetEnFinDeTransaction();
 						break;
 					case "3":
-						InterfaceUtilisateur.afficherMenuPrincipal();
+						Gui.afficherMenuPrincipal();
 						break;
 					default:
 						break;
 				}
 				break;
 			case "2":
-				InterfaceUtilisateur.afficher("1. Valider suppression.");
-				InterfaceUtilisateur.afficher("2. Retour au menu principal.");
-				String validationSuppression = InterfaceUtilisateur.getTexteConsole();
+				Gui.afficher("1. Valider suppression.");
+				Gui.afficher("2. Retour au menu principal.");
+				String validationSuppression = Gui.getTexteConsole();
 				switch (validationSuppression) {
 					case "1":
 						centreDonnees.supprimerMembre(idMembre);
-						InterfaceUtilisateur.afficher("Memebre supprimé.");
+						Gui.afficher("Memebre supprimé.");
 						resetEnFinDeTransaction();
 						break;
 					case "2":
-						InterfaceUtilisateur.afficherMenuPrincipal();
+						Gui.afficherMenuPrincipal();
 					default:
 						break;
 				}
 			case "3":
-				InterfaceUtilisateur.afficherMenuPrincipal();
+				Gui.afficherMenuPrincipal();
 				break;
 			default:
 				break;
@@ -495,7 +563,7 @@ public class Controleur {
 	}
 
 		private void formulaireNouveauCompte () {
-			InterfaceUtilisateur.clearScreen();
+			Gui.clearScreen();
 			String entree2;
 
 			String typeClient;
@@ -505,17 +573,17 @@ public class Controleur {
 			String numeroTelephone = null;
 			String adresse = null;
 
-			InterfaceUtilisateur.afficher("------Formulaire de nouveau compte------");
+			Gui.afficher("------Formulaire de nouveau compte------");
 
 			do {
-				InterfaceUtilisateur.afficher("Veuillez entrer le nom :");
-				entree2 = InterfaceUtilisateur.getTexteConsole();
+				Gui.afficher("Veuillez entrer le nom :");
+				entree2 = Gui.getTexteConsole();
 			} while (!nomValide(entree2));
 			nom = entree2;
 
 			do {
-				InterfaceUtilisateur.afficher("Veuillez entrer la date de naissance (jj-mm-aaaa):");
-				entree2 = InterfaceUtilisateur.getTexteConsole();
+				Gui.afficher("Veuillez entrer la date de naissance (jj-mm-aaaa):");
+				entree2 = Gui.getTexteConsole();
 			} while (!dateValide(entree2));
 			try {
 				dateNaissance = getDateFromString(entree2);
@@ -524,28 +592,28 @@ public class Controleur {
 			}
 
 			do {
-				InterfaceUtilisateur.afficher("Veuillez entrer l'adresse :");
-				entree2 = InterfaceUtilisateur.getTexteConsole();
+				Gui.afficher("Veuillez entrer l'adresse :");
+				entree2 = Gui.getTexteConsole();
 			} while (!adresseValide(entree2));
 			adresse = entree2;
 
 			do {
-				InterfaceUtilisateur.afficher("Veuillez entrer le numéro de téléphone (XXX-XXX-XXXX):");
-				entree2 = InterfaceUtilisateur.getTexteConsole();
+				Gui.afficher("Veuillez entrer le numéro de téléphone (XXX-XXX-XXXX):");
+				entree2 = Gui.getTexteConsole();
 			} while (!telephoneValide(entree2));
 			numeroTelephone = entree2;
 
 			do {
-				InterfaceUtilisateur.afficher("Veuillez entrer l'adresse courriel (xxx@xxx.xxx) :");
-				entree2 = InterfaceUtilisateur.getTexteConsole();
+				Gui.afficher("Veuillez entrer l'adresse courriel (xxx@xxx.xxx) :");
+				entree2 = Gui.getTexteConsole();
 			} while (!courrielValide(entree2));
 			adresseCourriel = entree2;
 
 			do {
-				InterfaceUtilisateur.afficher("Inscrivez-vous un membre qui a payé les frais d'hadhésion (entrez \"1\"), " +
+				Gui.afficher("Inscrivez-vous un membre qui a payé les frais d'hadhésion (entrez \"1\"), " +
 						"un membre qui n'a pas payé les frais (entrez \"2\"), " +
 						"ou un professionnel (entrez \"3\") ?");
-				entree2 = InterfaceUtilisateur.getTexteConsole();
+				entree2 = Gui.getTexteConsole();
 			} while (!typeMembreValide(entree2));
 			typeClient = entree2;
 
@@ -555,26 +623,27 @@ public class Controleur {
 		private void afficherAutorisationProfessionnel () {
 			String idProfessionnel;
 			do {
-				InterfaceUtilisateur.afficher("Entrez l'identifiant du professionnel puis appuyez sur ENTREE :");
-				idProfessionnel = InterfaceUtilisateur.getTexteConsole();
+				Gui.afficher("Entrez l'identifiant du professionnel puis appuyez sur ENTREE :");
+				idProfessionnel = Gui.getTexteConsole();
 			} while (idProfessionnel.length() != 9);
 			if (validerProfessionnel(idProfessionnel)) {
-				InterfaceUtilisateur.afficher("Le professionnel est autorisé à accéder au gym.");
+				Gui.afficher("Le professionnel est autorisé à accéder au gym.");
 			} else {
-				InterfaceUtilisateur.afficher("Le professionnel n'est pas enregistré.");
+				Gui.afficher("Le professionnel n'est pas enregistré.");
 			}
 		}
 
 		private void afficherAutorisationMembre () {
+			afficherTousLesMembres();
 			String idMembre;
 			do {
-				InterfaceUtilisateur.afficher("Entrez l'identifiant du membre puis appuyez sur ENTREE :");
-				idMembre = InterfaceUtilisateur.getTexteConsole();
+				Gui.afficher("Entrez l'identifiant du membre puis appuyez sur ENTREE :");
+				idMembre = Gui.getTexteConsole();
 			} while (idMembre.length() != 9);
 			if (validerMembre(idMembre)) {
-				InterfaceUtilisateur.afficher("Le membre est autorisé à accéder au gym.");
+				Gui.afficher("Le membre est autorisé à accéder au gym.");
 			} else {
-				InterfaceUtilisateur.afficher("Le membre n'est pas autorisé à accéder au gym.");
+				Gui.afficher("Le membre n'est pas autorisé à accéder au gym.");
 			}
 		}
 
@@ -626,7 +695,7 @@ public class Controleur {
 			switch (typeClient) {
 				case "1":
 					Membre membreValide = new Membre(nom, dateNaissance, adresse, numeroPhone, adresseCourriel, true);
-					if (!centreDonnees.membreEstValide(membreValide.getNumero())) {
+					if (!centreDonnees.membreEstValide(membreValide.getHashInString())) {
 						centreDonnees.ajouterMembre(membreValide);
 					}
 					client = membreValide;
@@ -636,7 +705,7 @@ public class Controleur {
 					break;
 				case "3":
 					Professionnel professionnel = new Professionnel(nom, dateNaissance, adresse, numeroPhone, adresseCourriel);
-					if (!centreDonnees.professionnelEstValide(professionnel.getNumero())) {
+					if (!centreDonnees.professionnelEstValide(professionnel.getHashInString())) {
 						centreDonnees.ajouterProfessionnel(professionnel);
 					}
 					client = professionnel;
@@ -646,16 +715,16 @@ public class Controleur {
 			}
 
 			if (client != null) {
-				InterfaceUtilisateur.afficher("Enregistrement du " + client);
+				Gui.afficher("Enregistrement du " + client);
 			} else {
-				InterfaceUtilisateur.afficher("Le client n'a pas été enregistré.");
+				Gui.afficher("Le client n'a pas été enregistré.");
 			}
 			resetEnFinDeTransaction();
 		}
 
 		private void resetEnFinDeTransaction () {
-			InterfaceUtilisateur.afficher("Appuyez sur ENTREE pour revenir à l'écran principal");
-			InterfaceUtilisateur.getTexteConsole();
+			Gui.afficher("Appuyez sur ENTREE pour revenir à l'écran principal");
+			Gui.getTexteConsole();
 		}
 
 		public boolean adresseValide (String entree){

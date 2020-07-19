@@ -2,22 +2,11 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.Scanner;
 
-public class InterfaceUtilisateur {
+public class Gui {
     static Controleur controleur;
-//    public static NomsMenus menuCourant = NomsMenus.PRINCIPAL;
 
-    public InterfaceUtilisateur() {
+    public Gui() {
     }
-
-//    public static void ReadCommandLine() {
-//        Scanner scanner = new Scanner(System.in);
-//        String option;
-//
-//        do {
-//            option = scanner.nextLine();
-//            controleur.input(menuCourant, option);
-//        } while (true);
-//    }
 
     public static void clearScreen() {
         System.out.print("\033[H\033[2J");
@@ -25,7 +14,6 @@ public class InterfaceUtilisateur {
     }
 
     public static void afficherMenuPrincipal() {
-//        menuCourant = NomsMenus.PRINCIPAL;
         StringBuilder sb = new StringBuilder();
         clearScreen();
         sb.append("---------------Accueil---------------\n");

@@ -1,6 +1,4 @@
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.HashMap;
 
 public class Professionnel extends Client {
 	//private String fichier;
@@ -16,6 +14,6 @@ public class Professionnel extends Client {
 
 	@Override
 	public String toString() {
-		return "Professionnel numéro : " + getNumero() + ".";
+		return "Professionnel numéro : " + getHashInString() + ".";
 	}
 }
