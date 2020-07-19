@@ -77,10 +77,8 @@ public class Controleur {
 				Gui.afficher("---Inscription à une séance---");
 
 				Gui.afficher("Références des séances disponibles ajourd'hui, le " + CentreDonnees.today() + " :");
-				var seances = centreDonnees.getListeSeances(CentreDonnees.today());
-				for (Seance s : seances) {
-					Gui.afficher(s.getHashInString() + " : le " + CentreDonnees.localDateTimeFormatter.format(s.getDateTimeSeance()));
-				}
+				afficherToutesLesSeancesDuJour(CentreDonnees.today());
+
 				Gui.afficher("Veuillez entrer la référence de la séance à laquelle vous voulez inscrire un membre :");
 				String seanceId = Gui.getTexteConsole();
 
@@ -139,6 +137,16 @@ public class Controleur {
 				break;
 			default:
 				break;
+		}
+	}
+
+	private void afficherToutesLesSeancesDuJour(LocalDate jour) {
+		var seances = centreDonnees.getListeSeances(jour);
+		for (Seance s : seances) {
+			Gui.afficher(s.getHashInString() + " (service de " +
+					centreDonnees.getService(s.getCodeService()).getNomService() +
+					") : le " +
+					CentreDonnees.localDateTimeFormatter.format(s.getDateTimeSeance()));
 		}
 	}
 
