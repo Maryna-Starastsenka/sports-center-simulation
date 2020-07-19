@@ -1,5 +1,3 @@
-import java.text.ParseException;
-import java.util.Date;
 import java.util.Scanner;
 
 public class Gui {
@@ -8,14 +6,14 @@ public class Gui {
     public Gui() {
     }
 
-    public static void clearScreen() {
+    public static void effacerEcran() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
 
     public static void afficherMenuPrincipal() {
         StringBuilder sb = new StringBuilder();
-        clearScreen();
+        effacerEcran();
         sb.append("---------------Accueil---------------\n");
         sb.append("1. Demande d'accès au gym\n");
         sb.append("2. Gestion d'un compte\n");
@@ -31,7 +29,7 @@ public class Gui {
 
     public static void afficherDemandeAcces() {
         StringBuilder sb = new StringBuilder();
-        clearScreen();
+        effacerEcran();
         sb.append("------Demande d'accès au gym------\n");
         sb.append("1. Membre\n");
         sb.append("2. Professionnel\n");
@@ -43,7 +41,7 @@ public class Gui {
 
     public static void afficherGestionCompte() {
         StringBuilder sb = new StringBuilder();
-        clearScreen();
+        effacerEcran();
         sb.append("------Gestion d'un compte------\n");
         sb.append("1. Création d'un compte\n");
         sb.append("2. Gestion d'un compte existant\n");
@@ -55,7 +53,7 @@ public class Gui {
 
     public static void afficherGestionService() {
         StringBuilder sb = new StringBuilder();
-        clearScreen();
+        effacerEcran();
         sb.append("------Gestion d'un service------\n");
         sb.append("1. Création d'un nouveau service\n");
         sb.append("2. Gestion d'un service existant\n");

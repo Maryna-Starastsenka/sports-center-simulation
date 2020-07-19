@@ -1,8 +1,6 @@
 import java.time.LocalDate;
 
 public class Professionnel extends Client {
-	//private String fichier;
-	//private Service[] services;
 
 	public Professionnel (String nom, LocalDate dateNaissance, String adresse, String numeroPhone, String adresseCourriel) {
 		this.nom = nom;

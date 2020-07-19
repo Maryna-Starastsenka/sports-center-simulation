@@ -4,11 +4,8 @@ public class Membre extends Client {
 
 	private boolean membreValide;
 
-	//private String fichier;
-	//private Inscription[] listeInscriptions;
-	//private ConfirmationPresence[] listeConfirmations;
-	
-	public Membre(String nom, LocalDate dateNaissance, String adresse, String numeroPhone, String adresseCourriel, boolean membreValide) {
+	public Membre(String nom, LocalDate dateNaissance, String adresse, String numeroPhone, String adresseCourriel,
+				  boolean membreValide) {
 		this.nom = nom;
 		this.dateNaissance = dateNaissance;
 		this.adresse = adresse;
@@ -26,12 +23,4 @@ public class Membre extends Client {
 		return "Membre numéro : " + getHashInString() + ".";
 	}
 
-	//public boolean validerMembre(){ return this.membreValide; }
-	
-	//public void ajouterInscription(Inscription inscription) { }
-	
-    //public void ajouterConfirmation(ConfirmationPresence confirmation) { }
-    
-    //public void validerOuSuspendre(boolean bool) { }
-	
 }

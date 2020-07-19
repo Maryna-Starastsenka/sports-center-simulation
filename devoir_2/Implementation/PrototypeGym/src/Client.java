@@ -42,8 +42,6 @@ public abstract class Client {
 		return "Client numéro : " + getHashInString() + ".";
 	}
 
-	//public void modifierCompte(String nom, int date, String courriel, int numero, String adresse) { }
-		
 }
 	
 	

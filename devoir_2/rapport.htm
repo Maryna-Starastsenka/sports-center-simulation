@@ -173,7 +173,7 @@
 
     Confirmation de la présence :
         - Ajout du scénario d'annulation de la confirmation.
-        - Afficher les séances du jour et choisir la séance concernée plutôt que 
+        - Afficher les séances du jour et choisir la séance concernée plutôt que
           de la rechercher par son code.
 
 
@@ -181,22 +181,22 @@
         - Ajout de l'annulation de la création d'un compte à deux étapes pour éviter les boucles infinies.
         - Ajout de la validation des informations
         - Ajout de la demande de confirmation du paiement des frais d'adhésion.
-    
-    Modification d'un compte : 
+
+    Modification d'un compte :
         - Ajout de validation du numéro de membre ou professionnel.
         - Il est possible de changer un compte pour membre pour suspendu.
 
-    Supprimer un compte : 
+    Supprimer un compte :
         - Changer suspendre un compte pour supprimer un compte.
-        
-    Mise à jour d'un service : 
+
+    Mise à jour d'un service :
         -Le service est trouvé avec le numéro du professinnel plutôt qu'avec le code de service.
-      
-    Suppression d'un service : 
+
+    Suppression d'un service :
         -Le service est trouvé avec le numéro du professinnel plutôt qu'avec le code de service.
-    
+
     Ajouts des cas d'utilisation suivant : Procédure comptable, Génération de Rapport de synthèse et Mise à jour du statut des membres.
-    
+
     </pre>
 
     <pre style="font-family: 'Open Sans';">
@@ -230,7 +230,7 @@
     <pre style="font-family: 'Open Sans';">
     <span style="font-weight: bold;">7. Diagramme d'activité UML </span>
     Les modifications aux diagrammes d'activité sont pour la plupart pareils aux changement des descriptions des CU.
-    
+
     Les modifications du diagramme d'activité UML principal :
        - Ajout d'une option de menu "Valider numéro membre".
        - Ajout des nouveaux cas d'utilisation.
@@ -263,14 +263,14 @@
        - Ajout de noeud de décision pour finir l'activité si aucune séance est disponible dans la journée.
        - Ajout de noeud de décision pour pouvoir finir l'activité si le numéro de membre est invalide.
        - Ajout de noeud de décision pour pouvoir finir l'activité si le membre n'est pas inscrit à la séance.
-       
+
     Ajout des cas d'utilisation : Procédure comptable, Génération du rapport de synthèse et Mise à jour du statut des membres.
     </pre>
 
   <h2>Tâche 2 : Diagramme de classe UML </h2>
   <pre style="font-family: 'Open Sans';">
-  Nous avons choisi un architecture Modèle-vue-contrôleur pour le logiciel #GYM. On va implenenter donc les classes suivantes.
-      1. Interface Utilisateur : classe de la vue.
+  Nous avons choisi un architecture Modèle-vue-contrôleur pour le système #GYM. On va implenenter donc les classes suivantes.
+      1. GUI : classe de la vue.
       2. Contrôleur : classe du contrôleur qui gère les données du modèle et met à jour la vue lorsque une option du menu est choisie.
       3. Centre de données : classe du modèle qui permet de manipuler les structures des données.
       4. Client : classe abstraite du modèle qui représente les acteurs principaux.
@@ -280,7 +280,8 @@
       8. Seance : classe du modèle qui représente la séance du service.
       9. Inscription : classe du modèle qui représente l'insciption du membre à la séance.
       10. Confirmation Présence : classe du modèle qui représente la confirmation de de la présence à la séance par le membre.
-  Représentons si-dessous le diagramme de classe UML.
+
+  Représentons ci-dessous le diagramme de classe UML.
   </pre>
 
    <figure>
@@ -292,7 +293,7 @@
 
 
   <h2>Tâche 3 : Diagrammes de séquence UML </h2>
-    
+
     Pour les diagrammes de séquence, nous n'avons pas montrer tous les échanges entre l'acteur, l'interface utilisateur et le contrôleur.<br>
     Par exemple, chaque fois qu'une donnée est entrer par l'utilisateur, le controleur appel InterfaceUtilisateur.getTexteConsole(). <br>
     Ces appels de méthode sont redondants dans le diagramme de séquence et le rendaient plus chargé.
@@ -312,7 +313,7 @@
     </figcaption>
   </figure> <br>
 
-  
+
    <figure>
     <img src="images/diagramme_sequence_gestion_service.png" alt="Diagramme de séquence Gestion de service" style="width:65%">
     <figcaption>
@@ -334,7 +335,7 @@
       <i>Figure 3.4 - <a href="Conception\Diagramme_sequence_inscription_seance.vpp"> Diagramme de séquence pour l'inscription à une séance</a></i>
     </figcaption>
   </figure> <br>
-  
+
   <figure>
     <img src="images/diagramme_sequence_procedure_comptable.png" alt="Diagramme de séquence pour la Procédure comptable" style="width:65%">
     <figcaption>

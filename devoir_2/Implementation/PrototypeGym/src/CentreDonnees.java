@@ -123,14 +123,14 @@ public class CentreDonnees {
         }
     }
 
-    public void inscrireMembreASeance(String membreId, String seanceID, String commentaires) {
-        Seance seance = listeSeances.get(seanceID);
+    public void inscrireMembreASeance(String idMembre, String idSeance, String commentaires) {
+        Seance seance = listeSeances.get(idSeance);
         Service service = listeServices.get(seance.getCodeService());
         Inscription inscription = new Inscription(
                 LocalDateTime.now(),
                 seance.getDateTimeSeance().toLocalDate(),
                 service.getNumeroProfessionnel(),
-                membreId,
+                idMembre,
                 seance.getCodeService(),
                 commentaires);
         if (!listeInscriptions.containsKey(inscription.getHashInString())) {
@@ -138,15 +138,13 @@ public class CentreDonnees {
         }
     }
 
-    public boolean membreEstValide(String idMembre) {
-        return listeMembres.containsKey(idMembre);
-    }
+    public boolean estMembre(String idMembre) { return listeMembres.containsKey(idMembre); }
 
-    public boolean professionnelEstValide(String idProfessionnel) {
+    public boolean estProfessionnel(String idProfessionnel) {
         return listeProfessionnels.containsKey(idProfessionnel);
     }
 
-    public List<Service> getServices(String idProfessionnel) {
+    public List<Service> getListeServicesPro(String idProfessionnel) {
         return listeServices
                 .values()
                 .stream()
@@ -194,11 +192,11 @@ public class CentreDonnees {
         return LocalDateTime.now(zoneId) ;
     }
 
-    public Seance getSeance(String id) {
-        return listeSeances.get(id);
+    public Seance getSeance(String idSeance) {
+        return listeSeances.get(idSeance);
     }
 
-    public List<Membre> getListeMembre() {
+    public List<Membre> getListeMembres() {
         return listeMembres.values().stream().collect(Collectors.toList());
     }
 
@@ -210,27 +208,24 @@ public class CentreDonnees {
         return listeServices.values().stream().collect(Collectors.toList());
     }
 
-    public boolean membreExiste(String membreId) {
-        return listeMembres.containsKey(membreId);
-    }
 
-    public boolean inscriptionExiste(String membreId, String seanceId) {
+    public boolean inscriptionExiste(String idMembre, String idSeance) {
         List<Inscription> inscriptions = null;
-        if (listeServices.containsKey(getSeance(seanceId).getCodeService())) {
-            Service service = getService(getSeance(seanceId).getCodeService());
+        if (listeServices.containsKey(getSeance(idSeance).getCodeService())) {
+            Service service = getService(getSeance(idSeance).getCodeService());
              inscriptions = listeInscriptions
                     .values()
                     .stream()
-                    .filter(x -> x.getNumeroMembre().equals(membreId) && x.getCodeService().equals(service.getCode()))
+                    .filter(x -> x.getNumeroMembre().equals(idMembre) && x.getCodeService().equals(service.getCode()))
                     .collect(Collectors.toList());
         }
         return inscriptions != null && inscriptions.size() >= 1;
     }
 
-    public void confirmationPresence(String seanceId, String membreId, String commentaire) {
-        String codeService = listeSeances.get(seanceId).getCodeService();
+    public void confirmationPresence(String idSeance, String idMembre, String commentaires) {
+        String codeService = listeSeances.get(idSeance).getCodeService();
         String numeroProfessionnel = listeServices.get(codeService).getNumeroProfessionnel();
-        ConfirmationPresence cp = new ConfirmationPresence(now(), membreId, numeroProfessionnel, codeService, commentaire);
+        ConfirmationPresence cp = new ConfirmationPresence(now(), idMembre, numeroProfessionnel, codeService, commentaires);
         if (!listeConfirmationsPresence.containsKey(cp.getHashInString())) {
             listeConfirmationsPresence.put(cp.getHashInString(), cp);
         }

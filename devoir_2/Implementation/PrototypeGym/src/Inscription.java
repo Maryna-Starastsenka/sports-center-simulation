@@ -57,7 +57,7 @@ public class Inscription {
 				commentaires) % 10000); // 4 chiffres max
 	}
 
-	public String getHashInString() {
+	protected String getHashInString() {
 		return String.format("%04d", this.hashCode());
 	}
 }

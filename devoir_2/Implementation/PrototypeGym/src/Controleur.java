@@ -92,7 +92,7 @@ public class Controleur {
 				Gui.afficher("Veuillez entrer le numéro du membre :");
 				String membreId = Gui.getTexteConsole();
 
-				if (!centreDonnees.membreExiste(membreId)) {
+				if (!centreDonnees.estMembre(membreId)) {
 					Gui.afficher("Membre inconnu. Retour au menu principal.");
 					break;
 				} else if (!centreDonnees.getMembre(membreId).getMembreValide()) {
@@ -154,7 +154,7 @@ public class Controleur {
 				Gui.afficher("Veuillez entrer le numéro du membre :");
 				membreId = Gui.getTexteConsole();
 
-				if (!centreDonnees.membreExiste(membreId)) {
+				if (!centreDonnees.estMembre(membreId)) {
 					Gui.afficher("Membre inconnu.");
 					break;
 				} else if (!centreDonnees.inscriptionExiste(membreId, seanceId)) {
@@ -230,7 +230,7 @@ public class Controleur {
 
 	private void afficherTousLesMembres() {
 		Gui.afficher("Numéros des membres du centre de données (pour faciliter les tests) :");
-		var membres = centreDonnees.getListeMembre();
+		var membres = centreDonnees.getListeMembres();
 		for (Membre m : membres) {
 			Gui.afficher(m.getHashInString());
 		}
@@ -314,7 +314,7 @@ public class Controleur {
 				formulaireNouveauService(idProfessionnel);
 				break;
 			case "2":
-				List<Service> servicesDuProfessionnel = centreDonnees.getServices(idProfessionnel);
+				List<Service> servicesDuProfessionnel = centreDonnees.getListeServicesPro(idProfessionnel);
 				afficherServicesProfessionnel(servicesDuProfessionnel);
 				gererServiceExistant();
 
@@ -327,7 +327,7 @@ public class Controleur {
 	}
 
 	private void afficherServicesProfessionnel(List<Service> servicesDuProfessionnel) {
-		Gui.clearScreen();
+		Gui.effacerEcran();
 
 		Gui.afficher("------Services du professionnel------");
 		Gui.afficher("Liste des services disponibles pour ce professionnel :");
@@ -380,7 +380,7 @@ public class Controleur {
 	}
 
 	private void formulaireNouveauService(String idProfessionnel) {
-		Gui.clearScreen();
+		Gui.effacerEcran();
 
 		Gui.afficher("------Formulaire de nouveau service------");
 
@@ -636,7 +636,7 @@ public class Controleur {
 	}
 
 		private void formulaireNouveauCompte () {
-			Gui.clearScreen();
+			Gui.effacerEcran();
 			String entree2;
 
 			String typeClient;
@@ -721,11 +721,11 @@ public class Controleur {
 		}
 
 		private boolean validerMembre (String id){
-			return centreDonnees.membreEstValide(id);
+			return centreDonnees.estMembre(id);
 		}
 
 		private boolean validerProfessionnel (String id){
-			return centreDonnees.professionnelEstValide(id);
+			return centreDonnees.estProfessionnel(id);
 		}
 
 		private boolean nomValide (String entree){
@@ -768,7 +768,7 @@ public class Controleur {
 			switch (typeClient) {
 				case "1":
 					Membre membreValide = new Membre(nom, dateNaissance, adresse, numeroPhone, adresseCourriel, true);
-					if (!centreDonnees.membreEstValide(membreValide.getHashInString())) {
+					if (!centreDonnees.estMembre(membreValide.getHashInString())) {
 						centreDonnees.ajouterMembre(membreValide);
 					}
 					client = membreValide;
@@ -778,7 +778,7 @@ public class Controleur {
 					break;
 				case "3":
 					Professionnel professionnel = new Professionnel(nom, dateNaissance, adresse, numeroPhone, adresseCourriel);
-					if (!centreDonnees.professionnelEstValide(professionnel.getHashInString())) {
+					if (!centreDonnees.estProfessionnel(professionnel.getHashInString())) {
 						centreDonnees.ajouterProfessionnel(professionnel);
 					}
 					client = professionnel;
@@ -816,12 +816,4 @@ public class Controleur {
 		public boolean typeMembreValide (String entree){
 			return entree.equals("1") || entree.equals("2") || entree.equals("3");
 		}
-
-
-		// public void genererRapportAutomatique() { }
-
-		// public void creerRapportSynthese() { }
-
-		// public void creerTEF() { }
-
 }
