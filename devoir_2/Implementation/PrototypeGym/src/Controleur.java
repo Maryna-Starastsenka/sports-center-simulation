@@ -1,6 +1,9 @@
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.*;
 
 public class Controleur {
@@ -50,6 +53,7 @@ public class Controleur {
 
 				break;
 			case "3":
+				InterfaceUtilisateur.afficher("--------Gestion d'un service-------");
 				InterfaceUtilisateur.afficher("Veuillez entrer le numéro de professionnel");
 				String idProfessionnel;
 				do {
@@ -66,14 +70,25 @@ public class Controleur {
 				}
 				break;
 			case "4":
+				InterfaceUtilisateur.afficher("---Inscription à une séance---");
 				InterfaceUtilisateur.afficher("Séances disponibles ajourd'hui");
+
+				LocalDate today = LocalDate.now(CentreDonnees.zoneId) ;
+
+				centreDonnees.getListeSeances(today);
 
 				break;
 			case "5":
+				InterfaceUtilisateur.afficher("---Confirmation de la présence---");
+
 				break;
 			case "6":
+				InterfaceUtilisateur.afficher("---Consultation d'une séance---");
+
 				break;
 			case "7":
+				InterfaceUtilisateur.afficher("---Procédure comptable---");
+
 				break;
 			default:
 				break;
@@ -82,17 +97,15 @@ public class Controleur {
 
 	private boolean gererMenuAccesGym(String entree) {
 		switch (entree) {
-			case "1":
+			case "1": // Membre
 				afficherAutorisationMembre();
 				resetEnFinDeTransaction();
 				break;
-			case "2":
+			case "2": // Professionnel
 				afficherAutorisationProfessionnel();
 				resetEnFinDeTransaction();
 				break;
-			case "3":
-//				InterfaceUtilisateur.menuCourant = NomsMenus.PRINCIPAL;
-				InterfaceUtilisateur.afficherMenuPrincipal();
+			case "3": // Retour au menu principal par défaut
 				break;
 			default:
 				return false;
@@ -152,8 +165,7 @@ public class Controleur {
 				gererServiceExistant();
 
 				break;
-			case "3":
-				InterfaceUtilisateur.afficherMenuPrincipal();
+			case "3": // Retour au menu principal par défaut
 				break;
 			default:
 				break;
@@ -164,8 +176,9 @@ public class Controleur {
 		InterfaceUtilisateur.clearScreen();
 
 		InterfaceUtilisateur.afficher("------Services du professionnel------");
+		InterfaceUtilisateur.afficher("Liste des services disponibles :");
 		for (Service s : servicesDuProfessionnel) {
-			InterfaceUtilisateur.afficher("Service : " + s.getCode());
+			InterfaceUtilisateur.afficher(s.getCode());
 		}
 	}
 
@@ -194,7 +207,8 @@ public class Controleur {
 
 					case "2":
 						InterfaceUtilisateur.afficher("Entrez la nouvelle valeur :");
-						String nouvelleHeure = InterfaceUtilisateur.getTexteConsole();
+						String entree = InterfaceUtilisateur.getTexteConsole();
+						LocalTime nouvelleHeure = getHoraire(entree);
 						serviceAModifier.setHeureService(nouvelleHeure);
 						InterfaceUtilisateur.afficher("Service modifié.");
 						resetEnFinDeTransaction();
@@ -221,10 +235,10 @@ public class Controleur {
 
 		String entree;
 
-		Date dateEtHeureActuelles = null;
-		Date dateDebutService = null;
-		Date dateFinService = null;
-		String heureService;
+		LocalDateTime dateEtHeureActuelles = null;
+		LocalDate dateDebutService = null;
+		LocalDate dateFinService = null;
+		LocalTime heureService;
 		int recurrenceHebdo;
 		int capaciteMaximale;
 		String numeroProfessionnel = idProfessionnel;
@@ -322,8 +336,7 @@ public class Controleur {
 			case "2":
 				gererCompreExistant();
 				break;
-			case "3":
-				InterfaceUtilisateur.afficherMenuPrincipal();
+			case "3": // Retour au menu principal par défaut
 				break;
 			default:
 				break;
@@ -487,7 +500,7 @@ public class Controleur {
 
 			String typeClient;
 			String nom;
-			Date dateNaissance = null;
+			LocalDate dateNaissance = null;
 			String adresseCourriel = null;
 			String numeroTelephone = null;
 			String adresse = null;
@@ -587,21 +600,16 @@ public class Controleur {
 			}
 		}
 
-		public static Date getDateFromString (String stringDate) throws ParseException {
-			DateFormat format = new SimpleDateFormat("dd-MM-yyyy", Locale.FRENCH);
-			return format.parse(stringDate);
+		public static LocalDate getDateFromString (String stringDate) throws ParseException {
+			return LocalDate.parse(stringDate, CentreDonnees.localDateFormatter);
 		}
 
-		public static Date getDateEtHeureFromString (String stringDate) throws ParseException {
-			DateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.FRENCH);
-			return format.parse(stringDate);
+		public static LocalDateTime getDateEtHeureFromString (String stringDate) throws ParseException {
+			return LocalDateTime.parse(stringDate, CentreDonnees.localDateTimeFormatter);
 		}
 
-		public static String getHoraire (String stringHoraire){
-			// TODO utiliser un vrai type de temps
-//		DateFormat format = new SimpleDateFormat("mm:ss", Locale.FRENCH);
-//		return format.parse(stringDate);
-			return stringHoraire;
+		public static LocalTime getHoraire (String stringHoraire){
+			return LocalTime.parse(stringHoraire, CentreDonnees.localTimeFormatter);
 		}
 
 		public int getInt (String stringInt){
@@ -612,7 +620,7 @@ public class Controleur {
 			return Double.parseDouble(stringDouble);
 		}
 
-		private void inscrireClient (String typeClient, String nom, Date dateNaissance, String adresseCourriel, String
+		private void inscrireClient (String typeClient, String nom, LocalDate dateNaissance, String adresseCourriel, String
 		numeroPhone, String adresse){
 			Client client = null;
 			switch (typeClient) {

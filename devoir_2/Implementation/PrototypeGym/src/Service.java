@@ -1,11 +1,14 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 
 
 public class Service {
-	private Date dateEtHeureActuelles;
-	private Date dateDebutService;
-	private Date dateFinService;
-	private String heureService;
+	private LocalDateTime dateEtHeureActuelles;
+	private LocalDate dateDebutService;
+	private LocalDate dateFinService;
+	private LocalTime heureService;
 	private int recurrenceHebdo;
 	private int capaciteMaximale;
 	private String numeroProfessionnel;
@@ -13,10 +16,10 @@ public class Service {
 	private double fraisService;
 	private String commentaires;
 
-	public Service(Date dateEtHeureActuelles,
-				  Date dateDebutService,
-				  Date dateFinService,
-				  String heureService,
+	public Service(LocalDateTime dateEtHeureActuelles,
+				  LocalDate dateDebutService,
+				  LocalDate dateFinService,
+				  LocalTime heureService,
 				  int recurrenceHebdo,
 				  int capaciteMaximale,
 				  String numeroProfessionnel,
@@ -40,7 +43,7 @@ public class Service {
 		this.recurrenceHebdo = Integer.parseInt(valeur);
 	}
 
-	public void setHeureService(String valeur){
+	public void setHeureService(LocalTime valeur){
 		this.heureService = valeur;
 	}
 
@@ -56,7 +59,7 @@ public class Service {
 		return "" + recurrenceHebdo;
 	}
 
-	public String getHeureService() {
+	public LocalTime getHeureService() {
 		return heureService;
 	}
 

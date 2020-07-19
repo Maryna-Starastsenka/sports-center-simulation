@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -5,7 +6,7 @@ public class Professionnel extends Client {
 	//private String fichier;
 	//private Service[] services;
 
-	public Professionnel (String nom, Date dateNaissance, String adresse, String numeroPhone, String adresseCourriel) {
+	public Professionnel (String nom, LocalDate dateNaissance, String adresse, String numeroPhone, String adresseCourriel) {
 		this.nom = nom;
 		this.dateNaissance = dateNaissance;
 		this.adresse = adresse;

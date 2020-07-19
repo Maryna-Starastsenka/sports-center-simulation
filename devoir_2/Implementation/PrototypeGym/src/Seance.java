@@ -9,4 +9,12 @@ public class Seance {
 		this.dateSeance = dateSeance;
 		this.codeService = codeService;
 	}
+
+	public Date getDateSeance() {
+		return dateSeance;
+	}
+
+	public String getCodeService() {
+		return codeService;
+	}
 }
