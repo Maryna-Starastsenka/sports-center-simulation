@@ -167,7 +167,7 @@
       <span style="font-weight: bold;">- Répertoire des Services :</span> Base de données de tous les services offerts et leur séances.
       <span style="font-weight: bold;">- Requête :</span> Demande effectuée au système afin d'obtenir certaines informations.
       <span style="font-weight: bold;">- RnB :</span> Compagnie responsable des procédures financières en lien avec les membres.
-      <span style="font-weight: bold;">- Service :</span> Domaine d'expertise qu'un expert peut offrir à un client pendant des séances.
+      <span style="font-weight: bold;">- Service :</span> Domaine d'expertise qu'un expert peut offrir à un membre pendant des séances.
       <span style="font-weight: bold;">- Procédure comptable :</span> Génération automatique du rapport de synthèse et du TEF et envoie du rapport de synthèse au gérant  le vendredi à minuit.
       Comporte les entrainements et consultations des professionnels.
     </pre>
@@ -203,6 +203,8 @@
         - Ajout de la possibilité d'entrer des informations invalides.
         - Ajout de l'nnulation de la création d'un compte à deux étapes pour éviter les boucles infinies.
         - Ajout de la demande de confirmation du paiement des frais d'adhésion.
+        - Suspention du compte d'un membre est repmlacée par la suppression.
+        C'est possible de rendre le compte de membre suspendu en choisissant "Modifier".
     </pre>
 
     <pre style="font-family: 'Open Sans';">
@@ -246,6 +248,7 @@
        - Ajout de noeuds de décision pour valider les informations sur le membre.
        - Ajout de noeuds de décision pour pouvoir annuler l'activité si les informations sont invalides.
        - Ajout de paiement de frais d'adhésion pour assigner le numéro unique au niuveau membre.
+       - Remplacement de l'action "Suspendre" par "Supprimer".
 
     Les modification du diagramme d'activité UML Gestion d'un service :
        - Ajout la validation de numéro de professionel pour vérifier que le service à modifier/supprimer lui appartient.
@@ -266,12 +269,66 @@
     </pre>
 
   <h2>Tâche 2 : Diagramme de classe UML </h2>
+  <pre style="font-family: 'Open Sans';">
+  Nous avons choisi un architecture Modèle-vue-contrôleur pour le logiciel #GYM. On va implenenter donc les classes suivantes.
+      1. Interface Utilisateur : classe de la vue.
+      2. Contrôleur : classe du contrôleur qui gère les données du modèle et met à jour la vue lorsque une option du menu est choisie.
+      3. Centre de données : classe du modèle qui permet de manipuler les structures des données.
+      4. Client : classe abstraite du modèle qui représente les acteurs principaux.
+      5. Membre hérite Client : classe du modèle qui représente le membre avec accès illimité aux salles de sports et aux services d'un professionnel.
+      6. Professionnel hérite Client : classe du modèle qui représente le professionnel (l'expert en exercice physique ou en santé) qui offre un service aux membres.
+      7. Service : classe du modèle qui représente le service offert aux membres par des professionnels.
+      8. Seance : classe du modèle qui représente la séance du service.
+      9. Inscription : classe du modèle qui représente l'insciption du membre à la séance.
+      10. Confirmation Présence : classe du modèle qui représente la confirmation de de la présence à la séance par le membre.
+  Représentons si-dessous le diagramme de classe UML.
+  </pre>
 
-
+  <figure>
+    <img src="images/diagrammeClasse.png" alt="Diagramme de classe UML" style="width:30%">
+    <figcaption>
+      <i>Figure 2.1 - <a href="Conception\diagrammeClasse.vpp"> Diagramme de classe UML</a> </i>
+    </figcaption>
+  </figure> <br>
 
   <h2>Tâche 3 : Diagrammes de séquence UML </h2>
 
+  Représentons si-dessous les diagrammes de séquence UML.
 
+  <figure>
+    <img src="images/Diagramme_sequence_gestion_membre.png" alt="Diagramme de séquence gestion d'un membre" style="width:30%">
+    <figcaption>
+      <i>Figure 3.1 - <a href="Conception\Diagramme_sequence_gestion_membre.vpp"> Diagramme de séquence UML</a> pour le CU gestion d'un membre </i>
+    </figcaption>
+  </figure> <br>
+
+  <figure>
+    <img src="images/Diagramme_sequence_gestion_service.png" alt="Diagramme de séquence gestion d'un service" style="width:30%">
+    <figcaption>
+      <i>Figure 3.2 - <a href="Conception/Diagramme_sequence_gestion_service.vpp"> Diagramme de séquence UML</a> pour le CU gestion d'un service </i>
+    </figcaption>
+  </figure> <br>
+
+  <figure>
+    <img src="images/Diagramme_sequence_inscription_seance.png" alt="Diagramme de séquence inscription à une seance" style="width:30%">
+    <figcaption>
+      <i>Figure 3.3 - <a href="Conception/Diagramme_sequence_inscription_seance.vpp"> Diagramme de séquence UML</a> pour le CU inscription à une seance </i>
+    </figcaption>
+  </figure> <br>
+
+  <figure>
+    <img src="images/diagramme_sequence_confirmer_presence.png" alt="Diagramme de séquence confirmation de présence" style="width:30%">
+    <figcaption>
+      <i>Figure 3.4 - <a href="Conception/diagramme_sequence_confirmer_presence.vpp"> Diagramme de séquence UML</a> pour le CU confirmation de présence </i>
+    </figcaption>
+  </figure> <br>
+
+  <figure>
+    <img src="images/" alt="Diagramme de séquence procedure comptable" style="width:30%">
+    <figcaption>
+      <i>Figure 3.5 - <a href="Conception/"> Diagramme de séquence UML</a> pour le CU procedure comptable </i>
+    </figcaption>
+  </figure> <br>
 
   <h2>Tâche 4 : Production du prototype </h2>
 

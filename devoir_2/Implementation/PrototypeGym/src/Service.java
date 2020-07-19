@@ -39,28 +39,32 @@ public class Service {
 		this.commentaires = commentaires;
 	}
 
+	public LocalDate getDateDebutService() { return dateDebutService; }
+
+	public LocalDate getDateFinService() { return dateFinService; }
+
+	public LocalTime getHeureService() {
+		return heureService;
+	}
+
+	public String getNumeroProfessionnel() { return numeroProfessionnel; }
+
+	public String getRecurrenceHebdo() { return "" + recurrenceHebdo; }
+
+	public int getCapaciteMaximale() {return capaciteMaximale; }
+
+	public String getCode() { return codeService; }
+
+	public double getFraisService() {return fraisService; }
+
+	public String getCommentaires() { return getCommentaires(); }
+
 	public void setRecurrenceHebdo(String valeur) {
 		this.recurrenceHebdo = Integer.parseInt(valeur);
 	}
 
 	public void setHeureService(LocalTime valeur){
 		this.heureService = valeur;
-	}
-
-	public String getCode() {
-		return codeService;
-	}
-
-	public String getNumeroProfessionnel() {
-		return numeroProfessionnel;
-	}
-
-	public String getRecurrenceHebdo() {
-		return "" + recurrenceHebdo;
-	}
-
-	public LocalTime getHeureService() {
-		return heureService;
 	}
 
 }
