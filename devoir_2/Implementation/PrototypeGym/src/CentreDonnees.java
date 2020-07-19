@@ -10,7 +10,7 @@ public class CentreDonnees {
     private HashMap<String, Service> listeServices = new HashMap<>();
     private HashMap<String, Seance> listeSeances = new HashMap<>();
     private HashMap<String, Inscription> listeInscriptions = new HashMap<>();
-    private HashMap<String, Inscription> listeConfirmPresence = new HashMap<>();
+    private HashMap<String, ConfirmationPresence> listeConfirmationsPresence = new HashMap<>();
 
     public CentreDonnees() {
         // todo retirer valeurs par défaut
@@ -40,12 +40,12 @@ public class CentreDonnees {
         listeServices.put(service.getCode(), service);
     }
 
-    public boolean membreEstValide(String id) {
-        return listeMembres.containsKey(id);
+    public boolean membreEstValide(String idMembre) {
+        return listeMembres.containsKey(idMembre);
     }
 
-    public boolean professionnelEstValide(String id) {
-        return listeProfessionnels.containsKey(id);
+    public boolean professionnelEstValide(String idProfessionnel) {
+        return listeProfessionnels.containsKey(idProfessionnel);
     }
 
     public List<Service> getServices(String idProfessionnel) {
@@ -59,7 +59,23 @@ public class CentreDonnees {
         return listeServices.get(idService);
     }
 
+    public Membre getMembre(String idMembre) {
+        return listeMembres.get(idMembre);
+    }
+
+    public Professionnel getProfessionnel(String idProfessionnel) {
+        return listeProfessionnels.get(idProfessionnel);
+    }
+
     public void supprimerService(String serviceEntre) {
         listeServices.remove(serviceEntre);
+    }
+
+    public void supprimerMembre(String idMembre) {
+        listeMembres.remove(idMembre);
+    }
+
+    public void supprimerProfessionnel(String idProfessionnel) {
+        listeMembres.remove(idProfessionnel);
     }
 }

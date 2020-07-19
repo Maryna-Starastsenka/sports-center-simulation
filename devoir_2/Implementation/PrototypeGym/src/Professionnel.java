@@ -13,7 +13,6 @@ public class Professionnel extends Client {
 		this.adresseCourriel = adresseCourriel;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Professionnel numéro : " + getNumero() + ".";

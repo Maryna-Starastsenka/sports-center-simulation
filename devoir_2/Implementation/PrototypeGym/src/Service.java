@@ -60,7 +60,4 @@ public class Service {
 		return heureService;
 	}
 
-	// public void modifierService() { } On fait la modification ici ou dans CentreDeDonnees?
-
-	// public void addSeance() { }
 }

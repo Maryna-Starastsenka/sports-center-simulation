@@ -1,3 +1,4 @@
+import javax.swing.plaf.PanelUI;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -18,6 +19,10 @@ public class Membre extends Client {
 		this.adresseCourriel = adresseCourriel;
 		this.membreValide = membreValide;
 	}
+
+	public boolean getMembreValide() {return membreValide; }
+
+	public void setMembreValide(boolean membreValide) { this.membreValide = membreValide; }
 
 	@Override
 	public String toString() {
