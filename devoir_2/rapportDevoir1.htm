@@ -251,9 +251,9 @@
 
   <h2>Tâche 3 : Cas d'utilisation</h2>
 
-  <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Demande d'accès au gym pour un membre
+  <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Demande d'accès au gym pour un membre 
     <span style="font-weight: bold;">But :</span> Le client se présente à la réception et demande l'accès au gym.
-    <span style="font-weight: bold;">Préconditions :</span> Le client doit être membre. L'abonnement doit être valide.
+    <span style="font-weight: bold;">Préconditions :</span> Le client doit être membre et avoir un compte valide.
     <span style="font-weight: bold;">Acteurs :</span> Membre (principal), Agent à la réception (secondaire)
     <span style="font-weight: bold;">Scénario principal :</span>
     1. Le logiciel affiche le menu
@@ -273,7 +273,7 @@
 
     <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Demande d'accès au gym pour un professionnel
       <span style="font-weight: bold;">But :</span> Le client se présente à la réception et demande l'accès au gym.
-      <span style="font-weight: bold;">Préconditions :</span> Le client doit être membre. L'abonnement doit être valide.
+      <span style="font-weight: bold;">Préconditions :</span> Le client doit être un professionnel au #GYM. L'abonnement doit être valide.
       <span style="font-weight: bold;">Acteurs :</span> Professionnel (principal), Agent à la réception (secondaire)
       <span style="font-weight: bold;">Scénario principal :</span>
       1. Le logiciel affiche le menu
@@ -281,7 +281,7 @@
       3. L'agent entre le numéro unique du professionnel dans le logiciel.
         3.1. Le logiciel vérifie le numéro dans la liste des professionnels.
         3.2. Le logiciel affiche « Numéro valide ».
-      4. L'agent confirme et permet l'accès au membre.
+      4. L'agent confirme et permet l'accès au professionnel.
       <span style="font-weight: bold;">Scénarios alternatifs :</span>
         3.1a. Le logiciel ne trouve pas le numéro et renvoie « Numéro invalide ».
         3.2a. Le cas d'utilisation retourne à l'étape 3.
@@ -395,19 +395,19 @@
       3.1.b.2 Annuler la modification.
     <span style="font-weight: bold;">Postconditions :</span> Les modifications sont apportées dans le Centre de données. </pre>
 
-  <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Suspendre un compte
-    <span style="font-weight: bold;">But :</span> Suspendre l'accès d'un membre au gym ou les services d'un professionnel.
+  <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Supprimer un compte
+    <span style="font-weight: bold;">But :</span> Supprimer le compte du professionnel ou du membre du Centre de données.
     <span style="font-weight: bold;">Préconditions :</span> Le professionnel ou le membre doit être enregistré dans le logiciel.
     <span style="font-weight: bold;">Acteurs :</span> Professionnel (principal), Membre (principal), Agent à la réception (secondaire).
     <span style="font-weight: bold;">Scénario principal :</span>
     1. Le logiciel affiche le menu.
     2. L'agent choisit Gestion d'un compte.
     3. L'agent entre le Numéro du membre ou professionnel.
-      3.1 Le logiciel valide le numéro de membre
+      3.1 Le logiciel valide le numéro du client
     4. Le Centre de Données affiche les données du membre ou du professionnel.
-    5. L'agent choisit "Suspendre le compte".
+    5. L'agent choisit "Supprimer le compte".
       5.1. L'agent appuie sur "Confirmer"
-      5.2. Le logiciel modifie la condition du membre ou du professionnel à "Suspendu" dans le Centre de données.
+      5.2. Le logiciel supprimer le compte du client dans le logiciel.
     6. Le logiciel affiche "Validé".
     <span style="font-weight: bold;">Scénarios alternatifs :</span>
       3.1a.1 Le logiciel ne trouve pas le Numéro et renvoie "Numéro incorrect".
@@ -554,7 +554,6 @@
           - Pas de possibilité d'annuler une séance ou de rembourser les clients si le professionnel ne peut donner une séance.
     <span style="font-weight: bold;">3. Risque éloigné :</span>
           - Un professionnel donne un service pour lequel il n'a pas les compétences.
-          - Manque d'électricité au moment où le système doit faire les rapports le vendredi à minuit.
     <span style="font-weight: bold;">4. Obstacle mineur :</span>
  </pre>
 
