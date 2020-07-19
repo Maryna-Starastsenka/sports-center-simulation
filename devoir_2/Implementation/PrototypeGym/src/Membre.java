@@ -1,4 +1,5 @@
 import javax.swing.plaf.PanelUI;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -11,7 +12,7 @@ public class Membre extends Client {
 	//private Inscription[] listeInscriptions;
 	//private ConfirmationPresence[] listeConfirmations;
 	
-	public Membre(String nom, Date dateNaissance, String adresse, String numeroPhone, String adresseCourriel, boolean membreValide) {
+	public Membre(String nom, LocalDate dateNaissance, String adresse, String numeroPhone, String adresseCourriel, boolean membreValide) {
 		this.nom = nom;
 		this.dateNaissance = dateNaissance;
 		this.adresse = adresse;

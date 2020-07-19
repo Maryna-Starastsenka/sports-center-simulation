@@ -1,16 +1,17 @@
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
 public abstract class Client {
 	protected String nom;
-	protected Date dateNaissance;
+	protected LocalDate dateNaissance;
 	protected String adresseCourriel;
 	protected String numeroPhone;
 	protected String adresse;
 
 	public String getNom () { return nom; }
 
-	public Date getDateNaissance() { return dateNaissance; }
+	public LocalDate getDateNaissance() { return dateNaissance; }
 
 	public String getAdresseCourriel() { return adresseCourriel; }
 
@@ -20,7 +21,7 @@ public abstract class Client {
 
 	public void setNom(String nom) { this.nom = nom; }
 
-	public void setDateNaissance(Date dateNaissance) { this.dateNaissance = dateNaissance; }
+	public void setDateNaissance(LocalDate dateNaissance) { this.dateNaissance = dateNaissance; }
 
 	public void setAdresseCourriel(String adresseCourriel) { this.adresseCourriel = adresseCourriel; }
 

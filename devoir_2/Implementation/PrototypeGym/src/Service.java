@@ -1,11 +1,14 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 
 
 public class Service {
-	private Date dateEtHeureActuelles;
-	private Date dateDebutService;
-	private Date dateFinService;
-	private String heureService;
+	private LocalDateTime dateEtHeureActuelles;
+	private LocalDate dateDebutService;
+	private LocalDate dateFinService;
+	private LocalTime heureService;
 	private int recurrenceHebdo;
 	private int capaciteMaximale;
 	private String numeroProfessionnel;
@@ -13,10 +16,10 @@ public class Service {
 	private double fraisService;
 	private String commentaires;
 
-	public Service(Date dateEtHeureActuelles,
-				  Date dateDebutService,
-				  Date dateFinService,
-				  String heureService,
+	public Service(LocalDateTime dateEtHeureActuelles,
+				  LocalDate dateDebutService,
+				  LocalDate dateFinService,
+				  LocalTime heureService,
 				  int recurrenceHebdo,
 				  int capaciteMaximale,
 				  String numeroProfessionnel,
@@ -36,28 +39,32 @@ public class Service {
 		this.commentaires = commentaires;
 	}
 
+	public LocalDate getDateDebutService() { return dateDebutService; }
+
+	public LocalDate getDateFinService() { return dateFinService; }
+
+	public LocalTime getHeureService() {
+		return heureService;
+	}
+
+	public String getNumeroProfessionnel() { return numeroProfessionnel; }
+
+	public String getRecurrenceHebdo() { return "" + recurrenceHebdo; }
+
+	public int getCapaciteMaximale() {return capaciteMaximale; }
+
+	public String getCode() { return codeService; }
+
+	public double getFraisService() {return fraisService; }
+
+	public String getCommentaires() { return getCommentaires(); }
+
 	public void setRecurrenceHebdo(String valeur) {
 		this.recurrenceHebdo = Integer.parseInt(valeur);
 	}
 
-	public void setHeureService(String valeur){
+	public void setHeureService(LocalTime valeur){
 		this.heureService = valeur;
-	}
-
-	public String getCode() {
-		return codeService;
-	}
-
-	public String getNumeroProfessionnel() {
-		return numeroProfessionnel;
-	}
-
-	public String getRecurrenceHebdo() {
-		return "" + recurrenceHebdo;
-	}
-
-	public String getHeureService() {
-		return heureService;
 	}
 
 }
