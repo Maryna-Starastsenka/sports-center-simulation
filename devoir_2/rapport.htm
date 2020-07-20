@@ -43,7 +43,7 @@
     <br />
     <span style="font-weight: bold;">Courriel : </span>maryna.starastsenka@umontreal.ca
     <br />
-    <span style="font-weight: bold;">Temps mis : </span>-- heures
+    <span style="font-weight: bold;">Temps mis : </span>45 heures
   </p>
   <h2>
     Distribution des tâches</h2>
@@ -70,10 +70,10 @@
           Mise à jour des artéfacts
         </td>
         <td>
-          Correction de la majorité du rapport.(70%)
+          Correction de la majorité du rapport. (70%)
         </td>
         <td>
-          Peaufinement et ajouts.(30%)
+          Peaufinement et ajouts. (30%)
         </td>
       </tr>
       <tr>
@@ -81,10 +81,10 @@
           Diagramme de classe UML
         </td>
         <td>
-          Débuté le diagramme de classe avec l'idée générale.(25%)
+          Débuté le diagramme de classe avec l'idée générale. (25%)
         </td>
         <td>
-          Mis à jour constante du diagramme et ajout des attributs et méthodes.(75%)
+          Mis à jour constante du diagramme et ajout des attributs et méthodes. (75%)
         </td>
       </tr>
       <tr>
@@ -92,10 +92,10 @@
           Diagrammes de séquence UML
         </td>
         <td>
-          Principalement la gestion de services, Confirmer présence et Isncription séance(60%)
+          Principalement Gestion de services, Confirmer présence et Inscription séance. (60%)
         </td>
         <td>
-          Principalement Gestion de membre et Procédure comptable.(40%)
+          Principalement Gestion de membre et Procédure comptable. (40%)
         </td>
       </tr>
       <tr>
@@ -103,10 +103,10 @@
           Production du prototype
         </td>
         <td>
-          Structure générale (frame) (40%)
+          Structure générale (frame). (40%)
         </td>
         <td>
-          Codage des fonctions et interactions.(60%)
+          Codage des fonctions et interactions. (60%)
         </td>
       </tr>
     </tbody>
@@ -116,12 +116,6 @@
 
 
 </pre>
-
-  <h2>
-    Hypothèses</h2>
-  <p>
-    ****Si jamais on doit faire l'hypothèse sur les choses pertinentes.****
-  </p>
 
   <h2>
     Tâche 1 : Mise à jour des artéfacts</h2>
@@ -143,17 +137,16 @@
       <span style="font-weight: bold;">- Frais d'adhésion :</span> Montant mensuel à payer pour qu'un membre est accès au #GYM.
       <span style="font-weight: bold;">- Informations personnelles :</span> Informations fournies par les clients lors de l’adhésion au #GYM.
       <span style="font-weight: bold;">- Inscription :</span> Ajout d'un client dans le Centre de données ou d'un membre à une séance.
+      <span style="font-weight: bold;">- Procédure comptable :</span> Génération automatique du rapport de synthèse et du TEF et envoie du rapport de synthèse au gérant  le vendredi à minuit.
+                                                Comporte les entrainements et consultations des professionnels.
       <span style="font-weight: bold;">- Rapport de synthèse:</span>Rapport qui résume les comptes payables avec la liste des professionnels qui ont fourni des services pour une semaine.
       <span style="font-weight: bold;">- Répertoire des Services :</span> Base de données de tous les services offerts et leur séances.
       <span style="font-weight: bold;">- Requête :</span> Demande effectuée au système afin d'obtenir certaines informations.
       <span style="font-weight: bold;">- RnB :</span> Compagnie responsable des procédures financières en lien avec les membres.
       <span style="font-weight: bold;">- Service :</span> Domaine d'expertise qu'un expert peut offrir à un membre pendant des séances.
-      <span style="font-weight: bold;">- Procédure comptable :</span> Génération automatique du rapport de synthèse et du TEF et envoie du rapport de synthèse au gérant  le vendredi à minuit.
-                                                Comporte les entrainements et consultations des professionnels.
-      <span style="font-weight: bold;">Transfert électronique de fonds (TEF) :</span> Fichier créé hebdomadairement qui contient le nom et le numéro d'un professionnel ainsi que le montant à lui payer pour une semaine.  <br>
+      <span style="font-weight: bold;">- Transfert électronique de fonds (TEF) :</span> Fichier créé hebdomadairement qui contient le nom et le numéro d'un professionnel ainsi que le montant à lui payer pour une semaine.
 
     </pre>
-
     <pre style="font-family: 'Open Sans';">
     <span style="font-weight: bold;">2. Diagramme de cas d'utilisation UML </span>
     Les modifications effectuées :
@@ -178,7 +171,6 @@
         - Afficher les séances du jour et choisir la séance concernée plutôt que
           de la rechercher par son code.
 
-
     Création d'un compte :
         - Ajout de l'annulation de la création d'un compte à deux étapes pour éviter les boucles infinies.
         - Ajout de la validation des informations
@@ -192,25 +184,22 @@
         - Changer suspendre un compte pour supprimer un compte.
 
     Mise à jour d'un service :
-        -Le service est trouvé avec le numéro du professinnel plutôt qu'avec le code de service.
+        - Le service est trouvé avec le numéro du professinnel plutôt qu'avec le code de service.
 
     Suppression d'un service :
-        -Le service est trouvé avec le numéro du professinnel plutôt qu'avec le code de service.
+        - Le service est trouvé avec le numéro du professinnel plutôt qu'avec le code de service.
 
     Ajouts des cas d'utilisation suivant : Procédure comptable, Génération de Rapport de synthèse et Mise à jour du statut des membres.
-
     </pre>
 
     <pre style="font-family: 'Open Sans';">
     <span style="font-weight: bold;">4. Risques </span>
-
     Voici les risques ajoutés ajoutés à la version précédente.
     <span style="font-weight: bold;">Risque important :</span>
         - Pas de techniques pour retrouver le numéro d'un client si on le perd.
         - Pas de possibilité d'annuler une séance ou de rembourser les clients si le professionnel ne peut donner une séance.
     <span style="font-weight: bold;">Risque éloigné :</span>
         - Un professionnel donne un service pour lequel il n'a pas les compétences.
-
     </pre>
 
     <pre style="font-family: 'Open Sans';">
@@ -283,7 +272,8 @@
       8. Seance : classe du modèle qui représente la séance du service.
       9. Inscription : classe du modèle qui représente l'insciption du membre à la séance.
       10. Confirmation Présence : classe du modèle qui représente la confirmation de de la présence à la séance par le membre.
-
+      11. Professionnel TEF : classe du modèle qui représente le fichier TEF pour la procédure comptable.
+      12. Rapport de Synthèse : classe du modèle qui représente le rapport de synthèse pour la procédure comptable.
   Représentons ci-dessous le diagramme de classe UML.
   </pre>
 

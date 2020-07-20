@@ -1,5 +1,3 @@
-import java.time.LocalDate;
-
 public class ProfessionnelTef {
     private String nom;
     private String numero;
