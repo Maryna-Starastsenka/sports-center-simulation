@@ -225,11 +225,11 @@
 
     <span style="font-weight: bold;">Séance :</span> Période durant laquelle un professionnel offre un service pour les membres de #GYM. <br>
 
+    <span style="font-weight: bold;">Procédure comptable :</span> Génération automatique du rapport de synthèse et du TEF et envoie du rapport de synthèse au gérant  le vendredi à minuit. <br>
+
     <span style="font-weight: bold;">Service :</span> Domaine d'expertise qu'un expert peut offrir à un membre pendant des séances. Comporte les entrainements et consultations des professionnels. <br>
 
     <span style="font-weight: bold;">Transfert électronique de fonds (TEF) :</span> Fichier créé hebdomadairement qui contient le nom et le numéro d'un professionnel ainsi que le montant à lui payer pour une semaine.  <br>
-
-    <span style="font-weight: bold;">Procédure comptable :</span> Génération automatique du rapport de synthèse et du TEF et envoie du rapport de synthèse au gérant  le vendredi à minuit. <br>
     <br>
 
 
@@ -243,7 +243,7 @@
   </p>
 
   <figure>
-    <img src="images/Diagramme_de_cas_utilisation_UML.png" alt="Diagramme de cas d'utilisation UML" style="width:85%">
+    <img src="images/Diagramme_de_cas_utilisation_UML.png" alt="Diagramme de cas d'utilisation UML" style="width:65%">
     <figcaption>
       <i>Figure 2.1 - Diagramme de cas d'utilisation UML</i>
     </figcaption>
@@ -251,7 +251,7 @@
 
   <h2>Tâche 3 : Cas d'utilisation</h2>
 
-  <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Demande d'accès au gym pour un membre 
+  <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Demande d'accès au gym pour un membre
     <span style="font-weight: bold;">But :</span> Le client se présente à la réception et demande l'accès au gym.
     <span style="font-weight: bold;">Préconditions :</span> Le client doit être membre et avoir un compte valide.
     <span style="font-weight: bold;">Acteurs :</span> Membre (principal), Agent à la réception (secondaire)
@@ -527,7 +527,7 @@
     <span style="font-weight: bold;">Scénarios alternatifs :</span>
     6.a.1. Le gérant choisit de produire un autre rapport.
     6.a.2. Retour à l'étape 3.
-    <span style="font-weight: bold;">Postconditions : Rapport envoyé au gérant.</span> </pre>
+    <span style="font-weight: bold;">Postconditions : </span>Rapport envoyé au gérant. </pre>
 
     <pre style="font-family: 'Open Sans';">    <span style="font-weight: bold;">Cas d'utilisation :</span> Mise à jour du statut des membres
     <span style="font-weight: bold;">But :</span> Mettre à jour des informations sur le paiement des frais d'adhésion afin de mettre à jour du statut des membre.
@@ -543,12 +543,12 @@
     <span style="font-weight: bold;">Scénarios alternatifs </span>
     6.a.1 Il y a d'autres membres à traiter dans la liste.
     6.a.2 Retourner à l'étape 3.
-    <span style="font-weight: bold;">Postconditions : Mise à jour de statut des membres (suspendu ou rétabli).</span> </pre>
+    <span style="font-weight: bold;">Postconditions :</span> Mise à jour de statut des membres (suspendu ou rétabli). </pre>
 
   <h2>Tâche 4 : Risques</h2>
   <pre style="font-family: 'Open Sans';">
     <span style="font-weight: bold;">1. Risque sévère :</span>
-     <span style="font-weight: bold;">2. Risque important :</span>
+    <span style="font-weight: bold;">2. Risque important :</span>
           - Une personne non-membre pourrait utiliser le code d'une personne membre pour s'authentifier sans abonnement.
           - Pas de techniques pour retrouver le numéro d'un client si on le perd.
           - Pas de possibilité d'annuler une séance ou de rembourser les clients si le professionnel ne peut donner une séance.
@@ -560,8 +560,9 @@
   <h2>Tâche 5 : Exigences non-fonctionnelles</h2>
 
   <p>
-    Identifions les besoins non-fonctionnels du système.
+  Identifions les besoins non-fonctionnels du système.
   </p>
+
   <pre style="font-family: 'Open Sans';">
     <span style="font-weight: bold;">Utilisation :</span> Le système doit avoir une interface convivial.
 
@@ -587,7 +588,7 @@
     Le projet #GYM est informatisé au complet.<br>
     Les données sur les membres, les professionnels et les services sont stockées dans des fichiers (au format CSV, par exemple).
     Le matériel nécessaire est un serveur de fichiers et un ordinateur d’entrée de gamme connecté à internet pour l'agent (4 Go de RAM et un disque dur de 120 Go). Un disque dur externe est requis pour la sauvegarde des données.<br>
-   
+
   </p>
 
   <h2>Tâche 7 : Diagramme d'activité UML</h2>
@@ -652,15 +653,12 @@
     </figcaption>
   </figure> <br>
 
-  <h2>Collaboration</h2>
-
   <figure>
     <img src="images/Statistiques_bitbucket.png" alt="Statistiques du dépôt BitBucket" style="width:80%">
     <figcaption>
       <i>Figure 8.1 - Statistiques du dépôt BitBucket</i>
     </figcaption>
   </figure> <br>
-
 </body>
 
 </html>

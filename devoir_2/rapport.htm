@@ -34,7 +34,7 @@
     <br />
     <span style="font-weight: bold;">Courriel : </span>alex.defoy@umontreal.ca
     <br />
-    <span style="font-weight: bold;">Temps mis : </span>-- heures
+    <span style="font-weight: bold;">Temps mis : </span>45 heures
   </p>
   <p>
     <span style="font-weight: bold;">Nom : </span>Maryna Starastsenka
@@ -121,7 +121,7 @@
     Tâche 1 : Mise à jour des artéfacts</h2>
 
     <p>Représentons ci-dessous les modifications des artifacts. La version complète du premier rapport modifié est disponoble
-    <a href="rapportModifier.htm" title="premier rapport">ici</a>.</p>
+    <a href="rapportDevoir1.htm" title="premier rapport">ici</a>.</p>
 
     <pre style="font-family: 'Open Sans';">
     <span style="font-weight: bold;">1. Glossaire </span>
@@ -150,7 +150,7 @@
     <pre style="font-family: 'Open Sans';">
     <span style="font-weight: bold;">2. Diagramme de cas d'utilisation UML </span>
     Les modifications effectuées :
-        - Ajout des cas d'utilisation Mise à jour du statut des membres et procédure comptable qui inclut Génération de TEF, Génération de Rapport de synthèse.
+        - Ajout des cas d'utilisation "Mise à jour du statut des membres" et "Procédure comptable". Le cas d'utilisation Procédure comptable inclut Génération de TEF, Génération de Rapport de synthèse.
         - Ajout des acteurs : client, RnB, gérant et temps.
         - Ajout des cas d'utilisation "Validé numéro membre" et "Consultation répertoire séances" qui sont inclus dans d'autres cas d'utilisation.
         - Remplacement du cas d'utilisation "Consultation des inscription" par "Consultation d'une séance".
@@ -164,24 +164,22 @@
 
     Inscription à une séance :
         - Ajout de plusieurs possibilités d'annuler la demande pour éviter des boucles infinies.
-        - Ajout du paiement pour le service.
+        - Ajout du paiement des frais de service.
 
     Confirmation de la présence :
         - Ajout du scénario d'annulation de la confirmation.
-        - Afficher les séances du jour et choisir la séance concernée plutôt que
-          de la rechercher par son code.
+        - Afficher les séances du jour et choisir la séance concernée plutôt que de la rechercher par son code.
 
     Création d'un compte :
         - Ajout de l'annulation de la création d'un compte à deux étapes pour éviter les boucles infinies.
-        - Ajout de la validation des informations
+        - Ajout de la validation des informations.
         - Ajout de la demande de confirmation du paiement des frais d'adhésion.
 
     Modification d'un compte :
-        - Ajout de validation du numéro de membre ou professionnel.
-        - Il est possible de changer un compte pour membre pour suspendu.
+        - Ajout de la validation du numéro de membre ou professionnel.
 
     Supprimer un compte :
-        - Changer suspendre un compte pour supprimer un compte.
+        - Changer la suspension d'un compte par la suppression d'un compte.
 
     Mise à jour d'un service :
         - Le service est trouvé avec le numéro du professinnel plutôt qu'avec le code de service.
@@ -194,7 +192,7 @@
 
     <pre style="font-family: 'Open Sans';">
     <span style="font-weight: bold;">4. Risques </span>
-    Voici les risques ajoutés ajoutés à la version précédente.
+    Voici les risques ajoutés à la version précédente.
     <span style="font-weight: bold;">Risque important :</span>
         - Pas de techniques pour retrouver le numéro d'un client si on le perd.
         - Pas de possibilité d'annuler une séance ou de rembourser les clients si le professionnel ne peut donner une séance.
@@ -206,8 +204,8 @@
     <span style="font-weight: bold;">5. Exigences non-fonctionnelles </span>
     Les exigences non-fonctionnelles mentionnées dans groupe "Fiabilité" ont été regroupées selon leur nature.
     <span style="font-weight: bold;">Fiabilité :</span>
-    1. Le système doit être disponible 99.999% lors des heures d'ouverture du gym.
-    2. Le système peut perdre seulement l'information de la saisie courante (avant l'enregistrement).
+      1. Le système doit être disponible 99.999% lors des heures d'ouverture du gym.
+      2. Le système peut perdre seulement l'information de la saisie courante (avant l'enregistrement).
     <span style="font-weight: bold;">Securité :</span> Le système doit garantir la sécurité des données des membres et des professionnels.
     <span style="font-weight: bold;">Supportabilité :</span> Le système doit être adaptable aux besoins futurs du gym.
     <span style="font-weight: bold;">Performance :</span> Le démarrage du système ne doit pas dépasser 10s.
@@ -223,40 +221,40 @@
     Les modifications aux diagrammes d'activité sont pour la plupart pareils aux changement des descriptions des CU.
 
     Les modifications du diagramme d'activité UML principal :
-       - Ajout d'une option de menu "Valider numéro membre".
+       - Ajout de l'option de menu "Valider numéro membre".
        - Ajout des nouveaux cas d'utilisation. Ces cas sont accessibles du menu de façon interactive, mais Procédure comptable et
          Mise à jour du statut des membres sont aussi générer respectivement le vendredi à minuit automatiquement et par RnB.
        - Remplacement de la fin de flux par la fin d'activité quand "Quitter" est sélectionné.
        - Ajout de "Revenir en arrière".
 
     Les modifications du diagramme d'activité UML Gestion d'un Compte :
-       - Ajout de noeud de fin d'activité pour pouvoir sortir du menu "Gestion d'un compte" si le numéro de client n'est pas valide.
-       - Ajout de noeuds de décision pour valider les informations sur le membre.
-       - Ajout de noeuds de décision pour pouvoir annuler l'activité si les informations sont invalides.
-       - Ajout de paiement de frais d'adhésion pour assigner le numéro unique au niuveau membre.
+       - Ajout du noeud de fin d'activité pour pouvoir sortir du menu "Gestion d'un compte" si le numéro de client n'est pas valide.
+       - Ajout des noeuds de décision pour valider les informations sur le membre.
+       - Ajout des noeuds de décision pour pouvoir annuler l'activité si les informations sont invalides.
+       - Ajout du paiement de frais d'adhésion pour assigner le numéro unique au niuveau membre.
        - Changement de suspension du compte pour suppression du compte.
-       - Ajout de noeuds de confirmations.
+       - Ajout des noeuds de confirmations.
 
     Les modification du diagramme d'activité UML Gestion d'un service :
-       - Ajout la validation de numéro de professionel pour vérifier que le service à modifier/supprimer lui appartient.
-       - Ajout de noeud de décision pour finir l'activité si numéro de professionnel n'est pas valide.
-       - Ajout de noeud de décision pour pouvoir finir l'activité s'il n'y a pas de services liés au professionnel du centre sportif.
-       - Ajout de noeud de décision pour confirmer la suppression et la modification d'un service.
-       - Ajout de noeud de décision pour valider les informations sur la service.
+       - Ajout de la validation de numéro de professionel pour vérifier que le service à modifier/supprimer lui appartient.
+       - Ajout du noeud de décision pour finir l'activité si numéro de professionnel n'est pas valide.
+       - Ajout du noeud de décision pour pouvoir finir l'activité s'il n'y a pas de services liés au professionnel du centre sportif.
+       - Ajout du noeud de décision pour confirmer la suppression et la modification d'un service.
+       - Ajout du noeud de décision pour valider les informations sur la service.
 
     Les modification du diagramme d'activité UML Inscription à une séance :
        - On affiche seulement les séances disponibles (pas à capacité maximale).
-       - Ajout de noeud de décision pour finir l'activité s'il n'y pas de séance ce jour ou le client n'est pas intéressé.
-       - Ajout de noeud de décision pour finir l'activité si le numéro de membre est invalide.
-       - Ajout d'accès refusé si le membre est suspendu.
-       - Ajout de paiement pour les services lors de l'inscription à une séance.
+       - Ajout du noeud de décision pour finir l'activité s'il n'y pas de séance ce jour ou le client n'est pas intéressé.
+       - Ajout du noeud de décision pour finir l'activité si le numéro de membre est invalide.
+       - Ajout de l'accès refusé si le membre est suspendu.
+       - Ajout du paiement pour les services lors de l'inscription à une séance.
 
     Les modification du diagramme d'activité UML Confirmation de la présence :
-       - Ajout de noeud de décision pour finir l'activité si aucune séance est disponible dans la journée.
-       - Ajout de noeud de décision pour pouvoir finir l'activité si le numéro de membre est invalide.
-       - Ajout de noeud de décision pour pouvoir finir l'activité si le membre n'est pas inscrit à la séance.
+       - Ajout du noeud de décision pour finir l'activité si aucune séance est disponible dans la journée.
+       - Ajout du noeud de décision pour pouvoir finir l'activité si le numéro de membre est invalide.
+       - Ajout du noeud de décision pour pouvoir finir l'activité si le membre n'est pas inscrit à la séance.
 
-    Ajout des cas d'utilisation : Procédure comptable, Génération du rapport de synthèse et Mise à jour du statut des membres.
+    Ajout des diagrammes d'activité pour les nouveaux cas d'utilisation : Procédure comptable, Génération du rapport de synthèse et Mise à jour du statut des membres.
     </pre>
 
   <h2>Tâche 2 : Diagramme de classe UML </h2>
@@ -287,15 +285,15 @@
 
   <h2>Tâche 3 : Diagrammes de séquence UML </h2>
 
-    Pour les diagrammes de séquence, nous n'avons pas montrer tous les échanges entre l'acteur, l'interface utilisateur et le contrôleur.<br>
-    Par exemple, chaque fois qu'une donnée est entrer par l'utilisateur, le controleur appel InterfaceUtilisateur.getTexteConsole(). <br>
-    Ces appels de méthode sont redondants dans le diagramme de séquence et le rendaient plus chargé.<br><br>
+    Pour les diagrammes de séquence, nous n'avons pas montré tous les échanges entre l'acteur, l'interface utilisateur et le contrôleur.<br>
+    Par exemple, chaque fois qu'une donnée est entrée par l'utilisateur, le controleur appelle Gui.getTexteConsole(). <br>
+    Ces appels de méthode sont redondants dans le diagramme de séquence. Ils le rendaient plus chargé.<br><br>
 
     De même, en générale les getters ne sont pas tous représentés dans les diagammes de séquence parce qu'ils sont implicites et redondants.<br>
 
-    Les interactions entre les classes ne sont pas tous représentés par le nom de la méthode pour être plus clair (particulièrement lorsqu'il
+    Les interactions entre les classes ne sont pas tous représentées par le nom de la méthode pour être plus claires (particulièrement lorsqu'il
     y a beaucoup d'attributs passés à la méthode.<br>
-    Par exemple : "Construire nouveau service" pour l'appel au constructeur de Service.
+    Par exemple : "Construire nouveau service" est un appel au constructeur de Service.
 
     <br><br>
 
@@ -338,14 +336,13 @@
   </figure> <br>
 
 
-
   <h2>Tâche 4 : Production du prototype </h2>
 
 
   <h2>Collaboration</h2>
 
 <figure>
-  <img src="images/Statistiques_bitbucket.png" alt="Statistiques du dépôt BitBucket" style="width:80%">
+  <img src="images/Statistiques_bitbucket_2.png" alt="Statistiques du dépôt BitBucket" style="width:80%">
   <figcaption>
     <i>Figure 5.1 - Statistiques du dépôt BitBucket</i>
   </figcaption>
