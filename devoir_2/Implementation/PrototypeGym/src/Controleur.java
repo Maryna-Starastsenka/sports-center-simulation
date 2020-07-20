@@ -1,12 +1,9 @@
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.temporal.TemporalAdjusters;
-import java.time.temporal.TemporalAmount;
 import java.util.*;
 
 public class Controleur {
@@ -181,7 +178,16 @@ public class Controleur {
 				break;
 			case "6":
 				Gui.afficher("---Consultation d'une séance---");
+				afficherTousLesProfessionnels();
+				Gui.afficher("Veuillez entrer le numéro du professionnel.");
+				entreeSecondaire = Gui.getTexteConsole();
 
+				if (centreDonnees.estProfessionnel(entreeSecondaire)) {
+				Gui.afficher("Inscriptions aux séances du professionnel " + entreeSecondaire);
+				afficherToutesLesInscriptionDuPro(entreeSecondaire);
+				} else {
+					Gui.afficher("Numéro du professionnel incorrect.");
+				}
 				break;
 			case "7":
 				Gui.afficher("---Procédure comptable---");
@@ -218,6 +224,18 @@ public class Controleur {
 		resetEnFinDeTransaction();
 	}
 
+	private void afficherToutesLesInscriptionDuPro(String idProfessionnel) {
+		var inscriptions = centreDonnees.getListeInscriptionsPro(idProfessionnel);
+		if (inscriptions.size() == 0) {
+			Gui.afficher("Aucune inscription");
+		} else {
+			for (Inscription i : inscriptions) {
+				Gui.afficher("Séance " + i.getHashInString() + " date " + i.getDateSeance() + " membre "
+						+ i.getNumeroMembre() + ". Commentaire : " + i.getCommentaires());
+			}
+		}
+	}
+
 	private void afficherToutesLesSeancesDuJour(LocalDate jour) {
 		var seances = centreDonnees.getListeSeances(jour);
 		for (Seance s : seances) {
@@ -244,14 +262,6 @@ public class Controleur {
 		}
 	}
 
-	private void afficherTousLesServices() {
-		Gui.afficher("Numéros des services du centre de données (pour faciliter les tests) :");
-		var services = centreDonnees.getListeServices();
-		for (Service s : services) {
-			Gui.afficher(s.getCode());
-		}
-	}
-
 	private void gererMenuAccesGym(String entree) {
 		switch (entree) {
 			case "1": // Membre
@@ -266,47 +276,6 @@ public class Controleur {
 				break;
 		}
 	}
-
-	private void gererProcedureComptable(String entree) {
-		switch (entree) {
-			case "1":
-
-				break;
-			default:
-				break;
-		}
-	}
-
-	private void gererConsultationSeance(String entree) {
-		switch (entree) {
-			case "1":
-
-				break;
-			default:
-				break;
-		}
-	}
-
-	private void gererConfirmationPresence(String entree) {
-		switch (entree) {
-			case "1":
-
-				break;
-			default:
-				break;
-		}
-	}
-
-	private void gererInscriptionSeance(String entree) {
-		switch (entree) {
-			case "1":
-
-				break;
-			default:
-				break;
-		}
-	}
-
 
 	private void gererGestionService(String entree, String idProfessionnel) {
 		switch (entree) {
@@ -407,21 +376,14 @@ public class Controleur {
 			Gui.afficher("Veuillez entrer la date de début du service (jj-mm-aaaa) :");
 			entree = Gui.getTexteConsole();
 		} while (false); //todo
-		try {
-			dateDebutService = getDateFromString(entree);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		dateDebutService = getDateFromString(entree);
 
 		do {
 			Gui.afficher("Veuillez entrer la date de fin du service (jj-mm-aaaa) :");
 			entree = Gui.getTexteConsole();
 		} while (false); //todo
-		try {
-			dateFinService = getDateFromString(entree);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		dateFinService = getDateFromString(entree);
+
 
 		do {
 			Gui.afficher("Veuillez entrer l'heure du service (hh:mm) :");
@@ -658,11 +620,8 @@ public class Controleur {
 				Gui.afficher("Veuillez entrer la date de naissance (jj-mm-aaaa):");
 				entree2 = Gui.getTexteConsole();
 			} while (!dateValide(entree2));
-			try {
-				dateNaissance = getDateFromString(entree2);
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
+			dateNaissance = getDateFromString(entree2);
+
 
 			do {
 				Gui.afficher("Veuillez entrer l'adresse :");
@@ -742,15 +701,11 @@ public class Controleur {
 			}
 		}
 
-		public static LocalDate getDateFromString (String stringDate) throws ParseException {
+		public static LocalDate getDateFromString (String stringDate) {
 			return LocalDate.parse(stringDate, CentreDonnees.localDateFormatter);
 		}
 
-		public static LocalDateTime getDateEtHeureFromString (String stringDate) throws ParseException {
-			return LocalDateTime.parse(stringDate, CentreDonnees.localDateTimeFormatter);
-		}
-
-		public static LocalTime getHoraire (String stringHoraire){
+	public static LocalTime getHoraire (String stringHoraire){
 			return LocalTime.parse(stringHoraire, CentreDonnees.localTimeFormatter);
 		}
 

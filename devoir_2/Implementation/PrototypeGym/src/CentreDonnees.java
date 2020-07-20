@@ -105,6 +105,15 @@ public class CentreDonnees {
         Seance seance4 = new Seance(LocalDateTime.of(today(), LocalTime.of(15, 55)).minusDays(8),
                 service2.getCode());
         listeSeances.put(seance4.getHashInString(), seance4);
+
+        /*** INSCRIPTION ***/
+        Inscription inscription1 = new Inscription(now(),
+                seance2.getDateTimeSeance().toLocalDate(),
+                professionnel1.getHashInString(),
+                membre1.getHashInString(),
+                seance2.getCodeService(),
+                "");
+        listeInscriptions.put(inscription1.getHashInString(), inscription1);
     }
 
     public void ajouterMembre(Membre membre) {
@@ -229,6 +238,14 @@ public class CentreDonnees {
         if (!listeConfirmationsPresence.containsKey(cp.getHashInString())) {
             listeConfirmationsPresence.put(cp.getHashInString(), cp);
         }
+    }
+
+    public List<Inscription> getListeInscriptionsPro(String idProfessionnel) {
+        return listeInscriptions
+                .values()
+                .stream()
+                .filter(x -> x.getNumeroProfessionnel().equals(idProfessionnel))
+                .collect(Collectors.toList());
     }
 
     public List<Seance> getSeancesEntre(LocalDate debut, LocalDate fin) {
