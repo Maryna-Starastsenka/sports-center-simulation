@@ -81,7 +81,7 @@
           Diagramme de classe UML
         </td>
         <td>
-          Débuté le diagramme de classe avec l'idée générale.25(%)
+          Débuté le diagramme de classe avec l'idée générale.(25%)
         </td>
         <td>
           Mis à jour constante du diagramme et ajout des attributs et méthodes.(75%)
@@ -149,7 +149,9 @@
       <span style="font-weight: bold;">- RnB :</span> Compagnie responsable des procédures financières en lien avec les membres.
       <span style="font-weight: bold;">- Service :</span> Domaine d'expertise qu'un expert peut offrir à un membre pendant des séances.
       <span style="font-weight: bold;">- Procédure comptable :</span> Génération automatique du rapport de synthèse et du TEF et envoie du rapport de synthèse au gérant  le vendredi à minuit.
-      Comporte les entrainements et consultations des professionnels.
+                                                Comporte les entrainements et consultations des professionnels.
+      <span style="font-weight: bold;">Transfert électronique de fonds (TEF) :</span> Fichier créé hebdomadairement qui contient le nom et le numéro d'un professionnel ainsi que le montant à lui payer pour une semaine.  <br>
+
     </pre>
 
     <pre style="font-family: 'Open Sans';">
@@ -224,7 +226,7 @@
 
     <pre style="font-family: 'Open Sans';">
     <span style="font-weight: bold;">6. Analyse </span>
-      **** TO DO : ajouter l'intéraction du logiciel avec le serveur de fihiers******
+    L'ordinateur est connecté à internet pour interagir avec le serveur de fichier.
     </pre>
 
     <pre style="font-family: 'Open Sans';">
@@ -233,7 +235,8 @@
 
     Les modifications du diagramme d'activité UML principal :
        - Ajout d'une option de menu "Valider numéro membre".
-       - Ajout des nouveaux cas d'utilisation.
+       - Ajout des nouveaux cas d'utilisation. Ces cas sont accessibles du menu de façon interactive, mais Procédure comptable et 
+         Mise à jour du statut des membres sont aussi générer respectivement le vendredi à minuit automatiquement et par RnB.
        - Remplacement de la fin de flux par la fin d'activité quand "Quitter" est sélectionné.
        - Ajout de "Revenir en arrière".
 
@@ -296,12 +299,13 @@
 
     Pour les diagrammes de séquence, nous n'avons pas montrer tous les échanges entre l'acteur, l'interface utilisateur et le contrôleur.<br>
     Par exemple, chaque fois qu'une donnée est entrer par l'utilisateur, le controleur appel InterfaceUtilisateur.getTexteConsole(). <br>
-    Ces appels de méthode sont redondants dans le diagramme de séquence et le rendaient plus chargé.
+    Ces appels de méthode sont redondants dans le diagramme de séquence et le rendaient plus chargé.<br><br>
     
-    De même, en générale les getters ne sont pas représentés dans les diagammes de séquence parce que ça rendrait les diagrammes trop chargés.<br>
+    De même, en générale les getters ne sont pas tous représentés dans les diagammes de séquence parce qu'ils sont implicites et redondants.<br>
     
-    Les noms de méthode ne sont pas tous nommés tel quels. Souvent seulement la description de ce qu'elles font est fait. <br>
-    Par exemple : Construire nouveau service pour l'appel au constructeur de service.
+    Les interactions entre les classes ne sont pas tous représentés par le nom de la méthode pour être plus clair (particulièrement lorsqu'il
+    y a beaucoup d'attributs passés à la méthode.<br>
+    Par exemple : "Construire nouveau service" pour l'appel au constructeur de Service.
     
     <br><br>
     
