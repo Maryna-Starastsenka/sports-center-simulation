@@ -1,10 +1,9 @@
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.*;
+import java.time.format.DateTimeParseException;
+import java.util.Arrays;
+import java.util.List;
 
 public class Controleur {
 	private CentreDonnees centreDonnees;
@@ -459,10 +458,11 @@ public class Controleur {
 		String entree = Gui.getTexteConsole();
 		switch (entree) {
 			case "1":
+				afficherTousLesMembres();
 				Gui.afficher("Veuillez entrer le numéro du membre");
 				String idMembre = Gui.getTexteConsole();
 				Membre membre = centreDonnees.getMembre(idMembre);
-				String dateFormateMembre = new SimpleDateFormat("dd-MM-yyyy").format(membre.getDateNaissance());
+				String dateFormateMembre = CentreDonnees.localDateFormatter.format(membre.getDateNaissance());
 
 				Gui.afficher("Nom : " + membre.getNom() + "\n" + "Date de naissance : "
 						+ dateFormateMembre + "\n" + "Adresse courriel : " + membre.getAdresseCourriel() + "\n"
@@ -479,7 +479,7 @@ public class Controleur {
 				Gui.afficher("Veuillez entrer le numéro du professionnel");
 				String idProfessionnel = Gui.getTexteConsole();
 				Professionnel professionnel = centreDonnees.getProfessionnel(idProfessionnel);
-				String dateFormateProf = new SimpleDateFormat("dd-MM-yyyy").format(professionnel.getDateNaissance());
+				String dateFormateProf = CentreDonnees.localDateFormatter.format(professionnel.getDateNaissance());
 
 				Gui.afficher("Nom : " + professionnel.getNom() + "\n" + "Date de naissance : "
 						+ dateFormateProf + "\n" + "Adresse courriel : " + professionnel.getAdresseCourriel() + "\n"
@@ -692,11 +692,10 @@ public class Controleur {
 		}
 
 		private boolean dateValide (String entree){
-			DateFormat format = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
 			try {
-				format.parse(entree);
+				getDateFromString(entree);
 				return true;
-			} catch (ParseException e) {
+			} catch (DateTimeParseException e) {
 				return false;
 			}
 		}
