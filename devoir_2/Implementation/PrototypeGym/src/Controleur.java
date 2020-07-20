@@ -549,8 +549,8 @@ public class Controleur {
 		}
 	}
 
-	private void gererMembreExistant(String entree, Membre membre, String idMembre) {
-		switch (entree) {
+	private void gererMembreExistant(String action, Membre membre, String idMembre) {
+		switch (action) {
 			case "1":
 				Gui.afficher("1. Modifier le statut du membre. Valeur actuelle : " + membre.getMembreValide());// todo faire les autres
 				Gui.afficher("2. Modifier le numéro de téléphone.");

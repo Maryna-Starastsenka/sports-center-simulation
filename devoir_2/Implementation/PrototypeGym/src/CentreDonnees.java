@@ -1,5 +1,4 @@
 import java.time.*;
-import java.time.chrono.ChronoLocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
@@ -212,11 +211,6 @@ public class CentreDonnees {
     public List<Professionnel> getListeProfessionnels() {
         return listeProfessionnels.values().stream().collect(Collectors.toList());
     }
-
-    public List<Service> getListeServices() {
-        return listeServices.values().stream().collect(Collectors.toList());
-    }
-
 
     public boolean inscriptionExiste(String idMembre, String idSeance) {
         List<Inscription> inscriptions = null;

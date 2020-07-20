@@ -49,6 +49,9 @@ public class Service {
 		return heureService;
 	}
 
+
+	public String getNomService() { return nomService; }
+
 	public String getNumeroProfessionnel() { return numeroProfessionnel; }
 
 	public String getRecurrenceHebdo() { return "" + recurrenceHebdo; }
@@ -85,9 +88,5 @@ public class Service {
 
 	protected String getHashInString() {
 		return String.format("%04d", this.hashCode());
-	}
-
-	public String getNomService() {
-		return nomService;
 	}
 }

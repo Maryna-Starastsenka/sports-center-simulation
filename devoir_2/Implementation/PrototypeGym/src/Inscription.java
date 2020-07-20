@@ -1,6 +1,5 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Objects;
 
 
@@ -21,10 +20,6 @@ public class Inscription {
 		this.numeroMembre = numeroMembre;
 		this.codeService = codeService;
 		this.commentaires = commentaires;
-	}
-
-	public LocalDateTime getDateEtHeureActuelles() {
-		return dateEtHeureActuelles;
 	}
 
 	public LocalDate getDateSeance() {
