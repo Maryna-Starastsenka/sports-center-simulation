@@ -20,7 +20,7 @@ public class Membre extends Client {
 
 	@Override
 	public String toString() {
-		return "Membre numÃ©ro : " + getHashInString() + ".";
+		return "Membre numéro : " + getHashInString() + ".";
 	}
 
 }

@@ -1,6 +1,11 @@
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Professionnel extends Client {
+	
+	private HashMap<String, Service> listeServices = new HashMap<>();
 
 	public Professionnel (String nom, LocalDate dateNaissance, String adresse, String numeroPhone, String adresseCourriel) {
 		this.nom = nom;
@@ -12,6 +17,7 @@ public class Professionnel extends Client {
 
 	@Override
 	public String toString() {
-		return "Professionnel numÃ©ro : " + getHashInString() + ".";
+		return "Professionnel numéro : " + getHashInString() + ".";
 	}
+	
 }

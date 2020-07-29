@@ -39,10 +39,7 @@ public abstract class Client {
 
 	@Override
 	public String toString() {
-		return "Client numÃ©ro : " + getHashInString() + ".";
+		return "Client numéro : " + getHashInString() + ".";
 	}
 
 }
-	
-	
-

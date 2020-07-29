@@ -120,7 +120,18 @@
   <h2>
     Tâche 1 : Mise à jour des artéfacts</h2>
     <pre style="font-family: 'Open Sans';">
-
+    
+    **** Pour me souvenir de ce que j'ai modifié***
+    Mis tout ce qui est professionnel, membre centre données client. Les rapports et TEF sont dans Centredonnéesservices. Ajout d'un attribut liste de services pour professionnel.
+    
+    CONTROLEUR : a deux attributs, controleurClient et controleurServices. Gère le menu principal. Enlevé gérerMenuAccesGym et mis dans demanderAcces.
+                Enlevé gérerGestionCompte et mis le switch dans gestionCompte.
+                
+                Modifié cas d'utilisation Inscription séance et confirmer présence. Demander le numéro du membre est en premier maintenant
+                La validation des numéros de client et professionnel dans controleur n'est pas gérer toujours de la même façon. (boucle while dans gestions ervice)
+                J'ai mis la procédure comptable dans CentreDonneesServices, mais il a fallu que j'aille chercher le hashmap des professionnels de CentreDonneesClient pour 
+                    le donner à CentreDoneesServices pour faire les TEF.
+    ****
 
     MODIFICATIONS
 
