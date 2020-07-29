@@ -119,34 +119,68 @@
 
   <h2>
     Tâche 1 : Mise à jour des artéfacts</h2>
-    
-    MODIFICATIONS : 
-        0. Modifier diagramme d'activité principal pour ajouter le temps.
-        1. Séparer Controleur et CentreDonnées en deux pour spécialiser services et clients
-        2. Compte facebook pour l'inscription : précondition? Bizarre..
+    <pre style="font-family: 'Open Sans';">
+
+
+    MODIFICATIONS
+
+        Artéfacts :
+        1. Modifier diagramme d'activité principal pour ajouter le temps.
+        2. Modifier le diagramme de classe :
+          2.1. Relier CentreDonnes avec les classes Service, Client etc.
+          2.2. Ajouter les nouveaux classes (vue + contrôleur)
+        3. Modifier le diagramme de séquences selon les remarques qui ont été faites
+
+        Générales :
+        1. Séparer Controleur, Vue (?) et CentreDonnées en deux pour spécialiser services et clients
         2. Ajouter l'option application mobile ou desktop avant le menu principale. On affiche pas le même menu principale selon l'un ou l'autre.
-            Le client 
-        3. Ajouter la création d'un code QR pour le mobile.
-            Accès au gym se fait avec le code.
-        4. Les clients s'inscrive à partir de l'application (on peut toujours laisser la façon avec l'agent aussi)
-        5. Les profesisonnels consulte les inscriptions`avec le mobile.
-        6. Changer la création d'un numéro de service : particularités selon le cours.
-        7. Confirmation d'une présence se fait par le professionnel sur son application avec le code QR.
-        8. Ajouter la création des factures envoyer aux membres et professionnels à chaque semaine.
-        
-    
+            Le client
+
+        Inscription :
+        1. Compte facebook pour l'inscription : précondition? Bizarre..
+        2. Utilisation de compte FB valide => courriel.
+        3. Les clients s'inscrive à partir de l'application avec son compte FB (on peut toujours laisser la façon avec l'agent aussi).
+        4. Ajouter la création d'un code QR pour le mobile.
+
+        Accès :
+        1. Accès au gym se fait avec le code.
+        2. Si le membre est valide, affichage des info + QR code sur l'écrane de l'app
+        (Il n'est pas nécessaire de générer des codes QR, vous pouvez simplement utiliser les codes qu'ils représentent pour les simuler.)
+
+        Inscription :
+        1. Inscription à partir de l'app mobile.
+
+        Création de la séance :
+        1. Changer la création d'un numéro de service (plutôt séance ?) : particularités selon le cours.
+
+        Consultation des séances :
+        1. Les profesisonnels consulte les inscriptions avec l'app mobile en utilisant son compte FB.
+
+        Confirmation de la présence :
+        1. Confirmation se fait par le professionnel sur son application avec le code QR.
+        2. Recherche se fait par le code de séance (avant c'était par le code de service).
+        3. Lecture du code QR d'un membre.
+        4. La confirmation inclut le code de la séance (avant c'était le code du service).
+
+        Procedure comptable :
+        1. Ajouter la création des factures envoyées aux membres et professionnels à chaque semaine.
+        2. Chaque rapport de membre doit être écrit dans son propre fichier ; le nom du fichier doit commencer par le nom du membre, suivi de la date du rapport.
+        Il en est de même pour les rapports de professionnels.
+
+    </pre>
+
     <p>Représentons ci-dessous les modifications des artifacts. La version complète du deuxième rapport modifié est disponible
     <a href="rapportDevoir2.htm" title="deuxième rapport">ici</a>.</p>
 
     <pre style="font-family: 'Open Sans';">
-    
+
     <span style="font-weight: bold;">1. Cas d'utilisation</span>
-    
+
     <span style="font-weight: bold;">2. Diagramme de classes</span>
 
     <span style="font-weight: bold;">3. Diagrammes de séquence</span>
-    
- 
+
+
 
     </pre>
 
