@@ -1,3 +1,5 @@
+package Modele;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -52,7 +54,7 @@ public class Inscription {
 				commentaires) % 10000); // 4 chiffres max
 	}
 
-	protected String getHashInString() {
+	public String getHashInString() {
 		return String.format("%04d", this.hashCode());
 	}
 }

@@ -1,3 +1,5 @@
+package Modele;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -38,7 +40,7 @@ public abstract class Client {
 		return Math.abs(Objects.hash(adresseCourriel) % 1000000000); // 9 chiffres max
 	}
 
-	protected String getHashInString() {
+	public String getHashInString() {
 		return String.format("%09d", this.hashCode());
 	}
 	

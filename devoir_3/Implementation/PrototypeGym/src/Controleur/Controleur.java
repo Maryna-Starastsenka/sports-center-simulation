@@ -1,9 +1,9 @@
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
+package Controleur;
+
+import Modele.*;
+import Vue.*;
+
 import java.util.Arrays;
-import java.util.List;
 import java.util.HashMap;
 
 public class Controleur {
@@ -67,16 +67,16 @@ public class Controleur {
 					controleurService.gererService(idProfessionnel);
 				break;
 			case "4":
-				Gui.afficher("---Inscription à une séance---");
+				Gui.afficher("---Modele.Inscription à une séance---");
 				controleurClient.afficherTousLesMembres();
 
 				Gui.afficher("Veuillez entrer le numéro du membre :");
 				membreId = Gui.getTexteConsole();
 				if (!controleurClient.validerMembre(membreId)) {
-					Gui.afficher("Membre inconnu. Retour au menu principal.");
+					Gui.afficher("Modele.Membre inconnu. Retour au menu principal.");
 					break;
 				} else if (!controleurClient.membrePasSuspendu(membreId)) {
-					Gui.afficher("Membre suspendu. Retour au menu principal.");
+					Gui.afficher("Modele.Membre suspendu. Retour au menu principal.");
 					break;
 				}
 				controleurService.inscriptionSeance(membreId);
@@ -89,10 +89,10 @@ public class Controleur {
 				membreId = Gui.getTexteConsole();
 
 				if (!controleurClient.validerMembre(membreId)) {
-					Gui.afficher("Membre inconnu. Retour au menu principal.");
+					Gui.afficher("Modele.Membre inconnu. Retour au menu principal.");
 					break;
 				} else if (!controleurClient.membrePasSuspendu(membreId)) {
-					Gui.afficher("Membre suspendu. Retour au menu principal.");
+					Gui.afficher("Modele.Membre suspendu. Retour au menu principal.");
 					break;
 				} 
 				controleurService.confirmerPresence(membreId);

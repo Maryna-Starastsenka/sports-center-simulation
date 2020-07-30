@@ -1,7 +1,7 @@
+package Modele;
+
 import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class Professionnel extends Client {
 	
@@ -17,7 +17,7 @@ public class Professionnel extends Client {
 
 	@Override
 	public String toString() {
-		return "Professionnel numéro : " + getHashInString() + ".";
+		return "Modele.Professionnel numéro : " + getHashInString() + ".";
 	}
 	
 }

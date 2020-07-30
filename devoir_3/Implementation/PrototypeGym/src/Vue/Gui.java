@@ -1,7 +1,11 @@
+package Vue;
+
+import Controleur.Controleur;
+
 import java.util.Scanner;
 
 public class Gui {
-    static Controleur controleur;
+    public static Controleur controleur;
 
     public Gui() {
     }
@@ -18,7 +22,7 @@ public class Gui {
         sb.append("1. Demande d'accès au gym\n");
         sb.append("2. Gestion d'un compte\n");
         sb.append("3. Gestion d'un service\n");
-        sb.append("4. Inscription à une séance\n");
+        sb.append("4. Modele.Inscription à une séance\n");
         sb.append("5. Confirmation de la présence\n");
         sb.append("6. Consultation d'une séance\n");
         sb.append("7. Procédure comptable\n");
@@ -32,8 +36,8 @@ public class Gui {
         StringBuilder sb = new StringBuilder();
         effacerEcran();
         sb.append("------Demande d'accès au gym------\n");
-        sb.append("1. Membre\n");
-        sb.append("2. Professionnel\n");
+        sb.append("1. Modele.Membre\n");
+        sb.append("2. Modele.Professionnel\n");
         sb.append("3. Retour au menu principal\n");
         sb.append("X. Sortir");
 

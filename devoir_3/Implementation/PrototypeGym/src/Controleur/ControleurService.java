@@ -1,7 +1,11 @@
+package Controleur;
+
+import Modele.*;
+import Vue.*;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -189,7 +193,7 @@ public class ControleurService {
 						Gui.afficher("Entrez la nouvelle valeur :");
 						String nouvelleRecurrence = Gui.getTexteConsole();
 						serviceAModifier.setRecurrenceHebdo(nouvelleRecurrence);
-						Gui.afficher("Service modifié.");
+						Gui.afficher("Modele.Service modifié.");
 						break;
 
 					case "2":
@@ -197,7 +201,7 @@ public class ControleurService {
 						String entree = Gui.getTexteConsole();
 						LocalTime nouvelleHeure = getHoraire(entree);
 						serviceAModifier.setHeureService(nouvelleHeure);
-						Gui.afficher("Service modifié.");
+						Gui.afficher("Modele.Service modifié.");
 						break;
 					default:
 						break;
@@ -206,7 +210,7 @@ public class ControleurService {
 				break;
 			case "2":
 				centreDonneesServices.supprimerService(serviceEntre);
-				Gui.afficher("Service " + serviceEntre + " supprimé.");
+				Gui.afficher("Modele.Service " + serviceEntre + " supprimé.");
 				break;
 			default:
 				break;
@@ -299,7 +303,7 @@ public class ControleurService {
 				commentaires);
 		centreDonneesServices.ajouterService(service);
 
-		Gui.afficher("Service " + service.getCode() + " enregistré.");
+		Gui.afficher("Modele.Service " + service.getCode() + " enregistré.");
 	}
 	
 	private void afficherToutesLesSeancesDuJour(LocalDate jour) {

@@ -1,3 +1,8 @@
+package Controleur;
+
+import Modele.*;
+import Vue.*;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
@@ -18,10 +23,10 @@ public class ControleurClient {
 		String entree = Gui.getTexteConsole();
 		if (Arrays.asList("1", "2", "3", "X").contains(entree)) {
 			switch (entree) {
-				case "1": // Membre
+				case "1": // Modele.Membre
 					afficherAutorisationMembre();
 					break;
-				case "2": // Professionnel
+				case "2": // Modele.Professionnel
 					afficherAutorisationProfessionnel();
 					break;
 				case "3": // Retour au menu principal par défaut
@@ -137,13 +142,13 @@ public class ControleurClient {
 				switch (modifMembre) {
 					case "1":
 						membre.setMembreValide(!membre.getMembreValide());
-						Gui.afficher("Membre modifié.");
+						Gui.afficher("Modele.Membre modifié.");
 						break;
 					case "2":
 						Gui.afficher("Veuillez entrer le nouveau numéro de téléphone.");
 						String nouveauNumeroTel = Gui.getTexteConsole();
 						membre.setNumeroPhone(nouveauNumeroTel);
-						Gui.afficher("Membre modifié.");
+						Gui.afficher("Modele.Membre modifié.");
 						break;
 					case "3":
 						Gui.afficherMenuPrincipal();
@@ -159,7 +164,7 @@ public class ControleurClient {
 				switch (validationSuppression) {
 					case "1":
 						centreDonneesClient.supprimerMembre(idMembre);
-						Gui.afficher("Membre supprimé.");
+						Gui.afficher("Modele.Membre supprimé.");
 						break;
 					case "2":
 						Gui.afficherMenuPrincipal();
@@ -187,13 +192,13 @@ public class ControleurClient {
 						Gui.afficher("Veuillez entrer la nouvelle addresse.");
 						String nouvelleAdresse = Gui.getTexteConsole();
 						professionnel.setAdresse(nouvelleAdresse);
-						Gui.afficher("Professionnel modifié.");
+						Gui.afficher("Modele.Professionnel modifié.");
 						break;
 					case "2":
 						Gui.afficher("Veuillez entrer la nouvelle addresse courriel.");
 						String nouvelleAdresseCourriel = Gui.getTexteConsole();
 						professionnel.setAdresseCourriel(nouvelleAdresseCourriel);
-						Gui.afficher("Membre modifié.");
+						Gui.afficher("Modele.Membre modifié.");
 						break;
 					case "3":
 						Gui.afficherMenuPrincipal();
@@ -209,7 +214,7 @@ public class ControleurClient {
 					switch (validationSuppression) {
 						case "1":
 							centreDonneesClient.supprimerProfessionnel(idProfessionnel);
-							Gui.afficher("Professionnel supprimé.");
+							Gui.afficher("Modele.Professionnel supprimé.");
 							break;
 						case "2":
 							Gui.afficherMenuPrincipal();

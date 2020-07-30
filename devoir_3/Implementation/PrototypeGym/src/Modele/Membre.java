@@ -1,3 +1,5 @@
+package Modele;
+
 import java.time.LocalDate;
 
 public class Membre extends Client {
@@ -20,7 +22,7 @@ public class Membre extends Client {
 
 	@Override
 	public String toString() {
-		return super.toString() + "Membre valide : " + this.getMembreValide() + "\n";
+		return super.toString() + "Modele.Membre valide : " + this.getMembreValide() + "\n";
 	}
 
 }

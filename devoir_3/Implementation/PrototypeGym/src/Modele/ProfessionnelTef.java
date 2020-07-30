@@ -1,3 +1,5 @@
+package Modele;
+
 public class ProfessionnelTef {
     private String nom;
     private String numero;

@@ -1,7 +1,8 @@
+package Modele;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,7 +23,7 @@ public class CentreDonneesServices extends CentreDonnees {
     
 	public CentreDonneesServices() {
 		/*
-		Service service1 = new Service("Zumba",
+		Modele.Service service1 = new Modele.Service("Zumba",
 				LocalDateTime.of(LocalDate.of(2020, 1,1), LocalTime.of(8,0,0)),
 				LocalDate.of(2025, 12, 31),
 				LocalDate.of(2020, 7, 19),
@@ -35,7 +36,7 @@ public class CentreDonneesServices extends CentreDonnees {
 				"Rien à signaler");
 		listeServices.put(service1.getCode(), service1);
 
-		Service service2 = new Service("Yoga",
+		Modele.Service service2 = new Modele.Service("Yoga",
 				LocalDateTime.of(LocalDate.of(2020, 3,1), LocalTime.of(7, 30, 0)),
 				LocalDate.of(2015, 11, 30),
 				LocalDate.of(2025, 7, 12),
@@ -48,7 +49,7 @@ public class CentreDonneesServices extends CentreDonnees {
 				"Aucun commentaire");
 		listeServices.put(service2.getCode(), service2);
 
-		Service service3 = new Service("Danse", LocalDateTime.of(LocalDate.of(2020, 3,1), LocalTime.of(7, 30, 0)),
+		Modele.Service service3 = new Modele.Service("Danse", LocalDateTime.of(LocalDate.of(2020, 3,1), LocalTime.of(7, 30, 0)),
 				LocalDate.of(2017, 11, 15),
 				LocalDate.of(2036, 9, 20),
 				LocalTime.of(18,20),
@@ -61,24 +62,24 @@ public class CentreDonneesServices extends CentreDonnees {
 		listeServices.put(service3.getCode(), service3);
 
 		// crée une séance au jour d'exécution du programme pour les tests
-		Seance seance1 = new Seance(LocalDateTime.of(today(), LocalTime.of(12, 30)),
+		Modele.Seance seance1 = new Modele.Seance(LocalDateTime.of(today(), LocalTime.of(12, 30)),
 				service1.getCode());
 		listeSeances.put(seance1.getHashInString(), seance1);
 
-		Seance seance2 = new Seance(LocalDateTime.of(today(), LocalTime.of(17, 20)),
+		Modele.Seance seance2 = new Modele.Seance(LocalDateTime.of(today(), LocalTime.of(17, 20)),
 				service2.getCode());
 		listeSeances.put(seance2.getHashInString(), seance2);
 
-		Seance seance3 = new Seance(LocalDateTime.of(today(), LocalTime.of(11, 00)).minusDays(1),
+		Modele.Seance seance3 = new Modele.Seance(LocalDateTime.of(today(), LocalTime.of(11, 00)).minusDays(1),
 				service3.getCode());
 		listeSeances.put(seance3.getHashInString(), seance3);
 
-		Seance seance4 = new Seance(LocalDateTime.of(today(), LocalTime.of(15, 55)).minusDays(8),
+		Modele.Seance seance4 = new Modele.Seance(LocalDateTime.of(today(), LocalTime.of(15, 55)).minusDays(8),
 				service2.getCode());
 		listeSeances.put(seance4.getHashInString(), seance4);
 		
 
-        Inscription inscription1 = new Inscription(now(),
+        Modele.Inscription inscription1 = new Modele.Inscription(now(),
                 seance2.getDateTimeSeance().toLocalDate(),
                 professionnel1.getHashInString(),
                 membre1.getHashInString(),
