@@ -17,7 +17,7 @@ public class Professionnel extends Client {
 
 	@Override
 	public String toString() {
-		return "Professionnel numéro : " + getHashInString() + ".";
+		return "Professionnel numÃ©ro : " + getHashInString() + ".";
 	}
 	
 }

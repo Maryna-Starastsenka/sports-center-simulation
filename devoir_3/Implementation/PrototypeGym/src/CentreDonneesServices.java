@@ -32,7 +32,7 @@ public class CentreDonneesServices extends CentreDonnees {
 				professionnel1.getHashInString(),
 				"1234567",
 				63.25,
-				"Rien à signaler");
+				"Rien Ã  signaler");
 		listeServices.put(service1.getCode(), service1);
 
 		Service service2 = new Service("Yoga",
@@ -60,7 +60,7 @@ public class CentreDonneesServices extends CentreDonnees {
 				"En refonte");
 		listeServices.put(service3.getCode(), service3);
 
-		// crée une séance au jour d'exécution du programme pour les tests
+		// crÃ©e une sÃ©ance au jour d'exÃ©cution du programme pour les tests
 		Seance seance1 = new Seance(LocalDateTime.of(today(), LocalTime.of(12, 30)),
 				service1.getCode());
 		listeSeances.put(seance1.getHashInString(), seance1);
