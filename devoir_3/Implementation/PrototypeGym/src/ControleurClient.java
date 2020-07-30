@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 public class ControleurClient {
 
@@ -23,7 +24,7 @@ public class ControleurClient {
 				case "2": // Professionnel
 					afficherAutorisationProfessionnel();
 					break;
-				case "3": // Retour au menu principal par défaut
+				case "3": // Retour au menu principal par dÃ©faut
 					break;
 				default:
 					break;
@@ -39,9 +40,9 @@ public class ControleurClient {
 			idProfessionnel = Gui.getTexteConsole();
 		} while (idProfessionnel.length() != 9);
 		if (validerProfessionnel(idProfessionnel)) {
-			Gui.afficher("Le professionnel est autorisé à accéder au gym.");
+			Gui.afficher("Le professionnel est autorisÃ© Ã  accÃ©der au gym.");
 		} else {
-			Gui.afficher("Le professionnel n'est pas enregistré.");
+			Gui.afficher("Le professionnel n'est pas enregistrÃ©.");
 		}
 	}
 
@@ -53,9 +54,9 @@ public class ControleurClient {
 			idMembre = Gui.getTexteConsole();
 		} while (idMembre.length() != 9);
 		if (validerMembre(idMembre)) {
-			Gui.afficher("Le membre est autorisé à accéder au gym.");
+			Gui.afficher("Le membre est autorisÃ© Ã  accÃ©der au gym.");
 		} else {
-			Gui.afficher("Le membre n'est pas autorisé à accéder au gym.");
+			Gui.afficher("Le membre n'est pas autorisÃ© Ã  accÃ©der au gym.");
 		}
 	}
 	public void gestionCompte() {
@@ -69,7 +70,7 @@ public class ControleurClient {
 			case "2":
 				gererCompteExistant();
 				break;
-			case "3": // Retour au menu principal par défaut
+			case "3": // Retour au menu principal par dÃ©faut
 				break;
 			default:
 				break;
@@ -85,32 +86,32 @@ public class ControleurClient {
 		switch (entree) {
 			case "1":
 				afficherTousLesMembres();
-				Gui.afficher("Veuillez entrer le numéro du membre");
-				String idMembre = Gui.getTexteConsole();
-				Membre membre = centreDonneesClient.getMembre(idMembre);
-				String dateFormateMembre = CentreDonnees.localDateFormatter.format(membre.getDateNaissance());
-
-				Gui.afficher("Nom : " + membre.getNom() + "\n" + "Date de naissance : "
-						+ dateFormateMembre + "\n" + "Adresse courriel : " + membre.getAdresseCourriel() + "\n"
-						+ "Numéro de téléphone : " + membre.getNumeroPhone() + "\n" + "Adresse : " + membre.getAdresse() + "\n"
-						+ "Membre valide : " + membre.getMembreValide() + "\n");
-
-				Gui.afficher("Veuillez choisir l'action");
-				Gui.afficher("1. Modifier.");
-				Gui.afficher("2. Supprimer.");
-				String action = Gui.getTexteConsole();
-				gererMembreExistant(action, membre, idMembre);
+				Gui.afficher("Veuillez entrer le numÃ©ro du membre ou entrer \"retour\" pour retourner au menu principal.");
+				String idMembre = Gui.getTexteConsole();;
+				while (!validerMembre(idMembre)&&!idMembre.equals("retour")) {
+					Gui.afficher("NumÃ©ro de membre invalide. RÃ©essayez.");
+					idMembre = Gui.getTexteConsole();
+				} 
+				if(!idMembre.equals("retour")) {
+					Membre membre = centreDonneesClient.getMembre(idMembre);
+					Gui.afficher(membre.toString());
+					Gui.afficher("Veuillez choisir l'action");
+					Gui.afficher("1. Modifier.");
+					Gui.afficher("2. Supprimer.");
+					String action = Gui.getTexteConsole();
+					gererMembreExistant(action, membre, idMembre);
+				}
 				break;
 			case "2":
-				Gui.afficher("Veuillez entrer le numéro du professionnel");
+				afficherTousLesProfessionnels();
+				Gui.afficher("Veuillez entrer le numÃ©ro du professionnel");
 				String idProfessionnel = Gui.getTexteConsole();
+				while (!validerProfessionnel(idProfessionnel)&&!idProfessionnel.equals("retour")) {
+					Gui.afficher("NumÃ©ro de professionnel invalide. RÃ©essayez.");
+					idProfessionnel = Gui.getTexteConsole();
+				} 
 				Professionnel professionnel = centreDonneesClient.getProfessionnel(idProfessionnel);
-				String dateFormateProf = CentreDonnees.localDateFormatter.format(professionnel.getDateNaissance());
-
-				Gui.afficher("Nom : " + professionnel.getNom() + "\n" + "Date de naissance : "
-						+ dateFormateProf + "\n" + "Adresse courriel : " + professionnel.getAdresseCourriel() + "\n"
-						+ "Numéro de téléphone : " + professionnel.getNumeroPhone() + "\n" + "Adresse : " + professionnel.getAdresse() + "\n");
-
+				Gui.afficher(professionnel.toString());
 				Gui.afficher("Veuillez choisir l'action");
 				Gui.afficher("1. Modifier.");
 				Gui.afficher("2. Supprimer.");
@@ -129,20 +130,20 @@ public class ControleurClient {
 		switch (action) {
 			case "1":
 				Gui.afficher("1. Modifier le statut du membre. Valeur actuelle : " + membre.getMembreValide());// todo faire les autres
-				Gui.afficher("2. Modifier le numéro de téléphone.");
+				Gui.afficher("2. Modifier le numÃ©ro de tÃ©lÃ©phone.");
 				Gui.afficher("3. Retour au menu principal.");
 				String modifMembre = Gui.getTexteConsole();
 
 				switch (modifMembre) {
 					case "1":
 						membre.setMembreValide(!membre.getMembreValide());
-						Gui.afficher("Membre modifié.");
+						Gui.afficher("Membre modifiÃ©.");
 						break;
 					case "2":
-						Gui.afficher("Veuillez entrer le nouveau numéro de téléphone.");
+						Gui.afficher("Veuillez entrer le nouveau numÃ©ro de tÃ©lÃ©phone.");
 						String nouveauNumeroTel = Gui.getTexteConsole();
 						membre.setNumeroPhone(nouveauNumeroTel);
-						Gui.afficher("Membre modifié.");
+						Gui.afficher("Membre modifiÃ©.");
 						break;
 					case "3":
 						Gui.afficherMenuPrincipal();
@@ -158,7 +159,7 @@ public class ControleurClient {
 				switch (validationSuppression) {
 					case "1":
 						centreDonneesClient.supprimerMembre(idMembre);
-						Gui.afficher("Membre supprimé.");
+						Gui.afficher("Membre supprimÃ©.");
 						break;
 					case "2":
 						Gui.afficherMenuPrincipal();
@@ -186,13 +187,13 @@ public class ControleurClient {
 						Gui.afficher("Veuillez entrer la nouvelle addresse.");
 						String nouvelleAdresse = Gui.getTexteConsole();
 						professionnel.setAdresse(nouvelleAdresse);
-						Gui.afficher("Professionnel modifié.");
+						Gui.afficher("Professionnel modifiÃ©.");
 						break;
 					case "2":
 						Gui.afficher("Veuillez entrer la nouvelle addresse courriel.");
 						String nouvelleAdresseCourriel = Gui.getTexteConsole();
 						professionnel.setAdresseCourriel(nouvelleAdresseCourriel);
-						Gui.afficher("Membre modifié.");
+						Gui.afficher("Membre modifiÃ©.");
 						break;
 					case "3":
 						Gui.afficherMenuPrincipal();
@@ -208,7 +209,7 @@ public class ControleurClient {
 					switch (validationSuppression) {
 						case "1":
 							centreDonneesClient.supprimerProfessionnel(idProfessionnel);
-							Gui.afficher("Professionnel supprimé.");
+							Gui.afficher("Professionnel supprimÃ©.");
 							break;
 						case "2":
 							Gui.afficherMenuPrincipal();
@@ -225,7 +226,7 @@ public class ControleurClient {
 	
 	private void formulaireNouveauCompte () {
 		Gui.effacerEcran();
-		String entree2;
+		String entree;
 
 		String typeClient;
 		String nom;
@@ -238,77 +239,66 @@ public class ControleurClient {
 
 		do {
 			Gui.afficher("Veuillez entrer le nom :");
-			entree2 = Gui.getTexteConsole();
-		} while (!nomValide(entree2));
-		nom = entree2;
+			entree = Gui.getTexteConsole();
+		} while (!nomValide(entree));
+		nom = entree;
 
 		do {
 			Gui.afficher("Veuillez entrer la date de naissance (jj-mm-aaaa):");
-			entree2 = Gui.getTexteConsole();
-		} while (!dateValide(entree2));
-		dateNaissance = getDateFromString(entree2);
+			entree = Gui.getTexteConsole();
+		} while (!dateValide(entree));
+		dateNaissance = getDateFromString(entree);
 
 
 		do {
 			Gui.afficher("Veuillez entrer l'adresse :");
-			entree2 = Gui.getTexteConsole();
-		} while (!adresseValide(entree2));
-		adresse = entree2;
+			entree = Gui.getTexteConsole();
+		} while (!adresseValide(entree));
+		adresse = entree;
 
 		do {
-			Gui.afficher("Veuillez entrer le numéro de téléphone (XXX-XXX-XXXX):");
-			entree2 = Gui.getTexteConsole();
-		} while (!telephoneValide(entree2));
-		numeroTelephone = entree2;
+			Gui.afficher("Veuillez entrer le numÃ©ro de tÃ©lÃ©phone (XXX-XXX-XXXX):");
+			entree = Gui.getTexteConsole();
+		} while (!telephoneValide(entree));
+		numeroTelephone = entree;
 
 		do {
 			Gui.afficher("Veuillez entrer l'adresse courriel (xxx@xxx.xxx) :");
-			entree2 = Gui.getTexteConsole();
-		} while (!courrielValide(entree2));
-		adresseCourriel = entree2;
+			entree = Gui.getTexteConsole();
+		} while (!courrielValide(entree));
+		adresseCourriel = entree;
 
 		do {
-			Gui.afficher("Inscrivez-vous un membre qui a payé les frais d'hadhésion (entrez \"1\"), " +
-					"un membre qui n'a pas payé les frais (entrez \"2\"), " +
+			Gui.afficher("Inscrivez-vous un membre qui a payÃ© les frais d'adhÃ©sion (entrez \"1\"), " +
+					"un membre qui n'a pas payÃ© les frais (entrez \"2\"), " +
 					"ou un professionnel (entrez \"3\") ?");
-			entree2 = Gui.getTexteConsole();
-		} while (!typeMembreValide(entree2));
-		typeClient = entree2;
+			entree = Gui.getTexteConsole();
+		} while (!typeMembreValide(entree));
+		typeClient = entree;
 
-		inscrireClient(typeClient, nom, dateNaissance, adresseCourriel, numeroTelephone, adresse);
+		Client client=centreDonneesClient.inscrireClient(typeClient, nom, dateNaissance, adresseCourriel, numeroTelephone, adresse);
+		if (typeClient.equals("2"))
+			Gui.afficher("Le client est suspendu");
+		else 
+			Gui.afficher("Enregistrement du client numÃ©ro : " + client.getHashInString());
 	}
 	
-	private void inscrireClient (String typeClient, String nom, LocalDate dateNaissance, String adresseCourriel, String
-			numeroPhone, String adresse){
-				Client client = null;
-				switch (typeClient) {
-					case "1":
-						Membre membreValide = new Membre(nom, dateNaissance, adresse, numeroPhone, adresseCourriel, true);
-						if (!centreDonneesClient.estMembre(membreValide.getHashInString())) {
-							centreDonneesClient.ajouterMembre(membreValide);
-						}
-						client = membreValide;
-						break;
-					case "2":
-						Membre membreSuspendu = new Membre(nom, dateNaissance, adresse, numeroPhone, adresseCourriel, false);
-						break;
-					case "3":
-						Professionnel professionnel = new Professionnel(nom, dateNaissance, adresse, numeroPhone, adresseCourriel);
-						if (!centreDonneesClient.estProfessionnel(professionnel.getHashInString())) {
-							centreDonneesClient.ajouterProfessionnel(professionnel);
-						}
-						client = professionnel;
-						break;
-					default:
-						break;
-				}
-
-				if (client != null) {
-					Gui.afficher("Enregistrement du " + client);
-				} else {
-					Gui.afficher("Le client n'a pas été enregistré.");
-				}
+	public void modifierStatutMembres() {
+		List<Membre> listeMembres = centreDonneesClient.getListeMembres();
+		for(Membre membre : listeMembres) {
+			Gui.afficher("Est-ce que le membre a payÃ©? RÃ©pondre :  \"oui\" ou \"non\".");
+			Gui.afficher(membre.toString());
+			String entree = Gui.getTexteConsole();
+			while(!entree.equals("oui")&&!entree.equals("non")) {
+				entree = Gui.getTexteConsole();				
 			}
+			if(entree.equals("oui")) {
+				membre.setMembreValide(true);
+			} else {
+				membre.setMembreValide(false);
+			}
+		}
+	}
 	
 
 	private boolean nomValide (String entree){
@@ -363,7 +353,7 @@ public class ControleurClient {
     }
 	
 	public void afficherTousLesMembres() {
-		Gui.afficher("Numéros des membres du centre de données (pour faciliter les tests) :");
+		Gui.afficher("NumÃ©ros des membres du centre de donnÃ©es (pour faciliter les tests) :");
 		var membres = centreDonneesClient.getListeMembres();
 		for (Membre m : membres) {
 			Gui.afficher(m.getHashInString());
@@ -371,7 +361,7 @@ public class ControleurClient {
 	}
 
 	public void afficherTousLesProfessionnels() {
-		Gui.afficher("Numéros des professionnels du centre de données (pour faciliter les tests) :");
+		Gui.afficher("NumÃ©ros des professionnels du centre de donnÃ©es (pour faciliter les tests) :");
 		var professionnels = centreDonneesClient.getListeProfessionnels();
 		for (Professionnel m : professionnels) {
 			Gui.afficher(m.getHashInString());

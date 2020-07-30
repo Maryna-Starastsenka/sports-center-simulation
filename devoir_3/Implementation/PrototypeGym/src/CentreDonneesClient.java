@@ -16,16 +16,13 @@ public class CentreDonneesClient extends CentreDonnees{
 
     
     public CentreDonneesClient() {
-        // valeurs par d�faut
+        // valeurs par défaut
         /*** MEMBRES ***/
-        Membre membre1 = new Membre("Maryna",
-                LocalDate.of(1989, 9, 28),
-                "123 rue Martin, Montreal",
-                "123-123-1234",
-                "maryna@udem.com",
-                true);
+    	Membre membre1 = new Membre("John Doe", LocalDate.of(1970, 2, 2),
+                "456 du Brésil, Brasilia",
+                "999-999-9999",
+                "John@doe.com", false);
         listeMembres.put(membre1.getHashInString(), membre1);
-
         /*** PROFESSIONNELS ***/
         Professionnel professionnel1 = new Professionnel("Jean", LocalDate.of(1980, 12, 25),
                 "456 rue Michel, Laval",
@@ -43,6 +40,38 @@ public class CentreDonneesClient extends CentreDonnees{
      
     }
     
+    public Client inscrireClient (String typeClient, String nom, LocalDate dateNaissance, String adresse, String
+			numeroPhone, String adresseCourriel){
+				Client client = null;
+				switch (typeClient) {
+					case "1":
+						Membre membreValide = new Membre(nom, dateNaissance, adresse, numeroPhone, adresseCourriel, true);
+						if (!estMembre(membreValide.getHashInString())) {
+							ajouterMembre(membreValide);
+						}
+						client = membreValide;
+						break;
+					case "2":
+						Membre membreSuspendu = new Membre(nom, dateNaissance, adresse, numeroPhone, adresseCourriel, false);
+						if (!estMembre(membreSuspendu.getHashInString())) {
+							ajouterMembre(membreSuspendu);
+						}
+						client = membreSuspendu;
+						break;
+					case "3":
+						Professionnel professionnel = new Professionnel(nom, dateNaissance, adresse, numeroPhone, adresseCourriel);
+						if (!estProfessionnel(professionnel.getHashInString())) {
+							ajouterProfessionnel(professionnel);
+						}
+						client = professionnel;
+						break;
+					default:
+						break;
+				}
+
+				return client;
+			}
+    
     public void ajouterMembre(Membre membre) {
         listeMembres.put(membre.getHashInString(), membre);
     }
@@ -56,8 +85,10 @@ public class CentreDonneesClient extends CentreDonnees{
     public boolean estMembre(String idMembre) { return listeMembres.containsKey(idMembre); }
     
     public boolean estMembreValide(String idMembre) { 
-    	return listeMembres.get(idMembre).getMembreValide(); 
-    	
+    	if (listeMembres.containsKey(idMembre)) {
+    		return listeMembres.get(idMembre).getMembreValide(); 
+    	}
+    	return false;
     }
 
     public boolean estProfessionnel(String idProfessionnel) {
@@ -93,7 +124,8 @@ public class CentreDonneesClient extends CentreDonnees{
         listeMembres.remove(idProfessionnel);
     }
     
-    
-   
+    public String getNumeroClient(String adresseCourriel) {
+    	return Client.getHashInString(adresseCourriel);
+    }
 
 }

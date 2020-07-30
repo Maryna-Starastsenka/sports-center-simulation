@@ -7,6 +7,7 @@ public abstract class Client {
 	protected String adresseCourriel;
 	protected String numeroPhone;
 	protected String adresse;
+	
 
 	public String getNom () { return nom; }
 
@@ -30,16 +31,26 @@ public abstract class Client {
 
 	@Override
 	public int hashCode() {
-		return Math.abs(Objects.hash(nom, dateNaissance, adresseCourriel, numeroPhone, adresse) % 1000000000); // 9 chiffres max
+		return Math.abs(Objects.hash(this.adresseCourriel) % 1000000000); // 9 chiffres max
+	}
+	
+	public static int hashCode(String adresseCourriel) {
+		return Math.abs(Objects.hash(adresseCourriel) % 1000000000); // 9 chiffres max
 	}
 
 	protected String getHashInString() {
 		return String.format("%09d", this.hashCode());
 	}
+	
+	protected static String getHashInString(String adresseCourriel) {
+		return String.format("%09d", hashCode(adresseCourriel));
+	}
 
 	@Override
 	public String toString() {
-		return "Client num�ro : " + getHashInString() + ".";
+		return "Nom : " + this.getNom() + "\n" + "Date de naissance : "
+				+ CentreDonnees.localDateFormatter.format(this.getDateNaissance())+ "\n" + "Adresse courriel : " + this.getAdresseCourriel() + "\n"
+				+ "Numéro de téléphone : " + this.getNumeroPhone() + "\n" + "Adresse : " + this.getAdresse() + "\n";
 	}
 
 }

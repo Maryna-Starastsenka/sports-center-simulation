@@ -12,7 +12,7 @@ public class ControleurService {
 	private CentreDonneesServices centreDonneesServices;
 	
 	
-public ControleurService() {
+	public ControleurService() {
 		
 		this.centreDonneesServices = new CentreDonneesServices();
 	}
@@ -33,7 +33,7 @@ public ControleurService() {
 				afficherServicesProfessionnel(servicesDuProfessionnel);
 				gererServiceExistant();
 				break;
-			case "3": // Retour au menu principal par défaut
+			case "3": // Retour au menu principal par dÃ©faut
 				break;
 			default:
 				break;
@@ -42,16 +42,16 @@ public ControleurService() {
 	}
 	
 	public void inscriptionSeance(String membreId) {
-		Gui.afficher("Références des séances disponibles ajourd'hui, le " + CentreDonnees.today() + " :");
+		Gui.afficher("RÃ©fÃ©rences des sÃ©ances disponibles aujourd'hui, le " + CentreDonnees.today() + " :");
 		afficherToutesLesSeancesDuJour(CentreDonnees.today());
 
-		Gui.afficher("Veuillez entrer la référence de la séance à laquelle vous voulez inscrire un membre ou appuyez sur ENTREE pour revenir au menu principal :");
+		Gui.afficher("Veuillez entrer la rÃ©fÃ©rence de la sÃ©ance Ã  laquelle vous voulez inscrire un membre ou appuyez sur ENTREE pour revenir au menu principal :");
 		String seanceId = Gui.getTexteConsole();
 		if (!seanceId.equals("")) {
 
 			Seance seance = centreDonneesServices.getSeance(seanceId);
 			Service service = centreDonneesServices.getService(seance.getCodeService());
-			Gui.afficher("Les frais à payer pour la séance sont de : " + service.getFraisService() + "$");
+			Gui.afficher("Les frais Ã  payer pour la sÃ©ance sont de : " + service.getFraisService() + "$");
 
 			Gui.afficher("1. Continuer inscription");
 			Gui.afficher("2. Quitter et revenir au menu principal");
@@ -71,7 +71,7 @@ public ControleurService() {
 
 					Gui.afficher("Le membre " +
 							membreId +
-							" a été inscrit à la séance " +
+							" a Ã©tÃ© inscrit Ã  la sÃ©ance " +
 							seanceId +
 							" qui aura lieu le " +
 							CentreDonneesServices.localDateTimeFormatter.format(centreDonneesServices.getSeance(seanceId).getDateTimeSeance()));
@@ -90,19 +90,19 @@ public ControleurService() {
 	
 	public void confirmerPresence(String membreId) {
 		
-		Gui.afficher("Références des séances disponibles ajourd'hui, le " + CentreDonnees.today() + " :");
+		Gui.afficher("RÃ©fÃ©rences des sÃ©ances disponibles ajourd'hui, le " + CentreDonnees.today() + " :");
 		afficherToutesLesSeancesDuJour(CentreDonneesServices.today());
 
-		Gui.afficher("Veuillez entrer la référence de la séance à laquelle vous voulez inscrire un membre ou appuyez sur ENTREE pour revenir au menu principal :");
+		Gui.afficher("Veuillez entrer la rÃ©fÃ©rence de la sÃ©ance Ã  laquelle vous voulez inscrire un membre ou appuyez sur ENTREE pour revenir au menu principal :");
 		String seanceId = Gui.getTexteConsole();
 		if (seanceId.equals("")) {
 			return;
 		}else if (!centreDonneesServices.inscriptionExiste(membreId, seanceId)) {
-			Gui.afficher("Le membre n'est pas inscrit. Accès refusé.");
+			Gui.afficher("Le membre n'est pas inscrit. AccÃ¨s refusÃ©.");
 			return;
 		}else {
 			
-			Gui.afficher("Confirmer la présence ?");
+			Gui.afficher("Confirmer la prÃ©sence ?");
 			Gui.afficher("1. Oui");
 			Gui.afficher("2. Non");
 			String entree = Gui.getTexteConsole();
@@ -112,7 +112,7 @@ public ControleurService() {
 				String commentaire = Gui.getTexteConsole();
 
 				centreDonneesServices.confirmationPresence(seanceId, membreId, commentaire);
-				Gui.afficher("Présence validée.");
+				Gui.afficher("PrÃ©sence validÃ©e.");
 
 			} else {
 				Gui.afficher("Annulation de la confirmation.");
@@ -121,37 +121,37 @@ public ControleurService() {
 	}
 	
 	public void consultationInscription(String idProfessionnel) {
-		Gui.afficher("Inscriptions aux séances du professionnel " + idProfessionnel);
+		Gui.afficher("Inscriptions aux sÃ©ances du professionnel " + idProfessionnel);
 		afficherToutesLesInscriptionDuPro(idProfessionnel);
 	}
 	
 	public void procedureComptable(HashMap<String, Professionnel> listeProfessionnels) {
 		
-		Gui.afficher("---Procédure comptable---");
-		Gui.afficher("Voulez-vous générer et afficher le rapport de synthèse ?");
+		Gui.afficher("---ProcÃ©dure comptable---");
+		Gui.afficher("Voulez-vous gÃ©nÃ©rer et afficher le rapport de synthÃ¨se ?");
 		Gui.afficher("1. Oui");
 		Gui.afficher("2. Non");
 		String entree = Gui.getTexteConsole();
 
 		if (entree.equals("1")) {
 			var rapport = centreDonneesServices.genererRapportSynthese(listeProfessionnels);
-			Gui.afficher("Liste des professionnels à payer :");
+			Gui.afficher("Liste des professionnels Ã  payer :");
 
 			for (ProfessionnelTef pro : rapport.getProTef()) {
-				Gui.afficher(String.format("-%s (%s) doit recevoir %.2f$ pour les %s services qu'il a donnés cette semaine.",
+				Gui.afficher(String.format("-%s (%s) doit recevoir %.2f$ pour les %s services qu'il a donnÃ©s cette semaine.",
 						pro.getNom(),
 						pro.getNumero(),
 						pro.getMontant(),
 						pro.getNombreServices()));
 			}
-			Gui.afficher("\n* Nombre total de professionnels à payer : " + rapport.getNombreTotalProfessionnels());
+			Gui.afficher("\n* Nombre total de professionnels Ã  payer : " + rapport.getNombreTotalProfessionnels());
 			Gui.afficher("* Nombre total de services : " + rapport.getNombreTotalServices());
-			Gui.afficher("* Nombre total des frais à payer : " + rapport.getTotalFrais() + "$");
+			Gui.afficher("* Nombre total des frais Ã  payer : " + rapport.getTotalFrais() + "$");
 
-			Gui.afficher("\nUne copie du rapport a été envoyée au gérant.");
+			Gui.afficher("\nUne copie du rapport a Ã©tÃ© envoyÃ©e au gÃ©rant.");
 
 		} else {
-			Gui.afficher("Annulation de la génération du rapport de synthèse.");
+			Gui.afficher("Annulation de la gÃ©nÃ©ration du rapport de synthÃ¨se.");
 		}
 		
 	}
@@ -181,7 +181,7 @@ public ControleurService() {
 		String modifOuSuppr = Gui.getTexteConsole();
 		switch (modifOuSuppr) {
 			case "1":
-				Gui.afficher("1. Modifier récurrence hebdo. Valeur actuelle : " + serviceAModifier.getRecurrenceHebdo());// todo faire les autres
+				Gui.afficher("1. Modifier rÃ©currence hebdo. Valeur actuelle : " + serviceAModifier.getRecurrenceHebdo());// todo faire les autres
 				Gui.afficher("2. Modifier heure du service. Valeur actuelle : " + serviceAModifier.getHeureService());
 				String modifChamps = Gui.getTexteConsole();
 				switch (modifChamps) {
@@ -189,7 +189,7 @@ public ControleurService() {
 						Gui.afficher("Entrez la nouvelle valeur :");
 						String nouvelleRecurrence = Gui.getTexteConsole();
 						serviceAModifier.setRecurrenceHebdo(nouvelleRecurrence);
-						Gui.afficher("Service modifié.");
+						Gui.afficher("Service modifiÃ©.");
 						break;
 
 					case "2":
@@ -197,7 +197,7 @@ public ControleurService() {
 						String entree = Gui.getTexteConsole();
 						LocalTime nouvelleHeure = getHoraire(entree);
 						serviceAModifier.setHeureService(nouvelleHeure);
-						Gui.afficher("Service modifié.");
+						Gui.afficher("Service modifiÃ©.");
 						break;
 					default:
 						break;
@@ -206,7 +206,7 @@ public ControleurService() {
 				break;
 			case "2":
 				centreDonneesServices.supprimerService(serviceEntre);
-				Gui.afficher("Service " + serviceEntre + " supprimé.");
+				Gui.afficher("Service " + serviceEntre + " supprimÃ©.");
 				break;
 			default:
 				break;
@@ -238,7 +238,7 @@ public ControleurService() {
 		dateEtHeureActuelles = CentreDonnees.now();
 
 		do {
-			Gui.afficher("Veuillez entrer la date de début du service (jj-mm-aaaa) :");
+			Gui.afficher("Veuillez entrer la date de dÃ©but du service (jj-mm-aaaa) :");
 			entree = Gui.getTexteConsole();
 		} while (false); //todo
 		dateDebutService = getDateFromString(entree);
@@ -257,13 +257,13 @@ public ControleurService() {
 		heureService = getHoraire(entree);
 
 		do {
-			Gui.afficher("Veuillez entrer la récurrence hebdomadaire (1-7) :");
+			Gui.afficher("Veuillez entrer la rÃ©currence hebdomadaire (1-7) :");
 			entree = Gui.getTexteConsole();
 		} while (false); //todo
 		recurrenceHebdo = getInt(entree);//getHoraire(entree);
 
 		do {
-			Gui.afficher("Veuillez entrer la capacité maximale (1-30) :");
+			Gui.afficher("Veuillez entrer la capacitÃ© maximale (1-30) :");
 			entree = Gui.getTexteConsole();
 		} while (false); //todo
 		capaciteMaximale = getInt(entree);
@@ -299,7 +299,7 @@ public ControleurService() {
 				commentaires);
 		centreDonneesServices.ajouterService(service);
 
-		Gui.afficher("Service " + service.getCode() + " enregistré.");
+		Gui.afficher("Service " + service.getCode() + " enregistrÃ©.");
 	}
 	
 	private void afficherToutesLesSeancesDuJour(LocalDate jour) {
@@ -318,7 +318,7 @@ public ControleurService() {
 			Gui.afficher("Aucune inscription");
 		} else {
 			for (Inscription i : inscriptions) {
-				Gui.afficher("Séance " + i.getHashInString() + " date " + i.getDateSeance() + " membre "
+				Gui.afficher("SÃ©ance " + i.getHashInString() + " date " + i.getDateSeance() + " membre "
 						+ i.getNumeroMembre() + ". Commentaire : " + i.getCommentaires());
 			}
 		}

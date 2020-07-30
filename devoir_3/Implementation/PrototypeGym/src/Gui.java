@@ -15,13 +15,14 @@ public class Gui {
         StringBuilder sb = new StringBuilder();
         effacerEcran();
         sb.append("---------------Accueil---------------\n");
-        sb.append("1. Demande d'accès au gym\n");
+        sb.append("1. Demande d'accÃ¨s au gym\n");
         sb.append("2. Gestion d'un compte\n");
         sb.append("3. Gestion d'un service\n");
-        sb.append("4. Inscription à une séance\n");
-        sb.append("5. Confirmation de la présence\n");
-        sb.append("6. Consultation d'une séance\n");
-        sb.append("7. Procédure comptable\n");
+        sb.append("4. Inscription Ã  une sÃ©ance\n");
+        sb.append("5. Confirmation de la prÃ©sence\n");
+        sb.append("6. Consultation d'une sÃ©ance\n");
+        sb.append("7. ProcÃ©dure comptable\n");
+        sb.append("8. Mettre Ã  jour statut membres\n");
         sb.append("X. Sortir");
 
         System.out.println(sb.toString());
@@ -30,7 +31,7 @@ public class Gui {
     public static void afficherDemandeAcces() {
         StringBuilder sb = new StringBuilder();
         effacerEcran();
-        sb.append("------Demande d'accès au gym------\n");
+        sb.append("------Demande d'accÃ¨s au gym------\n");
         sb.append("1. Membre\n");
         sb.append("2. Professionnel\n");
         sb.append("3. Retour au menu principal\n");
@@ -43,7 +44,7 @@ public class Gui {
         StringBuilder sb = new StringBuilder();
         effacerEcran();
         sb.append("------Gestion d'un compte------\n");
-        sb.append("1. Création d'un compte\n");
+        sb.append("1. CrÃ©ation d'un compte\n");
         sb.append("2. Gestion d'un compte existant\n");
         sb.append("3. Retour au menu principal\n");
         sb.append("X. Sortir");
@@ -55,7 +56,7 @@ public class Gui {
         StringBuilder sb = new StringBuilder();
         effacerEcran();
         sb.append("------Gestion d'un service------\n");
-        sb.append("1. Création d'un nouveau service\n");
+        sb.append("1. CrÃ©ation d'un nouveau service\n");
         sb.append("2. Gestion d'un service existant\n");
         sb.append("3. Retour au menu principal\n");
         sb.append("X. Sortir");

@@ -18,20 +18,32 @@ public class Controleur {
 	}
 
 	public void start() {
-		String entree;
-		do {
-			Gui.afficherMenuPrincipal();
-
-			entree = Gui.getTexteConsole().toUpperCase();
-			if (fermetureApplicationDemandee(entree)) {
-				System.exit(0);
-			}
-			gererMenuPrincipal(entree);
-		} while (true);
+		menuLogiciel(); // TODO choix entre menuLogiciel et menuApplication
 	}
 
 	private boolean fermetureApplicationDemandee(String entree) {
 		return entree.equals("X");
+	}
+	
+	private void menuLogiciel() {
+		String entree;
+		String[] listEntree = new String[] {"1","2","3","4","5","6","7","8","X"};
+		do {
+			Gui.afficherMenuPrincipal();
+			do {
+				entree = Gui.getTexteConsole().toUpperCase();
+				if (fermetureApplicationDemandee(entree)) {
+					Gui.afficher("Fin du programme");
+					System.exit(0);
+				}
+			} while (!Arrays.asList(listEntree).contains(entree));
+			gererMenuPrincipal(entree);
+		} while (true);
+		
+	}
+	
+	private void menuApplication() {
+		
 	}
 
 	private void gererMenuPrincipal(String entreePrincipale) {
@@ -47,18 +59,18 @@ public class Controleur {
 			case "3":
 				Gui.afficher("--------Gestion d'un service-------");
 				controleurClient.afficherTousLesProfessionnels();
-				Gui.afficher("Veuillez entrer le numéro de professionnel");
-				
+				Gui.afficher("Veuillez entrer le numÃ©ro de professionnel ou \"retour\" pour retourner au menu principal");
 				do {
 					idProfessionnel = Gui.getTexteConsole();
-				} while (!controleurClient.validerProfessionnel(idProfessionnel) /*|| fermetureApplicationDemandee(idProfessionnel)*/);
-				controleurService.gererService(idProfessionnel);
+				} while (!controleurClient.validerProfessionnel(idProfessionnel)&&!idProfessionnel.equals("retour"));
+				if(!idProfessionnel.equals("retour"))
+					controleurService.gererService(idProfessionnel);
 				break;
 			case "4":
-				Gui.afficher("---Inscription à une séance---");
+				Gui.afficher("---Inscription Ã  une sÃ©ance---");
 				controleurClient.afficherTousLesMembres();
 
-				Gui.afficher("Veuillez entrer le numéro du membre :");
+				Gui.afficher("Veuillez entrer le numÃ©ro du membre :");
 				membreId = Gui.getTexteConsole();
 				if (!controleurClient.validerMembre(membreId)) {
 					Gui.afficher("Membre inconnu. Retour au menu principal.");
@@ -70,10 +82,10 @@ public class Controleur {
 				controleurService.inscriptionSeance(membreId);
 				break;
 			case "5":
-				Gui.afficher("---Confirmation de la présence---");
+				Gui.afficher("---Confirmation de la prÃ©sence---");
 
 				controleurClient.afficherTousLesMembres();
-				Gui.afficher("Veuillez entrer le numéro du membre :");
+				Gui.afficher("Veuillez entrer le numÃ©ro du membre :");
 				membreId = Gui.getTexteConsole();
 
 				if (!controleurClient.validerMembre(membreId)) {
@@ -86,20 +98,23 @@ public class Controleur {
 				controleurService.confirmerPresence(membreId);
 				break;
 			case "6":
-				Gui.afficher("---Consultation d'une séance---");
+				Gui.afficher("---Consultation d'une sÃ©ance---");
 				controleurClient.afficherTousLesProfessionnels();
-				Gui.afficher("Veuillez entrer le numéro du professionnel.");
+				Gui.afficher("Veuillez entrer le numÃ©ro du professionnel.");
 				idProfessionnel = Gui.getTexteConsole();
 
 				if (controleurClient.validerProfessionnel(idProfessionnel)) {
 					controleurService.consultationInscription(idProfessionnel);
 				} else {
-					Gui.afficher("Numéro du professionnel incorrect.");
+					Gui.afficher("NumÃ©ro du professionnel incorrect.");
 				}
 				break;
 			case "7":
 				HashMap<String, Professionnel> hashMapProfessionnel = controleurClient.getHashMapProfessionnel();
 				controleurService.procedureComptable(hashMapProfessionnel);
+				break;
+			case "8":
+				controleurClient.modifierStatutMembres();
 				break;
 			default:
 				break;
@@ -111,12 +126,9 @@ public class Controleur {
 
 	
 
-		private void resetEnFinDeTransaction () {
-			Gui.afficher("Appuyez sur ENTREE pour revenir à l'écran principal");
-			Gui.getTexteConsole();
-		}
-
-		
-
+	private void resetEnFinDeTransaction () {
+		Gui.afficher("Appuyez sur ENTREE pour revenir Ã  l'Ã©cran principal");
+		Gui.getTexteConsole();
+	}
 		
 }
