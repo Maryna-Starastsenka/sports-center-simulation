@@ -1,13 +1,16 @@
 package Vue;
 
-import Controleur.Controleur;
+import Controleur.*;
 
+import java.util.List;
 import java.util.Scanner;
 
-public class Gui {
-    public static Controleur controleur;
+public abstract class Vue {
+//    public ControleurClient controleurClient;
+//    public ControleurService controleurService;
 
-    public Gui() {
+    public Vue() {
+
     }
 
     public static void effacerEcran() {
@@ -15,7 +18,7 @@ public class Gui {
         System.out.flush();
     }
 
-    public static void afficherMenuPrincipal() {
+    protected void afficherMenuPrincipal() {
         StringBuilder sb = new StringBuilder();
         effacerEcran();
         sb.append("---------------Accueil---------------\n");
@@ -75,5 +78,23 @@ public class Gui {
     public static String getTexteConsole() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
+    }
+
+    public static String acquisitionReponse(List<String> jeuDeReponses) {
+        String reponse;
+        do {
+            System.out.print("> ");
+            reponse = getTexteConsole();
+        } while(!jeuDeReponses.contains(reponse));
+        return reponse;
+    }
+
+    public static String acquisitionReponse(int tailleDeString) {
+        String reponse;
+        do {
+            System.out.print("> ");
+            reponse = getTexteConsole();
+        } while(reponse.length() != tailleDeString);
+        return reponse;
     }
 }
