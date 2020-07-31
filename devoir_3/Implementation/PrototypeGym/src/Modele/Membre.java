@@ -18,13 +18,13 @@ public class Membre extends Client {
 		this.aPaye = aPaye;
 	}
 
-	public boolean getaPaye() {return aPaye; }
+	public boolean getAPaye() {return aPaye; }
 
-	public void setaPaye(boolean aPaye) { this.aPaye = aPaye; }
+	public void setAPaye(boolean aPaye) { this.aPaye = aPaye; }
 
 	@Override
 	public String toString() {
-		return super.toString() + "Modele.Membre valide : " + this.getaPaye() + "\n";
+		return super.toString() + "Modele.Membre valide : " + this.getAPaye() + "\n";
 	}
 
 }

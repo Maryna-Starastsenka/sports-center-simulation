@@ -1,6 +1,5 @@
 package Modele;
 
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -80,7 +79,7 @@ public abstract class CentreDonneesClient extends CentreDonnees{
     
     public boolean estMembreValide(String idMembre) { 
     	if (listeMembres.containsKey(idMembre)) {
-    		return listeMembres.get(idMembre).getaPaye();
+    		return listeMembres.get(idMembre).getAPaye();
     	}
     	return false;
     }

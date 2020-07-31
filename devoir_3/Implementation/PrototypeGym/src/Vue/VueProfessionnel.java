@@ -22,11 +22,6 @@ public class VueProfessionnel extends VueClient<Professionnel> {
     }
 
     @Override
-    public void gestionCompteExistant() {
-
-    }
-
-    @Override
     public void accesAutorise(String idProfessionnel) {
         afficher(String.format("Le professionnel numéro %s est autorisé à accéder au gym.",
                 idProfessionnel));

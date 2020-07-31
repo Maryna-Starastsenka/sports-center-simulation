@@ -2,6 +2,8 @@ package Modele;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class CentreDonneesProfessionnel implements ICentreDonnees<Professionnel> {
     private HashMap<String, Professionnel> listeProfessionnels = new HashMap<>();
@@ -37,13 +39,13 @@ public class CentreDonneesProfessionnel implements ICentreDonnees<Professionnel>
     }
 
     @Override
-    public void mettreAJour(String id) {
-
+    public void mettreAJour(String id, ChampsClients champs, String valeur) {
+        //TODO
     }
 
     @Override
     public void supprimer(String id) {
-
+        listeProfessionnels.remove(id);
     }
 
     @Override
@@ -51,5 +53,10 @@ public class CentreDonneesProfessionnel implements ICentreDonnees<Professionnel>
         if (!listeProfessionnels.containsKey(professionnel.getHashInString())) {
             listeProfessionnels.put(professionnel.getHashInString(), professionnel);
         }
+    }
+
+    @Override
+    public List<Client> getClients() {
+        return listeProfessionnels.values().stream().collect(Collectors.toList());
     }
 }

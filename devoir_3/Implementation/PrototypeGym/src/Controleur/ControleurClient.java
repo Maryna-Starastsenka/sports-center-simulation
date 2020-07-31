@@ -4,6 +4,7 @@ import Modele.*;
 import Vue.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static Vue.Verificateurs.getDateFromString;
 
@@ -42,22 +43,71 @@ public class ControleurClient extends Controleur {
 		}
 	}
 
-	public void mettreClientAJour(String idClient) {
-
+	public void mettreClientAJour(VueClient vue, String idClient, ChampsClients champs, String valeur) {
+		if (vue instanceof VueMembre) {
+			centreDonneesMembre.mettreAJour(idClient, champs, valeur);
+		} else if (vue instanceof VueProfessionnel) {
+			centreDonneesProfessionnel.mettreAJour(idClient, champs, valeur);
+		}
 	}
 
-	public void supprimerClient(String idClient) {
-
+	public void supprimerClient(VueClient vue, String idClient) {
+		if (vue instanceof VueMembre) {
+			centreDonneesMembre.supprimer(idClient);
+		} else if (vue instanceof VueProfessionnel) {
+			centreDonneesProfessionnel.supprimer(idClient);
+		}
 	}
 
-	public boolean authentifier(VueClient vueClient, String idClient) {
+	public boolean authentifier(VueClient vue, String idClient) {
 		Client client = null;
-		if (vueClient instanceof VueMembre) {
+		if (vue instanceof VueMembre) {
 			client = centreDonneesMembre.lire(idClient);
-		} else if (vueClient instanceof VueProfessionnel) {
+		} else if (vue instanceof VueProfessionnel) {
 			client = centreDonneesProfessionnel.lire(idClient);
 		}
 		return client != null;
+	}
+
+	public String getInformationsClient(VueClient vue, String idClient) {
+		Client client = null;
+		String infos = "";
+		if (vue instanceof VueMembre) {
+			client = centreDonneesMembre.lire(idClient);
+		} else if (vue instanceof VueProfessionnel) {
+			client = centreDonneesProfessionnel.lire(idClient);
+		}
+		if (client != null) {
+			infos = "ID : " + client.getHashInString() + "\n" +
+					"Nom : " + client.getNom() + "\n" +
+					"Date de naissance : " + client.getDateNaissance() + "\n" +
+					"Adresse courriel : " + client.getAdresseCourriel() + "\n" +
+					"Numéro de téléphone : " + client.getNumeroPhone() + "\n" +
+					"Adresse : " + client.getAdresse() + "\n";
+		}
+		if (vue instanceof VueMembre) {
+			Membre membre = (Membre)client;
+			infos += "Statut : " + (membre.getAPaye() ? "valide (a payé)\n" : "suspendu\n");
+		}
+		return infos;
+	}
+
+	public String getListeClients(VueClient vue) {
+		List<Client> clients = null;
+		if (vue instanceof VueMembre) {
+			clients = centreDonneesMembre.getClients();
+		} else if (vue instanceof VueProfessionnel) {
+			clients = centreDonneesProfessionnel.getClients();
+		}
+
+		String clientsString = "";
+
+		if (clients.size() != 0) {
+			for (Client c : clients) {
+				clientsString += c.getHashInString() + "; ";
+			}
+		}
+		return clientsString;
 	}
 
 	

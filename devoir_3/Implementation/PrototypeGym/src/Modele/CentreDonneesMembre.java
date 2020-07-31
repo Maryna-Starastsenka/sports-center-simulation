@@ -2,6 +2,8 @@ package Modele;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class CentreDonneesMembre implements ICentreDonnees<Membre> {
     private HashMap<String, Membre> listeMembres = new HashMap<>();
@@ -31,13 +33,21 @@ public class CentreDonneesMembre implements ICentreDonnees<Membre> {
     }
 
     @Override
-    public void mettreAJour(String id) {
+    public void mettreAJour(String idMembre, ChampsClients champs, String valeur) {
+        Membre membre = lire(idMembre);
 
+        switch (champs) {
+            case TELEPHONE:
+                membre.setNumeroPhone(valeur);
+                break;
+            case STATUT:
+                membre.setAPaye(!membre.getAPaye());
+        }
     }
 
     @Override
     public void supprimer(String id) {
-
+        listeMembres.remove(id);
     }
 
     @Override
@@ -45,5 +55,10 @@ public class CentreDonneesMembre implements ICentreDonnees<Membre> {
         if (!listeMembres.containsKey(membre.getHashInString())) {
             listeMembres.put(membre.getHashInString(), membre);
         }
+    }
+
+    @Override
+    public List<Client> getClients() {
+        return listeMembres.values().stream().collect(Collectors.toList());
     }
 }

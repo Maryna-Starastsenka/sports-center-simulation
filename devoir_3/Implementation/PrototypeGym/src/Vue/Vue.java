@@ -87,6 +87,18 @@ public abstract class Vue {
         return reponse;
     }
 
+    public static String acquisitionReponse(IVerificateur verificateur, String messageErreur) {
+        String reponse = null;
+        do {
+            if (reponse != null && !verificateur.verifier(reponse)) {
+                afficher(messageErreur);
+            }
+            System.out.print("> ");
+            reponse = getTexteConsole();
+        } while(!verificateur.verifier(reponse));
+        return reponse;
+    }
+
     public static String acquisitionReponse() {
         String reponse;
         do {

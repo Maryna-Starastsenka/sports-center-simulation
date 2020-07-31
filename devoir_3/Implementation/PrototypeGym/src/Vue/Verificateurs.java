@@ -32,7 +32,7 @@ public class Verificateurs {
     }
 
     public static boolean identifiantClientValide(String s){
-        return s.length() == 9;
+        return s != null && s.length() == 9;
     }
 
     public static boolean adresseValide (String s){

@@ -120,5 +120,4 @@ public abstract class Controleur {
 		Vue.afficher("Appuyez sur ENTREE pour revenir à l'écran principal");
 		Vue.getTexteConsole();
 	}
-		
 }
