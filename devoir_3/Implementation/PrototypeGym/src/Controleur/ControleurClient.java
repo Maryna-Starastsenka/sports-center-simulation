@@ -5,7 +5,7 @@ import Vue.*;
 
 import java.time.LocalDate;
 
-import static Modele.Verificateurs.getDateFromString;
+import static Vue.Verificateurs.getDateFromString;
 
 public class ControleurClient extends Controleur {
 
@@ -49,94 +49,16 @@ public class ControleurClient extends Controleur {
 
 	}
 
-	public void authentifier(VueClient vueClient, String idClient) {
+	public boolean authentifier(VueClient vueClient, String idClient) {
+		Client client = null;
 		if (vueClient instanceof VueMembre) {
-			Membre membre = centreDonneesMembre.lire(idClient);
-			if (membre == null) {
-				vueClient.accesRefuse(idClient);
-			} else {
-				vueClient.accesAutorise(membre);
-				// TODO traiter les cas où le membre est suspendu ?
-			}
+			client = centreDonneesMembre.lire(idClient);
 		} else if (vueClient instanceof VueProfessionnel) {
-			Professionnel professionnel = centreDonneesProfessionnel.lire(idClient);
-			if (professionnel == null) {
-				vueClient.accesRefuse(idClient);
-			} else {
-				vueClient.accesAutorise(professionnel);
-			}
+			client = centreDonneesProfessionnel.lire(idClient);
 		}
+		return client != null;
 	}
 
-//	public static void authentifier(VuePlateforme vue) {
-//		vue.authentifier();
-//
-//		Vue.afficherDemandeAcces();
-//		String entree = Vue.getTexteConsole();
-//		if (Arrays.asList("1", "2", "3", "X").contains(entree)) {
-//			switch (entree) {
-//				case "1": // Modele.Membre
-//					afficherAutorisationMembre();
-//					break;
-//				case "2": // Modele.Professionnel
-//					afficherAutorisationProfessionnel();
-//					break;
-//				case "3": // Retour au menu principal par défaut
-//					break;
-//				default:
-//					break;
-//			}
-//		}
-//	}
-	
-	
-//	private void afficherAutorisationProfessionnel () {
-//		String idProfessionnel;
-//		do {
-//			Vue.afficher("Entrez l'identifiant du professionnel puis appuyez sur ENTREE :");
-//			idProfessionnel = Vue.getTexteConsole();
-//		} while (idProfessionnel.length() != 9);
-//		if (validerProfessionnel(idProfessionnel)) {
-//			Vue.afficher("Le professionnel est autorisé à accéder au gym.");
-//		} else {
-//			Vue.afficher("Le professionnel n'est pas enregistré.");
-//		}
-//	}
-//
-//	private void afficherAutorisationMembre () {
-//		afficherTousLesMembres();
-//		String idMembre;
-//		do {
-//			Vue.afficher("Entrez l'identifiant du membre puis appuyez sur ENTREE :");
-//			idMembre = Vue.getTexteConsole();
-//		} while (idMembre.length() != 9);
-//		if (validerMembre(idMembre)) {
-//			Vue.afficher("Le membre est autorisé à accéder au gym.");
-//		} else {
-//			Vue.afficher("Le membre n'est pas autorisé à accéder au gym.");
-//		}
-//	}
-
-
-
-//	public void gestionCompte() {
-//		Vue.afficherGestionCompte();
-//		String entree = Vue.getTexteConsole();
-//		if (Arrays.asList("1", "2", "3", "X").contains(entree)) {
-//			switch (entree) {
-//			case "1":
-//				formulaireNouveauCompte();
-//				break;
-//			case "2":
-//				gererCompteExistant();
-//				break;
-//			case "3": // Retour au menu principal par défaut
-//				break;
-//			default:
-//				break;
-//			}
-//		}
-//	}
 	
 //	private void gererCompteExistant() {
 //		Vue.afficher("Veuillez choisir le type de compte");

@@ -1,4 +1,4 @@
-package Vue;
+package Modele;
 
 import java.time.LocalDate;
 
@@ -7,4 +7,5 @@ public interface ICentreDonnees<T> {
     T lire(String id);
     void mettreAJour(String id);
     void supprimer(String id);
+    void ajouterClient(T client);
 }

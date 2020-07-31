@@ -5,78 +5,76 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CentreDonneesClient extends CentreDonnees{
+public abstract class CentreDonneesClient extends CentreDonnees{
 	private HashMap<String, Membre> listeMembres = new HashMap<>();
     private HashMap<String, Professionnel> listeProfessionnels = new HashMap<>();
     
-
+//    public CentreDonneesClient() {
+//        // valeurs par défaut
+//        /*** MEMBRES ***/
+//    	Membre membre1 = new Membre("John Doe", LocalDate.of(1970, 2, 2),
+//                "456 du Brésil, Brasilia",
+//                "999-999-9999",
+//                "John@doe.com", false);
+//        listeMembres.put(membre1.getHashInString(), membre1);
+//        /*** PROFESSIONNELS ***/
+//        Professionnel professionnel1 = new Professionnel("Jean", LocalDate.of(1980, 12, 25),
+//                "456 rue Michel, Laval",
+//                "987-987-9876",
+//                "Jean@udem.com");
+//        listeProfessionnels.put(professionnel1.getHashInString(), professionnel1);
+//
+//        Professionnel professionnel2 = new Professionnel("Baptiste",
+//                LocalDate.of(1970, 6, 18),
+//                "1000 bld Henri, Longueil",
+//                "182-323-3432",
+//                "baptiste@udem.com");
+//        listeProfessionnels.put(professionnel2.getHashInString(), professionnel2);
+//
+//
+//    }
     
-    public CentreDonneesClient() {
-        // valeurs par défaut
-        /*** MEMBRES ***/
-    	Membre membre1 = new Membre("John Doe", LocalDate.of(1970, 2, 2),
-                "456 du Brésil, Brasilia",
-                "999-999-9999",
-                "John@doe.com", false);
-        listeMembres.put(membre1.getHashInString(), membre1);
-        /*** PROFESSIONNELS ***/
-        Professionnel professionnel1 = new Professionnel("Jean", LocalDate.of(1980, 12, 25),
-                "456 rue Michel, Laval",
-                "987-987-9876",
-                "Jean@udem.com");
-        listeProfessionnels.put(professionnel1.getHashInString(), professionnel1);
-
-        Professionnel professionnel2 = new Professionnel("Baptiste",
-                LocalDate.of(1970, 6, 18),
-                "1000 bld Henri, Longueil",
-                "182-323-3432",
-                "baptiste@udem.com");
-        listeProfessionnels.put(professionnel2.getHashInString(), professionnel2);
-
-     
-    }
+//    public Client inscrireClient (String typeClient, String nom, LocalDate dateNaissance, String adresse, String
+//			numeroPhone, String adresseCourriel){
+//				Client client = null;
+//				switch (typeClient) {
+//					case "1":
+//						Membre membreValide = new Membre(nom, dateNaissance, adresse, numeroPhone, adresseCourriel, true);
+//						if (!estMembre(membreValide.getHashInString())) {
+//							ajouterMembre(membreValide);
+//						}
+//						client = membreValide;
+//						break;
+//					case "2":
+//						Membre membreSuspendu = new Membre(nom, dateNaissance, adresse, numeroPhone, adresseCourriel, false);
+//						if (!estMembre(membreSuspendu.getHashInString())) {
+//							ajouterMembre(membreSuspendu);
+//						}
+//						client = membreSuspendu;
+//						break;
+//					case "3":
+//						Professionnel professionnel = new Professionnel(nom, dateNaissance, adresse, numeroPhone, adresseCourriel);
+//						if (!estProfessionnel(professionnel.getHashInString())) {
+//							ajouterProfessionnel(professionnel);
+//						}
+//						client = professionnel;
+//						break;
+//					default:
+//						break;
+//				}
+//
+//				return client;
+//    }
     
-    public Client inscrireClient (String typeClient, String nom, LocalDate dateNaissance, String adresse, String
-			numeroPhone, String adresseCourriel){
-				Client client = null;
-				switch (typeClient) {
-					case "1":
-						Membre membreValide = new Membre(nom, dateNaissance, adresse, numeroPhone, adresseCourriel, true);
-						if (!estMembre(membreValide.getHashInString())) {
-							ajouterMembre(membreValide);
-						}
-						client = membreValide;
-						break;
-					case "2":
-						Membre membreSuspendu = new Membre(nom, dateNaissance, adresse, numeroPhone, adresseCourriel, false);
-						if (!estMembre(membreSuspendu.getHashInString())) {
-							ajouterMembre(membreSuspendu);
-						}
-						client = membreSuspendu;
-						break;
-					case "3":
-						Professionnel professionnel = new Professionnel(nom, dateNaissance, adresse, numeroPhone, adresseCourriel);
-						if (!estProfessionnel(professionnel.getHashInString())) {
-							ajouterProfessionnel(professionnel);
-						}
-						client = professionnel;
-						break;
-					default:
-						break;
-				}
+//    public void ajouterMembre(Membre membre) {
+//        listeMembres.put(membre.getHashInString(), membre);
+//    }
 
-				return client;
-    }
-    
-    public void ajouterMembre(Membre membre) {
-        listeMembres.put(membre.getHashInString(), membre);
-    }
-
-    public void ajouterProfessionnel(Professionnel professionnel) {
-        if (!listeProfessionnels.containsKey(professionnel.getHashInString())) {
-            listeProfessionnels.put(professionnel.getHashInString(), professionnel);
-        }
-    }
+//    public void ajouterProfessionnel(Professionnel professionnel) {
+//        if (!listeProfessionnels.containsKey(professionnel.getHashInString())) {
+//            listeProfessionnels.put(professionnel.getHashInString(), professionnel);
+//        }
+//    }
     
     public boolean estMembre(String idMembre) { return listeMembres.containsKey(idMembre); }
     

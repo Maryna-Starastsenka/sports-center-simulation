@@ -1,4 +1,4 @@
-package Modele;
+package Vue;
 
 import Modele.CentreDonnees;
 
@@ -29,6 +29,10 @@ public class Verificateurs {
 
     private static boolean nomValide (String s){
         return s.length() >= 1;
+    }
+
+    public static boolean identifiantClientValide(String s){
+        return s.length() == 9;
     }
 
     public static boolean adresseValide (String s){

@@ -104,13 +104,4 @@ public abstract class Vue {
         } while(!jeuDeReponses.contains(reponse));
         return reponse;
     }
-
-    public static String acquisitionReponse(int tailleDeString) {
-        String reponse;
-        do {
-            System.out.print("> ");
-            reponse = getTexteConsole();
-        } while(reponse.length() != tailleDeString);
-        return reponse;
-    }
 }

@@ -1,16 +1,25 @@
 package Vue;
 
 import Controleur.ControleurClient;
-import Modele.Membre;
 import Modele.Professionnel;
-import Modele.Verificateurs;
-
-import java.util.Arrays;
 
 public class VueProfessionnel extends VueClient<Professionnel> {
 
     public VueProfessionnel() {
+        typeClient = "Professionnel";
         controleurClient = new ControleurClient();
+    }
+
+    @Override
+    public void enTeteGestionCompte() {
+        effacerEcran();
+        afficher("------Gestion d'un compte professionnel------");
+    }
+
+    @Override
+    public void gestionCompte() {
+        enTeteGestionCompte();
+
     }
 
     @Override
@@ -47,27 +56,20 @@ public class VueProfessionnel extends VueClient<Professionnel> {
     }
 
     @Override
-    public void mettreClientAJour() {
+    public void gestionCompteExistant() {
 
     }
 
     @Override
-    public void authentifier() {
-        afficher("Entrez l'identifiant du professionnel (9 chiffres) :");
-        String reponse = acquisitionReponse(9);
-        controleurClient.authentifier(this, reponse);
+    public void accesAutorise(String idProfessionnel) {
+        afficher(String.format("Le professionnel numéro %s est autorisé à accéder au gym.",
+                idProfessionnel));
     }
 
     @Override
-    public void accesAutorise(Professionnel client) {
-        afficher(String.format("Le professionnel %s (%s) est autorisé à accéder au gym.",
-                client.getNom(), client.getHashInString()));
-    }
-
-    @Override
-    public void accesRefuse(String idClient) {
+    public void accesRefuse(String idProfessionnel) {
         afficher(String.format("Le professionnel numéro %s n'est pas enregistré.",
-                idClient));
+                idProfessionnel));
     }
 
 

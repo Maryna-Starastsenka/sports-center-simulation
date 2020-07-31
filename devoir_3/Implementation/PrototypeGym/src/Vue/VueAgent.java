@@ -56,30 +56,47 @@ public class VueAgent extends VuePlateforme {
         effacerEcran();
 
         afficher("------Gestion d'un compte------");
-        afficher("1. Création d'un compte membre");
-        afficher("2. Création d'un compte professionnel");
-        afficher("3. Gestion d'un compte membre existant");
-        afficher("4. Gestion d'un compte professionnel existant");
-        afficher("5. Retour au menu principal");
+        afficher("1. Compte de membre");
+        afficher("2. Compte de professionnel");
+        afficher("3. Retour au menu principal");
 
-        String reponse = acquisitionReponse(Arrays.asList("1","2","3","4","5"));
+        String reponse = acquisitionReponse(Arrays.asList("1","2","3"));
 
         switch (reponse) {
             case "1":
-                vueMembre.creerClient();
+                vueMembre.gestionCompte();
                 break;
             case "2":
-                vueProfessionnel.creerClient();
+                vueProfessionnel.gestionCompte();
                 break;
             case "3":
-                vueMembre.mettreClientAJour();
-                break;
-            case "4":
-                vueProfessionnel.mettreClientAJour();
-                break;
-            case "5":
                 break;
         }
+
+//        afficher("1. Création d'un compte membre");
+//        afficher("2. Création d'un compte professionnel");
+//        afficher("3. Gestion d'un compte membre existant");
+//        afficher("4. Gestion d'un compte professionnel existant");
+//        afficher("5. Retour au menu principal");
+//
+//        String reponse = acquisitionReponse(Arrays.asList("1","2","3","4","5"));
+//
+//        switch (reponse) {
+//            case "1":
+//                vueMembre.creerClient();
+//                break;
+//            case "2":
+//                vueProfessionnel.creerClient();
+//                break;
+//            case "3":
+//                vueMembre.mettreClientAJour();
+//                break;
+//            case "4":
+//                vueProfessionnel.mettreClientAJour();
+//                break;
+//            case "5":
+//                break;
+//        }
 
         retourMenuPrincipal();
     }
