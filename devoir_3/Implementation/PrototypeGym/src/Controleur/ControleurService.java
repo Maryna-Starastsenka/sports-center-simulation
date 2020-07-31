@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-
 public class ControleurService extends Controleur {
 
 	private CentreDonneesServices centreDonneesServices;
@@ -256,13 +255,13 @@ public class ControleurService extends Controleur {
 			Vue.afficher("Veuillez entrer la date de début du service (jj-mm-aaaa) :");
 			entree = Vue.getTexteConsole();
 		} while (false); //todo
-		dateDebutService = getDateFromString(entree);
+		dateDebutService = Verificateurs.getDateFromString(entree);
 
 		do {
 			Vue.afficher("Veuillez entrer la date de fin du service (jj-mm-aaaa) :");
 			entree = Vue.getTexteConsole();
 		} while (false); //todo
-		dateFinService = getDateFromString(entree);
+		dateFinService = Verificateurs.getDateFromString(entree);
 
 
 		do {
@@ -337,10 +336,6 @@ public class ControleurService extends Controleur {
 						+ i.getNumeroMembre() + ". Commentaire : " + i.getCommentaires());
 			}
 		}
-	}
-
-	public static LocalDate getDateFromString (String stringDate) {
-		return LocalDate.parse(stringDate, CentreDonnees.localDateFormatter);
 	}
 
 	public static LocalTime getHoraire (String stringHoraire){

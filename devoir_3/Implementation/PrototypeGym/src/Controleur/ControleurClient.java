@@ -6,7 +6,6 @@ import Vue.*;
 import java.time.LocalDate;
 import java.util.List;
 
-import static Vue.Verificateurs.getDateFromString;
 
 public class ControleurClient extends Controleur {
 
@@ -25,7 +24,7 @@ public class ControleurClient extends Controleur {
 							String adresseCourriel,
 							String numeroTelephone,
 							String adresse) {
-		LocalDate dateNaissance = getDateFromString(dateNaissanceString);
+		LocalDate dateNaissance = Verificateurs.getDateFromString(dateNaissanceString);
 		Client client = null;
 		switch (typeClient) {
 			case MEMBRE_VALIDE: // membre qui a payé les frais d'adhésion

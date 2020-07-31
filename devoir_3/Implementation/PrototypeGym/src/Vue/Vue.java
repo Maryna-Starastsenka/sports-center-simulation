@@ -1,5 +1,7 @@
 package Vue;
 
+import Controleur.IVerificateur;
+
 import java.util.List;
 import java.util.Scanner;
 

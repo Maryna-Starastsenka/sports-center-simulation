@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static Controleur.Verificateurs.getDateFromString;
+
 public class CentreDonneesMembre implements ICentreDonnees<Membre> {
     private HashMap<String, Membre> listeMembres = new HashMap<>();
 
@@ -37,8 +39,20 @@ public class CentreDonneesMembre implements ICentreDonnees<Membre> {
         Membre membre = lire(idMembre);
 
         switch (champs) {
+            case NOM:
+                membre.setNom(valeur);
+                break;
+            case DATE_NAISSANCE:
+                membre.setDateNaissance(getDateFromString(valeur));
+                break;
+            case ADRESSE_COURRIEL:
+                membre.setAdresseCourriel(valeur);
+                break;
             case TELEPHONE:
                 membre.setNumeroPhone(valeur);
+                break;
+            case ADRESSE:
+                membre.setAdresse(valeur);
                 break;
             case STATUT:
                 membre.setAPaye(!membre.getAPaye());

@@ -1,4 +1,4 @@
-package Vue;
+package Controleur;
 
 import Modele.CentreDonnees;
 
@@ -27,7 +27,7 @@ public class Verificateurs {
         return s.matches(regexPattern);
     }
 
-    private static boolean nomValide (String s){
+    public static boolean nomValide (String s){
         return s.length() >= 1;
     }
 

@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static Controleur.Verificateurs.getDateFromString;
+
 public class CentreDonneesProfessionnel implements ICentreDonnees<Professionnel> {
     private HashMap<String, Professionnel> listeProfessionnels = new HashMap<>();
 
@@ -39,8 +41,26 @@ public class CentreDonneesProfessionnel implements ICentreDonnees<Professionnel>
     }
 
     @Override
-    public void mettreAJour(String id, ChampsClients champs, String valeur) {
-        //TODO
+    public void mettreAJour(String idProfessionnel, ChampsClients champs, String valeur) {
+        Professionnel professionnel = lire(idProfessionnel);
+
+        switch (champs) {
+            case NOM:
+                professionnel.setNom(valeur);
+                break;
+            case DATE_NAISSANCE:
+            professionnel.setDateNaissance(getDateFromString(valeur));
+            break;
+            case ADRESSE_COURRIEL:
+                professionnel.setAdresseCourriel(valeur);
+                break;
+            case TELEPHONE:
+                professionnel.setNumeroPhone(valeur);
+                break;
+            case ADRESSE:
+                professionnel.setAdresse(valeur);
+                break;
+        }
     }
 
     @Override
