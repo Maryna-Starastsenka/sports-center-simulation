@@ -1,0 +1,53 @@
+Le programme simule l’utilisation du logiciel et de l’application. Le texte est affiché dans la console et pour faire les choix il faut entrer des chiffres, des mots ou de lettres et appuyer sur ENTRÉE. 
+À chaque étape, des choix sont offerts et les instructions pour comment répondre aux choix sont affichés.
+ 
+La première étape est de choisir entre la version application ou la version ordinateur.
+1.	Version ordinateur
+    Le menu principal est affiché. Il faut choisir entre huit options. 
+    Il est aussi possible de quitter le programme en entrant la lettre « x » et en appuyant sur la touche ENTRÉE.
+    
+    1.1 Demander accès au gym.
+        Le logiciel vous demande de choisir entre membre, professionnel. Il suffit d'entrer le numéro de membre ou l'adresse courriel.
+    
+    1.2 Gestion d'un compte
+        1.2.1 Création de compte
+            Lorsqu'on crée le compte il est important de respecter les formats sinon les informations seront refusés.
+            Si un membre n'a pas payé, il ne recevra pas de numéro de membre et ne pourra accéder au #GYM.
+        1.2.2 Gestion de compte
+            On choisit le type de compte et si on le modifie ou on le supprime.
+            Si on le modifie, il suffit de choisir ce qu'on modifie dans le menu. Puis d'entrer la modification.
+     
+    1.3 Gestion d'un service
+        Il faut d'abord entrer le numéro du professionel.
+        Ensuite on choisir si on ajoute, modifie ou supprime le service.
+        
+    1.4 Inscription à une séance.
+        Les séances du jour seront affichées.
+        Il faut choisir une séance et entrer le numéro du membre.
+        Si le numéro du membre n'est pas valide, on retourne au menu principal.
+        On offre la possibilité d'ajouter un commentaire sur l'inscription.
+        Si le client ne paie pas, il ne sera pas inscrit.
+        
+    
+    1.5 Confirmer présence
+        Les séances du jour sont affichées.
+        Il faut entrer le numéro du membre puis confirmer la présence.
+        Il est possible d'ajouter un commentaire.
+    
+    1.6 Consultation d'une séance
+        Il suffit d'entrer le numéro du professionnel et le numéro de la séance.
+        Si l'un ou l'autre est incorrect, on retourne au menu principal.
+        
+    1.7 Procédure comptable
+        Version manuel des procédures comptables. Renvoie le rapport de synthèse et les TEF.
+        
+    1.8 Mise à jour d'un membre
+        Version manuel de la modification des membres. 
+        Tous les clients seront affichés et il faudra répondre oui si le client est encore valide.
+        
+2. Version application
+    TODO
+        
+        
+        
+        
