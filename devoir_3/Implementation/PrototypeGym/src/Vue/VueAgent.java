@@ -56,8 +56,8 @@ public class VueAgent extends VuePlateforme {
         effacerEcran();
 
         afficher("------Gestion d'un compte------");
-        afficher("1. Compte de membre");
-        afficher("2. Compte de professionnel");
+        afficher("1. Compte de Membre");
+        afficher("2. Compte de Professionnel");
         afficher("3. Retour au menu principal");
 
         String reponse = acquisitionReponse(Arrays.asList("1","2","3"));

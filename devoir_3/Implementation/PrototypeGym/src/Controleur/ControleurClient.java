@@ -17,7 +17,8 @@ public class ControleurClient extends Controleur {
 		this.centreDonneesProfessionnel = new CentreDonneesProfessionnel();
 	}
 
-	public void creerClient(VueClient vueClient, String typeClient,
+	public void creerClient(VueClient vueClient,
+							TypeClient typeClient,
 							String nom,
 							String dateNaissanceString,
 							String adresseCourriel,
@@ -26,18 +27,18 @@ public class ControleurClient extends Controleur {
 		LocalDate dateNaissance = getDateFromString(dateNaissanceString);
 		Client client = null;
 		switch (typeClient) {
-			case "1": // membre qui a payé les frais d'adhésion
-			case "2": // membre qui n'a pas payé les frais d'adhésion
+			case MEMBRE_VALIDE: // membre qui a payé les frais d'adhésion
+			case MEMBRE_SUSPENDU: // membre qui n'a pas payé les frais d'adhésion
 				Membre membre = new Membre(nom, dateNaissance, adresse, numeroTelephone, adresseCourriel, typeClient.equals("1") ? true : false);
 				client = centreDonneesMembre.creer(membre);
 				break;
-			case "3": // professionnel
+			case PROFESSIONNEL:
 				Professionnel professionnel = new Professionnel(nom, dateNaissance, adresse, numeroTelephone, adresseCourriel);
 				client = centreDonneesProfessionnel.creer(professionnel);
 				break;
 		}
-		if (typeClient.equals("1") || typeClient.equals("3")) {
-			vueClient.confirmerEnregistrement(client.getHashInString());
+		if (typeClient.equals(TypeClient.MEMBRE_VALIDE) || typeClient.equals(TypeClient.PROFESSIONNEL)) {
+			vueClient.confirmerEnregistrement(client.getHashInString()); // TODO à gérer, surtout avec les membres suspendus
 		}
 	}
 
