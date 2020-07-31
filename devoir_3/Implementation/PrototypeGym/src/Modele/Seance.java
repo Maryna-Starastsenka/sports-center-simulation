@@ -1,11 +1,14 @@
 package Modele;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class Seance {
 	private LocalDateTime dateSeance;
 	private String codeService;
+	private HashMap<String, Inscription> inscriptions;
+
 
 	public Seance(LocalDateTime dateSeance, String codeService) {
 		this.dateSeance = dateSeance;

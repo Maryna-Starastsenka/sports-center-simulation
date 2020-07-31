@@ -15,7 +15,7 @@ public class VueAgent extends VuePlateforme {
         this.vueService = new VueService();
     }
 
-    public void menuLogiciel() {
+    public void menuAccueil() {
         effacerEcran();
 
         afficher("---------------Accueil---------------");
@@ -32,9 +32,10 @@ public class VueAgent extends VuePlateforme {
 
         switch (reponse) {
             case "1":
-                authentifier();
+                authentification();
                 break;
             case "2":
+                gestionCompte();
                 break;
             case "3":
                 break;
@@ -51,15 +52,48 @@ public class VueAgent extends VuePlateforme {
         }
     }
 
+    public void gestionCompte() {
+        effacerEcran();
+
+        afficher("------Gestion d'un compte------");
+        afficher("1. Création d'un compte membre");
+        afficher("2. Création d'un compte professionnel");
+        afficher("3. Gestion d'un compte membre existant");
+        afficher("4. Gestion d'un compte professionnel existant");
+        afficher("5. Retour au menu principal");
+
+        String reponse = acquisitionReponse(Arrays.asList("1","2","3","4","5"));
+
+        switch (reponse) {
+            case "1":
+                vueMembre.creerClient();
+                break;
+            case "2":
+                vueProfessionnel.creerClient();
+                break;
+            case "3":
+                vueMembre.mettreClientAJour();
+                break;
+            case "4":
+                vueProfessionnel.mettreClientAJour();
+                break;
+            case "5":
+                break;
+        }
+
+        retourMenuPrincipal();
+    }
+
     @Override
-    public void authentifier() {
+    public void authentification() {
         effacerEcran();
 
         afficher("------Demande d'accès au gym------");
         afficher("1. Membre");
         afficher("2. Professionnel");
+        afficher("3. Retour au menu principal");
 
-        String reponse = acquisitionReponse(Arrays.asList("1","2"));
+        String reponse = acquisitionReponse(Arrays.asList("1","2","3"));
 
         switch (reponse) {
             case "1":
@@ -68,7 +102,11 @@ public class VueAgent extends VuePlateforme {
             case "2":
                 vueProfessionnel.authentifier();
                 break;
+            case "3":
+                break;
         }
+
+        retourMenuPrincipal();
     }
 
 

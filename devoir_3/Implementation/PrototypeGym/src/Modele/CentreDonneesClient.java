@@ -66,7 +66,7 @@ public class CentreDonneesClient extends CentreDonnees{
 				}
 
 				return client;
-			}
+    }
     
     public void ajouterMembre(Membre membre) {
         listeMembres.put(membre.getHashInString(), membre);
@@ -82,7 +82,7 @@ public class CentreDonneesClient extends CentreDonnees{
     
     public boolean estMembreValide(String idMembre) { 
     	if (listeMembres.containsKey(idMembre)) {
-    		return listeMembres.get(idMembre).getMembreValide(); 
+    		return listeMembres.get(idMembre).getaPaye();
     	}
     	return false;
     }

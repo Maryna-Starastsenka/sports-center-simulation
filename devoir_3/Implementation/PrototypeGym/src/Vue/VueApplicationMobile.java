@@ -2,12 +2,12 @@ package Vue;
 
 public class VueApplicationMobile extends VuePlateforme {
     @Override
-    public void menuLogiciel() {
+    public void menuAccueil() {
 
     }
 
     @Override
-    public void authentifier() {
+    public void authentification() {
 
     }
 }

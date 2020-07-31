@@ -14,4 +14,6 @@ public abstract class VueClient<T> extends Vue {
 
     public abstract void accesAutorise(T client);
     public abstract void accesRefuse(String idClient);
+
+    public abstract void confirmerEnregistrement(String id);
 }

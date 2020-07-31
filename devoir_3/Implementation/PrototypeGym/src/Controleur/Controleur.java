@@ -8,9 +8,6 @@ import java.util.HashMap;
 
 public abstract class Controleur {
 
-	public static Vue vue;
-
-	
 	public Controleur() {
 
 	}

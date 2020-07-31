@@ -4,12 +4,14 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public abstract class Client {
+	protected String id;
 	protected String nom;
 	protected LocalDate dateNaissance;
 	protected String adresseCourriel;
 	protected String numeroPhone;
 	protected String adresse;
-	
+
+	public String getId () { return id; }
 
 	public String getNom () { return nom; }
 
@@ -22,6 +24,8 @@ public abstract class Client {
 	public String getAdresse() { return adresse; }
 
 	public void setNom(String nom) { this.nom = nom; }
+
+	public void setId(String id) { this.id = id; }
 
 	public void setDateNaissance(LocalDate dateNaissance) { this.dateNaissance = dateNaissance; }
 

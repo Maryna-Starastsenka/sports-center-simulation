@@ -1,15 +1,19 @@
 package Vue;
 
-import Controleur.ControleurClient;
-
 public abstract class VuePlateforme extends Vue {
 
     public void start() {
-        menuLogiciel();
+        menuAccueil();
     }
 
-    public abstract void menuLogiciel();
+    public abstract void menuAccueil();
 
-    public abstract void authentifier();
+    public abstract void authentification();
+
+    public void retourMenuPrincipal() {
+        afficher("\nAppuyez sur ENTREE pour revenir à l'écran principal");
+        getTexteConsole();
+        menuAccueil();
+    }
 
 }

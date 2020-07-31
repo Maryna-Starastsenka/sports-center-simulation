@@ -3,6 +3,7 @@ package Modele;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.HashMap;
 import java.util.Objects;
 
 
@@ -18,6 +19,9 @@ public class Service {
 	private String codeService;
 	private double fraisService;
 	private String commentaires;
+
+	private HashMap<String, Seance> seances;
+
 
 	public Service(String nomService,
 				   LocalDateTime dateEtHeureActuelles,

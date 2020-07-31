@@ -4,10 +4,8 @@ import Modele.*;
 import Vue.*;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+
+import static Modele.Verificateurs.getDateFromString;
 
 public class ControleurClient extends Controleur {
 
@@ -19,6 +17,38 @@ public class ControleurClient extends Controleur {
 		this.centreDonneesProfessionnel = new CentreDonneesProfessionnel();
 	}
 
+	public void creerClient(VueClient vueClient, String typeClient,
+							String nom,
+							String dateNaissanceString,
+							String adresseCourriel,
+							String numeroTelephone,
+							String adresse) {
+		LocalDate dateNaissance = getDateFromString(dateNaissanceString);
+		Client client = null;
+		switch (typeClient) {
+			case "1": // membre qui a payé les frais d'adhésion
+			case "2": // membre qui n'a pas payé les frais d'adhésion
+				Membre membre = new Membre(nom, dateNaissance, adresse, numeroTelephone, adresseCourriel, typeClient.equals("1") ? true : false);
+				client = centreDonneesMembre.creer(membre);
+				break;
+			case "3": // professionnel
+				Professionnel professionnel = new Professionnel(nom, dateNaissance, adresse, numeroTelephone, adresseCourriel);
+				client = centreDonneesProfessionnel.creer(professionnel);
+				break;
+		}
+		if (typeClient.equals("1") || typeClient.equals("3")) {
+			vueClient.confirmerEnregistrement(client.getHashInString());
+		}
+	}
+
+	public void mettreClientAJour(String idClient) {
+
+	}
+
+	public void supprimerClient(String idClient) {
+
+	}
+
 	public void authentifier(VueClient vueClient, String idClient) {
 		if (vueClient instanceof VueMembre) {
 			Membre membre = centreDonneesMembre.lire(idClient);
@@ -26,6 +56,7 @@ public class ControleurClient extends Controleur {
 				vueClient.accesRefuse(idClient);
 			} else {
 				vueClient.accesAutorise(membre);
+				// TODO traiter les cas où le membre est suspendu ?
 			}
 		} else if (vueClient instanceof VueProfessionnel) {
 			Professionnel professionnel = centreDonneesProfessionnel.lire(idClient);
@@ -252,65 +283,7 @@ public class ControleurClient extends Controleur {
 //				break;
 //		}
 //	}
-	
-//	private void formulaireNouveauCompte () {
-//		Vue.effacerEcran();
-//		String entree;
-//
-//		String typeClient;
-//		String nom;
-//		LocalDate dateNaissance = null;
-//		String adresseCourriel = null;
-//		String numeroTelephone = null;
-//		String adresse = null;
-//
-//		Vue.afficher("------Formulaire de nouveau compte------");
-//
-//		do {
-//			Vue.afficher("Veuillez entrer le nom :");
-//			entree = Vue.getTexteConsole();
-//		} while (!nomValide(entree));
-//		nom = entree;
-//
-//		do {
-//			Vue.afficher("Veuillez entrer la date de naissance (jj-mm-aaaa):");
-//			entree = Vue.getTexteConsole();
-//		} while (!dateValide(entree));
-//		dateNaissance = getDateFromString(entree);
-//
-//
-//		do {
-//			Vue.afficher("Veuillez entrer l'adresse :");
-//			entree = Vue.getTexteConsole();
-//		} while (!adresseValide(entree));
-//		adresse = entree;
-//
-//		do {
-//			Vue.afficher("Veuillez entrer le numéro de téléphone (XXX-XXX-XXXX):");
-//			entree = Vue.getTexteConsole();
-//		} while (!telephoneValide(entree));
-//		numeroTelephone = entree;
-//
-//		do {
-//			Vue.afficher("Veuillez entrer l'adresse courriel (xxx@xxx.xxx) :");
-//			entree = Vue.getTexteConsole();
-//		} while (!courrielValide(entree));
-//		adresseCourriel = entree;
-//
-//		do {
-//			Vue.afficher("Inscrivez-vous un membre qui a payé les frais d'adhésion (entrez \"1\"), " +
-//					"un membre qui n'a pas payé les frais (entrez \"2\"), " +
-//					"ou un professionnel (entrez \"3\") ?");
-//			entree = Vue.getTexteConsole();
-//		} while (!typeMembreValide(entree));
-//		typeClient = entree;
-//
-//		Client client=centreDonneesClient.inscrireClient(typeClient, nom, dateNaissance, adresseCourriel, numeroTelephone, adresse);
-//		if (typeClient.equals("2"))
-//			Vue.afficher("Le client est suspendu");
-//		else
-//			Vue.afficher("Enregistrement du client numéro : " + client.getHashInString());
-//	}
+
 	
 //	public void modifierStatutMembres() {
 //		List<Membre> listeMembres = centreDonneesClient.getListeMembres();
@@ -328,42 +301,8 @@ public class ControleurClient extends Controleur {
 //			}
 //		}
 //	}
-	
 
-	private boolean nomValide (String entree){
-		return entree.length() >= 1;
-	}
-	
-	public boolean adresseValide (String entree){
-		return entree.length() >= 1;
-	}
 
-	public boolean telephoneValide (String entree){
-		String regexPattern = "\\d{3}-\\d{3}-\\d{4}";
-		return entree.matches(regexPattern);
-	}
-
-	public boolean courrielValide (String entree){
-		String regexPattern = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
-		return entree.matches(regexPattern);
-	}
-	
-	public boolean typeMembreValide (String entree){
-		return entree.equals("1") || entree.equals("2") || entree.equals("3");
-	}
-	
-	private boolean dateValide (String entree){
-		try {
-			getDateFromString(entree);
-			return true;
-		} catch (DateTimeParseException e) {
-			return false;
-		}
-	}
-	
-	public static LocalDate getDateFromString (String stringDate) {
-		return LocalDate.parse(stringDate, CentreDonnees.localDateFormatter);
-	}
 
 //	public boolean validerMembre (String id){
 //		return centreDonneesClient.estMembre(id);

@@ -20,6 +20,18 @@ public class ControleurService extends Controleur {
 		this.centreDonneesServices = new CentreDonneesServices();
 	}
 
+	public void creerService() {
+
+	}
+
+	public void mettreServiceAJour(String idService) {
+
+	}
+
+	public void supprimerService(String idService) {
+
+	}
+
 
 	public void gererService(String idProfessionnel) {
 
