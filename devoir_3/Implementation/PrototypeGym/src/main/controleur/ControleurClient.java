@@ -125,9 +125,13 @@ public class ControleurClient extends Controleur {
 		return clientsString;
 	}
 
-//	public boolean validerMembre (String id){
-//		return centreDonneesClient.estMembre(id);
-//	}
+	public Client lireClient(String idClient) {
+		return this.centreDonneesMembre.lire(idClient);
+	}
+	
+//public boolean validerMembre (String id){
+//		return centreDonneesMembre.estMembre(id);
+//}
 //
 //	public boolean membrePasSuspendu (String id) {
 //		return centreDonneesClient.estMembreValide(id);

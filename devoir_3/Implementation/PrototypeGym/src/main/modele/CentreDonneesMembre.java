@@ -16,7 +16,7 @@ public class CentreDonneesMembre implements ICentreDonnees<Membre> {
         Membre membre1 = new Membre("John Doe", LocalDate.of(1970, 2, 2),
                 "456 du Brésil, Brasilia",
                 "999-999-9999",
-                "John@doe.com", false);
+                "John@doe.com", true);
         listeMembres.put(membre1.getHashInString(), membre1);
     }
 

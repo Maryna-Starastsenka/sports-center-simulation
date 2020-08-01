@@ -50,7 +50,7 @@ public abstract class Client {
 		return String.format("%09d", this.hashCode());
 	}
 	
-	protected static String getHashInString(String adresseCourriel) {
+	public static String getHashInString(String adresseCourriel) {
 		return String.format("%09d", hashCode(adresseCourriel));
 	}
 
