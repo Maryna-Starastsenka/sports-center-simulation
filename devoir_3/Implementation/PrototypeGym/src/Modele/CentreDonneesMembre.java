@@ -35,29 +35,26 @@ public class CentreDonneesMembre implements ICentreDonnees<Membre> {
     }
 
     @Override
-    public void mettreAJour(String idMembre, IChamps champs, String valeur) {
+    public void mettreAJour(String idMembre, Champs champsClient, String valeur) {
         Membre membre = lire(idMembre);
 
-        if (!(champs instanceof ChampsClient)) return;
-        ChampsClient champsClient = (ChampsClient) champs;
-
         switch (champsClient) {
-            case NOM:
+            case NOM_CLIENT:
                 membre.setNom(valeur);
                 break;
-            case DATE_NAISSANCE:
+            case DATE_NAISSANCE_CLIENT:
                 membre.setDateNaissance(getDateFromString(valeur));
                 break;
-            case ADRESSE_COURRIEL:
+            case ADRESSE_COURRIEL_CLIENT:
                 membre.setAdresseCourriel(valeur);
                 break;
-            case TELEPHONE:
+            case TELEPHONE_CLIENT:
                 membre.setNumeroPhone(valeur);
                 break;
-            case ADRESSE:
+            case ADRESSE_CLIENT:
                 membre.setAdresse(valeur);
                 break;
-            case STATUT:
+            case STATUT_MEMBRE:
                 membre.setAPaye(!membre.getAPaye());
         }
     }

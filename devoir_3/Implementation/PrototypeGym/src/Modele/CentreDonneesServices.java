@@ -247,35 +247,32 @@ public class CentreDonneesServices implements ICentreDonnees {
 	}
 
 	@Override
-	public void mettreAJour(String idService, IChamps champs, String valeur) {
+	public void mettreAJour(String idService, Champs champsService, String valeur) {
 		Service service = lire(idService);
-
-		if (!(champs instanceof ChampsService)) return;
-		ChampsService champsService = (ChampsService) champs;
 
 		switch (champsService) {
 			case NOM_SERVICE:
 				service.setNomService(valeur);
 				break;
-			case DATE_DEBUT:
+			case DATE_DEBUT_SERVICE:
 				service.setDateDebutService(getDateFromString(valeur));
 				break;
-			case DATE_FIN:
+			case DATE_FIN_SERVICE:
 				service.setDateFinService(getDateFromString(valeur));
 				break;
-			case HEURE:
+			case HEURE_SERVICE:
 				service.setHeureService(getHeureFromString(valeur));
 				break;
-			case RECURRENCE:
+			case RECURRENCE_HEBDO_SERVICE:
 				service.setRecurrenceHebdo(getJourFromString(valeur));
 				break;
-			case CAPACITE_MAX:
+			case CAPACITE_MAX_SERVICE:
 				service.setCapaciteMax(getIntFromString(valeur));
 				break;
-			case FRAIS:
+			case FRAIS_SERVICE:
 				service.setFrais(getDoubleFromString(valeur));
 				break;
-			case COMMENTAIRE:
+			case COMMENTAIRE_SERVICE:
 				service.setCommentaires(valeur);
 				break;
 		}

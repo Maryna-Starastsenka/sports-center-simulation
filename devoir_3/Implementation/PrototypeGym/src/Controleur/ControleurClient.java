@@ -42,11 +42,11 @@ public class ControleurClient extends Controleur {
 //		}
 	}
 
-	public void mettreClientAJour(VueClient vue, String idClient, ChampsClient champsClient, String valeur) {
+	public void mettreClientAJour(VueClient vue, String idClient, Champs champs, String valeur) {
 		if (vue instanceof VueMembre) {
-			centreDonneesMembre.mettreAJour(idClient, champsClient, valeur);
+			centreDonneesMembre.mettreAJour(idClient, champs, valeur);
 		} else if (vue instanceof VueProfessionnel) {
-			centreDonneesProfessionnel.mettreAJour(idClient, champsClient, valeur);
+			centreDonneesProfessionnel.mettreAJour(idClient, champs, valeur);
 		}
 	}
 

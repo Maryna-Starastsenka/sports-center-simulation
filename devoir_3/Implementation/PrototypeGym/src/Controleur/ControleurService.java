@@ -55,7 +55,7 @@ public class ControleurService extends Controleur {
 		centreDonneesServices.ajouterService(service);
 	}
 
-	public void mettreServiceAJour(String idService, ChampsService champs, String valeur) {
+	public void mettreServiceAJour(String idService, Champs champs, String valeur) {
 		centreDonneesServices.mettreAJour(idService, champs, valeur);
 	}
 

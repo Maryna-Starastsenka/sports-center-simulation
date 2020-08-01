@@ -8,7 +8,7 @@ import Modele.TypeClient;
 import java.util.Arrays;
 
 import static Controleur.Verificateurs.identifiantClientValide;
-import static Modele.ChampsService.*;
+import static Modele.Champs.*;
 
 public class VueService extends Vue {
 
@@ -109,46 +109,46 @@ public class VueService extends Vue {
             case "2":
                 afficher("Veuillez entrer la nouvelle date de début du service (jj-mm-aaaa) :");
                 String dateDebutService = acquisitionReponse(Verificateurs::dateValide);
-                controleurService.mettreServiceAJour(idService, DATE_DEBUT, dateDebutService);
-                afficher(String.format("%s du service %s modifié.", DATE_DEBUT.name(), idService));
+                controleurService.mettreServiceAJour(idService, DATE_DEBUT_SERVICE, dateDebutService);
+                afficher(String.format("%s du service %s modifié.", DATE_DEBUT_SERVICE.name(), idService));
                 break;
             case "3":
                 afficher("Veuillez entrer la nouvelle date de fin du service (jj-mm-aaaa) :");
                 String dateFinService = acquisitionReponse(Verificateurs::dateValide);
-                controleurService.mettreServiceAJour(idService, DATE_FIN, dateFinService);
-                afficher(String.format("%s du service %s modifié.", DATE_FIN.name(), idService));
+                controleurService.mettreServiceAJour(idService, DATE_FIN_SERVICE, dateFinService);
+                afficher(String.format("%s du service %s modifié.", DATE_FIN_SERVICE.name(), idService));
                 break;
             case "4":
                 afficher("Veuillez entrer la nouvelle heure du service (hh:mm) :");
                 String heureService = acquisitionReponse(Verificateurs::horaireValide);
-                controleurService.mettreServiceAJour(idService, HEURE, heureService);
-                afficher(String.format("%s du service %s modifié.", HEURE.name(), idService));
+                controleurService.mettreServiceAJour(idService, HEURE_SERVICE, heureService);
+                afficher(String.format("%s du service %s modifié.", HEURE_SERVICE.name(), idService));
                 break;
             case "5":
                 afficher("Veuillez entrer la nouvelle récurrence hebdomadaire (ex : entrez \"mercredi\") :");
                 String recurrenceHebdo = acquisitionReponse(Verificateurs::jourSemaineValide);
-                controleurService.mettreServiceAJour(idService, RECURRENCE, recurrenceHebdo);
-                afficher(String.format("%s du service %s modifié.", RECURRENCE.name(), idService));
+                controleurService.mettreServiceAJour(idService, RECURRENCE_HEBDO_SERVICE, recurrenceHebdo);
+                afficher(String.format("%s du service %s modifié.", RECURRENCE_HEBDO_SERVICE.name(), idService));
                 break;
             case "6":
                 afficher("Veuillez entrer la nouvelle capacité maximale (1-30) :");
                 String capaciteMaximale = acquisitionReponse((String s) -> Verificateurs.intValide(s)
                         && Integer.parseInt(s) >= 1
                         && Integer.parseInt(s) <= 30);
-                controleurService.mettreServiceAJour(idService, CAPACITE_MAX, capaciteMaximale);
-                afficher(String.format("%s du service %s modifié.", CAPACITE_MAX.name(), idService));
+                controleurService.mettreServiceAJour(idService, CAPACITE_MAX_SERVICE, capaciteMaximale);
+                afficher(String.format("%s du service %s modifié.", CAPACITE_MAX_SERVICE.name(), idService));
                 break;
             case "7":
                 afficher("Veuillez entrer les frais du service (XXX.XX) :");
                 String fraisService = acquisitionReponse(Verificateurs::fraisServiceValide);
-                controleurService.mettreServiceAJour(idService, FRAIS, fraisService);
-                afficher(String.format("%s du service %s modifié.", FRAIS.name(), idService));
+                controleurService.mettreServiceAJour(idService, FRAIS_SERVICE, fraisService);
+                afficher(String.format("%s du service %s modifié.", FRAIS_SERVICE.name(), idService));
                 break;
             case "8":
                 afficher("Veuillez entrer le nouveau commentaire :");
                 String commentaires = getTexteConsole();
-                controleurService.mettreServiceAJour(idService, COMMENTAIRE, commentaires);
-                afficher(String.format("%s du service %s modifié.", COMMENTAIRE.name(), idService));
+                controleurService.mettreServiceAJour(idService, COMMENTAIRE_SERVICE, commentaires);
+                afficher(String.format("%s du service %s modifié.", COMMENTAIRE_SERVICE.name(), idService));
                 break;
         }
     }
