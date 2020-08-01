@@ -1,16 +1,30 @@
 package Controleur;
 
-import Modele.CentreDonnees;
+import Modele.Jour;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
-import static Controleur.ControleurClient.*;
 
 public class Verificateurs {
 
+    public static ZoneId zoneId = ZoneId.systemDefault();
+    public static DateTimeFormatter localDateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+    public static DateTimeFormatter localDateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    public static DateTimeFormatter localTimeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+
+    public static LocalDate today() {
+        return LocalDate.now(zoneId) ;
+    }
+
+    public static LocalDateTime now() {
+        return LocalDateTime.now(zoneId) ;
+    }
+
     public static LocalDate getDateFromString (String stringDate) {
-        return LocalDate.parse(stringDate, CentreDonnees.localDateFormatter);
+        return LocalDate.parse(stringDate, localDateFormatter);
     }
 
     public static boolean dateValide (String s){
@@ -22,7 +36,7 @@ public class Verificateurs {
         }
     }
 
-    public static boolean courrielValide (String s){
+    public static boolean courrielValide (String s) {
         String regexPattern = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
         return s.matches(regexPattern);
     }
@@ -31,8 +45,40 @@ public class Verificateurs {
         return s.length() >= 1;
     }
 
-    public static boolean identifiantClientValide(String s){
-        return s != null && s.length() == 9;
+    public static boolean horaireValide(String s) {
+        String regexPattern = "^([0-1][0-9]|[2][0-3]):([0-5][0-9])$";
+        return s.matches(regexPattern);
+    }
+
+    public static boolean jourSemaineValide(String s) {
+        for (Jour jour : Jour.values()) {
+            if (s.toUpperCase().equals(jour.name().toUpperCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean identifiantClientValide(String s) {
+        return s != null && s.length() == 9 && intValide(s);
+    }
+
+    public static boolean identifiantServiceValide(String s) {
+        return s != null && s.length() == 7 && intValide(s);
+    }
+
+    public static boolean fraisServiceValide(String s) {
+        String regexPattern = "^\\d+([.,]\\d{1,2})?$";
+        return s.matches(regexPattern);
+    }
+
+    public static boolean intValide(String s) {
+        try {
+            Integer.parseInt(s);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     public static boolean adresseValide (String s){

@@ -13,7 +13,7 @@ public class Service {
 	private LocalDate dateDebutService;
 	private LocalDate dateFinService;
 	private LocalTime heureService;
-	private int recurrenceHebdo;
+	private Jour recurrenceHebdo;
 	private int capaciteMaximale;
 	private String numeroProfessionnel;
 	private String codeService;
@@ -24,16 +24,16 @@ public class Service {
 
 
 	public Service(String nomService,
-				   LocalDateTime dateEtHeureActuelles,
-				   LocalDate dateDebutService,
-				   LocalDate dateFinService,
-				   LocalTime heureService,
-				   int recurrenceHebdo,
-				   int capaciteMaximale,
-				   String numeroProfessionnel,
-				   String codeService,
-				   double fraisService,
-				   String commentaires) {
+                   LocalDateTime dateEtHeureActuelles,
+                   LocalDate dateDebutService,
+                   LocalDate dateFinService,
+                   LocalTime heureService,
+                   Jour recurrenceHebdo,
+                   int capaciteMaximale,
+                   String numeroProfessionnel,
+                   String codeService,
+                   double fraisService,
+                   String commentaires) {
 		this.nomService = nomService;
 		this.dateEtHeureActuelles = dateEtHeureActuelles;
 		this.dateDebutService = dateDebutService;
@@ -71,7 +71,7 @@ public class Service {
 	public String getCommentaires() { return getCommentaires(); }
 
 	public void setRecurrenceHebdo(String valeur) {
-		this.recurrenceHebdo = Integer.parseInt(valeur);
+		this.recurrenceHebdo = Jour.valueOf(valeur.toUpperCase());
 	}
 
 	public void setHeureService(LocalTime valeur){

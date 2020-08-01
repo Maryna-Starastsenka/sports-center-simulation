@@ -9,19 +9,20 @@ import java.util.Arrays;
 public class VueMembre extends VueClient<Membre> {
 
     public VueMembre() {
-        typeClient = "Membre";
+        clientString = "Membre";
+        typeClient = TypeClient.MEMBRE;
         controleurClient = new ControleurClient();
     }
 
     @Override
-    public TypeClient getTypeClient() {
+    public TypeClient getTypeClientPrecis() {
         afficher("Inscrivez-vous un membre qui a payé les frais d'adhésion ?");
         afficher("1. Oui");
         afficher("2. Non");
 
-        typeClient = acquisitionReponse(Arrays.asList("1", "2"));
+        clientString = acquisitionReponse(Arrays.asList("1", "2"));
 
-        switch (typeClient) {
+        switch (clientString) {
             case "1":
                 return TypeClient.MEMBRE_VALIDE;
             case "2":

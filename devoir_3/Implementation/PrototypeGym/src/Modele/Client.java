@@ -1,5 +1,7 @@
 package Modele;
 
+import Controleur.Verificateurs;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -55,7 +57,7 @@ public abstract class Client {
 	@Override
 	public String toString() {
 		return "Nom : " + this.getNom() + "\n" + "Date de naissance : "
-				+ CentreDonnees.localDateFormatter.format(this.getDateNaissance())+ "\n" + "Adresse courriel : " + this.getAdresseCourriel() + "\n"
+				+ Verificateurs.localDateFormatter.format(this.getDateNaissance())+ "\n" + "Adresse courriel : " + this.getAdresseCourriel() + "\n"
 				+ "Numéro de téléphone : " + this.getNumeroPhone() + "\n" + "Adresse : " + this.getAdresse() + "\n";
 	}
 

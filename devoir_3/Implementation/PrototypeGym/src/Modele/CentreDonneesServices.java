@@ -3,6 +3,7 @@ package Modele;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,7 +11,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CentreDonneesServices extends CentreDonnees {
+import static Controleur.Verificateurs.*;
+
+public class CentreDonneesServices implements ICentreDonnees {
 
 	private HashMap<String, Service> listeServices = new HashMap<>();
     private HashMap<String, Seance> listeSeances = new HashMap<>();
@@ -22,15 +25,18 @@ public class CentreDonneesServices extends CentreDonnees {
     private List<ProfessionnelTef> listeProfessionnelsTef = new ArrayList<>();
     
 	public CentreDonneesServices() {
-		/*
+		String idProfessionel1 = "150337313";
+		String idProfessionel2 = "173262475";
+		String idMembre1 = "554365143";
+
 		Modele.Service service1 = new Modele.Service("Zumba",
 				LocalDateTime.of(LocalDate.of(2020, 1,1), LocalTime.of(8,0,0)),
 				LocalDate.of(2025, 12, 31),
 				LocalDate.of(2020, 7, 19),
 				LocalTime.of(22, 30),
-				7,
+				Jour.DIMANCHE,
 				25,
-				professionnel1.getHashInString(),
+				idProfessionel1,
 				"1234567",
 				63.25,
 				"Rien à signaler");
@@ -41,9 +47,9 @@ public class CentreDonneesServices extends CentreDonnees {
 				LocalDate.of(2015, 11, 30),
 				LocalDate.of(2025, 7, 12),
 				LocalTime.of(18,20),
-				1,
+				Jour.LUNDI,
 				25,
-				professionnel1.getHashInString(),
+				idProfessionel1,
 				"2345678",
 				100.00,
 				"Aucun commentaire");
@@ -53,10 +59,11 @@ public class CentreDonneesServices extends CentreDonnees {
 				LocalDate.of(2017, 11, 15),
 				LocalDate.of(2036, 9, 20),
 				LocalTime.of(18,20),
-				1,
+				Jour.LUNDI,
 				2,
-				professionnel2.getHashInString(),
-				"967588234",
+				idProfessionel2,
+				"9675882" +
+						"",
 				50.12,
 				"En refonte");
 		listeServices.put(service3.getCode(), service3);
@@ -81,13 +88,11 @@ public class CentreDonneesServices extends CentreDonnees {
 
         Modele.Inscription inscription1 = new Modele.Inscription(now(),
                 seance2.getDateTimeSeance().toLocalDate(),
-                professionnel1.getHashInString(),
-                membre1.getHashInString(),
+				idProfessionel1,
+				idMembre1,
                 seance2.getCodeService(),
                 "");
         listeInscriptions.put(inscription1.getHashInString(), inscription1);
-        */
-        
 	}
 
 	public void ajouterService(Service service) {
@@ -224,5 +229,34 @@ public class CentreDonneesServices extends CentreDonnees {
 				fraisTotaux);
 	}
 
-	
+
+	@Override
+	public Object creer(Object client) {
+		return null;
+	}
+
+	@Override
+	public Object lire(String id) {
+		return null;
+	}
+
+	@Override
+	public void mettreAJour(String id, ChampsClients champs, String valeur) {
+
+	}
+
+	@Override
+	public void supprimer(String id) {
+
+	}
+
+	@Override
+	public void ajouterClient(Object client) {
+
+	}
+
+	@Override
+	public List<Client> getClients() {
+		return null;
+	}
 }

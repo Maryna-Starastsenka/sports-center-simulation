@@ -19,8 +19,38 @@ public class ControleurService extends Controleur {
 		this.centreDonneesServices = new CentreDonneesServices();
 	}
 
-	public void creerService() {
+	public void creerService(String nomService,
+							 String dateDebutServiceString,
+							 String dateFinServiceString,
+							 String heureServiceString,
+							 String recurrenceHebdoString,
+							 String capaciteMaximaleString,
+							 String numeroProfessionnel,
+							 String codeService,
+							 String fraisServiceString,
+							 String commentaires) {
 
+		LocalDateTime dateEtHeureActuelles = Verificateurs.now();
+		LocalDate dateDebutService = LocalDate.from(Verificateurs.localDateFormatter.parse(dateDebutServiceString));
+		LocalDate dateFinService = LocalDate.from(Verificateurs.localDateFormatter.parse(dateFinServiceString));
+		LocalTime heureService = LocalTime.from(Verificateurs.localTimeFormatter.parse(heureServiceString));
+		Jour recurrenceHebdo = Jour.valueOf(recurrenceHebdoString.toUpperCase());
+		int capaciteMaximale = Integer.parseInt(capaciteMaximaleString);
+		double fraisService = Double.parseDouble(fraisServiceString);
+
+		Service service = new Service(nomService,
+				dateEtHeureActuelles,
+				dateDebutService,
+				dateFinService,
+				heureService,
+				recurrenceHebdo,
+				capaciteMaximale,
+				numeroProfessionnel,
+				codeService,
+				fraisService,
+				commentaires);
+
+		centreDonneesServices.ajouterService(service);
 	}
 
 	public void mettreServiceAJour(String idService) {
@@ -34,13 +64,13 @@ public class ControleurService extends Controleur {
 
 	public void gererService(String idProfessionnel) {
 
-		Vue.afficherGestionService();
+//		Vue.afficherGestionService();
 		String entree = Vue.getTexteConsole();
 
 		if (Arrays.asList("1", "2", "3", "X").contains(entree)) {
 			switch (entree) {
 			case "1":
-				formulaireNouveauService(idProfessionnel);
+//				formulaireNouveauService(idProfessionnel);
 				break;
 			case "2":
 				List<Service> servicesDuProfessionnel = centreDonneesServices.getListeServicesPro(idProfessionnel);
@@ -56,8 +86,8 @@ public class ControleurService extends Controleur {
 	}
 
 	public void inscriptionSeance(String membreId) {
-		Vue.afficher("Références des séances disponibles aujourd'hui, le " + CentreDonnees.today() + " :");
-		afficherToutesLesSeancesDuJour(CentreDonnees.today());
+		Vue.afficher("Références des séances disponibles aujourd'hui, le " + Verificateurs.today() + " :");
+		afficherToutesLesSeancesDuJour(Verificateurs.today());
 
 		Vue.afficher("Veuillez entrer la référence de la séance à laquelle vous voulez inscrire un membre ou appuyez sur ENTREE pour revenir au menu principal :");
 		String seanceId = Vue.getTexteConsole();
@@ -88,7 +118,7 @@ public class ControleurService extends Controleur {
 							" a été inscrit à la séance " +
 							seanceId +
 							" qui aura lieu le " +
-							CentreDonneesServices.localDateTimeFormatter.format(centreDonneesServices.getSeance(seanceId).getDateTimeSeance()));
+							Verificateurs.localDateTimeFormatter.format(centreDonneesServices.getSeance(seanceId).getDateTimeSeance()));
 				} else {
 					Vue.afficher("Annulation de l'inscription. Retour au menu principal.");
 				}
@@ -104,8 +134,8 @@ public class ControleurService extends Controleur {
 
 	public void confirmerPresence(String membreId) {
 
-		Vue.afficher("Références des séances disponibles ajourd'hui, le " + CentreDonnees.today() + " :");
-		afficherToutesLesSeancesDuJour(CentreDonneesServices.today());
+		Vue.afficher("Références des séances disponibles ajourd'hui, le " + Verificateurs.today() + " :");
+		afficherToutesLesSeancesDuJour(Verificateurs.today());
 
 		Vue.afficher("Veuillez entrer la référence de la séance à laquelle vous voulez inscrire un membre ou appuyez sur ENTREE pour revenir au menu principal :");
 		String seanceId = Vue.getTexteConsole();
@@ -171,8 +201,6 @@ public class ControleurService extends Controleur {
 	}
 
 
-
-
 	private void afficherServicesProfessionnel(List<Service> servicesDuProfessionnel) {
 		Vue.effacerEcran();
 
@@ -227,94 +255,94 @@ public class ControleurService extends Controleur {
 		}
 	}
 
-	private void formulaireNouveauService(String idProfessionnel) {
-		Vue.effacerEcran();
-
-		Vue.afficher("------Formulaire de nouveau service------");
-
-		String entree;
-
-		String nomService;
-		LocalDateTime dateEtHeureActuelles = null;
-		LocalDate dateDebutService = null;
-		LocalDate dateFinService = null;
-		LocalTime heureService;
-		int recurrenceHebdo;
-		int capaciteMaximale;
-		String numeroProfessionnel = idProfessionnel;
-		String codeService;
-		double fraisService;
-		String commentaires;
-
-		Vue.afficher("Veuillez entrer le nom du service :");
-		nomService = Vue.getTexteConsole();
-
-		dateEtHeureActuelles = CentreDonnees.now();
-
-		do {
-			Vue.afficher("Veuillez entrer la date de début du service (jj-mm-aaaa) :");
-			entree = Vue.getTexteConsole();
-		} while (false); //todo
-		dateDebutService = Verificateurs.getDateFromString(entree);
-
-		do {
-			Vue.afficher("Veuillez entrer la date de fin du service (jj-mm-aaaa) :");
-			entree = Vue.getTexteConsole();
-		} while (false); //todo
-		dateFinService = Verificateurs.getDateFromString(entree);
-
-
-		do {
-			Vue.afficher("Veuillez entrer l'heure du service (hh:mm) :");
-			entree = Vue.getTexteConsole();
-		} while (false); //todo
-		heureService = getHoraire(entree);
-
-		do {
-			Vue.afficher("Veuillez entrer la récurrence hebdomadaire (1-7) :");
-			entree = Vue.getTexteConsole();
-		} while (false); //todo
-		recurrenceHebdo = getInt(entree);//getHoraire(entree);
-
-		do {
-			Vue.afficher("Veuillez entrer la capacité maximale (1-30) :");
-			entree = Vue.getTexteConsole();
-		} while (false); //todo
-		capaciteMaximale = getInt(entree);
-
-		do {
-			Vue.afficher("Veuillez entrer le code du service (XXXXXXX) :");
-			entree = Vue.getTexteConsole();
-		} while (false); //todo
-		codeService = entree;
-
-		do {
-			Vue.afficher("Veuillez entrer les frais du service (XXX.XX) :");
-			entree = Vue.getTexteConsole();
-		} while (false); //todo
-		fraisService = getDouble(entree);
-
-		do {
-			Vue.afficher("Veuillez entrer les commentaires :");
-			entree = Vue.getTexteConsole();
-		} while (false); //todo
-		commentaires = entree;
-
-		Service service = new Service(nomService,
-				dateEtHeureActuelles,
-				dateDebutService,
-				dateFinService,
-				heureService,
-				recurrenceHebdo,
-				capaciteMaximale,
-				numeroProfessionnel,
-				codeService,
-				fraisService,
-				commentaires);
-		centreDonneesServices.ajouterService(service);
-
-		Vue.afficher("Modele.Service " + service.getCode() + " enregistré.");
-	}
+//	private void formulaireNouveauService(String idProfessionnel) {
+//		Vue.effacerEcran();
+//
+//		Vue.afficher("------Formulaire de nouveau service------");
+//
+//		String entree;
+//
+//		String nomService;
+//		LocalDateTime dateEtHeureActuelles = null;
+//		LocalDate dateDebutService = null;
+//		LocalDate dateFinService = null;
+//		LocalTime heureService;
+//		int recurrenceHebdo;
+//		int capaciteMaximale;
+//		String numeroProfessionnel = idProfessionnel;
+//		String codeService;
+//		double fraisService;
+//		String commentaires;
+//
+//		Vue.afficher("Veuillez entrer le nom du service :");
+//		nomService = Vue.getTexteConsole();
+//
+//		dateEtHeureActuelles = Verificateurs.now();
+//
+//		do {
+//			Vue.afficher("Veuillez entrer la date de début du service (jj-mm-aaaa) :");
+//			entree = Vue.getTexteConsole();
+//		} while (false); //todo
+//		dateDebutService = Verificateurs.getDateFromString(entree);
+//
+//		do {
+//			Vue.afficher("Veuillez entrer la date de fin du service (jj-mm-aaaa) :");
+//			entree = Vue.getTexteConsole();
+//		} while (false); //todo
+//		dateFinService = Verificateurs.getDateFromString(entree);
+//
+//
+//		do {
+//			Vue.afficher("Veuillez entrer l'heure du service (hh:mm) :");
+//			entree = Vue.getTexteConsole();
+//		} while (false); //todo
+//		heureService = getHoraire(entree);
+//
+//		do {
+//			Vue.afficher("Veuillez entrer la récurrence hebdomadaire (1-7) :");
+//			entree = Vue.getTexteConsole();
+//		} while (false); //todo
+//		recurrenceHebdo = getInt(entree);//getHoraire(entree);
+//
+//		do {
+//			Vue.afficher("Veuillez entrer la capacité maximale (1-30) :");
+//			entree = Vue.getTexteConsole();
+//		} while (false); //todo
+//		capaciteMaximale = getInt(entree);
+//
+//		do {
+//			Vue.afficher("Veuillez entrer le code du service (XXXXXXX) :");
+//			entree = Vue.getTexteConsole();
+//		} while (false); //todo
+//		codeService = entree;
+//
+//		do {
+//			Vue.afficher("Veuillez entrer les frais du service (XXX.XX) :");
+//			entree = Vue.getTexteConsole();
+//		} while (false); //todo
+//		fraisService = getDouble(entree);
+//
+//		do {
+//			Vue.afficher("Veuillez entrer les commentaires :");
+//			entree = Vue.getTexteConsole();
+//		} while (false); //todo
+//		commentaires = entree;
+//
+//		Service service = new Service(nomService,
+//				dateEtHeureActuelles,
+//				dateDebutService,
+//				dateFinService,
+//				heureService,
+//				recurrenceHebdo,
+//				capaciteMaximale,
+//				numeroProfessionnel,
+//				codeService,
+//				fraisService,
+//				commentaires);
+//		centreDonneesServices.ajouterService(service);
+//
+//		Vue.afficher("Modele.Service " + service.getCode() + " enregistré.");
+//	}
 
 	private void afficherToutesLesSeancesDuJour(LocalDate jour) {
 		var seances = centreDonneesServices.getListeSeances(jour);
@@ -322,7 +350,7 @@ public class ControleurService extends Controleur {
 			Vue.afficher(s.getHashInString() + " (service de " +
 					centreDonneesServices.getService(s.getCodeService()).getNomService() +
 					") : le " +
-					CentreDonnees.localDateTimeFormatter.format(s.getDateTimeSeance()));
+					Verificateurs.localDateTimeFormatter.format(s.getDateTimeSeance()));
 		}
 	}
 
@@ -339,7 +367,7 @@ public class ControleurService extends Controleur {
 	}
 
 	public static LocalTime getHoraire (String stringHoraire){
-		return LocalTime.parse(stringHoraire, CentreDonnees.localTimeFormatter);
+		return LocalTime.parse(stringHoraire, Verificateurs.localTimeFormatter);
 	}
 
 	public int getInt (String stringInt){

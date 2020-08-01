@@ -44,12 +44,6 @@ public abstract class Controleur {
 //		String membreId;
 //		String idProfessionnel;
 //		switch (entreePrincipale) {
-//			case "1":
-//				controleurClient.demanderAcces();
-//				break;
-//			case "2":
-//				controleurClient.gestionCompte();
-//				break;
 //			case "3":
 //				Vue.afficher("--------Gestion d'un service-------");
 //				controleurClient.afficherTousLesProfessionnels();

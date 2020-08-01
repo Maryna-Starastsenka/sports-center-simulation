@@ -7,12 +7,13 @@ import Modele.TypeClient;
 public class VueProfessionnel extends VueClient<Professionnel> {
 
     public VueProfessionnel() {
-        typeClient = "Professionnel";
+        clientString = "Professionnel";
+        typeClient = TypeClient.PROFESSIONNEL;
         controleurClient = new ControleurClient();
     }
 
     @Override
-    public TypeClient getTypeClient() {
+    public TypeClient getTypeClientPrecis() {
         return TypeClient.PROFESSIONNEL;
     }
 

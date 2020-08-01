@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class CentreDonneesClient extends CentreDonnees{
+//TODO A SUPPRIMER
+public abstract class CentreDonneesClient {
 	private HashMap<String, Membre> listeMembres = new HashMap<>();
     private HashMap<String, Professionnel> listeProfessionnels = new HashMap<>();
     

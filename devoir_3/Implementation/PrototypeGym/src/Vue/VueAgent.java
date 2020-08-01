@@ -22,7 +22,7 @@ public class VueAgent extends VuePlateforme {
         afficher("1. Demande d'accès au gym");
         afficher("2. Gestion d'un compte");
         afficher("3. Gestion d'un service");
-        afficher("4. Modele.Inscription à une séance");
+        afficher("4. Inscription à une séance");
         afficher("5. Confirmation de la présence");
         afficher("6. Consultation d'une séance");
         afficher("7. Procédure comptable");
@@ -39,6 +39,7 @@ public class VueAgent extends VuePlateforme {
                 gestionCompte();
                 break;
             case "3":
+                vueService.gestionService();
                 break;
             case "4":
                 break;
@@ -53,7 +54,15 @@ public class VueAgent extends VuePlateforme {
             case "9":
                 break;
         }
+
+        retourMenuPrincipal();
     }
+
+//    private void gestionService() {
+//        if (cont.authentifier())
+//
+//        vueService.gestionService();
+//    }
 
     public void gestionCompte() {
         effacerEcran();
@@ -100,8 +109,6 @@ public class VueAgent extends VuePlateforme {
 //            case "5":
 //                break;
 //        }
-
-        retourMenuPrincipal();
     }
 
     @Override
@@ -125,8 +132,6 @@ public class VueAgent extends VuePlateforme {
             case "3":
                 break;
         }
-
-        retourMenuPrincipal();
     }
 
 
