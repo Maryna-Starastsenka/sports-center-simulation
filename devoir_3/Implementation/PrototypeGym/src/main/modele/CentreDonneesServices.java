@@ -286,7 +286,6 @@ public class CentreDonneesServices implements ICentreDonnees {
 
 	}
 
-	@Override
 	public List<Client> getClients() {
 		return null;
 	}

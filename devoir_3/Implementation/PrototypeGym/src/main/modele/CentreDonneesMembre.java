@@ -9,6 +9,7 @@ import static main.controleur.Verificateurs.getDateFromString;
 
 public class CentreDonneesMembre implements ICentreDonnees<Membre> {
     private HashMap<String, Membre> listeMembres = new HashMap<>();
+    private HashMap<String, String> listeAdressesMembres = new HashMap<>();
 
     public CentreDonneesMembre() {
         // valeurs par défaut
@@ -18,6 +19,7 @@ public class CentreDonneesMembre implements ICentreDonnees<Membre> {
                 "999-999-9999",
                 "John@doe.com", true);
         listeMembres.put(membre1.getHashInString(), membre1);
+        listeAdressesMembres.put(membre1.adresseCourriel, membre1.getHashInString());
     }
 
     @Override
@@ -34,6 +36,13 @@ public class CentreDonneesMembre implements ICentreDonnees<Membre> {
         return null;
     }
 
+    public String getIdDepuisAdresse(String adresseCourriel) {
+        if (listeAdressesMembres.containsKey(adresseCourriel)) {
+            return listeAdressesMembres.get(adresseCourriel);
+        }
+        return null;
+    }
+
     @Override
     public void mettreAJour(String idMembre, Champs champsClient, String valeur) {
         Membre membre = lire(idMembre);
@@ -46,7 +55,10 @@ public class CentreDonneesMembre implements ICentreDonnees<Membre> {
                 membre.setDateNaissance(getDateFromString(valeur));
                 break;
             case ADRESSE_COURRIEL_CLIENT:
+                String ancienneAdresse = membre.getAdresseCourriel();
                 membre.setAdresseCourriel(valeur);
+                listeAdressesMembres.remove(ancienneAdresse);
+                listeAdressesMembres.put(valeur, idMembre);
                 break;
             case TELEPHONE_CLIENT:
                 membre.setNumeroPhone(valeur);
@@ -61,17 +73,20 @@ public class CentreDonneesMembre implements ICentreDonnees<Membre> {
 
     @Override
     public void supprimer(String id) {
+        String adresseCourriel = listeMembres.get(id).getAdresseCourriel();
         listeMembres.remove(id);
+        listeAdressesMembres.remove(adresseCourriel);
     }
 
     @Override
     public void ajouterClient(Membre membre) {
-        if (!listeMembres.containsKey(membre.getHashInString())) {
+        if (!listeMembres.containsKey(membre.getHashInString()) &&
+        !listeAdressesMembres.containsKey(membre.adresseCourriel)) {
             listeMembres.put(membre.getHashInString(), membre);
+            listeAdressesMembres.put(membre.adresseCourriel, membre.getHashInString());
         }
     }
 
-    @Override
     public List<Client> getClients() {
         return listeMembres.values().stream().collect(Collectors.toList());
     }

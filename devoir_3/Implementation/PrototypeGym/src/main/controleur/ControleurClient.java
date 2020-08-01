@@ -68,6 +68,16 @@ public class ControleurClient extends Controleur {
 		return client != null;
 	}
 
+	public static String seConnecterApp(TypeClient typeClient, String adresseCourriel) {
+		String idClient = null;
+		if (typeClient.equals(TypeClient.MEMBRE)) {
+			return idClient = (centreDonneesMembre.getIdDepuisAdresse(adresseCourriel));
+		} else if (typeClient.equals(TypeClient.PROFESSIONNEL)) {
+			return idClient = (centreDonneesProfessionnel.getIdDepuisAdresse(adresseCourriel));
+		}
+		return idClient;
+	}
+
 	public static TypeClient verifierTypeClient(TypeClient typeClient, String idClient) {
 		if (typeClient == TypeClient.MEMBRE) {
 			Membre membre = centreDonneesMembre.lire(idClient);

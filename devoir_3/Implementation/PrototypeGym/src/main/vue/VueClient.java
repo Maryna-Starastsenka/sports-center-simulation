@@ -6,7 +6,6 @@ import main.modele.TypeClient;
 
 import java.util.Arrays;
 
-import static main.controleur.Verificateurs.getDateFromString;
 import static main.modele.Champs.*;
 import static main.controleur.Verificateurs.identifiantClientValide;
 
@@ -198,6 +197,15 @@ public abstract class VueClient<T> extends Vue {
         }
     }
 
+    public void seConnecterApp(String adresseCourriel) {
+        String idClient = controleurClient.seConnecterApp(typeClient, adresseCourriel);
+        if (idClient != null) {
+            afficher("Bienvenue au #GYM");
+        } else {
+            afficher("Adresse courriel n'est pas retrouvée");
+        }
+    }
+
     public void verifierTypeCleint() {
         afficher(String.format("Entrez l'identifiant du %s (9 chiffres) :", clientString));
         String reponse = acquisitionReponse(Verificateurs::identifiantClientValide);
@@ -216,6 +224,7 @@ public abstract class VueClient<T> extends Vue {
                 break;
         }
     }
+
 
     public abstract void accesAutorise(String idClient);
     public abstract void accesRefuse(String idClient);

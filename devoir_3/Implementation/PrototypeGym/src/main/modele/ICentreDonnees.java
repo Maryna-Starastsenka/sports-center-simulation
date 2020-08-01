@@ -8,5 +8,4 @@ public interface ICentreDonnees<T> {
     void mettreAJour(String id, Champs champs, String valeur);
     void supprimer(String id);
     void ajouterClient(T client);
-    List<Client> getClients();
 }
