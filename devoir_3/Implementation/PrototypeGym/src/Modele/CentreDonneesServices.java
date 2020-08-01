@@ -229,6 +229,9 @@ public class CentreDonneesServices implements ICentreDonnees {
 				fraisTotaux);
 	}
 
+	public List<Service> getServices() {
+		return listeServices.values().stream().collect(Collectors.toList());
+	}
 
 	@Override
 	public Object creer(Object client) {
@@ -236,19 +239,50 @@ public class CentreDonneesServices implements ICentreDonnees {
 	}
 
 	@Override
-	public Object lire(String id) {
+	public Service lire(String id) {
+		if (listeServices.containsKey(id)) {
+			return listeServices.get(id);
+		}
 		return null;
 	}
 
 	@Override
-	public void mettreAJour(String id, ChampsClients champs, String valeur) {
+	public void mettreAJour(String idService, IChamps champs, String valeur) {
+		Service service = lire(idService);
 
+		if (!(champs instanceof ChampsService)) return;
+		ChampsService champsService = (ChampsService) champs;
+
+		switch (champsService) {
+			case NOM_SERVICE:
+				service.setNomService(valeur);
+				break;
+			case DATE_DEBUT:
+				service.setDateDebutService(getDateFromString(valeur));
+				break;
+			case DATE_FIN:
+				service.setDateFinService(getDateFromString(valeur));
+				break;
+			case HEURE:
+				service.setHeureService(getHeureFromString(valeur));
+				break;
+			case RECURRENCE:
+				service.setRecurrenceHebdo(getJourFromString(valeur));
+				break;
+			case CAPACITE_MAX:
+				service.setCapaciteMax(getIntFromString(valeur));
+				break;
+			case FRAIS:
+				service.setFrais(getDoubleFromString(valeur));
+				break;
+			case COMMENTAIRE:
+				service.setCommentaires(valeur);
+				break;
+		}
 	}
 
 	@Override
-	public void supprimer(String id) {
-
-	}
+	public void supprimer(String id) { listeServices.remove(id); }
 
 	@Override
 	public void ajouterClient(Object client) {

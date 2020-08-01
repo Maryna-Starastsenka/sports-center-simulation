@@ -32,7 +32,7 @@ public abstract class Vue {
         String reponse;
         do {
             reponse = getTexteConsole();
-        } while(!verificateur.verifier(reponse) || reponse.equals("0"));
+        } while(!verificateur.verifier(reponse) && !reponse.equals("0"));
         return reponse;
     }
 
@@ -43,7 +43,7 @@ public abstract class Vue {
                 afficher(messageErreur);
             }
             reponse = getTexteConsole();
-        } while(!verificateur.verifier(reponse) || reponse.equals("0"));
+        } while(!verificateur.verifier(reponse) && !reponse.equals("0"));
         return reponse;
     }
 
@@ -51,7 +51,7 @@ public abstract class Vue {
         String reponse;
         do {
             reponse = getTexteConsole();
-        } while(reponse.length() < 1 || reponse.equals("0"));
+        } while(reponse.length() < 1 && !reponse.equals("0"));
         return reponse;
     }
 

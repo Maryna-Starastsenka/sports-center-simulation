@@ -6,7 +6,7 @@ import Modele.TypeClient;
 
 import java.util.Arrays;
 
-import static Modele.ChampsClients.*;
+import static Modele.ChampsClient.*;
 import static Controleur.Verificateurs.identifiantClientValide;
 
 public abstract class VueClient<T> extends Vue {

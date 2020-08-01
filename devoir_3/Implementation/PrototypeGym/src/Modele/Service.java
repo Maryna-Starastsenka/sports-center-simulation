@@ -68,10 +68,10 @@ public class Service {
 
 	public double getFraisService() {return fraisService; }
 
-	public String getCommentaires() { return getCommentaires(); }
+	public String getCommentaires() { return commentaires; }
 
-	public void setRecurrenceHebdo(String valeur) {
-		this.recurrenceHebdo = Jour.valueOf(valeur.toUpperCase());
+	public void setRecurrenceHebdo(Jour valeur) {
+		this.recurrenceHebdo = valeur;
 	}
 
 	public void setHeureService(LocalTime valeur){
@@ -94,5 +94,29 @@ public class Service {
 
 	protected String getHashInString() {
 		return String.format("%04d", this.hashCode());
+	}
+
+	public void setNomService(String valeur) {
+		this.nomService = valeur;
+	}
+
+	public void setDateDebutService(LocalDate valeur) {
+		this.dateDebutService = valeur;
+	}
+
+	public void setDateFinService(LocalDate valeur) {
+		this.dateFinService = valeur;
+	}
+
+	public void setCapaciteMax(int valeur) {
+		this.capaciteMaximale = valeur;
+	}
+
+	public void setFrais(double valeur) {
+		this.fraisService = valeur;
+	}
+
+	public void setCommentaires(String valeur) {
+		this.commentaires = valeur;
 	}
 }

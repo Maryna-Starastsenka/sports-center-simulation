@@ -1,6 +1,6 @@
 package Modele;
 
-public enum ChampsClients {
+public enum ChampsClient implements IChamps {
     NOM,
     TELEPHONE,
     STATUT,

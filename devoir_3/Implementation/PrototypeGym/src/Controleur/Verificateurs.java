@@ -4,6 +4,7 @@ import Modele.Jour;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -23,8 +24,24 @@ public class Verificateurs {
         return LocalDateTime.now(zoneId) ;
     }
 
-    public static LocalDate getDateFromString (String stringDate) {
+    public static LocalDate getDateFromString(String stringDate) {
         return LocalDate.parse(stringDate, localDateFormatter);
+    }
+
+    public static LocalTime getHeureFromString(String stringTime) {
+        return LocalTime.parse(stringTime, localTimeFormatter);
+    }
+
+    public static Jour getJourFromString(String stringJour) {
+        return Jour.valueOf(stringJour.toUpperCase());
+    }
+
+    public static int getIntFromString(String stringInt) {
+        return Integer.parseInt(stringInt);
+    }
+
+    public static double getDoubleFromString(String stringDouble) {
+        return Double.parseDouble(stringDouble);
     }
 
     public static boolean dateValide (String s){

@@ -35,10 +35,13 @@ public class CentreDonneesMembre implements ICentreDonnees<Membre> {
     }
 
     @Override
-    public void mettreAJour(String idMembre, ChampsClients champs, String valeur) {
+    public void mettreAJour(String idMembre, IChamps champs, String valeur) {
         Membre membre = lire(idMembre);
 
-        switch (champs) {
+        if (!(champs instanceof ChampsClient)) return;
+        ChampsClient champsClient = (ChampsClient) champs;
+
+        switch (champsClient) {
             case NOM:
                 membre.setNom(valeur);
                 break;

@@ -41,16 +41,19 @@ public class CentreDonneesProfessionnel implements ICentreDonnees<Professionnel>
     }
 
     @Override
-    public void mettreAJour(String idProfessionnel, ChampsClients champs, String valeur) {
+    public void mettreAJour(String idProfessionnel, IChamps champs, String valeur) {
         Professionnel professionnel = lire(idProfessionnel);
 
-        switch (champs) {
+        if (!(champs instanceof ChampsClient)) return;
+        ChampsClient champsClient = (ChampsClient) champs;
+
+        switch (champsClient) {
             case NOM:
                 professionnel.setNom(valeur);
                 break;
             case DATE_NAISSANCE:
-            professionnel.setDateNaissance(getDateFromString(valeur));
-            break;
+                professionnel.setDateNaissance(getDateFromString(valeur));
+                break;
             case ADRESSE_COURRIEL:
                 professionnel.setAdresseCourriel(valeur);
                 break;

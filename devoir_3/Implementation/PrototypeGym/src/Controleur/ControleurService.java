@@ -10,6 +10,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import static Controleur.Verificateurs.getJourFromString;
+
 public class ControleurService extends Controleur {
 
 	private CentreDonneesServices centreDonneesServices;
@@ -53,14 +55,26 @@ public class ControleurService extends Controleur {
 		centreDonneesServices.ajouterService(service);
 	}
 
-	public void mettreServiceAJour(String idService) {
-
+	public void mettreServiceAJour(String idService, ChampsService champs, String valeur) {
+		centreDonneesServices.mettreAJour(idService, champs, valeur);
 	}
 
 	public void supprimerService(String idService) {
-
+			centreDonneesServices.supprimer(idService);
 	}
 
+	public String getListeService(VueService vue, String idProfessionnel) {
+		List<Service> services = centreDonneesServices.getListeServicesPro(idProfessionnel);
+
+		String servicesString = "";
+
+		if (services.size() != 0) {
+			for (Service s : services) {
+				servicesString += s.getNomService() + " " + s.getCode() + "; ";
+			}
+		}
+		return servicesString;
+	}
 
 	public void gererService(String idProfessionnel) {
 
@@ -230,7 +244,7 @@ public class ControleurService extends Controleur {
 					case "1":
 						Vue.afficher("Entrez la nouvelle valeur :");
 						String nouvelleRecurrence = Vue.getTexteConsole();
-						serviceAModifier.setRecurrenceHebdo(nouvelleRecurrence);
+						serviceAModifier.setRecurrenceHebdo(getJourFromString(nouvelleRecurrence));
 						Vue.afficher("Modele.Service modifié.");
 						break;
 
@@ -378,4 +392,23 @@ public class ControleurService extends Controleur {
 		return Double.parseDouble(stringDouble);
 	}
 
+	public String getInformationsService(String idService) {
+		Service service = null;
+		String infos = "";
+		service = centreDonneesServices.lire(idService);
+
+		if (service != null) {
+			infos = "ID : " + service.getCode() + "\n" +
+					"Nom de service : " + service.getNomService() + "\n" +
+					"Date de début de service : " + service.getDateDebutService() + "\n" +
+					"Date de fin de service : " + service.getDateFinService() + "\n" +
+					"Heure de service : " + service.getHeureService() + "\n" +
+					"Récurrence hebdomadaire : " + service.getRecurrenceHebdo() + "\n" +
+					"Capacité maximale : " + service.getCapaciteMaximale() + "\n" +
+					"Numéro de professionnel : " + service.getNumeroProfessionnel() + "\n" +
+					"Frais de service : " + service.getFraisService() + "\n" +
+					"Commentaire : " + service.getCommentaires() + "\n";
+		}
+		return infos;
+	}
 }
