@@ -1,16 +1,17 @@
-package Tests;
-
-import static main.controleur.Verificateurs.getDateFromString;
-import static org.junit.jupiter.api.Assertions.*;
-
+ package Tests;
+ 
+ import static main.controleur.Verificateurs.getDateFromString;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+ 
 import java.time.LocalDate;
-import java.util.List;
 
-import org.junit.jupiter.api.Test;
-
+ 
 import main.controleur.*;
 import main.modele.*;
 import main.vue.*;
+import org.junit.jupiter.api.*;
+
 
 class ControleurClientTests {
 
@@ -99,7 +100,7 @@ class ControleurClientTests {
 		
 	}
 
-	@Test
+	@Test //TODO
 	void testSupprimerClient() {
 		ControleurClient controleurClient = new ControleurClient();
 		VueMembre vue = new VueMembre();
@@ -108,7 +109,18 @@ class ControleurClientTests {
 		controleurClient.supprimerClient(vue, idClient);
 		//assertFalse(controleurClient.estMembre(idClient),"Test supprimer client échoué");
 	}
+	
+	@Test
+	void testVerifierTypeClient() {
+		ControleurClient controleurClient = new ControleurClient();
+		String idClient = Client.getHashInString("John@doe.com");
+		TypeClient typeClient = ControleurClient.verifierTypeClient(TypeClient.MEMBRE,idClient);
+		assertEquals(typeClient,TypeClient.MEMBRE_VALIDE,"Test vérifier type vrai échoué");
+		assertFalse(typeClient.equals(TypeClient.MEMBRE_SUSPENDU),"Test vérifier type faux échoué");
 
-
+		String idClient2 = Client.getHashInString("Jean@udem.com");
+		TypeClient typeClient2 = ControleurClient.verifierTypeClient(TypeClient.PROFESSIONNEL,idClient2);
+		assertEquals(typeClient2,TypeClient.PROFESSIONNEL_VALIDE,"Test vérifier type professionnel échoué");
+	}
 
 }
