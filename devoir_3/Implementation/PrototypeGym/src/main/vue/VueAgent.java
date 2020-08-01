@@ -124,10 +124,10 @@ public class VueAgent extends VuePlateforme {
 
         switch (reponse) {
             case "1":
-                vueMembre.authentifier();
+                vueMembre.verifierTypeCleint();
                 break;
             case "2":
-                vueProfessionnel.authentifier();
+                vueProfessionnel.verifierTypeCleint();
                 break;
             case "3":
                 break;

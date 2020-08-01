@@ -6,13 +6,14 @@ import main.modele.TypeClient;
 
 import java.util.Arrays;
 
+import static main.controleur.Verificateurs.getDateFromString;
 import static main.modele.Champs.*;
 import static main.controleur.Verificateurs.identifiantClientValide;
 
 public abstract class VueClient<T> extends Vue {
 
     protected String clientString = "Client";
-    protected TypeClient typeClient = TypeClient.INDEFINI;
+    protected TypeClient typeClient = TypeClient.CLIENT_INVALIDE;
     ControleurClient controleurClient;
 
     protected void enTeteGestionCompte() {
@@ -194,6 +195,25 @@ public abstract class VueClient<T> extends Vue {
             accesAutorise(reponse);
         } else {
             accesRefuse(reponse);
+        }
+    }
+
+    public void verifierTypeCleint() {
+        afficher(String.format("Entrez l'identifiant du %s (9 chiffres) :", clientString));
+        String reponse = acquisitionReponse(Verificateurs::identifiantClientValide);
+        String typeClientVerifie = String.valueOf(controleurClient.verifierTypeClient(typeClient, reponse));
+
+        switch (typeClientVerifie) {
+            case "MEMBRE_VALIDE":
+            case "PROFESSIONNEL_VALIDE":
+                afficher("Accès validé");
+                break;
+            case "MEMBRE_SUSPENDU" :
+                afficher("Membre suspendu");
+                break;
+            case "CLIENT_INVALIDE":
+                afficher("Numéro invalide");
+                break;
         }
     }
 

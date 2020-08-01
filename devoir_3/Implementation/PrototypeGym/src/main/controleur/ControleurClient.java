@@ -68,6 +68,22 @@ public class ControleurClient extends Controleur {
 		return client != null;
 	}
 
+	public static TypeClient verifierTypeClient(TypeClient typeClient, String idClient) {
+		if (typeClient == TypeClient.MEMBRE) {
+			Membre membre = centreDonneesMembre.lire(idClient);
+			if (membre != null) {
+				return membre.getAPaye() ? TypeClient.MEMBRE_VALIDE : TypeClient.MEMBRE_SUSPENDU;
+			}
+		}
+		if (typeClient == TypeClient.PROFESSIONNEL) {
+			Professionnel professionnel = centreDonneesProfessionnel.lire(idClient);
+			if (professionnel != null) {
+				return TypeClient.PROFESSIONNEL_VALIDE;
+			}
+		}
+		return typeClient.CLIENT_INVALIDE;
+	}
+
 	public String getInformationsClient(TypeClient typeClient, String idClient) {
 		Client client = null;
 		String infos = "";

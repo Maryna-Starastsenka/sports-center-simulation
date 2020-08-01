@@ -48,7 +48,4 @@ public class VueMembre extends VueClient<Membre> {
         afficher(String.format("Le membre numéro %s n'est pas autorisé à accéder au gym.",
                 idMembre));
     }
-
-
-
 }
