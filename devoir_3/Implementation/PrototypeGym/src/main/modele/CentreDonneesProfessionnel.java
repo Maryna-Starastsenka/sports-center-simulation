@@ -9,6 +9,7 @@ import static main.controleur.Verificateurs.getDateFromString;
 
 public class CentreDonneesProfessionnel implements ICentreDonnees<Professionnel> {
     private HashMap<String, Professionnel> listeProfessionnels = new HashMap<>();
+    private HashMap<String, String> listeAdressesProffesionnels = new HashMap<>();
 
     public CentreDonneesProfessionnel() {
         /*** PROFESSIONNELS ***/
@@ -17,6 +18,7 @@ public class CentreDonneesProfessionnel implements ICentreDonnees<Professionnel>
                 "987-987-9876",
                 "Jean@udem.com");
         listeProfessionnels.put(professionnel1.getHashInString(), professionnel1);
+        listeAdressesProffesionnels.put(professionnel1.adresseCourriel, professionnel1.getHashInString());
 
         Professionnel professionnel2 = new Professionnel("Baptiste",
                 LocalDate.of(1970, 6, 18),
@@ -24,6 +26,7 @@ public class CentreDonneesProfessionnel implements ICentreDonnees<Professionnel>
                 "182-323-3432",
                 "baptiste@udem.com");
         listeProfessionnels.put(professionnel2.getHashInString(), professionnel2);
+        listeAdressesProffesionnels.put(professionnel2.adresseCourriel, professionnel2.getHashInString());
     }
 
     @Override
@@ -39,7 +42,12 @@ public class CentreDonneesProfessionnel implements ICentreDonnees<Professionnel>
         }
         return null;
     }
-
+    public String getIdDepuisAdresse(String adresseCourriel) {
+        if (listeAdressesProffesionnels.containsKey(adresseCourriel)) {
+            return listeAdressesProffesionnels.get(adresseCourriel);
+        }
+        return null;
+    }
     @Override
     public void mettreAJour(String idProfessionnel, Champs champsClient, String valeur) {
         Professionnel professionnel = lire(idProfessionnel);
@@ -52,7 +60,11 @@ public class CentreDonneesProfessionnel implements ICentreDonnees<Professionnel>
                 professionnel.setDateNaissance(getDateFromString(valeur));
                 break;
             case ADRESSE_COURRIEL_CLIENT:
+                //String ancienneAdresse = professionnel.getAdresseCourriel();
+                String ancienneAdresse = professionnel.getAdresseCourriel();
                 professionnel.setAdresseCourriel(valeur);
+                listeAdressesProffesionnels.remove(ancienneAdresse);
+                listeAdressesProffesionnels.put(valeur, idProfessionnel);
                 break;
             case TELEPHONE_CLIENT:
                 professionnel.setNumeroPhone(valeur);
@@ -65,17 +77,20 @@ public class CentreDonneesProfessionnel implements ICentreDonnees<Professionnel>
 
     @Override
     public void supprimer(String id) {
+        String adresseCourriel = listeProfessionnels.get(id).getAdresseCourriel();
         listeProfessionnels.remove(id);
+        listeAdressesProffesionnels.remove(adresseCourriel);
     }
 
     @Override
     public void ajouterClient(Professionnel professionnel) {
-        if (!listeProfessionnels.containsKey(professionnel.getHashInString())) {
+        if (!listeProfessionnels.containsKey(professionnel.getHashInString()) &&
+        !listeAdressesProffesionnels.containsKey(professionnel.adresseCourriel)) {
             listeProfessionnels.put(professionnel.getHashInString(), professionnel);
+            listeAdressesProffesionnels.put(professionnel.adresseCourriel, professionnel.getHashInString());
         }
     }
 
-    @Override
     public List<Client> getClients() {
         return listeProfessionnels.values().stream().collect(Collectors.toList());
     }

@@ -58,12 +58,6 @@ public class VueAgent extends VuePlateforme {
         retourMenuPrincipal();
     }
 
-//    private void gestionService() {
-//        if (cont.authentifier())
-//
-//        vueService.gestionService();
-//    }
-
     public void gestionCompte() {
         effacerEcran();
 
@@ -84,31 +78,6 @@ public class VueAgent extends VuePlateforme {
             case "3":
                 break;
         }
-
-//        afficher("1. Création d'un compte membre");
-//        afficher("2. Création d'un compte professionnel");
-//        afficher("3. Gestion d'un compte membre existant");
-//        afficher("4. Gestion d'un compte professionnel existant");
-//        afficher("5. Retour au menu principal");
-//
-//        String reponse = acquisitionReponse(Arrays.asList("1","2","3","4","5"));
-//
-//        switch (reponse) {
-//            case "1":
-//                vueMembre.creerClient();
-//                break;
-//            case "2":
-//                vueProfessionnel.creerClient();
-//                break;
-//            case "3":
-//                vueMembre.mettreClientAJour();
-//                break;
-//            case "4":
-//                vueProfessionnel.mettreClientAJour();
-//                break;
-//            case "5":
-//                break;
-//        }
     }
 
     @Override

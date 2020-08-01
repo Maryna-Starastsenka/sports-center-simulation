@@ -1,16 +1,16 @@
 package Tests;
 
 import static main.controleur.Verificateurs.getDateFromString;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
-import java.util.List;
 
-import org.junit.jupiter.api.Test;
 
 import main.controleur.*;
 import main.modele.*;
 import main.vue.*;
+import org.junit.jupiter.api.*;
 
 class ControleurClientTests {
 
