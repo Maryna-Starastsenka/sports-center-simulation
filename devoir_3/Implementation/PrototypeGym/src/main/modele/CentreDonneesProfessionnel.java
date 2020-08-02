@@ -94,4 +94,8 @@ public class CentreDonneesProfessionnel implements ICentreDonnees<Professionnel>
     public List<Client> getClients() {
         return listeProfessionnels.values().stream().collect(Collectors.toList());
     }
+
+    public HashMap<String, Professionnel> getListeProfessionnels() {
+        return listeProfessionnels;
+    }
 }

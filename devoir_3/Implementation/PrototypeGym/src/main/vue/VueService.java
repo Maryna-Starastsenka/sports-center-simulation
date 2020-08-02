@@ -7,6 +7,7 @@ import main.modele.TypeClient;
 
 import java.util.Arrays;
 
+import static main.controleur.Verificateurs.getIntFromString;
 import static main.controleur.Verificateurs.identifiantClientValide;
 import static main.modele.Champs.*;
 
@@ -131,8 +132,8 @@ public class VueService extends Vue {
             case "6":
                 afficher("Veuillez entrer la nouvelle capacité maximale (1-30) :");
                 String capaciteMaximale = acquisitionReponse((String s) -> Verificateurs.intValide(s)
-                        && Integer.parseInt(s) >= 1
-                        && Integer.parseInt(s) <= 30);
+                        && getIntFromString(s) >= 1
+                        && getIntFromString(s) <= 30);
                 controleurService.mettreServiceAJour(idService, CAPACITE_MAX_SERVICE, capaciteMaximale);
                 afficher(String.format("%s du service %s modifié.", CAPACITE_MAX_SERVICE.name(), idService));
                 break;
@@ -198,8 +199,8 @@ public class VueService extends Vue {
 
         afficher("Veuillez entrer la capacité maximale (1-30) :");
         capaciteMaximale = acquisitionReponse((String s) -> Verificateurs.intValide(s)
-                && Integer.parseInt(s) >= 1
-                && Integer.parseInt(s) <= 30);
+                && getIntFromString(s) >= 1
+                && getIntFromString(s) <= 30);
         if (capaciteMaximale.equals("0")) return;
 
         afficher("Veuillez entrer le code du service à 7 chiffres (XXXXXXX) :");
