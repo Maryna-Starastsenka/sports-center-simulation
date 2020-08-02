@@ -77,9 +77,13 @@ class ControleurClientTests {
 		String dateNaissance = "01-01-0001";
 		LocalDate localDate = getDateFromString(dateNaissance);
 		String numeroTel = "001-001-0001";
+		String nom = "Jean";
 		
 		Client client = controleurClient.lireClient(idClient);
 
+		controleurClient.mettreClientAJour(typeClient, idClient, Champs.NOM_CLIENT, nom);
+		assertTrue(client.getNom().equals(nom), "Test mettre a jour nom échoué");
+		
 		assertFalse(client.getAdresse().equals(adresse), "Test mettre a jour adresse échoué");
 		controleurClient.mettreClientAJour(typeClient, idClient, Champs.ADRESSE_CLIENT, adresse);
 		assertTrue(client.getAdresse().equals(adresse), "Test mettre a jour adresse échoué");
@@ -94,6 +98,17 @@ class ControleurClientTests {
 		Membre membre = (Membre)client;
 		controleurClient.mettreClientAJour(typeClient, idClient, Champs.STATUT_MEMBRE, "");
 		assertFalse(membre.getAPaye(), "Test mettre a jour statut échoué");
+		
+		
+		String nouvelleAdresse = "salut@gmail.com";
+		
+		controleurClient.mettreClientAJour(typeClient, idClient, Champs.ADRESSE_COURRIEL_CLIENT, nouvelleAdresse);
+		assertEquals(controleurClient.lireClient(idClient).getAdresseCourriel(), nouvelleAdresse, "Test mettre a jour adresse courriel. Nouveau client non ajouté.");
+		assertNotNull(controleurClient.getIdDepuisAdresse(nouvelleAdresse), "Test mettre a jour, nouveau courriel pas ajouté");
+		assertNull(controleurClient.getIdDepuisAdresse("John@doe.com"), "Test mettre a jour, ancien courriel non supprimé");
+		
+		idClient = Client.getHashInString("salut@gmail.com");
+		assertNull(controleurClient.lireClient(idClient), "Test mettre a jour adresse courriel. Client créer en double.");
 
 		
 	}

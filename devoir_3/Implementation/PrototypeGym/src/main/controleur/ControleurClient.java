@@ -138,6 +138,10 @@ public class ControleurClient extends Controleur {
 	public Client lireClient(String idClient) {
 		return this.centreDonneesMembre.lire(idClient);
 	}
+	
+	public String getIdDepuisAdresse(String adresseCourriel) {
+		return this.centreDonneesMembre.getIdDepuisAdresse(adresseCourriel);
+	}
 
 	public static HashMap<String, Professionnel> getListeProfessionnels() {
 		return centreDonneesProfessionnel.getListeProfessionnels();

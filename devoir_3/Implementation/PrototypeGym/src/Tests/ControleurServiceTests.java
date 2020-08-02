@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
@@ -20,11 +21,17 @@ import main.modele.*;
 import main.vue.*;
 
 class ControleurServiceTests {
+	
+	ControleurService controleurService;
+	
+	@BeforeEach
+	void initialisation() {
+		this.controleurService = new ControleurService();
+	}
 
 	@Test
 	void testCreerService() {
 
-		ControleurService controleurService = new ControleurService();
 		String nomService = "danse";
 		String dateDebutServiceString = "01-08-2020";
 		String dateFinServiceString = "01-08-2021";
@@ -57,7 +64,6 @@ class ControleurServiceTests {
 	void testMettreServiceAJour() {
 
 		String idService = "1234567";
-		ControleurService controleurService = new ControleurService();
 
 		controleurService.mettreServiceAJour(idService, Champs.NOM_SERVICE, "Massage");
 		controleurService.mettreServiceAJour(idService, Champs.DATE_DEBUT_SERVICE, "02-03-2020");
@@ -78,25 +84,23 @@ class ControleurServiceTests {
 				"Numéro de professionnel : 150337313\n" +
 				"Frais de service : 60.0\n" +
 				"Commentaire : Oui\n";
-		System.out.println(infoService);
-		System.out.println(controleurService.getInformationsService(idService));
+		
 		assertEquals(controleurService.getInformationsService(idService),infoService, "Test modifier service échoué");
 	}
 
 	@Test
 	void testSupprimerService() {
 		String idService = "1234567";
-		ControleurService controleurService = new ControleurService();
 		
 		assertNotNull(controleurService.lire(idService),"Test supprimer service. Service n'existe pas");
-		
 		controleurService.supprimerService(idService);
 		assertNull(controleurService.lire(idService),"Test suppermier service. Service pas supprimé.");
 	}
 
 	@Test
 	void testInscriptionSeance() {
-		fail("Not yet implemented");
+		//public String inscriptionSeance(String membreId, String seanceId, String commentaire) {
+		//	return centreDonneesServices.inscrireMembreASeance(membreId, seanceId, commentaire).getHashInString();
 	}
 
 	@Test
