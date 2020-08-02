@@ -4,6 +4,7 @@ import main.modele.*;
 import main.vue.*;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -136,6 +137,10 @@ public class ControleurClient extends Controleur {
 
 	public Client lireClient(String idClient) {
 		return this.centreDonneesMembre.lire(idClient);
+	}
+
+	public static HashMap<String, Professionnel> getListeProfessionnels() {
+		return centreDonneesProfessionnel.getListeProfessionnels();
 	}
 	
 //public boolean validerMembre (String id){
