@@ -1,5 +1,7 @@
 package main.modele;
 
+import main.controleur.Verificateurs;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -44,6 +46,10 @@ public class Inscription {
 		return commentaires;
 	}
 
+	public String getDateEtHeureActuelleString() {
+		return Verificateurs.localDateTimeFormatter.format(dateEtHeureActuelles);
+	}
+
 	@Override
 	public int hashCode() {
 		return Math.abs(Objects.hash(dateEtHeureActuelles,
@@ -56,5 +62,9 @@ public class Inscription {
 
 	public String getHashInString() {
 		return String.format("%04d", this.hashCode());
+	}
+
+	public String getDateSeanceString() {
+		return Verificateurs.localDateFormatter.format(dateSeance);
 	}
 }

@@ -42,6 +42,7 @@ public class VueAgent extends VuePlateforme {
                 vueService.gestionService();
                 break;
             case "4":
+                vueService.inscriptionSeance();
                 break;
             case "5":
                 break;
@@ -104,26 +105,6 @@ public class VueAgent extends VuePlateforme {
     }
 
 
-//    private void gererMenuPrincipal(String entreePrincipale) {
-//        String membreId;
-//        String idProfessionnel;
-//        switch (entreePrincipale) {
-//            case "1":
-//                controleurClient.demanderAcces();
-//                break;
-//            case "2":
-//                controleurClient.gestionCompte();
-//                break;
-//            case "3":
-//                Vue.afficher("--------Gestion d'un service-------");
-//                controleurClient.afficherTousLesProfessionnels();
-//                Vue.afficher("Veuillez entrer le numéro de professionnel ou \"retour\" pour retourner au menu principal");
-//                do {
-//                    idProfessionnel = Vue.getTexteConsole();
-//                } while (!controleurClient.validerProfessionnel(idProfessionnel)&&!idProfessionnel.equals("retour"));
-//                if(!idProfessionnel.equals("retour"))
-//                    controleurService.gererService(idProfessionnel);
-//                break;
 //            case "4":
 //                Vue.afficher("---Modele.Inscription à une séance---");
 //                controleurClient.afficherTousLesMembres();

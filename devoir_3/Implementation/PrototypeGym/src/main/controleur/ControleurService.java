@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 import static main.controleur.Verificateurs.getJourFromString;
@@ -99,57 +100,14 @@ public class ControleurService extends Controleur {
 		}
 	}
 
-	public void inscriptionSeance(String membreId) {
-		Vue.afficher("Références des séances disponibles aujourd'hui, le " + Verificateurs.today() + " :");
-		afficherToutesLesSeancesDuJour(Verificateurs.today());
-
-		Vue.afficher("Veuillez entrer la référence de la séance à laquelle vous voulez inscrire un membre ou appuyez sur ENTREE pour revenir au menu principal :");
-		String seanceId = Vue.getTexteConsole();
-		if (!seanceId.equals("")) {
-
-			Seance seance = centreDonneesServices.getSeance(seanceId);
-			Service service = centreDonneesServices.getService(seance.getCodeService());
-			Vue.afficher("Les frais à payer pour la séance sont de : " + service.getFraisService() + "$");
-
-			Vue.afficher("1. Continuer inscription");
-			Vue.afficher("2. Quitter et revenir au menu principal");
-			String entree = Vue.getTexteConsole();
-			switch (entree) {
-			case "1":
-				Vue.afficher("Le paiement est-il valide ?");
-				Vue.afficher("1. Oui");
-				Vue.afficher("2. Non");
-				entree = Vue.getTexteConsole();
-
-				if (entree.equals("1")) {
-					Vue.afficher("Veuillez entrer un commentaire (appuyez sur ENTREE si vous le ne souhaitez pas) :");
-					String commentaire = Vue.getTexteConsole();
-
-					centreDonneesServices.inscrireMembreASeance(membreId, seanceId, commentaire);
-
-					Vue.afficher("Le membre " +
-							membreId +
-							" a été inscrit à la séance " +
-							seanceId +
-							" qui aura lieu le " +
-							Verificateurs.localDateTimeFormatter.format(centreDonneesServices.getSeance(seanceId).getDateTimeSeance()));
-				} else {
-					Vue.afficher("Annulation de l'inscription. Retour au menu principal.");
-				}
-
-				break;
-			case "2":
-				break;
-			default:
-				break;
-			}
-		}
+	public String inscriptionSeance(String membreId, String seanceId, String commentaire) {
+		return centreDonneesServices.inscrireMembreASeance(membreId, seanceId, commentaire).getHashInString();
 	}
 
 	public void confirmerPresence(String membreId) {
 
 		Vue.afficher("Références des séances disponibles ajourd'hui, le " + Verificateurs.today() + " :");
-		afficherToutesLesSeancesDuJour(Verificateurs.today());
+		obtenirToutesLesSeancesDuJourEnString(Verificateurs.today());
 
 		Vue.afficher("Veuillez entrer la référence de la séance à laquelle vous voulez inscrire un membre ou appuyez sur ENTREE pour revenir au menu principal :");
 		String seanceId = Vue.getTexteConsole();
@@ -269,14 +227,25 @@ public class ControleurService extends Controleur {
 		}
 	}
 
-	private void afficherToutesLesSeancesDuJour(LocalDate jour) {
+	public String obtenirToutesLesSeancesDuJourEnString(LocalDate jour) {
 		var seances = centreDonneesServices.getListeSeances(jour);
+		String concatenation = "";
 		for (Seance s : seances) {
-			Vue.afficher(s.getHashInString() + " (service de " +
+			concatenation += s.getCodeSeance() + " (service de " +
 					centreDonneesServices.getService(s.getCodeService()).getNomService() +
 					") : le " +
-					Verificateurs.localDateTimeFormatter.format(s.getDateTimeSeance()));
+					Verificateurs.localDateTimeFormatter.format(s.getDateTimeSeance()) + "\n";
 		}
+		return concatenation;
+	}
+
+	public List<String> obtenirListeIdSeancesDuJour(LocalDate jour) {
+		var listeSeances = centreDonneesServices.getListeSeances(jour);
+		List<String> idSeances = new LinkedList<>();
+		for (Seance seance : listeSeances) {
+			idSeances.add(seance.getCodeSeance());
+		}
+		return idSeances;
 	}
 
 	private void afficherToutesLesInscriptionDuPro(String idProfessionnel) {
@@ -319,6 +288,39 @@ public class ControleurService extends Controleur {
 					"Numéro de professionnel : " + service.getNumeroProfessionnel() + "\n" +
 					"Frais de service : " + service.getFraisService() + "\n" +
 					"Commentaire : " + service.getCommentaires() + "\n";
+		}
+		return infos;
+	}
+
+	public String getFraisService(String seanceId) {
+		Seance seance = centreDonneesServices.getSeance(seanceId);
+		Service service = centreDonneesServices.getService(seance.getCodeService());
+		return "" + service.getFraisService();
+	}
+
+	public String getInformationSeance(String seanceId) {
+		Seance seance = centreDonneesServices.getSeance(seanceId);
+		String infos = "";
+
+		if (seance != null) {
+			infos = "Code séance : " + seance.getCodeSeance() + "\n" +
+					"Code professionnel : " + seance.getCodeProfessionnel() + "\n" +
+					"Date de la séance : " + seance.getDateTimeSeance() + "\n";
+		}
+		return infos;
+	}
+
+	public String getInformationsInscription(String inscriptionId) {
+		Inscription inscription = centreDonneesServices.getInscription(inscriptionId);
+		String infos = "";
+
+		if (inscription != null) {
+			infos = "Date et heure d'inscription : " + inscription.getDateEtHeureActuelleString() + "\n" +
+					"Date de la séance : " + inscription.getDateSeanceString() + "\n" +
+					"Numéro de professionnel : " + inscription.getNumeroProfessionnel() + "\n" +
+					"Numéro de membre : " + inscription.getNumeroMembre() + "\n" +
+					"Code de service : " + inscription.getCodeService() + "\n" +
+					"Commentaires : " + inscription.getCommentaires() + "\n";
 		}
 		return infos;
 	}

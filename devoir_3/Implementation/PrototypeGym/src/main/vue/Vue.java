@@ -59,7 +59,7 @@ public abstract class Vue {
         String reponse;
         do {
             reponse = getTexteConsole();
-        } while(!jeuDeReponses.contains(reponse));
+        } while(!jeuDeReponses.contains(reponse) && !reponse.equals("0"));
         return reponse;
     }
 }

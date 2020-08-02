@@ -202,7 +202,7 @@ public abstract class VueClient<T> extends Vue {
         if (idClient != null) {
             afficher("Bienvenue au #GYM");
         } else {
-            afficher("Adresse courriel n'est pas retrouvée");
+            afficher("L'adresse courriel renseignée n'est pas valide");
         }
     }
 

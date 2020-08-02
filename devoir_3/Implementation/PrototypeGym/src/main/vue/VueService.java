@@ -3,8 +3,12 @@ package main.vue;
 import main.controleur.ControleurClient;
 import main.controleur.ControleurService;
 import main.controleur.Verificateurs;
+import main.modele.Seance;
+import main.modele.Service;
 import main.modele.TypeClient;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 
 import static main.controleur.Verificateurs.identifiantClientValide;
@@ -165,7 +169,6 @@ public class VueService extends Vue {
         }
     }
 
-
     public void creerService(String idProfessionnel) {
         String nomService;
         String dateEtHeureActuelles = null;
@@ -228,5 +231,66 @@ public class VueService extends Vue {
                 commentaires);
 
         Vue.afficher("Service créé");
+    }
+
+    public void inscriptionSeance() {
+        afficher("---Inscription à une séance---");
+        afficher("Références des séances disponibles ajourd'hui, le " + Verificateurs.today() + " :");
+        afficher(controleurService.obtenirToutesLesSeancesDuJourEnString(Verificateurs.today()));
+
+        afficher("Veuillez entrer la référence de la séance à laquelle vous voulez " +
+                "inscrire un membre ou appuyez sur 0 pour revenir au menu principal :");
+
+        String seanceId = acquisitionReponse(controleurService.obtenirListeIdSeancesDuJour(Verificateurs.today()));
+        if (seanceId.equals("0")) return;
+
+//        afficherTousLesMembres();
+        afficher("Veuillez entrer le numéro du membre :");
+        String membreId = acquisitionReponse(Verificateurs::identifiantClientValide);
+
+        TypeClient statutMembre = ControleurClient.verifierTypeClient(TypeClient.MEMBRE, membreId);
+
+        if (statutMembre == TypeClient.MEMBRE_SUSPENDU) {
+            afficher("Membre suspendu. Retour au menu principal.");
+            return;
+        }
+
+        if (statutMembre == TypeClient.CLIENT_INVALIDE) {
+            afficher("Membre inconnu. Retour au menu principal.");
+            return;
+        }
+
+        if (statutMembre != TypeClient.MEMBRE_VALIDE) return;
+
+        afficher("Les frais à payer pour la séance sont de : " + controleurService.getFraisService(seanceId) + "$");
+
+        afficher("1. Continuer inscription");
+        afficher("2. Quitter et revenir au menu principal");
+
+        String reponseContinuer = acquisitionReponse(Arrays.asList("1","2"));
+        if (!reponseContinuer.equals("1")) return;
+
+        afficher("Le paiement est-il valide ?");
+        afficher("1. Oui");
+        afficher("2. Non");
+        String responsePaiement = acquisitionReponse(Arrays.asList("1","2"));
+
+        if (responsePaiement.equals("1")) {
+            afficher("Veuillez entrer un commentaire (appuyez sur ENTREE si vous le ne souhaitez pas) :");
+            String commentaire = getTexteConsole();
+
+            String inscriptionId = controleurService.inscriptionSeance(membreId, seanceId, commentaire);
+
+            afficher("Le membre " +
+                    membreId +
+                    " a été inscrit à la séance : \n" +
+                    controleurService.getInformationSeance(seanceId) +
+                    "\nRécapitulatif de l'inscription : \n" +
+                    controleurService.getInformationsInscription(inscriptionId)
+                    );
+        } else {
+            afficher("Annulation de l'inscription. Retour au menu principal.");
+        }
+
     }
 }

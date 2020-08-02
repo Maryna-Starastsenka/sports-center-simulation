@@ -1,5 +1,7 @@
 package main.modele;
 
+import jdk.jshell.spi.ExecutionControl;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -29,7 +31,7 @@ public class CentreDonneesServices implements ICentreDonnees {
 		String idProfessionel2 = "173262475";
 		String idMembre1 = "554365143";
 
-		main.modele.Service service1 = new main.modele.Service("Zumba",
+		Service service1 = new Service("Zumba",
 				LocalDateTime.of(LocalDate.of(2020, 1,1), LocalTime.of(8,0,0)),
 				LocalDate.of(2025, 12, 31),
 				LocalDate.of(2020, 7, 19),
@@ -42,7 +44,7 @@ public class CentreDonneesServices implements ICentreDonnees {
 				"Rien à signaler");
 		listeServices.put(service1.getCode(), service1);
 
-		main.modele.Service service2 = new main.modele.Service("Yoga",
+		Service service2 = new Service("Yoga",
 				LocalDateTime.of(LocalDate.of(2020, 3,1), LocalTime.of(7, 30, 0)),
 				LocalDate.of(2015, 11, 30),
 				LocalDate.of(2025, 7, 12),
@@ -55,7 +57,7 @@ public class CentreDonneesServices implements ICentreDonnees {
 				"Aucun commentaire");
 		listeServices.put(service2.getCode(), service2);
 
-		main.modele.Service service3 = new main.modele.Service("Danse", LocalDateTime.of(LocalDate.of(2020, 3,1), LocalTime.of(7, 30, 0)),
+		Service service3 = new Service("Danse", LocalDateTime.of(LocalDate.of(2020, 3,1), LocalTime.of(7, 30, 0)),
 				LocalDate.of(2017, 11, 15),
 				LocalDate.of(2036, 9, 20),
 				LocalTime.of(18,20),
@@ -69,24 +71,24 @@ public class CentreDonneesServices implements ICentreDonnees {
 		listeServices.put(service3.getCode(), service3);
 
 		// crée une séance au jour d'exécution du programme pour les tests
-		main.modele.Seance seance1 = new main.modele.Seance(LocalDateTime.of(today(), LocalTime.of(12, 30)),
-				service1.getCode());
-		listeSeances.put(seance1.getHashInString(), seance1);
+		Seance seance1 = new Seance(LocalDateTime.of(today(), LocalTime.of(12, 30)),
+				service1.getCode(), service1.getNumeroProfessionnel());
+		listeSeances.put(seance1.getCodeSeance(), seance1);
 
-		main.modele.Seance seance2 = new main.modele.Seance(LocalDateTime.of(today(), LocalTime.of(17, 20)),
-				service2.getCode());
-		listeSeances.put(seance2.getHashInString(), seance2);
+		Seance seance2 = new Seance(LocalDateTime.of(today(), LocalTime.of(17, 20)),
+				service2.getCode(), service2.getNumeroProfessionnel());
+		listeSeances.put(seance2.getCodeSeance(), seance2);
 
-		main.modele.Seance seance3 = new main.modele.Seance(LocalDateTime.of(today(), LocalTime.of(11, 00)).minusDays(1),
-				service3.getCode());
-		listeSeances.put(seance3.getHashInString(), seance3);
+		Seance seance3 = new Seance(LocalDateTime.of(today(), LocalTime.of(11, 00)).minusDays(1),
+				service3.getCode(), service3.getNumeroProfessionnel());
+		listeSeances.put(seance3.getCodeSeance(), seance3);
 
-		main.modele.Seance seance4 = new main.modele.Seance(LocalDateTime.of(today(), LocalTime.of(15, 55)).minusDays(8),
-				service2.getCode());
-		listeSeances.put(seance4.getHashInString(), seance4);
+		Seance seance4 = new Seance(LocalDateTime.of(today(), LocalTime.of(15, 55)).minusDays(8),
+				service2.getCode(), service2.getNumeroProfessionnel());
+		listeSeances.put(seance4.getCodeSeance(), seance4);
 		
 
-        main.modele.Inscription inscription1 = new main.modele.Inscription(now(),
+        Inscription inscription1 = new Inscription(now(),
                 seance2.getDateTimeSeance().toLocalDate(),
 				idProfessionel1,
 				idMembre1,
@@ -129,7 +131,7 @@ public class CentreDonneesServices implements ICentreDonnees {
                 .collect(Collectors.toList());
     }
 	
-	public void inscrireMembreASeance(String idMembre, String idSeance, String commentaires) {
+	public Inscription inscrireMembreASeance(String idMembre, String idSeance, String commentaires) {
         Seance seance = listeSeances.get(idSeance);
         Service service = listeServices.get(seance.getCodeService());
         Inscription inscription = new Inscription(
@@ -142,6 +144,7 @@ public class CentreDonneesServices implements ICentreDonnees {
         if (!listeInscriptions.containsKey(inscription.getHashInString())) {
             listeInscriptions.put(inscription.getHashInString(), inscription);
         }
+        return inscription;
     }
 	
 	public boolean inscriptionExiste(String idMembre, String idSeance) {
@@ -286,7 +289,14 @@ public class CentreDonneesServices implements ICentreDonnees {
 
 	}
 
-	public List<Client> getClients() {
+	public List<Client> getClients() throws ExecutionControl.NotImplementedException {
+		throw new ExecutionControl.NotImplementedException("not implemented");
+	}
+
+	public Inscription getInscription(String inscriptionId) {
+		if (listeInscriptions.containsKey(inscriptionId)) {
+			return listeInscriptions.get(inscriptionId);
+		}
 		return null;
 	}
 }
