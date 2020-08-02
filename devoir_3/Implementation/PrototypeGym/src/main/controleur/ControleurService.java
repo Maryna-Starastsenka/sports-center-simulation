@@ -334,4 +334,8 @@ public class ControleurService extends Controleur {
 	public boolean inscriptionExiste(String idMembre, String idSeance) {
 		return centreDonneesServices.inscriptionExiste(idMembre, idSeance);
 	}
+	
+	public Service lire(String idService) {
+		return centreDonneesServices.lire(idService);
+	}
 }

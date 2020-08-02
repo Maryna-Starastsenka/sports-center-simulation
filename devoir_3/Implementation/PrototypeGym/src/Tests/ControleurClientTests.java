@@ -106,7 +106,7 @@ class ControleurClientTests {
 		String idClient = Client.getHashInString("John@doe.com");
 		
 		controleurClient.supprimerClient(vue, idClient);
-		//assertFalse(controleurClient.estMembre(idClient),"Test supprimer client échoué");
+		//assertFalse(controleurClient.lireClient(idClient),"Test supprimer client échoué");
 	}
 	
 	@Test
