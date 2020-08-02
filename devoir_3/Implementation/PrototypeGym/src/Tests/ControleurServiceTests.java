@@ -99,8 +99,14 @@ class ControleurServiceTests {
 
 	@Test
 	void testInscriptionSeance() {
-		//public String inscriptionSeance(String membreId, String seanceId, String commentaire) {
-		//	return centreDonneesServices.inscrireMembreASeance(membreId, seanceId, commentaire).getHashInString();
+
+		
+		String membreId = "150337313";
+		String seanceId = "2345413";
+		String commentaire = "Pas de commentaire";
+		
+		controleurService.inscriptionSeance(membreId, seanceId, commentaire);
+		//assert
 	}
 
 	@Test
