@@ -27,7 +27,7 @@ public class VueAgent extends VuePlateforme {
         afficher("6. Consultation d'une séance");
         afficher("7. Procédure comptable");
         afficher("8. Mettre à jour statut membres");
-        afficher("9. Sortir de la version agent");
+        afficher("9. Sortir de l'application");
 
         String reponse = acquisitionReponse(Arrays.asList("1","2","3","4","5","6","7","8","9"));
 
@@ -53,6 +53,7 @@ public class VueAgent extends VuePlateforme {
             case "8":
                 break;
             case "9":
+                System.exit(0);
                 break;
         }
 

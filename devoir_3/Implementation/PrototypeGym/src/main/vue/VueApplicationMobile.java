@@ -25,8 +25,11 @@ public class VueApplicationMobile extends VuePlateforme {
         afficher("Choisissez le type de compte.");
         afficher("1. Membre");
         afficher("2. Professionnel");
+        afficher("3. Sortir de l'application");
 
-        String reponse = acquisitionReponse(Arrays.asList("1","2"));
+        String reponse = acquisitionReponse(Arrays.asList("1","2","3"));
+
+        if (reponse.equals("3")) System.exit(0);
 
         afficher("Entrez l'adresse courriel pour vous connecter.");
         String adresseCourriel = acquisitionReponse(Verificateurs::courrielValide);
@@ -39,6 +42,8 @@ public class VueApplicationMobile extends VuePlateforme {
                 vueProfessionnel.seConnecterApp(adresseCourriel);
                 break;
         }
+
+        retourMenuPrincipal();
     }
 
     @Override
