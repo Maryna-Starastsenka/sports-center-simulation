@@ -92,10 +92,6 @@ public class ControleurService extends Controleur {
 				afficherServicesProfessionnel(servicesDuProfessionnel);
 				gererServiceExistant();
 				break;
-			case "3": // Retour au menu principal par défaut
-				break;
-			default:
-				break;
 			}
 		}
 	}

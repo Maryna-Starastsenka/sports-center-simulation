@@ -24,9 +24,9 @@ public abstract class VueClient<T> extends Vue {
         enTeteGestionCompte();
         afficher(String.format("1. Création d'un nouveau compte %s", clientString));
         afficher(String.format("2. Gestion d'un compte %s existant", clientString));
-        afficher("3. Retour au menu principal");
+        afficher("0. Retour au menu principal");
 
-        String reponse = acquisitionReponse(Arrays.asList("1","2","3"));
+        String reponse = acquisitionReponse(Arrays.asList("1","2"));
 
         switch (reponse) {
             case "1":
@@ -34,8 +34,6 @@ public abstract class VueClient<T> extends Vue {
                 break;
             case "2":
                 gererCompteExistant();
-                break;
-            case "3":
                 break;
         }
     }
@@ -85,9 +83,9 @@ public abstract class VueClient<T> extends Vue {
 
         afficher(String.format("1. Mise à jour d'un compte %s", clientString));
         afficher(String.format("2. Suppression d'un compte %s", clientString));
-        afficher("3. Retour au menu principal");
+        afficher("0. Retour au menu principal");
 
-        String reponse = acquisitionReponse(Arrays.asList("1","2","3"));
+        String reponse = acquisitionReponse(Arrays.asList("1","2"));
 
 
         switch (reponse) {
@@ -97,16 +95,14 @@ public abstract class VueClient<T> extends Vue {
             case "2":
                 supprimerClient(idClient);
                 break;
-            case "3":
-                break;
         }
     }
 
     private void supprimerClient(String idClient) {
         afficher("1. Valider suppression.");
-        afficher("2. Retour au menu principal.");
+        afficher("0. Retour au menu principal.");
 
-        String reponse = acquisitionReponse(Arrays.asList("1","2"));
+        String reponse = acquisitionReponse(Arrays.asList("1"));
 
         if (reponse.equals("1")) {
             controleurClient.supprimerClient(this, idClient);
@@ -137,9 +133,9 @@ public abstract class VueClient<T> extends Vue {
 
         if (this instanceof VueMembre) {
             afficher("6. Modifier le statut du Membre.");
-            afficher("7. Retour au menu principal.");
+            afficher("0. Retour au menu principal.");
 
-            action = acquisitionReponse(Arrays.asList("1","2","3","4","5","6","7"));
+            action = acquisitionReponse(Arrays.asList("1","2","3","4","5","6"));
 
             switch (action) {
                 case "6":
@@ -148,9 +144,8 @@ public abstract class VueClient<T> extends Vue {
                     break;
             }
         } else if (this instanceof VueProfessionnel) {
-            afficher("6. Retour au menu principal.");
-
-            action = acquisitionReponse(Arrays.asList("1","2","3","4","5","6"));
+            afficher("0. Retour au menu principal.");
+            action = acquisitionReponse(Arrays.asList("1","2","3","4","5"));
         }
 
         switch (action) {

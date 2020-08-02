@@ -67,9 +67,9 @@ public class VueAgent extends VuePlateforme {
         afficher("------Gestion d'un compte------");
         afficher("1. Compte de Membre");
         afficher("2. Compte de Professionnel");
-        afficher("3. Retour au menu principal");
+        afficher("0. Retour au menu principal");
 
-        String reponse = acquisitionReponse(Arrays.asList("1","2","3"));
+        String reponse = acquisitionReponse(Arrays.asList("1","2"));
 
         switch (reponse) {
             case "1":
@@ -77,8 +77,6 @@ public class VueAgent extends VuePlateforme {
                 break;
             case "2":
                 vueProfessionnel.gestionCompte();
-                break;
-            case "3":
                 break;
         }
     }
@@ -90,9 +88,9 @@ public class VueAgent extends VuePlateforme {
         afficher("------Demande d'accès au gym------");
         afficher("1. Membre");
         afficher("2. Professionnel");
-        afficher("3. Retour au menu principal");
+        afficher("0. Retour au menu principal");
 
-        String reponse = acquisitionReponse(Arrays.asList("1","2","3"));
+        String reponse = acquisitionReponse(Arrays.asList("1","2"));
 
         switch (reponse) {
             case "1":
@@ -100,8 +98,6 @@ public class VueAgent extends VuePlateforme {
                 break;
             case "2":
                 vueProfessionnel.verifierTypeCleint();
-                break;
-            case "3":
                 break;
         }
     }

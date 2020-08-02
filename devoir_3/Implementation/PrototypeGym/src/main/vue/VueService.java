@@ -39,9 +39,9 @@ public class VueService extends Vue {
 
         afficher("1. Création d'un nouveau service");
         afficher("2. Gestion d'un service existant");
-        afficher("3. Retour au menu principal");
+        afficher("0. Retour au menu principal");
 
-        String reponse = acquisitionReponse(Arrays.asList("1","2","3"));
+        String reponse = acquisitionReponse(Arrays.asList("1","2"));
 
         switch (reponse) {
             case "1":
@@ -67,9 +67,9 @@ public class VueService extends Vue {
 
         afficher("1. Mise à jour d'un service");
         afficher("2. Suppression d'un service");
-        afficher("3. Retour au menu principal");
+        afficher("0. Retour au menu principal");
 
-        String reponse = acquisitionReponse(Arrays.asList("1","2","3"));
+        String reponse = acquisitionReponse(Arrays.asList("1","2"));
 
         switch (reponse) {
             case "1":
@@ -77,8 +77,6 @@ public class VueService extends Vue {
                 break;
             case "2":
                 supprimerService(idService);
-                break;
-            case "3":
                 break;
         }
     }
@@ -99,9 +97,9 @@ public class VueService extends Vue {
         afficher("6. Modifier la capacité maximale.");
         afficher("7. Modifier les frais de service.");
         afficher("8. Modifier le commentaire.");
-        afficher("9. Retour au menu principal.");
+        afficher("0. Retour au menu principal.");
 
-        action = acquisitionReponse(Arrays.asList("1","2","3","4","5","6","7","8","9"));
+        action = acquisitionReponse(Arrays.asList("1","2","3","4","5","6","7","8"));
 
         switch (action) {
             case "1":
@@ -159,9 +157,9 @@ public class VueService extends Vue {
 
     private void supprimerService(String idService) {
         afficher("1. Valider suppression.");
-        afficher("2. Retour au menu principal.");
+        afficher("0. Retour au menu principal.");
 
-        String reponse = acquisitionReponse(Arrays.asList("1","2"));
+        String reponse = acquisitionReponse(Arrays.asList("1"));
 
         if (reponse.equals("1")) {
             controleurService.supprimerService(idService);
@@ -299,11 +297,13 @@ public class VueService extends Vue {
         afficher("Veuillez entrer le numéro du professionnel ou entrez 0 pour revenir au menu principal.");
 
         String idProfessionnel = acquisitionReponse((String s) -> ControleurClient.authentifier(TypeClient.PROFESSIONNEL, s), "Numéro du professionnel incorrect.");
+        if (idProfessionnel.equals("0")) return;
 
         afficher("Veuillez choisir une séance parmi celles du professionnel " + idProfessionnel + " ou entrez 0 pour revenir au menu principal :");
         afficher(controleurService.obtenirToutesLesSeancesDuProfessionnelEnString(idProfessionnel));
 
         String idSeance = acquisitionReponse(controleurService.obtenirListeSeancesDuProfessionnel(idProfessionnel));
+        if (idSeance.equals("0")) return;
         afficher(controleurService.getInformationSeance(idSeance));
 
         afficher("Liste des inscriptions à la séance :");
