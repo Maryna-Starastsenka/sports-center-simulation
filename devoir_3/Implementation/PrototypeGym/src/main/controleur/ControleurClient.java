@@ -9,16 +9,15 @@ import java.util.List;
 
 public class ControleurClient extends Controleur {
 
-	private static CentreDonneesMembre centreDonneesMembre;
-	private static CentreDonneesProfessionnel centreDonneesProfessionnel;
+	private static CentreDonneesMembre centreDonneesMembre = new CentreDonneesMembre();
+	private static CentreDonneesProfessionnel centreDonneesProfessionnel = new CentreDonneesProfessionnel();
 
 	public ControleurClient() {
-		this.centreDonneesMembre = new CentreDonneesMembre();
-		this.centreDonneesProfessionnel = new CentreDonneesProfessionnel();
+		centreDonneesMembre = new CentreDonneesMembre();
+		centreDonneesProfessionnel = new CentreDonneesProfessionnel();
 	}
 
-	public void creerClient(TypeClient vueClient,
-							TypeClient typeClient,
+	public void creerClient(TypeClient typeClient,
 							String nom,
 							String dateNaissanceString,
 							String adresseCourriel,
@@ -42,18 +41,18 @@ public class ControleurClient extends Controleur {
 //		}
 	}
 
-	public void mettreClientAJour(VueClient vue, String idClient, Champs champs, String valeur) {
-		if (vue instanceof VueMembre) {
+	public void mettreClientAJour(TypeClient typeClient, String idClient, Champs champs, String valeur) {
+		if (typeClient == TypeClient.MEMBRE) {
 			centreDonneesMembre.mettreAJour(idClient, champs, valeur);
-		} else if (vue instanceof VueProfessionnel) {
+		} else if (typeClient == TypeClient.PROFESSIONNEL) {
 			centreDonneesProfessionnel.mettreAJour(idClient, champs, valeur);
 		}
 	}
 
-	public void supprimerClient(VueClient vue, String idClient) {
-		if (vue instanceof VueMembre) {
+	public void supprimerClient(TypeClient typeClient, String idClient) {
+		if (typeClient == TypeClient.MEMBRE) {
 			centreDonneesMembre.supprimer(idClient);
-		} else if (vue instanceof VueProfessionnel) {
+		} else if (typeClient == TypeClient.PROFESSIONNEL) {
 			centreDonneesProfessionnel.supprimer(idClient);
 		}
 	}
@@ -117,11 +116,11 @@ public class ControleurClient extends Controleur {
 		return infos;
 	}
 
-	public String getListeClients(VueClient vue) {
+	public String getListeClients(TypeClient typeClient) {
 		List<Client> clients = null;
-		if (vue instanceof VueMembre) {
+		if (typeClient == TypeClient.MEMBRE) {
 			clients = centreDonneesMembre.getClients();
-		} else if (vue instanceof VueProfessionnel) {
+		} else if (typeClient == TypeClient.PROFESSIONNEL) {
 			clients = centreDonneesProfessionnel.getClients();
 		}
 
