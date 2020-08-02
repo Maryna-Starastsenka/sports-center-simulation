@@ -100,36 +100,8 @@ public class ControleurService extends Controleur {
 		return centreDonneesServices.inscrireMembreASeance(membreId, seanceId, commentaire).getHashInString();
 	}
 
-	public void confirmerPresence(String membreId) {
-
-		Vue.afficher("Références des séances disponibles ajourd'hui, le " + Verificateurs.today() + " :");
-		obtenirToutesLesSeancesDuJourEnString(Verificateurs.today());
-
-		Vue.afficher("Veuillez entrer la référence de la séance à laquelle vous voulez inscrire un membre ou appuyez sur ENTREE pour revenir au menu principal :");
-		String seanceId = Vue.getTexteConsole();
-		if (seanceId.equals("")) {
-			return;
-		}else if (!centreDonneesServices.inscriptionExiste(membreId, seanceId)) {
-			Vue.afficher("Le membre n'est pas inscrit. Accès refusé.");
-			return;
-		}else {
-
-			Vue.afficher("Confirmer la présence ?");
-			Vue.afficher("1. Oui");
-			Vue.afficher("2. Non");
-			String entree = Vue.getTexteConsole();
-
-			if (entree.equals("1")) {
-				Vue.afficher("Veuillez entrer un commentaire (appuyez sur ENTREE si vous le ne souhaitez pas) :");
-				String commentaire = Vue.getTexteConsole();
-
-				centreDonneesServices.confirmationPresence(seanceId, membreId, commentaire);
-				Vue.afficher("Présence validée.");
-
-			} else {
-				Vue.afficher("Annulation de la confirmation.");
-			}
-		}
+	public boolean confirmerPresence(String idSeance, String idMembre, String commentaire) {
+		return centreDonneesServices.confirmationPresence(idSeance, idMembre, commentaire);
 	}
 
 	public void consultationInscription(String idProfessionnel) {
@@ -357,5 +329,9 @@ public class ControleurService extends Controleur {
 
 	public List<Inscription> obtenirInscriptionsASeance(String idSeance) {
 		return centreDonneesServices.getListeInscriptionsSeance(idSeance);
+	}
+
+	public boolean inscriptionExiste(String idMembre, String idSeance) {
+		return centreDonneesServices.inscriptionExiste(idMembre, idSeance);
 	}
 }

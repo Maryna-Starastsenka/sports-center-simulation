@@ -187,14 +187,16 @@ public class CentreDonneesServices implements ICentreDonnees {
 	}
 
 	
-	public void confirmationPresence(String idSeance, String idMembre, String commentaires) {
+	public boolean confirmationPresence(String idSeance, String idMembre, String commentaires) {
         String codeService = listeSeances.get(idSeance).getCodeService();
         String numeroProfessionnel = listeServices.get(codeService).getNumeroProfessionnel();
         ConfirmationPresence cp = new ConfirmationPresence(now(), idMembre, numeroProfessionnel, codeService, commentaires);
         if (!listeConfirmationsPresence.containsKey(cp.getHashInString())) {
             listeConfirmationsPresence.put(cp.getHashInString(), cp);
+            return true;
         }
-    }
+		return false;
+	}
 	
 	public List<Seance> getSeancesEntre(LocalDate debut, LocalDate fin) {
         return listeSeances

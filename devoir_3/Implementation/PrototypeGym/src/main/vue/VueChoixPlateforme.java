@@ -8,6 +8,7 @@ public class VueChoixPlateforme extends Vue {
     }
 
     public static VuePlateforme selectionnerOption() {
+        effacerEcran();
         afficher("Veuillez choisir la plateforme que vous souhaitez lancer :");
         afficher("1. Version agent");
         afficher("2. Version application");

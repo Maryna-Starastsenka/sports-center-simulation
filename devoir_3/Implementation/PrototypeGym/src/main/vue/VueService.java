@@ -3,12 +3,8 @@ package main.vue;
 import main.controleur.ControleurClient;
 import main.controleur.ControleurService;
 import main.controleur.Verificateurs;
-import main.modele.Seance;
-import main.modele.Service;
 import main.modele.TypeClient;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Arrays;
 
 import static main.controleur.Verificateurs.identifiantClientValide;
@@ -232,6 +228,7 @@ public class VueService extends Vue {
     }
 
     public void inscriptionSeance() {
+        effacerEcran();
         afficher("---Inscription à une séance---");
         afficher("Références des séances disponibles ajourd'hui, le " + Verificateurs.today() + " :");
         afficher(controleurService.obtenirToutesLesSeancesDuJourEnString(Verificateurs.today()));
@@ -293,6 +290,7 @@ public class VueService extends Vue {
     }
 
     public void consultationSeance() {
+        effacerEcran();
         afficher("---Consultation d'une séance---");
         afficher("Veuillez entrer le numéro du professionnel ou entrez 0 pour revenir au menu principal.");
 
@@ -308,5 +306,52 @@ public class VueService extends Vue {
 
         afficher("Liste des inscriptions à la séance :");
         afficher(controleurService.obtenirInscriptionsASeanceEnString(idSeance));
+    }
+
+    public void confirmationPresence() {
+        afficher("---Confirmation de la présence---");
+
+        afficher("Veuillez entrer le numéro du membre :");
+        String idMembre = acquisitionReponse(Verificateurs::identifiantClientValide);
+
+        TypeClient typeClient = ControleurClient.verifierTypeClient(TypeClient.MEMBRE, idMembre);
+        switch (typeClient) {
+            case CLIENT_INVALIDE:
+                afficher("Membre inconnu. Retour au menu principal.");
+                return;
+            case MEMBRE_SUSPENDU:
+                afficher("Membre suspendu. Retour au menu principal.");
+                return;
+            case MEMBRE_VALIDE:
+                afficher("Références des séances disponibles ajourd'hui, le " + Verificateurs.today() + " :");
+                afficher(controleurService.obtenirToutesLesSeancesDuJourEnString(Verificateurs.today()));
+
+                afficher("Veuillez entrer la référence de la séance à laquelle vous voulez inscrire un membre ou appuyez sur 0 pour revenir au menu principal :");
+                String idSeance = acquisitionReponse(controleurService.obtenirListeIdSeancesDuJour(Verificateurs.today()));
+
+                if (!controleurService.inscriptionExiste(idMembre, idSeance)) {
+                    afficher("Le membre n'est pas inscrit. Accès refusé.");
+                    return;
+                } else {
+                    afficher("Confirmer la présence ?");
+                    afficher("1. Oui");
+                    afficher("2. Non");
+                    String reponse = acquisitionReponse(Arrays.asList("1","2"));
+
+                    if (reponse.equals("1")) {
+                        afficher("Veuillez entrer un commentaire (appuyez sur ENTREE si vous le ne souhaitez pas) :");
+                        String commentaire = getTexteConsole();
+
+                        if (controleurService.confirmerPresence(idSeance, idMembre, commentaire)) {
+                            afficher("Présence validée.");
+                        } else {
+                            afficher("Échec de la confirmation de présence.");
+                        }
+                    } else {
+                        afficher("Annulation de la confirmation.");
+                    }
+                }
+                break;
+        }
     }
 }

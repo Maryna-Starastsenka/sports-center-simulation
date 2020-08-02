@@ -45,6 +45,7 @@ public class VueAgent extends VuePlateforme {
                 vueService.inscriptionSeance();
                 break;
             case "5":
+                vueService.confirmationPresence();
                 break;
             case "6":
                 vueService.consultationSeance();
@@ -103,21 +104,6 @@ public class VueAgent extends VuePlateforme {
     }
 
 
-//            case "4":
-//                Vue.afficher("---Modele.Inscription à une séance---");
-//                controleurClient.afficherTousLesMembres();
-//
-//                Vue.afficher("Veuillez entrer le numéro du membre :");
-//                membreId = Vue.getTexteConsole();
-//                if (!controleurClient.validerMembre(membreId)) {
-//                    Vue.afficher("Modele.Membre inconnu. Retour au menu principal.");
-//                    break;
-//                } else if (!controleurClient.membrePasSuspendu(membreId)) {
-//                    Vue.afficher("Modele.Membre suspendu. Retour au menu principal.");
-//                    break;
-//                }
-//                controleurService.inscriptionSeance(membreId);
-//                break;
 //            case "5":
 //                Vue.afficher("---Confirmation de la présence---");
 //
@@ -134,18 +120,6 @@ public class VueAgent extends VuePlateforme {
 //                }
 //                controleurService.confirmerPresence(membreId);
 //                break;
-//            case "6":
-//                Vue.afficher("---Consultation d'une séance---");
-//                controleurClient.afficherTousLesProfessionnels();
-//                Vue.afficher("Veuillez entrer le numéro du professionnel.");
-//                idProfessionnel = Vue.getTexteConsole();
-//
-//                if (controleurClient.validerProfessionnel(idProfessionnel)) {
-//                    controleurService.consultationInscription(idProfessionnel);
-//                } else {
-//                    Vue.afficher("Numéro du professionnel incorrect.");
-//                }
-//                break;
 //            case "7":
 //                HashMap<String, Professionnel> hashMapProfessionnel = controleurClient.getHashMapProfessionnel();
 //                controleurService.procedureComptable(hashMapProfessionnel);
@@ -156,6 +130,5 @@ public class VueAgent extends VuePlateforme {
 //            default:
 //                break;
 //        }
-//        resetEnFinDeTransaction();
 //    }
 }
