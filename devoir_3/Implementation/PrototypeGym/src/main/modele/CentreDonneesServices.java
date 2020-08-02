@@ -93,7 +93,8 @@ public class CentreDonneesServices implements ICentreDonnees {
 				idProfessionel1,
 				idMembre1,
                 seance2.getCodeService(),
-                "");
+                "",
+				seance2.getCodeSeance());
         listeInscriptions.put(inscription1.getHashInString(), inscription1);
 	}
 
@@ -122,6 +123,14 @@ public class CentreDonneesServices implements ICentreDonnees {
                 .filter(x -> x.getNumeroProfessionnel().equals(idProfessionnel))
                 .collect(Collectors.toList());
     }
+
+	public List<Seance> getListeSeancesPro(String idProfessionnel) {
+		return listeSeances
+				.values()
+				.stream()
+				.filter(x -> x.getCodeProfessionnel().equals(idProfessionnel))
+				.collect(Collectors.toList());
+	}
 	
 	public List<Seance> getListeSeances(LocalDate date) {
         return listeSeances
@@ -140,7 +149,8 @@ public class CentreDonneesServices implements ICentreDonnees {
                 service.getNumeroProfessionnel(),
                 idMembre,
                 seance.getCodeService(),
-                commentaires);
+                commentaires,
+				seance.getCodeSeance());
         if (!listeInscriptions.containsKey(inscription.getHashInString())) {
             listeInscriptions.put(inscription.getHashInString(), inscription);
         }
@@ -167,6 +177,14 @@ public class CentreDonneesServices implements ICentreDonnees {
                 .filter(x -> x.getNumeroProfessionnel().equals(idProfessionnel))
                 .collect(Collectors.toList());
     }
+
+	public List<Inscription> getListeInscriptionsSeance(String idSeance) {
+		return listeInscriptions
+				.values()
+				.stream()
+				.filter(x -> x.getCodeSeance().equals(idSeance))
+				.collect(Collectors.toList());
+	}
 
 	
 	public void confirmationPresence(String idSeance, String idMembre, String commentaires) {

@@ -23,6 +23,10 @@ public class Seance {
 		return dateSeance;
 	}
 
+	public String getDateTimeSeanceString() {
+		return Verificateurs.localDateTimeFormatter.format(dateSeance);
+	}
+
 	public String getCodeService() {
 		return codeService;
 	}

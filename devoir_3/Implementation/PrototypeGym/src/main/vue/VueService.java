@@ -293,4 +293,20 @@ public class VueService extends Vue {
         }
 
     }
+
+    public void consultationSeance() {
+        afficher("---Consultation d'une séance---");
+        afficher("Veuillez entrer le numéro du professionnel ou entrez 0 pour revenir au menu principal.");
+
+        String idProfessionnel = acquisitionReponse((String s) -> ControleurClient.authentifier(TypeClient.PROFESSIONNEL, s), "Numéro du professionnel incorrect.");
+
+        afficher("Veuillez choisir une séance parmi celles du professionnel " + idProfessionnel + " ou entrez 0 pour revenir au menu principal :");
+        afficher(controleurService.obtenirToutesLesSeancesDuProfessionnelEnString(idProfessionnel));
+
+        String idSeance = acquisitionReponse(controleurService.obtenirListeSeancesDuProfessionnel(idProfessionnel));
+        afficher(controleurService.getInformationSeance(idSeance));
+
+        afficher("Liste des inscriptions à la séance :");
+        afficher(controleurService.obtenirInscriptionsASeanceEnString(idSeance));
+    }
 }

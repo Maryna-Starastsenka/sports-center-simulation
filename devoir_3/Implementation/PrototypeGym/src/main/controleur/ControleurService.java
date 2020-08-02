@@ -248,6 +248,29 @@ public class ControleurService extends Controleur {
 		return idSeances;
 	}
 
+	public String obtenirToutesLesSeancesDuProfessionnelEnString(String idProfessionnel) {
+		var seances = centreDonneesServices.getListeSeancesPro(idProfessionnel);
+		String concatenation = "";
+		for (Seance s : seances) {
+			concatenation += s.getCodeSeance() + " (service de " +
+					centreDonneesServices.getService(s.getCodeService()).getNomService() +
+					") : le " +
+					Verificateurs.localDateTimeFormatter.format(s.getDateTimeSeance()) + "\n";
+		}
+		return concatenation;
+	}
+
+	public List<String> obtenirListeSeancesDuProfessionnel(String idProfessionnel) {
+		var listeSeances = centreDonneesServices.getListeSeancesPro(idProfessionnel);
+		List<String> idSeances = new LinkedList<>();
+		for (Seance seance : listeSeances) {
+			idSeances.add(seance.getCodeSeance());
+		}
+		return idSeances;
+	}
+
+
+
 	private void afficherToutesLesInscriptionDuPro(String idProfessionnel) {
 		var inscriptions = centreDonneesServices.getListeInscriptionsPro(idProfessionnel);
 		if (inscriptions.size() == 0) {
@@ -305,7 +328,7 @@ public class ControleurService extends Controleur {
 		if (seance != null) {
 			infos = "Code séance : " + seance.getCodeSeance() + "\n" +
 					"Code professionnel : " + seance.getCodeProfessionnel() + "\n" +
-					"Date de la séance : " + seance.getDateTimeSeance() + "\n";
+					"Date de la séance : " + seance.getDateTimeSeanceString() + "\n";
 		}
 		return infos;
 	}
@@ -323,5 +346,20 @@ public class ControleurService extends Controleur {
 					"Commentaires : " + inscription.getCommentaires() + "\n";
 		}
 		return infos;
+	}
+
+	public String obtenirInscriptionsASeanceEnString(String idSeance) {
+		var listeInscriptions = obtenirInscriptionsASeance(idSeance);
+		String inscriptions = "";
+		for (Inscription inscription : listeInscriptions) {
+			inscriptions += "Membre " + inscription.getNumeroMembre() +
+					(inscription.getCommentaires().length() != 0 ? "; Commentaires : " : "") +
+					inscription.getCommentaires() + "\n";
+		}
+		return inscriptions;
+	}
+
+	public List<Inscription> obtenirInscriptionsASeance(String idSeance) {
+		return centreDonneesServices.getListeInscriptionsSeance(idSeance);
 	}
 }

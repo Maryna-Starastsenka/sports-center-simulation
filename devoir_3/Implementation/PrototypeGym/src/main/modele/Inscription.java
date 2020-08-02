@@ -15,15 +15,17 @@ public class Inscription {
 	private String numeroMembre;
 	private String codeService;
 	private String commentaires;
-	
+	private String codeSeance;
+
 	public Inscription(LocalDateTime dateEtHeureActuelles, LocalDate dateSeance, String numeroProfessionnel, String numeroMembre,
-					   String codeService, String commentaires) {
+					   String codeService, String commentaires, String codeSeance) {
 		this.dateEtHeureActuelles = dateEtHeureActuelles;
 		this.dateSeance = dateSeance;
 		this.numeroProfessionnel = numeroProfessionnel;
 		this.numeroMembre = numeroMembre;
 		this.codeService = codeService;
 		this.commentaires = commentaires;
+		this.codeSeance = codeSeance;
 	}
 
 	public LocalDate getDateSeance() {
@@ -46,18 +48,22 @@ public class Inscription {
 		return commentaires;
 	}
 
+	public String getCodeSeance() {
+		return codeSeance;
+	}
+
 	public String getDateEtHeureActuelleString() {
 		return Verificateurs.localDateTimeFormatter.format(dateEtHeureActuelles);
 	}
 
 	@Override
 	public int hashCode() {
-		return Math.abs(Objects.hash(dateEtHeureActuelles,
+		return Math.abs(Objects.hash(
 				dateSeance,
 				numeroProfessionnel,
 				numeroMembre,
 				codeService,
-				commentaires) % 10000); // 4 chiffres max
+				codeSeance) % 10000); // 4 chiffres max
 	}
 
 	public String getHashInString() {
@@ -67,4 +73,7 @@ public class Inscription {
 	public String getDateSeanceString() {
 		return Verificateurs.localDateFormatter.format(dateSeance);
 	}
+
+
+
 }

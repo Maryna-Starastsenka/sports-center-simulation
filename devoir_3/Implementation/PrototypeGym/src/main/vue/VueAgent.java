@@ -47,6 +47,7 @@ public class VueAgent extends VuePlateforme {
             case "5":
                 break;
             case "6":
+                vueService.consultationSeance();
                 break;
             case "7":
                 break;
