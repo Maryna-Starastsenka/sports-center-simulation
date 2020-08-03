@@ -94,7 +94,7 @@ public class ControleurClient extends Controleur {
 				return TypeClient.PROFESSIONNEL_VALIDE;
 			}
 		}
-		return typeClient.CLIENT_INVALIDE;
+		return TypeClient.CLIENT_INVALIDE;
 	}
 	
 	public static String nomClient(String idClient) {

@@ -205,7 +205,7 @@ public abstract class VueClient<T> extends Vue {
     }
 
     public void seConnecterApp(String adresseCourriel) {
-        String idClient = controleurClient.seConnecterApp(typeClient, adresseCourriel);
+        String idClient = ControleurClient.seConnecterApp(typeClient, adresseCourriel);
         if (idClient != null) {
             afficher("Bienvenue au #GYM");
         } else {
@@ -213,7 +213,7 @@ public abstract class VueClient<T> extends Vue {
         }
     }
 
-    public void verifierTypeCleint() {
+    public void verifierTypeClient() {
         afficher(String.format("Entrez l'identifiant du %s (9 chiffres) :", clientString));
         String reponse = acquisitionReponse(Verificateurs::identifiantClientValide);
         String typeClientVerifie = String.valueOf(controleurClient.verifierTypeClient(typeClient, reponse));

@@ -1,11 +1,9 @@
 package main.controleur;
 
+import main.modele.Membre;
 import main.modele.Professionnel;
-import main.modele.ProfessionnelTef;
-import main.vue.Vue;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class ControleurAdministration extends Controleur {
 
@@ -13,18 +11,18 @@ public class ControleurAdministration extends Controleur {
 
     }
     
-    public String genererTef() {
+    public void genererTef() {
     	 HashMap<String, Professionnel> listeProfessionnels = ControleurClient.getListeProfessionnels();
     	 HashMap<String, Membre> listeMembres = ControleurClient.getListeMembres();
+    	 ControleurService.centreDonneesServices.genererTefMembre(listeMembres);
+    	 ControleurService.centreDonneesServices.genererTefProfessionnel(listeProfessionnels);
     }
 
     public String genererRapportSynthese() {
  
         HashMap<String, Professionnel> listeProfessionnels = ControleurClient.getListeProfessionnels();
         var rapport = ControleurService.centreDonneesServices.genererRapportSynthese(listeProfessionnels);
-
-        String concat = rapport.toString()+ "\n";
  
-        return concat;
+        return rapport.toString()+ "\n";
     }
 }

@@ -1,15 +1,19 @@
 package main.vue;
 
 import main.controleur.ControleurClient;
+import main.controleur.Verificateurs;
 import main.modele.Professionnel;
 import main.modele.TypeClient;
 
 public class VueProfessionnel extends VueClient<Professionnel> {
 
+    private VueService vueService;
+	
     public VueProfessionnel() {
         clientString = "Professionnel";
         typeClient = TypeClient.PROFESSIONNEL;
         controleurClient = new ControleurClient();
+        vueService = new VueService();
     }
 
     @Override
@@ -33,6 +37,19 @@ public class VueProfessionnel extends VueClient<Professionnel> {
         afficher(String.format("Le professionnel numéro %s n'est pas enregistré.",
                 idProfessionnel));
     }
+    
+    public void seConnecterApp(String adresseCourriel) {
+        String idProfessionnel = ControleurClient.seConnecterApp(typeClient, adresseCourriel);
+        if (idProfessionnel != null) {
+            afficher("Bienvenue au #GYM");
+            vueService.afficherSeance(idProfessionnel);
+            //vueService.confirmationPresence(); TODO
+        } else {
+            afficher("L'adresse courriel renseignée n'est pas valide");
+        }
+    }
+    
+    
 
 
 }

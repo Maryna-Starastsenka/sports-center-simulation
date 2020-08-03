@@ -377,6 +377,7 @@ public class CentreDonneesServices implements ICentreDonnees {
 	
 	
 	
+	
 	public DayOfWeek getDayOfWeek(Jour jour) {
 		switch (jour) {
 		case LUNDI:

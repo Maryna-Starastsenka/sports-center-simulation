@@ -289,11 +289,16 @@ public class VueService extends Vue {
 
     public void consultationSeance() {
         effacerEcran();
-        afficher("---Consultation d'une séance---");
         afficher("Veuillez entrer le numéro du professionnel ou entrez 0 pour revenir au menu principal.");
 
         String idProfessionnel = acquisitionReponse((String s) -> ControleurClient.authentifier(TypeClient.PROFESSIONNEL, s), "Numéro du professionnel incorrect.");
         if (idProfessionnel.equals("0")) return;
+        afficherSeance(idProfessionnel);
+    }
+    
+    public void afficherSeance(String idProfessionnel) {
+        afficher("---Consultation d'une séance---");
+
 
         afficher("Veuillez choisir une séance parmi celles du professionnel " + idProfessionnel + " ou entrez 0 pour revenir au menu principal :");
         afficher(controleurService.obtenirToutesLesSeancesDuProfessionnelEnString(idProfessionnel));
@@ -321,7 +326,7 @@ public class VueService extends Vue {
                 afficher("Membre suspendu. Retour au menu principal.");
                 return;
             case MEMBRE_VALIDE:
-                afficher("Références des séances disponibles ajourd'hui, le " + Verificateurs.today() + " :");
+                afficher("Références des séances disponibles aujourd'hui, le " + Verificateurs.today() + " :");
                 afficher(controleurService.obtenirToutesLesSeancesDuJourEnString(Verificateurs.today()));
 
                 afficher("Veuillez entrer la référence de la séance à laquelle vous voulez inscrire un membre ou appuyez sur 0 pour revenir au menu principal :");

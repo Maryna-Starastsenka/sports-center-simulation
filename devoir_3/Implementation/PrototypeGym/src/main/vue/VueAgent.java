@@ -2,6 +2,9 @@ package main.vue;
 
 import java.util.Arrays;
 
+import main.controleur.ControleurClient;
+import main.modele.TypeClient;
+
 public class VueAgent extends VuePlateforme {
     VueAdministration vueAdministration;
     VueMembre vueMembre;
@@ -93,10 +96,10 @@ public class VueAgent extends VuePlateforme {
 
         switch (reponse) {
             case "1":
-                vueMembre.verifierTypeCleint();
+                vueMembre.verifierTypeClient();
                 break;
             case "2":
-                vueProfessionnel.verifierTypeCleint();
+                vueProfessionnel.verifierTypeClient();
                 break;
         }
     }
