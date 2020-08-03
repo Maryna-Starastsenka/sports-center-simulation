@@ -46,6 +46,9 @@ public abstract class VueClient<T> extends Vue {
         String adresseCourriel;
         String numeroTelephone;
         String adresse;
+        String ville;
+        String codePostal;
+        String province;
 
         effacerEcran();
         afficher(String.format("------Formulaire de nouveau compte %s------", clientString));
@@ -57,6 +60,15 @@ public abstract class VueClient<T> extends Vue {
 
         afficher("Veuillez entrer l'adresse :");
         adresse = acquisitionReponse();
+        
+        afficher("Veuillez entrer la ville :");
+        ville = acquisitionReponse();
+        
+        afficher("Veuillez entrer l'adresse :");
+        province = acquisitionReponse();
+        
+        afficher("Veuillez entrer l'adresse :");
+        codePostal = acquisitionReponse(Verificateurs::codePostalValide).toUpperCase();
 
         afficher("Veuillez entrer le numéro de téléphone (XXX-XXX-XXXX):");
         numeroTelephone = acquisitionReponse(Verificateurs::telephoneValide);
@@ -64,7 +76,7 @@ public abstract class VueClient<T> extends Vue {
         afficher("Veuillez entrer l'adresse courriel (xxx@xxx.xxx) :");
         adresseCourriel = acquisitionReponse(Verificateurs::courrielValide);
 
-        controleurClient.creerClient(getTypeClientPrecis(), nom, dateNaissanceString, adresseCourriel, numeroTelephone, adresse);
+        controleurClient.creerClient(getTypeClientPrecis(), nom, dateNaissanceString, adresseCourriel, numeroTelephone, adresse, ville, province, codePostal);
     }
 
     public void gererCompteExistant() {

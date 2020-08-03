@@ -12,16 +12,16 @@ public class Seance {
 	private DayOfWeek recurrence;
 	private LocalDate date;
 	private String codeService;
+	private Service service;
 	private String codeProfessionnel;
 
-	private HashMap<String, Inscription> inscriptions;
-
-	public Seance(DayOfWeek recurrence, String codeService, String codeProfessionnel) {
+	public Seance(DayOfWeek recurrence, String codeService, String codeProfessionnel, Service service) {
 		this.recurrence = recurrence;
 
 		this.date = LocalDate.now().minusDays(1).with(TemporalAdjusters.next(recurrence));
 		this.codeService = codeService;
 		this.codeProfessionnel = codeProfessionnel;
+		this.service = service;
 	}
 
 	public DayOfWeek getRecurrence() {
@@ -34,6 +34,10 @@ public class Seance {
 	
 	public LocalDate getDate() {
 		return date;
+	}
+	
+	public Service getService() {
+		return service;
 	}
 	
 	public String dateString() {

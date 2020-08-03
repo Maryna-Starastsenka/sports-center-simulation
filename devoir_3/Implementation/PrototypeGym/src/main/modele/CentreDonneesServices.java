@@ -1,6 +1,7 @@
 package main.modele;
 
 import jdk.jshell.spi.ExecutionControl;
+import main.controleur.ControleurClient;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -9,7 +10,6 @@ import java.time.LocalTime;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,6 +25,7 @@ public class CentreDonneesServices implements ICentreDonnees {
   
     
     private List<ProfessionnelTef> listeProfessionnelsTef = new ArrayList<>();
+    private List<MembreTef> listeMembresTef = new ArrayList<>();
     
 	public CentreDonneesServices() {
 		String idProfessionel1 = "150337313";
@@ -42,7 +43,6 @@ public class CentreDonneesServices implements ICentreDonnees {
 				63.25,
 				"Rien à signaler");
 		listeServices.put(service1.getCode(), service1);
-		System.out.println(service1.getCode());
 		
 		
 		Service service3 = new Service("Yoga",
@@ -66,24 +66,27 @@ public class CentreDonneesServices implements ICentreDonnees {
 				idProfessionel2,
 				50.12,
 				"En refonte");
-		listeServices.put(service3.getCode(), service3);
+		listeServices.put(service4.getCode(), service4);
 
 		
 		// crée une séance au jour d'exécution du programme pour les tests
-		Seance seance1 = new Seance(DayOfWeek.MONDAY, service1.getCode(), service1.getNumeroProfessionnel());
+		Seance seance1 = new Seance(DayOfWeek.MONDAY, service1.getCode(), service1.getNumeroProfessionnel(), service1);
 		listeSeances.put(seance1.getCodeSeance(), seance1);
 		service1.ajouterSeance(seance1);
 
 		this.mettreAJourSeances();
 
+		
 
         Inscription inscription1 = new Inscription(now(),
                 seance1.getDate(),
 				idProfessionel1,
 				idMembre1,
+				ControleurClient.nomClient(idMembre1),
                 seance1.getCodeService(),
                 "",
-				seance1.getCodeSeance());
+				seance1.getCodeSeance(),
+				service1.getFraisService());
         listeInscriptions.put(inscription1.getHashInString(), inscription1);
 	}
 
@@ -150,7 +153,7 @@ public class CentreDonneesServices implements ICentreDonnees {
                 .collect(Collectors.toList());
     }
 	
-	public Inscription inscrireMembreASeance(String idMembre, String idSeance, String commentaires) {
+	public Inscription inscrireMembreASeance(String idMembre, String nomClient, String idSeance, String commentaires) {
         Seance seance = listeSeances.get(idSeance);
         Service service = listeServices.get(seance.getCodeService());
         Inscription inscription = new Inscription(
@@ -158,9 +161,11 @@ public class CentreDonneesServices implements ICentreDonnees {
                 seance.getDate(),
                 service.getNumeroProfessionnel(),
                 idMembre,
+                nomClient,
                 seance.getCodeService(),
                 commentaires,
-				seance.getCodeSeance());
+				seance.getCodeSeance(),
+				service.getFraisService());
         if (!listeInscriptions.containsKey(inscription.getHashInString())) {
             listeInscriptions.put(inscription.getHashInString(), inscription);
         }
@@ -215,45 +220,71 @@ public class CentreDonneesServices implements ICentreDonnees {
                 .filter(x -> x.getDate().compareTo(debut) >= 0 && x.getDate().compareTo(fin) <= 0)
                 .collect(Collectors.toList());
     }
+	
+	public List<Inscription> getInscriptionsEntre(LocalDate debut, LocalDate fin) {
+        return listeInscriptions
+                .values()
+                .stream()
+                .filter(x -> x.getDateSeance().compareTo(debut) >= 0 && x.getDateSeance().compareTo(fin) <= 0)
+                .collect(Collectors.toList());
+    }
 
-	public void genererTef(HashMap<String, Professionnel> listeProfessionnels) {
+	public void genererTefProfessionnel(HashMap<String, Professionnel> listeProfessionnels) {
 		LocalDate dateDebut = LocalDate.now().minusDays(8).with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
 		LocalDate dateFin = dateDebut.with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
 
-		List<Seance> seances = getSeancesEntre(dateDebut, dateFin);
+		List<Inscription> inscriptions = getInscriptionsEntre(dateDebut, dateFin);
 		HashMap<String, ProfessionnelTef> professionnelsAPayer = new HashMap<>();
-		HashSet<String> serviceIds = new HashSet<>();
-		for (Seance seance: seances) {
-			Service service = getService(seance.getCodeService());
 
-			if (!serviceIds.contains(service.getCode())) {
-				serviceIds.add(service.getCode());
-			}
-
-			Professionnel pro = listeProfessionnels.get(service.getNumeroProfessionnel());
-
-			if (!professionnelsAPayer.containsKey(pro.getHashInString())){
-				var proTef = new ProfessionnelTef(pro.getNom(), pro.getHashInString(), service.getFraisService(), 0);
-
+		for(Inscription i : inscriptions) {
+			String idProfessionnel = i.getNumeroProfessionnel();
+			Professionnel pro = listeProfessionnels.get(idProfessionnel);
+			if (!professionnelsAPayer.containsKey(idProfessionnel)){				
+				ProfessionnelTef proTef = new ProfessionnelTef(pro.getNom(), idProfessionnel, pro.getAdresse(), pro.getVille(),
+						pro.getProvince(), pro.getCodePostal(), getListeServicesPro(idProfessionnel).size());
 				professionnelsAPayer.put(pro.getHashInString(), proTef);
+				professionnelsAPayer.get(pro.getHashInString()).ajouterInscription(i);
 			} else {
-				professionnelsAPayer.get(pro.getHashInString()).ajouterFraisAPayer(service.getFraisService());
+				professionnelsAPayer.get(pro.getHashInString()).ajouterInscription(i);
 			}
-		}
 
-		for (String s : serviceIds) {
-			String pro = listeServices.get(s).getNumeroProfessionnel();
-			professionnelsAPayer.get(pro).ajouterService();
 		}
-
+		
 		listeProfessionnelsTef = professionnelsAPayer
+				.values()
+				.stream()
+				.collect(Collectors.toList());
+	}
+	
+	public void genererTefMembre(HashMap<String, Membre> listeMembres) {
+		LocalDate dateDebut = LocalDate.now().minusDays(8).with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
+		LocalDate dateFin = dateDebut.with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
+
+		List<Inscription> inscriptions = getInscriptionsEntre(dateDebut, dateFin);
+		HashMap<String, MembreTef> membresPaye = new HashMap<>();
+
+		for(Inscription i : inscriptions) {
+			String idMembre = i.getNumeroMembre();
+			Membre membre = listeMembres.get(idMembre);
+			if (!membresPaye.containsKey(idMembre)){				
+				MembreTef membreTef = new MembreTef(membre.getNom(), idMembre, membre.getAdresse(), membre.getVille(),
+						membre.getProvince(), membre.getCodePostal());
+				membresPaye.put(membre.getHashInString(), membreTef);
+				membresPaye.get(membre.getHashInString()).ajouterInscription(i);
+			} else {
+				membresPaye.get(membre.getHashInString()).ajouterInscription(i);
+			}
+
+		}
+		
+		listeMembresTef = membresPaye
 				.values()
 				.stream()
 				.collect(Collectors.toList());
 	}
 
 	public RapportSynthese genererRapportSynthese(HashMap<String, Professionnel> listeProfessionnels) {
-		genererTef(listeProfessionnels);
+		genererTefProfessionnel(listeProfessionnels);
 		int nombreTotalServices = listeProfessionnelsTef.stream().mapToInt(ProfessionnelTef::getNombreServices).sum();
 		double fraisTotaux = listeProfessionnelsTef.stream().mapToDouble(ProfessionnelTef::getMontant).sum();
 		return new RapportSynthese(listeProfessionnelsTef,
@@ -343,6 +374,8 @@ public class CentreDonneesServices implements ICentreDonnees {
 		}
 		return null;
 	}
+	
+	
 	
 	public DayOfWeek getDayOfWeek(Jour jour) {
 		switch (jour) {

@@ -76,7 +76,8 @@ public class ControleurService extends Controleur {
 	}
 
 	public String inscriptionSeance(String membreId, String seanceId, String commentaire) {
-		return centreDonneesServices.inscrireMembreASeance(membreId, seanceId, commentaire).getHashInString();
+		 String nomClient = ControleurClient.nomClient(membreId);
+		return centreDonneesServices.inscrireMembreASeance(membreId, nomClient, seanceId, commentaire).getHashInString();
 	}
 
 	public boolean confirmerPresence(String idSeance, String idMembre, String commentaire) {
@@ -219,6 +220,11 @@ public class ControleurService extends Controleur {
 
 	public String getIDServiceFromSeance(String idSeance) {
 		return centreDonneesServices.getIDServiceFromSeance(idSeance);
+	}
+	
+	public static String nomService(String idService) {
+		Service service = centreDonneesServices.lire(idService);
+		return service.getNomService();
 	}
 
 }

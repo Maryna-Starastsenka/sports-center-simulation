@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import main.controleur.Verificateurs;
+
 
 public class Service {
 	private String nomService;
@@ -51,11 +53,13 @@ public class Service {
 		this.fraisService = fraisService;
 		this.commentaires = commentaires;
 		
-		Seance seance = new Seance(recurrenceHebdo, this.codeService, numeroProfessionnel);
+		Seance seance = new Seance(recurrenceHebdo, this.codeService, numeroProfessionnel, this);
 		this.seances = new HashMap<String, Seance>();
 		this.seances.put(seance.getCodeSeance(), seance);		
 	}
 
+	public String getDateActuelleString() { return Verificateurs.localDateTimeFormatter.format(dateEtHeureActuelles);}
+	
 	public LocalDate getDateDebutService() { return dateDebutService; }
 
 	public LocalDate getDateFinService() { return dateFinService; }

@@ -23,17 +23,20 @@ public class ControleurClient extends Controleur {
 							String dateNaissanceString,
 							String adresseCourriel,
 							String numeroTelephone,
-							String adresse) {
+							String adresse,
+							String ville,
+							String province,
+							String codePostal) {
 		LocalDate dateNaissance = Verificateurs.getDateFromString(dateNaissanceString);
 		Client client = null;
 		switch (typeClient) {
 			case MEMBRE_VALIDE: // membre qui a payé les frais d'adhésion
 			case MEMBRE_SUSPENDU: // membre qui n'a pas payé les frais d'adhésion
-				Membre membre = new Membre(nom, dateNaissance, adresse, numeroTelephone, adresseCourriel, typeClient.equals("1") ? true : false);
+				Membre membre = new Membre(nom, dateNaissance, adresse, ville, province, codePostal, numeroTelephone, adresseCourriel, typeClient.equals("1") ? true : false);
 				client = centreDonneesMembre.creer(membre);
 				break;
 			case PROFESSIONNEL:
-				Professionnel professionnel = new Professionnel(nom, dateNaissance, adresse, numeroTelephone, adresseCourriel);
+				Professionnel professionnel = new Professionnel(nom, dateNaissance, adresse, ville, province, codePostal, numeroTelephone, adresseCourriel);
 				client = centreDonneesProfessionnel.creer(professionnel);
 				break;
 		}
@@ -93,6 +96,11 @@ public class ControleurClient extends Controleur {
 		}
 		return typeClient.CLIENT_INVALIDE;
 	}
+	
+	public static String nomClient(String idClient) {
+		Client client = centreDonneesMembre.lire(idClient);
+		return client.getNom();
+	}
 
 	public String getInformationsClient(TypeClient typeClient, String idClient) {
 		Client client = null;
@@ -145,6 +153,10 @@ public class ControleurClient extends Controleur {
 
 	public static HashMap<String, Professionnel> getListeProfessionnels() {
 		return centreDonneesProfessionnel.getListeProfessionnels();
+	}
+	
+	public static HashMap<String, Membre> getListeMembres() {
+		return centreDonneesMembre.getListeMembres();
 	}
 	
 	public void modifierStatutMembre(HashMap<String, Boolean> listeValidations) {

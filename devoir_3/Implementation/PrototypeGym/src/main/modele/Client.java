@@ -12,6 +12,9 @@ public abstract class Client {
 	protected String adresseCourriel;
 	protected String numeroPhone;
 	protected String adresse;
+	protected String ville;
+	protected String province;
+	protected String codePostal;
 
 	public String getId () { return id; }
 
@@ -24,7 +27,13 @@ public abstract class Client {
 	public String getNumeroPhone() { return numeroPhone; }
 
 	public String getAdresse() { return adresse; }
+	
+	public String getVille() { return ville; }
 
+	public String getProvince() { return province; }
+	
+	public String getCodePostal() { return codePostal; }
+	
 	public void setNom(String nom) { this.nom = nom; }
 
 	public void setId(String id) { this.id = id; }
@@ -36,6 +45,12 @@ public abstract class Client {
 	public void setNumeroPhone(String numeroPhone) { this.numeroPhone = numeroPhone; }
 
 	public void setAdresse(String adresse) { this.adresse = adresse; }
+	
+	public void setVille(String ville) { this.ville = ville; }
+
+	public void setProvince(String province) { this.province = province; }
+	
+	public void setCodePostal(String codePostal) { this.codePostal = codePostal; }
 
 	@Override
 	public int hashCode() {
@@ -58,7 +73,8 @@ public abstract class Client {
 	public String toString() {
 		return "Nom : " + this.getNom() + "\n" + "Date de naissance : "
 				+ Verificateurs.localDateFormatter.format(this.getDateNaissance())+ "\n" + "Adresse courriel : " + this.getAdresseCourriel() + "\n"
-				+ "Numéro de téléphone : " + this.getNumeroPhone() + "\n" + "Adresse : " + this.getAdresse() + "\n";
+				+ "Numéro de téléphone : " + this.getNumeroPhone() + "\n" + "Adresse : " + this.getAdresse() + "\n"+ this.getVille() + "\n"+ 
+				this.getProvince() + "\n" + this.getCodePostal();
 	}
 
 }

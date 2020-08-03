@@ -15,7 +15,10 @@ public class CentreDonneesMembre implements ICentreDonnees<Membre> {
         // valeurs par défaut
         /*** MEMBRES ***/
         Membre membre1 = new Membre("John Doe", LocalDate.of(1970, 2, 2),
-                "456 du Brésil, Brasilia",
+                "456 du Brésil",
+                "Memphré",
+                "Québec",
+                "G1H2Y8",
                 "999-999-9999",
                 "John@doe.com", true);
         listeMembres.put(membre1.getHashInString(), membre1);
@@ -66,6 +69,15 @@ public class CentreDonneesMembre implements ICentreDonnees<Membre> {
             case ADRESSE_CLIENT:
                 membre.setAdresse(valeur);
                 break;
+            case VILLE_CLIENT:
+                membre.setVille(valeur);
+                break;
+            case PROVINCE_CLIENT:
+                membre.setProvince(valeur);
+                break;
+            case CODEPOSTAL_CLIENT:
+                membre.setCodePostal(valeur);
+                break;
             case STATUT_MEMBRE:
                 membre.setAPaye(!membre.getAPaye());
         }
@@ -97,5 +109,9 @@ public class CentreDonneesMembre implements ICentreDonnees<Membre> {
 
     public List<Client> getClients() {
         return listeMembres.values().stream().collect(Collectors.toList());
+    }
+    
+    public HashMap<String, Membre> getListeMembres() {
+        return listeMembres;
     }
 }

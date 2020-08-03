@@ -52,6 +52,10 @@ public class Verificateurs {
             return false;
         }
     }
+    
+    public static boolean codePostalValide(String s) {
+        return s != null && s.length() == 6;
+    }
 
     public static boolean courrielValide (String s) {
         String regexPattern = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";

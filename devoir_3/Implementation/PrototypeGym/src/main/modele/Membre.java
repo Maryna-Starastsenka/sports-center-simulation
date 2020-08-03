@@ -8,11 +8,14 @@ public class Membre extends Client {
 	private boolean aPaye;
 	private HashMap<String, Inscription> inscriptions;
 
-	public Membre(String nom, LocalDate dateNaissance, String adresse, String numeroPhone, String adresseCourriel,
+	public Membre(String nom, LocalDate dateNaissance, String adresse, String ville, String province, String codePostal, String numeroPhone, String adresseCourriel,
 				  boolean aPaye) {
 		this.nom = nom;
 		this.dateNaissance = dateNaissance;
 		this.adresse = adresse;
+		this.ville = ville;
+		this.province = province;
+		this.codePostal = codePostal;
 		this.numeroPhone = numeroPhone;
 		this.adresseCourriel = adresseCourriel;
 		this.aPaye = aPaye;

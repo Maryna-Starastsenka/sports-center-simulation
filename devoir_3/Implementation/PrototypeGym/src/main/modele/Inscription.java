@@ -16,16 +16,20 @@ public class Inscription {
 	private String codeService;
 	private String commentaires;
 	private String codeSeance;
+	private double montant;
+	private String nomMembre;
 
 	public Inscription(LocalDateTime dateEtHeureActuelles, LocalDate dateSeance, String numeroProfessionnel, String numeroMembre,
-					   String codeService, String commentaires, String codeSeance) {
+					   String nomMembre, String codeService, String commentaires, String codeSeance, double montant) {
 		this.dateEtHeureActuelles = dateEtHeureActuelles;
 		this.dateSeance = dateSeance;
 		this.numeroProfessionnel = numeroProfessionnel;
 		this.numeroMembre = numeroMembre;
+		this.nomMembre = nomMembre;
 		this.codeService = codeService;
 		this.commentaires = commentaires;
 		this.codeSeance = codeSeance;
+		this.montant = montant;
 	}
 
 	public LocalDate getDateSeance() {
@@ -39,6 +43,10 @@ public class Inscription {
 	public String getNumeroMembre() {
 		return numeroMembre;
 	}
+	
+	public String getNomMembre() {
+		return nomMembre;
+	}
 
 	public String getCodeService() {
 		return codeService;
@@ -50,6 +58,10 @@ public class Inscription {
 
 	public String getCodeSeance() {
 		return codeSeance;
+	}
+	
+	public double getMontant() {
+		return montant;
 	}
 
 	public String getDateEtHeureActuelleString() {
