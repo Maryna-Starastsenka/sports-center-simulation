@@ -124,7 +124,7 @@ class ControleurServiceTests {
 		
 
 		List<String> listeSeances =  controleurService.obtenirListeSeancesDuProfessionnel(idProfessionel1);
-		controleurService.inscriptionSeance(idMembre1, listeSeances.get(0), "J'ai hâte!");
+		controleurService.inscriptionSeance(idMembre1, controleurClient.nomClient(idMembre1), listeSeances.get(0), "J'ai hâte!");
 		
 	}
 
@@ -156,8 +156,6 @@ class ControleurServiceTests {
 				"Commentaire : non\n";
 
 		assertEquals(controleurService.getInformationsService(codeSeance),infoService, "Test créer service échoué");
-
-		System.out.println(controleurService.obtenirToutesLesSeancesDuProfessionnelEnString(numeroProfessionnel));
 
 	}
 
@@ -215,7 +213,7 @@ class ControleurServiceTests {
 		String commentaire = "Pas de commentaire";
 		
 		assertFalse(controleurService.inscriptionExiste(membreId, idSeance), "Test inscription échoué");
-		controleurService.inscriptionSeance(membreId, idSeance, commentaire);
+		controleurService.inscriptionSeance(membreId, controleurClient.nomClient(membreId), idSeance, commentaire);
 		assertTrue(controleurService.inscriptionExiste(membreId, idSeance), "Test inscription échoué");
 
 	}

@@ -75,8 +75,7 @@ public class ControleurService extends Controleur {
 		return servicesString;
 	}
 
-	public String inscriptionSeance(String membreId, String seanceId, String commentaire) {
-		 String nomClient = ControleurClient.nomClient(membreId);
+	public String inscriptionSeance(String membreId, String nomClient, String seanceId, String commentaire) {
 		return centreDonneesServices.inscrireMembreASeance(membreId, nomClient, seanceId, commentaire).getHashInString();
 	}
 

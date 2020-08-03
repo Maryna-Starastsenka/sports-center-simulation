@@ -254,7 +254,8 @@ public class VueService extends Vue {
             afficher("Veuillez entrer un commentaire (appuyez sur ENTREE si vous le ne souhaitez pas) :");
             String commentaire = getTexteConsole();
 
-            String inscriptionId = controleurService.inscriptionSeance(membreId, idSeance, commentaire);
+            String nomClient = ControleurClient.nomClient(membreId);
+            String inscriptionId = controleurService.inscriptionSeance(membreId, nomClient, idSeance, commentaire);
 
             afficher("Le membre " +
                     membreId +
