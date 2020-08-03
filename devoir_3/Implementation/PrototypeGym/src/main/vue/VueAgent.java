@@ -26,10 +26,9 @@ public class VueAgent extends VuePlateforme {
         afficher("5. Confirmation de la présence");
         afficher("6. Consultation d'une séance");
         afficher("7. Procédure comptable");
-        afficher("8. Mettre à jour statut membres");
-        afficher("9. Sortir de l'application");
+        afficher("8. Sortir de l'application");
 
-        String reponse = acquisitionReponse(Arrays.asList("1","2","3","4","5","6","7","8","9"));
+        String reponse = acquisitionReponse(Arrays.asList("1","2","3","4","5","6","7","8"));
 
         switch (reponse) {
             case "1":
@@ -54,8 +53,6 @@ public class VueAgent extends VuePlateforme {
                 vueAdministration.procedureComptable();
                 break;
             case "8":
-                break;
-            case "9":
                 System.exit(0);
                 break;
         }
@@ -103,7 +100,6 @@ public class VueAgent extends VuePlateforme {
                 break;
         }
     }
-
 
 //            case "5":
 //                Vue.afficher("---Confirmation de la présence---");

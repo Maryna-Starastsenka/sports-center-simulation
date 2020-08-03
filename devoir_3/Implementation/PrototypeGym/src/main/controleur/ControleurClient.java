@@ -147,6 +147,10 @@ public class ControleurClient extends Controleur {
 		return centreDonneesProfessionnel.getListeProfessionnels();
 	}
 	
+	public void modifierStatutMembre(HashMap<String, Boolean> listeValidations) {
+		centreDonneesMembre.modifierStatutMembres(listeValidations);
+	}
+	
 //public boolean validerMembre (String id){
 //		return centreDonneesMembre.estMembre(id);
 //}

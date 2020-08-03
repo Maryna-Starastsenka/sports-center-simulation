@@ -55,7 +55,7 @@ public class VueService extends Vue {
     private void gererServiceExistant(String idProfessionnel) {
         enTeteGestionService();
 
-        afficher("Service du Professionnel : \n" + controleurService.obtenirToutesLesSeancesDuProfessionnelEnString(idProfessionnel));
+        afficher("Services et séances du Professionnel : \n" + controleurService.obtenirToutesLesSeancesDuProfessionnelEnString(idProfessionnel));
         afficher("Veuillez choisir le service ou 0 pour retourner au menu principal.");
         String idSeance = acquisitionReponse(Verificateurs::identifiantSeanceValide);
         if (idSeance.equals("0")) {
@@ -75,7 +75,7 @@ public class VueService extends Vue {
                 mettreAJourService(idSeance);
                 break;
             case "2":
-                supprimerService(controleurService.getIDServiceFromSeance(idSeance));
+                supprimerService(idSeance);
                 break;
         }
     }
@@ -155,15 +155,15 @@ public class VueService extends Vue {
         }
     }
 
-    private void supprimerService(String idService) {
+    private void supprimerService(String idSeance) {
         afficher("1. Valider suppression.");
         afficher("0. Retour au menu principal.");
 
         String reponse = acquisitionReponse(Arrays.asList("1"));
 
         if (reponse.equals("1")) {
-            controleurService.supprimerService(idService);
-            afficher(String.format("Service %s supprimé.", idService));
+            controleurService.supprimerService(idSeance);
+            afficher(String.format("Service %s supprimé.", idSeance));
         }
     }
 

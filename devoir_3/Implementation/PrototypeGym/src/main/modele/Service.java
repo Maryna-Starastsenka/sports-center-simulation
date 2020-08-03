@@ -68,6 +68,10 @@ public class Service {
 		this.seances.put(seance.getCodeSeance(), seance);
 	}
 	
+	public void enleverSeance(String id) {
+		this.seances.remove(id);
+	}
+	
 	public List<Seance> obtenirListeSeances() {
 		return seances
 				.values()

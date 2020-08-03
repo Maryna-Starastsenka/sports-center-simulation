@@ -319,7 +319,14 @@ public class CentreDonneesServices implements ICentreDonnees {
 	}
 
 	@Override
-	public void supprimer(String id) { listeServices.remove(id); }
+	public void supprimer(String id) { 
+		Seance seance = listeSeances.get(id);
+		Service service = listeServices.get(seance.getCodeService());
+		listeSeances.remove(id); 
+		service.enleverSeance(id);
+		if(service.obtenirListeSeances().size()==0)
+			listeServices.remove(service.getCode());
+		}
 
 	@Override
 	public void ajouterClient(Object client) {

@@ -18,7 +18,7 @@ public class Seance {
 
 	public Seance(DayOfWeek recurrence, String codeService, String codeProfessionnel) {
 		this.recurrence = recurrence;
-		System.out.println(LocalDate.now().minusDays(1).with(TemporalAdjusters.next(recurrence)));
+
 		this.date = LocalDate.now().minusDays(1).with(TemporalAdjusters.next(recurrence));
 		this.codeService = codeService;
 		this.codeProfessionnel = codeProfessionnel;

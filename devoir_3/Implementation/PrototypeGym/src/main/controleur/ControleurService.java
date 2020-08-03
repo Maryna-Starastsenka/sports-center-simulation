@@ -58,8 +58,8 @@ public class ControleurService extends Controleur {
 		centreDonneesServices.mettreAJour(idService, champs, valeur);
 	}
 
-	public void supprimerService(String idService) {
-			centreDonneesServices.supprimer(idService);
+	public void supprimerService(String idSeance) {
+			centreDonneesServices.supprimer(idSeance);
 	}
 
 	public String getListeService(String idProfessionnel) {

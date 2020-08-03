@@ -70,6 +70,14 @@ public class CentreDonneesMembre implements ICentreDonnees<Membre> {
                 membre.setAPaye(!membre.getAPaye());
         }
     }
+    
+    public void modifierStatutMembres(HashMap<String, Boolean> listeValidations) {
+    	List<Membre> listeMembreModifier= listeMembres.values().stream().collect(Collectors.toList());
+    			for(Membre membre : listeMembreModifier) {
+    				boolean statut = listeValidations.get(membre.getId());
+    				membre.setAPaye(statut);
+    			}
+    		}
 
     @Override
     public void supprimer(String id) {
