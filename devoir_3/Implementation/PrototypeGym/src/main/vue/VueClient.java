@@ -88,7 +88,7 @@ public abstract class VueClient<T> extends Vue {
         	afficher("Membre suspendu créé");
         	break;
         case PROFESSIONNEL : 
-        	afficher("Professionnel créé");
+        	afficher("Professionnel créé : " + controleurClient.getIdDepuisAdresse(adresseCourriel));
         	break;
         default : 
         	break;        		

@@ -54,8 +54,8 @@ public class ControleurService extends Controleur {
 		centreDonneesServices.ajouterService(service);
 	}
 
-	public void mettreServiceAJour(String idService, Champs champs, String valeur) {
-		centreDonneesServices.mettreAJour(idService, champs, valeur);
+	public void mettreServiceAJour(String idSeance, Champs champs, String valeur) {
+		centreDonneesServices.mettreAJour(idSeance, champs, valeur);
 	}
 
 	public void supprimerService(String idSeance) {
@@ -146,7 +146,7 @@ public class ControleurService extends Controleur {
 		
 
 		if (service != null) {
-			infos = "ID : " + service.getCode() + "\n" +
+			infos = "ID : " + seance.getCodeSeance() + "\n" +
 					"Nom de service : " + service.getNomService() + "\n" +
 					"Date de début de service : " + service.getDateDebutService() + "\n" +
 					"Date de fin de service : " + service.getDateFinService() + "\n" +
@@ -216,7 +216,10 @@ public class ControleurService extends Controleur {
 	public Service lire(String idService) {
 		return centreDonneesServices.lire(idService);
 	}
-
+	
+	public Seance lireSeance(String idSeance) {
+		return centreDonneesServices.lireSeance(idSeance);
+	}
 
 	public String getIDServiceFromSeance(String idSeance) {
 		return centreDonneesServices.getIDServiceFromSeance(idSeance);

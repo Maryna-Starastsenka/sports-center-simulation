@@ -86,7 +86,6 @@ public class VueService extends Vue {
         afficher(controleurService.getInformationsService(idSeance));
 
         String action = null;
-        String idService = controleurService.getIDServiceFromSeance(idSeance);
 
         afficher("Veuillez choisir l'action");
         afficher("1. Modifier le nom de service.");
@@ -105,26 +104,26 @@ public class VueService extends Vue {
             case "1":
                 Vue.afficher("Veuillez entrer le nouveau nom du service :");
                 String nomService = acquisitionReponse();
-                controleurService.mettreServiceAJour(idService, NOM_SERVICE, nomService);
-                afficher(String.format("%s du service %s modifié.", NOM_SERVICE.name(), idService));
+                controleurService.mettreServiceAJour(idSeance, NOM_SERVICE, nomService);
+                afficher(String.format("%s du service %s modifié.", NOM_SERVICE.name(), idSeance));
                 break;
             case "2":
                 afficher("Veuillez entrer la nouvelle date de début du service (jj-mm-aaaa) :");
                 String dateDebutService = acquisitionReponse(Verificateurs::dateValide);
-                controleurService.mettreServiceAJour(idService, DATE_DEBUT_SERVICE, dateDebutService);
-                afficher(String.format("%s du service %s modifié.", DATE_DEBUT_SERVICE.name(), idService));
+                controleurService.mettreServiceAJour(idSeance, DATE_DEBUT_SERVICE, dateDebutService);
+                afficher(String.format("%s du service %s modifié.", DATE_DEBUT_SERVICE.name(), idSeance));
                 break;
             case "3":
                 afficher("Veuillez entrer la nouvelle date de fin du service (jj-mm-aaaa) :");
                 String dateFinService = acquisitionReponse(Verificateurs::dateValide);
-                controleurService.mettreServiceAJour(idService, DATE_FIN_SERVICE, dateFinService);
-                afficher(String.format("%s du service %s modifié.", DATE_FIN_SERVICE.name(), idService));
+                controleurService.mettreServiceAJour(idSeance, DATE_FIN_SERVICE, dateFinService);
+                afficher(String.format("%s du service %s modifié.", DATE_FIN_SERVICE.name(), idSeance));
                 break;
             case "4":
                 afficher("Veuillez entrer la nouvelle heure du service (hh:mm) :");
                 String heureService = acquisitionReponse(Verificateurs::horaireValide);
-                controleurService.mettreServiceAJour(idService, HEURE_SERVICE, heureService);
-                afficher(String.format("%s du service %s modifié.", HEURE_SERVICE.name(), idService));
+                controleurService.mettreServiceAJour(idSeance, HEURE_SERVICE, heureService);
+                afficher(String.format("%s du service %s modifié.", HEURE_SERVICE.name(), idSeance));
                 break;
             case "5":
                 afficher("Veuillez entrée la nouvelle journée (ex : \"mercredi\") : ");
@@ -137,20 +136,20 @@ public class VueService extends Vue {
                 String capaciteMaximale = acquisitionReponse((String s) -> Verificateurs.intValide(s)
                         && getIntFromString(s) >= 1
                         && getIntFromString(s) <= 30);
-                controleurService.mettreServiceAJour(idService, CAPACITE_MAX_SERVICE, capaciteMaximale);
-                afficher(String.format("%s du service %s modifié.", CAPACITE_MAX_SERVICE.name(), idService));
+                controleurService.mettreServiceAJour(idSeance, CAPACITE_MAX_SERVICE, capaciteMaximale);
+                afficher(String.format("%s du service %s modifié.", CAPACITE_MAX_SERVICE.name(), idSeance));
                 break;
             case "7":
                 afficher("Veuillez entrer les frais du service (XXX.XX) :");
                 String fraisService = acquisitionReponse(Verificateurs::fraisServiceValide);
-                controleurService.mettreServiceAJour(idService, FRAIS_SERVICE, fraisService);
-                afficher(String.format("%s du service %s modifié.", FRAIS_SERVICE.name(), idService));
+                controleurService.mettreServiceAJour(idSeance, FRAIS_SERVICE, fraisService);
+                afficher(String.format("%s du service %s modifié.", FRAIS_SERVICE.name(), idSeance));
                 break;
             case "8":
                 afficher("Veuillez entrer le nouveau commentaire :");
                 String commentaires = getTexteConsole();
-                controleurService.mettreServiceAJour(idService, COMMENTAIRE_SERVICE, commentaires);
-                afficher(String.format("%s du service %s modifié.", COMMENTAIRE_SERVICE.name(), idService));
+                controleurService.mettreServiceAJour(idSeance, COMMENTAIRE_SERVICE, commentaires);
+                afficher(String.format("%s du service %s modifié.", COMMENTAIRE_SERVICE.name(), idSeance));
                 break;
         }
     }

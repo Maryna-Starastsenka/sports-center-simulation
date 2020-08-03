@@ -32,14 +32,13 @@ public class CentreDonneesServices implements ICentreDonnees {
 	}
 
 	public void ajouterService(Service service) {
-		if (!listeServices.containsKey(service.getCode())) {
+		if (!listeServices.containsKey(service.getCode())) 
 			listeServices.put(service.getCode(), service);
-		}else {
-			List<Seance> seances = service.obtenirListeSeances();
-			for(Seance seance : seances) {
-				listeSeances.put(seance.getCodeSeance(), seance);
-				listeServices.get(service.getCode()).ajouterSeance(seance);
-			}
+		
+		List<Seance> seances = service.obtenirListeSeances();
+		for(Seance seance : seances) {
+			listeSeances.put(seance.getCodeSeance(), seance);
+			listeServices.get(service.getCode()).ajouterSeance(seance);
 		}
 	}
 	
@@ -61,13 +60,14 @@ public class CentreDonneesServices implements ICentreDonnees {
 	
 	public void mettreAJourSeances() {
 		List<Service> services = this.getServices();
+		HashMap<String, Seance> nouvelleListe = new HashMap<String, Seance>();
 		for(Service service : services) {
 			List<Seance> seances = service.obtenirListeSeances();
 			for(Seance seance : seances) {
-				listeSeances.put(seance.getCodeSeance(), seance);
+				nouvelleListe.put(seance.getCodeSeance(), seance);
 			}
 		}
-		
+		listeSeances = nouvelleListe;
 	}
 	
 	public List<Service> getListeServicesPro(String idProfessionnel) {
@@ -259,12 +259,16 @@ public class CentreDonneesServices implements ICentreDonnees {
 	}
 
 	@Override
-	public void mettreAJour(String idService, Champs champsService, String valeur) {
-		Service service = lire(idService);
+	public void mettreAJour(String idSeance, Champs champsService, String valeur) {
+		Service service = lireSeance(idSeance).getService();
 
 		switch (champsService) {
 			case NOM_SERVICE:
+				String idService = service.getCode();
 				service.setNomService(valeur);
+				listeServices.remove(idService);
+				listeServices.put(service.getCode(), service);
+				mettreAJourSeances();
 				break;
 			case DATE_DEBUT_SERVICE:
 				service.setDateDebutService(getDateFromString(valeur));
@@ -276,7 +280,8 @@ public class CentreDonneesServices implements ICentreDonnees {
 				service.setHeureService(getHeureFromString(valeur));
 				break;
 			case RECURRENCE_HEBDO_SERVICE:
-				listeSeances.get(idService).setRecurrence(getDayOfWeek(getJourFromString(valeur)));
+				listeSeances.get(idSeance).setRecurrence(getDayOfWeek(getJourFromString(valeur)));
+				mettreAJourSeances();
 				break;
 			case CAPACITE_MAX_SERVICE:
 				service.setCapaciteMax(getIntFromString(valeur));

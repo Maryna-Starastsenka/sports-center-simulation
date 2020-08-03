@@ -17,7 +17,6 @@ public class Seance {
 
 	public Seance(DayOfWeek recurrence, String codeService, String codeProfessionnel, Service service) {
 		this.recurrence = recurrence;
-
 		this.date = LocalDate.now().minusDays(1).with(TemporalAdjusters.next(recurrence));
 		this.codeService = codeService;
 		this.codeProfessionnel = codeProfessionnel;
@@ -30,6 +29,10 @@ public class Seance {
 	
 	public void setRecurrence(DayOfWeek valeur) {
 		this.recurrence = valeur;
+	}
+	
+	public void setCodeService() {
+		this.codeService = this.service.getCode();
 	}
 	
 	public LocalDate getDate() {
@@ -71,7 +74,7 @@ public class Seance {
 
 	@Override
 	public int hashCode() {
-		return Math.abs(Objects.hash(recurrence, codeService, codeProfessionnel) % 100); // 2 chiffres max
+		return Math.abs(Objects.hash(recurrence) % 100); // 2 chiffres max
 	}
 
 	public String getCodeSeance() {

@@ -110,6 +110,11 @@ public class Service {
 
 	public void setNomService(String valeur) {
 		this.nomService = valeur;
+		this.codeService = this.getHashInString();
+		List<Seance> seances = obtenirListeSeances();
+		for(Seance s : seances) {
+			s.setCodeService();
+		}
 	}
 
 	public void setDateDebutService(LocalDate valeur) {
