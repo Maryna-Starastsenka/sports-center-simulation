@@ -57,7 +57,7 @@ public class VueService extends Vue {
 
         afficher("Services et séances du Professionnel : \n" + controleurService.obtenirToutesLesSeancesDuProfessionnelEnString(idProfessionnel));
         afficher("Veuillez choisir le service ou 0 pour retourner au menu principal.");
-        String idSeance = acquisitionReponse(Verificateurs::identifiantSeanceValide);
+        String idSeance = acquisitionReponse(controleurService.obtenirListeSeancesDuProfessionnel(idProfessionnel));
         if (idSeance.equals("0")) {
             return;
         }
