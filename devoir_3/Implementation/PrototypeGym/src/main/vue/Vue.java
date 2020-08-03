@@ -2,6 +2,7 @@ package main.vue;
 
 import main.controleur.IVerificateur;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,8 +15,18 @@ public abstract class Vue {
     }
 
     public static void effacerEcran() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
+        try {
+            if (System.getProperty("os.name").contains("Windows")) {
+                // Clear screen dans la commande Windows
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            }
+            else {
+                // Dans les environnements UNIX, on déplace l'information déjà présente
+                // en dehors de la zone visible mais il est possible de la retrouver en scrollant vers le haut
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
+            }
+        } catch (IOException | InterruptedException ex) {}
     }
 
     public static void afficher(String information) {
