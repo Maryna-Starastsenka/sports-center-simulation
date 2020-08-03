@@ -228,34 +228,16 @@ public class VueService extends Vue {
     public void inscriptionSeance() {
         effacerEcran();
         afficher("---Inscription à une séance---");
-        afficher("Références des séances disponibles ajourd'hui, le " + Verificateurs.today() + " :");
-        afficher(controleurService.obtenirToutesLesSeancesDuJourEnString(Verificateurs.today()));
-
-        afficher("Veuillez entrer la référence de la séance à laquelle vous voulez " +
-                "inscrire un membre ou appuyez sur 0 pour revenir au menu principal :");
-
-        String seanceId = acquisitionReponse(controleurService.obtenirListeIdSeancesDuJour(Verificateurs.today()));
-        if (seanceId.equals("0")) return;
+        
 
 //        afficherTousLesMembres();
-        afficher("Veuillez entrer le numéro du membre :");
-        String membreId = acquisitionReponse(Verificateurs::identifiantClientValide);
+        String membreId = validerTypeClient();
+        if(membreId==null) { return;}
+        
+        String idSeance = validerIdSeance();
+        if(idSeance.equals("0")) {return;}
 
-        TypeClient statutMembre = ControleurClient.verifierTypeClient(TypeClient.MEMBRE, membreId);
-
-        if (statutMembre == TypeClient.MEMBRE_SUSPENDU) {
-            afficher("Membre suspendu. Retour au menu principal.");
-            return;
-        }
-
-        if (statutMembre == TypeClient.CLIENT_INVALIDE) {
-            afficher("Membre inconnu. Retour au menu principal.");
-            return;
-        }
-
-        if (statutMembre != TypeClient.MEMBRE_VALIDE) return;
-
-        afficher("Les frais à payer pour la séance sont de : " + controleurService.getFraisService(seanceId) + "$");
+        afficher("Les frais à payer pour la séance sont de : " + controleurService.getFraisService(idSeance) + "$");
 
         afficher("1. Continuer inscription");
         afficher("2. Quitter et revenir au menu principal");
@@ -272,12 +254,12 @@ public class VueService extends Vue {
             afficher("Veuillez entrer un commentaire (appuyez sur ENTREE si vous le ne souhaitez pas) :");
             String commentaire = getTexteConsole();
 
-            String inscriptionId = controleurService.inscriptionSeance(membreId, seanceId, commentaire);
+            String inscriptionId = controleurService.inscriptionSeance(membreId, idSeance, commentaire);
 
             afficher("Le membre " +
                     membreId +
                     " a été inscrit à la séance : \n" +
-                    controleurService.getInformationSeance(seanceId) +
+                    controleurService.getInformationSeance(idSeance) +
                     "\nRécapitulatif de l'inscription : \n" +
                     controleurService.getInformationsInscription(inscriptionId)
                     );
@@ -296,7 +278,7 @@ public class VueService extends Vue {
         afficherSeance(idProfessionnel);
     }
     
-    public void afficherSeance(String idProfessionnel) {
+    public String afficherSeance(String idProfessionnel) {
         afficher("---Consultation d'une séance---");
 
 
@@ -304,57 +286,79 @@ public class VueService extends Vue {
         afficher(controleurService.obtenirToutesLesSeancesDuProfessionnelEnString(idProfessionnel));
 
         String idSeance = acquisitionReponse(controleurService.obtenirListeSeancesDuProfessionnel(idProfessionnel));
-        if (idSeance.equals("0")) return;
+        if (idSeance.equals("0")) return null;
         afficher(controleurService.getInformationSeance(idSeance));
 
         afficher("Liste des inscriptions à la séance :");
         afficher(controleurService.obtenirInscriptionsASeanceEnString(idSeance));
+        return idSeance;
     }
 
-    public void confirmationPresence() {
-        afficher("---Confirmation de la présence---");
-
-        afficher("Veuillez entrer le numéro du membre :");
+    public String validerTypeClient() {
+    	afficher("Veuillez entrer le numéro du membre ou scanner le code QR :");
         String idMembre = acquisitionReponse(Verificateurs::identifiantClientValide);
 
         TypeClient typeClient = ControleurClient.verifierTypeClient(TypeClient.MEMBRE, idMembre);
         switch (typeClient) {
             case CLIENT_INVALIDE:
                 afficher("Membre inconnu. Retour au menu principal.");
-                return;
+                return null;
             case MEMBRE_SUSPENDU:
                 afficher("Membre suspendu. Retour au menu principal.");
-                return;
+                return null;
             case MEMBRE_VALIDE:
-                afficher("Références des séances disponibles aujourd'hui, le " + Verificateurs.today() + " :");
-                afficher(controleurService.obtenirToutesLesSeancesDuJourEnString(Verificateurs.today()));
-
-                afficher("Veuillez entrer la référence de la séance à laquelle vous voulez inscrire un membre ou appuyez sur 0 pour revenir au menu principal :");
-                String idSeance = acquisitionReponse(controleurService.obtenirListeIdSeancesDuJour(Verificateurs.today()));
-
-                if (!controleurService.inscriptionExiste(idMembre, idSeance)) {
-                    afficher("Le membre n'est pas inscrit. Accès refusé.");
-                    return;
-                } else {
-                    afficher("Confirmer la présence ?");
-                    afficher("1. Oui");
-                    afficher("2. Non");
-                    String reponse = acquisitionReponse(Arrays.asList("1","2"));
-
-                    if (reponse.equals("1")) {
-                        afficher("Veuillez entrer un commentaire (appuyez sur ENTREE si vous le ne souhaitez pas) :");
-                        String commentaire = getTexteConsole();
-
-                        if (controleurService.confirmerPresence(idSeance, idMembre, commentaire)) {
-                            afficher("Présence validée.");
-                        } else {
-                            afficher("Échec de la confirmation de présence.");
-                        }
-                    } else {
-                        afficher("Annulation de la confirmation.");
-                    }
-                }
-                break;
+            	afficher("Membre valide.");
+            	return idMembre;
+            default:
+            	afficher("Membre inconnu. Retour au menu principal.");
+            	return null;
         }
     }
+    
+    public String validerIdSeance() {
+    	afficher("Références des séances disponibles aujourd'hui, le " + Verificateurs.today() + " :");
+        afficher(controleurService.obtenirToutesLesSeancesDuJourEnString(Verificateurs.today()));
+
+        afficher("Veuillez entrer le numéro de séance ou entrer 0 pour revenir au menu principal :");
+        String idSeance = acquisitionReponse(controleurService.obtenirListeIdSeancesDuJour(Verificateurs.today()));
+        return idSeance;
+    }
+    
+    public void confirmationPresence() {
+        afficher("---Confirmation de la présence---");
+
+        String idSeance = validerIdSeance();
+    	if(idSeance.equals("0")) {return;}
+        confirmationPresence(idSeance);
+    }
+
+    public void confirmationPresence(String idSeance) {
+    	
+    	String idMembre = validerTypeClient();
+        if(idMembre==null) { return;}
+
+    	if (!controleurService.inscriptionExiste(idMembre, idSeance)) {
+    		afficher("Le membre n'est pas inscrit. Accès refusé.");
+    		return;
+    	} else {
+    		afficher("Confirmer la présence ?");
+    		afficher("1. Oui");
+    		afficher("2. Non");
+    		String reponse = acquisitionReponse(Arrays.asList("1","2"));
+
+    		if (reponse.equals("1")) {
+    			afficher("Veuillez entrer un commentaire (appuyez sur ENTREE si vous le ne souhaitez pas) :");
+    			String commentaire = getTexteConsole();
+
+    			if (controleurService.confirmerPresence(idSeance, idMembre, commentaire)) {
+    				afficher("Présence validée.");
+    			} else {
+    				afficher("Échec de la confirmation de présence.");
+    			}
+    		} else {
+    			afficher("Annulation de la confirmation.");
+    		}
+    	}
+    }
+
 }

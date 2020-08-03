@@ -1,5 +1,7 @@
 package main.vue;
 
+import java.util.Arrays;
+
 import main.controleur.ControleurClient;
 import main.controleur.Verificateurs;
 import main.modele.Professionnel;
@@ -42,14 +44,24 @@ public class VueProfessionnel extends VueClient<Professionnel> {
         String idProfessionnel = ControleurClient.seConnecterApp(typeClient, adresseCourriel);
         if (idProfessionnel != null) {
             afficher("Bienvenue au #GYM");
-            vueService.afficherSeance(idProfessionnel);
-            //vueService.confirmationPresence(); TODO
+            String idSeance = vueService.afficherSeance(idProfessionnel);
+            confirmerPresences(idSeance);
         } else {
             afficher("L'adresse courriel renseignée n'est pas valide");
         }
     }
     
-    
-
-
+    public void confirmerPresences(String idSeance) {
+    	afficher("------Voulez-vous confirmer une présence?------");
+        afficher("1. Confirmer présence");
+        afficher("2. Retour au menu");
+        String reponse = acquisitionReponse(Arrays.asList("1","2"));
+        while(reponse.equals("1")){
+        	vueService.confirmationPresence(idSeance);
+        	afficher("------Voulez-vous confirmer une autre présence?------");
+            afficher("1. Confirmer présence");
+            afficher("2. Retour au menu");
+            reponse = acquisitionReponse(Arrays.asList("1","2"));
+        }
+    }
 }
