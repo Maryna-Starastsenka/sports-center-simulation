@@ -8,8 +8,6 @@ import main.modele.Professionnel;
 import main.modele.TypeClient;
 
 public class VueProfessionnel extends VueClient<Professionnel> {
-
-    private VueService vueService;
 	
     public VueProfessionnel() {
         clientString = "Professionnel";

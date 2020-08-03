@@ -1,6 +1,7 @@
 package main.vue;
 
 import main.controleur.ControleurClient;
+import main.modele.Client;
 import main.modele.Membre;
 import main.modele.TypeClient;
 
@@ -12,6 +13,7 @@ public class VueMembre extends VueClient<Membre> {
         clientString = "Membre";
         typeClient = TypeClient.MEMBRE;
         controleurClient = new ControleurClient();
+        vueService = new VueService();
     }
 
     @Override
@@ -31,6 +33,20 @@ public class VueMembre extends VueClient<Membre> {
         }
         return TypeClient.MEMBRE_SUSPENDU;
     }
+    
+    public void seConnecterApp(String adresseCourriel) {
+        String idMembre = ControleurClient.seConnecterApp(typeClient, adresseCourriel);
+        if (idMembre != null) {
+            afficher("Bienvenue au #GYM");
+            Client client = controleurClient.lireClient(idMembre);
+            afficher("Nom du membre : " + client.getNom());
+            afficher("Numéro du membre : " + idMembre);
+            afficher("code QR");
+            inscriptionApp(idMembre);
+        } else {
+            afficher("L'adresse courriel renseignée n'est pas valide");
+        }
+    }
 
     @Override
     public void confirmerEnregistrement(String id) {
@@ -47,5 +63,15 @@ public class VueMembre extends VueClient<Membre> {
     public void accesRefuse(String idMembre) {
         afficher(String.format("Le membre numéro %s n'est pas autorisé à accéder au gym.",
                 idMembre));
+    }
+    
+    public void inscriptionApp(String idMembre) {
+    	afficher("------Voulez-vous inscrire à une séance?------");
+    	afficher("1. Inscription séance");
+    	afficher("2. Retour au menu");
+    	String reponse = acquisitionReponse(Arrays.asList("1","2"));
+    	if(reponse.equals("1")){
+    		vueService.inscriptionSeance(idMembre);
+    	}
     }
 }

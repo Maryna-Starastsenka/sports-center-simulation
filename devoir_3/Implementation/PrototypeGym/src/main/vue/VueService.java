@@ -226,13 +226,14 @@ public class VueService extends Vue {
     }
 
     public void inscriptionSeance() {
+    	//  afficherTousLesMembres();
+    	String membreId = validerTypeClient();
+    	if(membreId==null) { return;}
+    	inscriptionSeance(membreId);
+    }
+    public void inscriptionSeance(String membreId) {
         effacerEcran();
         afficher("---Inscription à une séance---");
-        
-
-//        afficherTousLesMembres();
-        String membreId = validerTypeClient();
-        if(membreId==null) { return;}
         
         String idSeance = validerIdSeance();
         if(idSeance.equals("0")) {return;}

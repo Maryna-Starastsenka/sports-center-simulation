@@ -14,6 +14,7 @@ public abstract class VueClient<T> extends Vue {
     protected String clientString = "Client";
     protected TypeClient typeClient = TypeClient.CLIENT_INVALIDE;
     ControleurClient controleurClient;
+    protected VueService vueService;
 
     protected void enTeteGestionCompte() {
         effacerEcran();
