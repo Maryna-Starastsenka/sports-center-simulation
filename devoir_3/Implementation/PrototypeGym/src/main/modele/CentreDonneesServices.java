@@ -36,71 +36,66 @@ public class CentreDonneesServices implements ICentreDonnees {
 				LocalDate.of(2025, 12, 31),
 				LocalDate.of(2020, 7, 19),
 				LocalTime.of(22, 30),
-				Jour.DIMANCHE,
+				DayOfWeek.SUNDAY,
 				25,
 				idProfessionel1,
-				"1234567",
 				63.25,
 				"Rien à signaler");
 		listeServices.put(service1.getCode(), service1);
-
-		Service service2 = new Service("Yoga",
+		System.out.println(service1.getCode());
+		
+		
+		Service service3 = new Service("Yoga",
 				LocalDateTime.of(LocalDate.of(2020, 3,1), LocalTime.of(7, 30, 0)),
 				LocalDate.of(2015, 11, 30),
 				LocalDate.of(2025, 7, 12),
 				LocalTime.of(18,20),
-				Jour.LUNDI,
+				DayOfWeek.MONDAY,
 				25,
 				idProfessionel1,
-				"2345678",
 				100.00,
 				"Aucun commentaire");
-		listeServices.put(service2.getCode(), service2);
+		listeServices.put(service3.getCode(), service3);
 
-		Service service3 = new Service("Danse", LocalDateTime.of(LocalDate.of(2020, 3,1), LocalTime.of(7, 30, 0)),
+		Service service4 = new Service("Danse", LocalDateTime.of(LocalDate.of(2020, 3,1), LocalTime.of(7, 30, 0)),
 				LocalDate.of(2017, 11, 15),
 				LocalDate.of(2036, 9, 20),
 				LocalTime.of(18,20),
-				Jour.LUNDI,
+				DayOfWeek.MONDAY,
 				2,
 				idProfessionel2,
-				"9675882" +
-						"",
 				50.12,
 				"En refonte");
 		listeServices.put(service3.getCode(), service3);
 
-		// crée une séance au jour d'exécution du programme pour les tests
-		Seance seance1 = new Seance(LocalDateTime.of(today(), LocalTime.of(12, 30)),
-				service1.getCode(), service1.getNumeroProfessionnel());
-		listeSeances.put(seance1.getCodeSeance(), seance1);
-
-		Seance seance2 = new Seance(LocalDateTime.of(today(), LocalTime.of(17, 20)),
-				service2.getCode(), service2.getNumeroProfessionnel());
-		listeSeances.put(seance2.getCodeSeance(), seance2);
-
-		Seance seance3 = new Seance(LocalDateTime.of(today(), LocalTime.of(11, 00)).minusDays(1),
-				service3.getCode(), service3.getNumeroProfessionnel());
-		listeSeances.put(seance3.getCodeSeance(), seance3);
-
-		Seance seance4 = new Seance(LocalDateTime.of(today(), LocalTime.of(15, 55)).minusDays(8),
-				service2.getCode(), service2.getNumeroProfessionnel());
-		listeSeances.put(seance4.getCodeSeance(), seance4);
 		
+		// crée une séance au jour d'exécution du programme pour les tests
+		Seance seance1 = new Seance(DayOfWeek.MONDAY, service1.getCode(), service1.getNumeroProfessionnel());
+		listeSeances.put(seance1.getCodeSeance(), seance1);
+		service1.ajouterSeance(seance1);
+
+		this.mettreAJourSeances();
+
 
         Inscription inscription1 = new Inscription(now(),
-                seance2.getDateTimeSeance().toLocalDate(),
+                seance1.getDate(),
 				idProfessionel1,
 				idMembre1,
-                seance2.getCodeService(),
+                seance1.getCodeService(),
                 "",
-				seance2.getCodeSeance());
+				seance1.getCodeSeance());
         listeInscriptions.put(inscription1.getHashInString(), inscription1);
 	}
 
 	public void ajouterService(Service service) {
 		if (!listeServices.containsKey(service.getCode())) {
 			listeServices.put(service.getCode(), service);
+		}else {
+			List<Seance> seances = service.obtenirListeSeances();
+			for(Seance seance : seances) {
+				listeSeances.put(seance.getCodeSeance(), seance);
+				listeServices.get(service.getCode()).ajouterSeance(seance);
+			}
 		}
 	}
 	
@@ -112,9 +107,24 @@ public class CentreDonneesServices implements ICentreDonnees {
         return listeSeances.get(idSeance);
     }
 	
+	public String getIDServiceFromSeance(String idSeance) {
+		return listeSeances.get(idSeance).getCodeService();
+	}
+	
 	public void supprimerService(String serviceEntre) {
         listeServices.remove(serviceEntre);
     }
+	
+	public void mettreAJourSeances() {
+		List<Service> services = this.getServices();
+		for(Service service : services) {
+			List<Seance> seances = service.obtenirListeSeances();
+			for(Seance seance : seances) {
+				listeSeances.put(seance.getCodeSeance(), seance);
+			}
+		}
+		
+	}
 	
 	public List<Service> getListeServicesPro(String idProfessionnel) {
         return listeServices
@@ -132,11 +142,11 @@ public class CentreDonneesServices implements ICentreDonnees {
 				.collect(Collectors.toList());
 	}
 	
-	public List<Seance> getListeSeances(LocalDate date) {
+	public List<Seance> getListeSeances(LocalDate jour) {
         return listeSeances
                 .values()
                 .stream()
-                .filter(x -> x.getDateTimeSeance().toLocalDate().equals(date))
+                .filter(x -> x.getDate().equals(jour))
                 .collect(Collectors.toList());
     }
 	
@@ -145,7 +155,7 @@ public class CentreDonneesServices implements ICentreDonnees {
         Service service = listeServices.get(seance.getCodeService());
         Inscription inscription = new Inscription(
                 LocalDateTime.now(),
-                seance.getDateTimeSeance().toLocalDate(),
+                seance.getDate(),
                 service.getNumeroProfessionnel(),
                 idMembre,
                 seance.getCodeService(),
@@ -202,7 +212,7 @@ public class CentreDonneesServices implements ICentreDonnees {
         return listeSeances
                 .values()
                 .stream()
-                .filter(x -> x.getDateTimeSeance().toLocalDate().compareTo(debut) >= 0 && x.getDateTimeSeance().toLocalDate().compareTo(fin) <= 0)
+                .filter(x -> x.getDate().compareTo(debut) >= 0 && x.getDate().compareTo(fin) <= 0)
                 .collect(Collectors.toList());
     }
 
@@ -268,6 +278,13 @@ public class CentreDonneesServices implements ICentreDonnees {
 		}
 		return null;
 	}
+	
+	public Seance lireSeance(String id) {
+		if (listeSeances.containsKey(id)) {
+			return listeSeances.get(id);
+		}
+		return null;
+	}
 
 	@Override
 	public void mettreAJour(String idService, Champs champsService, String valeur) {
@@ -287,7 +304,7 @@ public class CentreDonneesServices implements ICentreDonnees {
 				service.setHeureService(getHeureFromString(valeur));
 				break;
 			case RECURRENCE_HEBDO_SERVICE:
-				service.setRecurrenceHebdo(getJourFromString(valeur));
+				listeSeances.get(idService).setRecurrence(getDayOfWeek(getJourFromString(valeur)));
 				break;
 			case CAPACITE_MAX_SERVICE:
 				service.setCapaciteMax(getIntFromString(valeur));
@@ -319,4 +336,26 @@ public class CentreDonneesServices implements ICentreDonnees {
 		}
 		return null;
 	}
+	
+	public DayOfWeek getDayOfWeek(Jour jour) {
+		switch (jour) {
+		case LUNDI:
+			return DayOfWeek.MONDAY;
+		case MARDI:
+			return DayOfWeek.TUESDAY;
+		case MERCREDI:
+			return DayOfWeek.WEDNESDAY;
+		case JEUDI:
+			return DayOfWeek.THURSDAY;
+		case VENDREDI:
+			return DayOfWeek.FRIDAY;
+		case SAMEDI:
+			return DayOfWeek.SATURDAY;
+		case DIMANCHE:
+			return DayOfWeek.SUNDAY;
+		default:
+			return null;
+		}
+	}
+	
 }

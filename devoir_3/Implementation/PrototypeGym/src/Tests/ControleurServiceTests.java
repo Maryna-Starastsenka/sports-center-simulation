@@ -43,7 +43,7 @@ class ControleurServiceTests {
 		String fraisServiceString = "050.50";
 		String commentaires = "non";
 		controleurService.creerService(nomService, dateDebutServiceString, dateFinServiceString, heureServiceString, 
-				recurrenceHebdoString, capaciteMaximaleString, numeroProfessionnel, codeService, fraisServiceString, commentaires);
+				recurrenceHebdoString, capaciteMaximaleString, numeroProfessionnel, fraisServiceString, commentaires);
 
 		String infoService = "ID : 0101010\n" +
 				"Nom de service : danse\n" +

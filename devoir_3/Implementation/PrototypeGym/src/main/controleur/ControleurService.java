@@ -3,6 +3,7 @@ package main.controleur;
 import main.modele.*;
 import main.vue.*;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -28,7 +29,6 @@ public class ControleurService extends Controleur {
 							 String recurrenceHebdoString,
 							 String capaciteMaximaleString,
 							 String numeroProfessionnel,
-							 String codeService,
 							 String fraisServiceString,
 							 String commentaires) {
 
@@ -45,10 +45,9 @@ public class ControleurService extends Controleur {
 				dateDebutService,
 				dateFinService,
 				heureService,
-				recurrenceHebdo,
+				centreDonneesServices.getDayOfWeek(recurrenceHebdo),
 				capaciteMaximale,
 				numeroProfessionnel,
-				codeService,
 				fraisService,
 				commentaires);
 
@@ -63,7 +62,7 @@ public class ControleurService extends Controleur {
 			centreDonneesServices.supprimer(idService);
 	}
 
-	public String getListeService(VueService vue, String idProfessionnel) {
+	public String getListeService(String idProfessionnel) {
 		List<Service> services = centreDonneesServices.getListeServicesPro(idProfessionnel);
 
 		String servicesString = "";
@@ -101,7 +100,7 @@ public class ControleurService extends Controleur {
 			concatenation += s.getCodeSeance() + " (service de " +
 					centreDonneesServices.getService(s.getCodeService()).getNomService() +
 					") : le " +
-					Verificateurs.localDateTimeFormatter.format(s.getDateTimeSeance()) + "\n";
+					Verificateurs.localDateFormatter.format(s.getDate()) + "\n";
 		}
 		return concatenation;
 	}
@@ -122,7 +121,7 @@ public class ControleurService extends Controleur {
 			concatenation += s.getCodeSeance() + " (service de " +
 					centreDonneesServices.getService(s.getCodeService()).getNomService() +
 					") : le " +
-					Verificateurs.localDateTimeFormatter.format(s.getDateTimeSeance()) + "\n";
+					s.getRecurrenceString() + "\n";
 		}
 		return concatenation;
 	}
@@ -136,10 +135,14 @@ public class ControleurService extends Controleur {
 		return idSeances;
 	}
 
-	public String getInformationsService(String idService) {
+	public String getInformationsService(String idSeance) {
 		Service service = null;
+		Seance seance = null;
 		String infos = "";
-		service = centreDonneesServices.lire(idService);
+		
+		seance = centreDonneesServices.lireSeance(idSeance);
+		service = centreDonneesServices.lire(seance.getCodeService());
+		
 
 		if (service != null) {
 			infos = "ID : " + service.getCode() + "\n" +
@@ -147,7 +150,7 @@ public class ControleurService extends Controleur {
 					"Date de début de service : " + service.getDateDebutService() + "\n" +
 					"Date de fin de service : " + service.getDateFinService() + "\n" +
 					"Heure de service : " + service.getHeureService() + "\n" +
-					"Récurrence hebdomadaire : " + service.getRecurrenceHebdo() + "\n" +
+					"Récurrence hebdomadaire : " + seance.getRecurrence() + "\n" +
 					"Capacité maximale : " + service.getCapaciteMaximale() + "\n" +
 					"Numéro de professionnel : " + service.getNumeroProfessionnel() + "\n" +
 					"Frais de service : " + service.getFraisService() + "\n" +
@@ -169,7 +172,8 @@ public class ControleurService extends Controleur {
 		if (seance != null) {
 			infos = "Code séance : " + seance.getCodeSeance() + "\n" +
 					"Code professionnel : " + seance.getCodeProfessionnel() + "\n" +
-					"Date de la séance : " + seance.getDateTimeSeanceString() + "\n";
+					"Journée : " + seance.getRecurrenceString() + "\n" + 
+					"Date de la séance : " + seance.dateString() + "\n";
 		}
 		return infos;
 	}
@@ -211,4 +215,10 @@ public class ControleurService extends Controleur {
 	public Service lire(String idService) {
 		return centreDonneesServices.lire(idService);
 	}
+
+
+	public String getIDServiceFromSeance(String idSeance) {
+		return centreDonneesServices.getIDServiceFromSeance(idSeance);
+	}
+
 }

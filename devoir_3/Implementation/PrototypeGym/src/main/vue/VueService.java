@@ -1,11 +1,13 @@
 package main.vue;
 
 import main.controleur.ControleurClient;
+
 import main.controleur.ControleurService;
 import main.controleur.Verificateurs;
 import main.modele.TypeClient;
 
 import java.util.Arrays;
+import java.util.ArrayList;
 
 import static main.controleur.Verificateurs.getIntFromString;
 import static main.controleur.Verificateurs.identifiantClientValide;
@@ -53,10 +55,10 @@ public class VueService extends Vue {
     private void gererServiceExistant(String idProfessionnel) {
         enTeteGestionService();
 
-        afficher("Service du Professionnel : " + controleurService.getListeService(this, idProfessionnel));
+        afficher("Service du Professionnel : \n" + controleurService.obtenirToutesLesSeancesDuProfessionnelEnString(idProfessionnel));
         afficher("Veuillez choisir le service ou 0 pour retourner au menu principal.");
-        String idService = acquisitionReponse(Verificateurs::identifiantServiceValide);
-        if (idService.equals("0")) {
+        String idSeance = acquisitionReponse(Verificateurs::identifiantSeanceValide);
+        if (idSeance.equals("0")) {
             return;
         }
 
@@ -70,20 +72,21 @@ public class VueService extends Vue {
 
         switch (reponse) {
             case "1":
-                mettreAJourService(idService);
+                mettreAJourService(idSeance);
                 break;
             case "2":
-                supprimerService(idService);
+                supprimerService(controleurService.getIDServiceFromSeance(idSeance));
                 break;
         }
     }
 
-    private void mettreAJourService(String idService) {
+    private void mettreAJourService(String idSeance) {
         enTeteGestionService();
 
-        afficher(controleurService.getInformationsService(idService));
+        afficher(controleurService.getInformationsService(idSeance));
 
         String action = null;
+        String idService = controleurService.getIDServiceFromSeance(idSeance);
 
         afficher("Veuillez choisir l'action");
         afficher("1. Modifier le nom de service.");
@@ -124,10 +127,10 @@ public class VueService extends Vue {
                 afficher(String.format("%s du service %s modifié.", HEURE_SERVICE.name(), idService));
                 break;
             case "5":
-                afficher("Veuillez entrer la nouvelle récurrence hebdomadaire (ex : entrez \"mercredi\") :");
-                String recurrenceHebdo = acquisitionReponse(Verificateurs::jourSemaineValide);
-                controleurService.mettreServiceAJour(idService, RECURRENCE_HEBDO_SERVICE, recurrenceHebdo);
-                afficher(String.format("%s du service %s modifié.", RECURRENCE_HEBDO_SERVICE.name(), idService));
+                afficher("Veuillez entrée la nouvelle journée (ex : \"mercredi\") : ");
+                String recurrenceHebdo = acquisitionReponse(Verificateurs::jourSemaineValide);    
+                controleurService.mettreServiceAJour(idSeance, RECURRENCE_HEBDO_SERVICE, recurrenceHebdo);
+                afficher(String.format("%s du service %s modifié.", RECURRENCE_HEBDO_SERVICE.name(), idSeance));
                 break;
             case "6":
                 afficher("Veuillez entrer la nouvelle capacité maximale (1-30) :");
@@ -173,7 +176,6 @@ public class VueService extends Vue {
         String recurrenceHebdo;
         String capaciteMaximale;
         String numeroProfessionnel = idProfessionnel;
-        String codeService;
         String fraisService;
         String commentaires;
 
@@ -203,10 +205,6 @@ public class VueService extends Vue {
                 && getIntFromString(s) <= 30);
         if (capaciteMaximale.equals("0")) return;
 
-        afficher("Veuillez entrer le code du service à 7 chiffres (XXXXXXX) :");
-        codeService = acquisitionReponse(Verificateurs::identifiantServiceValide);
-        if (codeService.equals("0")) return;
-
         afficher("Veuillez entrer les frais du service (XXX.XX) :");
         fraisService = acquisitionReponse(Verificateurs::fraisServiceValide);
         if (fraisService.equals("0")) return;
@@ -221,7 +219,6 @@ public class VueService extends Vue {
                 recurrenceHebdo,
                 capaciteMaximale,
                 numeroProfessionnel,
-                codeService,
                 fraisService,
                 commentaires);
 

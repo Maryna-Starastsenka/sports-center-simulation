@@ -81,6 +81,10 @@ public class Verificateurs {
     }
 
     public static boolean identifiantServiceValide(String s) {
+        return s != null && s.length() == 3 && intValide(s);
+    }
+    
+    public static boolean identifiantSeanceValide(String s) {
         return s != null && s.length() == 7 && intValide(s);
     }
 

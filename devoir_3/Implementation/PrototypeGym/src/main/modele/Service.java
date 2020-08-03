@@ -1,10 +1,15 @@
 package main.modele;
 
+import static main.controleur.Verificateurs.today;
+
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 
 public class Service {
@@ -13,7 +18,6 @@ public class Service {
 	private LocalDate dateDebutService;
 	private LocalDate dateFinService;
 	private LocalTime heureService;
-	private Jour recurrenceHebdo;
 	private int capaciteMaximale;
 	private String numeroProfessionnel;
 	private String codeService;
@@ -28,23 +32,28 @@ public class Service {
                    LocalDate dateDebutService,
                    LocalDate dateFinService,
                    LocalTime heureService,
-                   Jour recurrenceHebdo,
+                   DayOfWeek recurrenceHebdo,
                    int capaciteMaximale,
                    String numeroProfessionnel,
-                   String codeService,
                    double fraisService,
                    String commentaires) {
+		
+		
+		
 		this.nomService = nomService;
 		this.dateEtHeureActuelles = dateEtHeureActuelles;
 		this.dateDebutService = dateDebutService;
 		this.dateFinService = dateFinService;
 		this.heureService = heureService;
-		this.recurrenceHebdo = recurrenceHebdo;
 		this.capaciteMaximale = capaciteMaximale;
 		this.numeroProfessionnel = numeroProfessionnel;
-		this.codeService = codeService;
+		this.codeService = this.getHashInString();
 		this.fraisService = fraisService;
 		this.commentaires = commentaires;
+		
+		Seance seance = new Seance(recurrenceHebdo, this.codeService, numeroProfessionnel);
+		this.seances = new HashMap<String, Seance>();
+		this.seances.put(seance.getCodeSeance(), seance);		
 	}
 
 	public LocalDate getDateDebutService() { return dateDebutService; }
@@ -55,12 +64,20 @@ public class Service {
 		return heureService;
 	}
 
+	public void ajouterSeance(Seance seance) {
+		this.seances.put(seance.getCodeSeance(), seance);
+	}
+	
+	public List<Seance> obtenirListeSeances() {
+		return seances
+				.values()
+				.stream()
+				.collect(Collectors.toList());
+	}
 
 	public String getNomService() { return nomService; }
 
 	public String getNumeroProfessionnel() { return numeroProfessionnel; }
-
-	public String getRecurrenceHebdo() { return "" + recurrenceHebdo; }
 
 	public int getCapaciteMaximale() {return capaciteMaximale; }
 
@@ -70,30 +87,17 @@ public class Service {
 
 	public String getCommentaires() { return commentaires; }
 
-	public void setRecurrenceHebdo(Jour valeur) {
-		this.recurrenceHebdo = valeur;
-	}
-
 	public void setHeureService(LocalTime valeur){
 		this.heureService = valeur;
 	}
 
 	@Override
 	public int hashCode() {
-		return Math.abs(Objects.hash(dateEtHeureActuelles,
-				dateDebutService,
-				dateFinService,
-				heureService,
-				recurrenceHebdo,
-				capaciteMaximale,
-				numeroProfessionnel,
-				codeService,
-				fraisService,
-				commentaires) % 10000); // 4 chiffres max
+		return Math.abs((Objects.hash(nomService) + Objects.hash(numeroProfessionnel)) % 1000); // 3 chiffres max
 	}
 
 	protected String getHashInString() {
-		return String.format("%04d", this.hashCode());
+		return String.format("%03d", this.hashCode());
 	}
 
 	public void setNomService(String valeur) {
