@@ -65,10 +65,10 @@ public abstract class VueClient<T> extends Vue {
         afficher("Veuillez entrer la ville :");
         ville = acquisitionReponse();
         
-        afficher("Veuillez entrer l'adresse :");
+        afficher("Veuillez entrer la province :");
         province = acquisitionReponse();
         
-        afficher("Veuillez entrer l'adresse :");
+        afficher("Veuillez entrer le code postal (XXXXXX) :");
         codePostal = acquisitionReponse(Verificateurs::codePostalValide).toUpperCase();
 
         afficher("Veuillez entrer le numéro de téléphone (XXX-XXX-XXXX):");
@@ -76,8 +76,23 @@ public abstract class VueClient<T> extends Vue {
 
         afficher("Veuillez entrer l'adresse courriel (xxx@xxx.xxx) :");
         adresseCourriel = acquisitionReponse(Verificateurs::courrielValide);
+        
+        TypeClient typeClient = getTypeClientPrecis();
 
-        controleurClient.creerClient(getTypeClientPrecis(), nom, dateNaissanceString, adresseCourriel, numeroTelephone, adresse, ville, province, codePostal);
+        controleurClient.creerClient(typeClient, nom, dateNaissanceString, adresseCourriel, numeroTelephone, adresse, ville, province, codePostal);
+        switch(typeClient) {
+        case MEMBRE_VALIDE :
+        	afficher("Membre créé : " + controleurClient.getIdDepuisAdresse(adresseCourriel));
+        	break;
+        case MEMBRE_SUSPENDU : 
+        	afficher("Membre suspendu créé");
+        	break;
+        case PROFESSIONNEL : 
+        	afficher("Professionnel créé");
+        	break;
+        default : 
+        	break;        		
+        }
     }
 
     public void gererCompteExistant() {
