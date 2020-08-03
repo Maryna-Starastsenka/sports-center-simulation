@@ -12,27 +12,7 @@ public class CentreDonneesProfessionnel implements ICentreDonnees<Professionnel>
     private HashMap<String, String> listeAdressesProfessionnels = new HashMap<>();
 
     public CentreDonneesProfessionnel() {
-        /*** PROFESSIONNELS ***/
-        Professionnel professionnel1 = new Professionnel("Jean", LocalDate.of(1980, 12, 25),
-                "456 rue Michel",
-                "Laval",
-                "Québec",
-                "G2T2T2",
-                "987-987-9876",
-                "Jean@udem.com");
-        listeProfessionnels.put(professionnel1.getHashInString(), professionnel1);
-        listeAdressesProfessionnels.put(professionnel1.adresseCourriel, professionnel1.getHashInString());
 
-        Professionnel professionnel2 = new Professionnel("Baptiste",
-                LocalDate.of(1970, 6, 18),
-                "1000 bld Henri",
-                "Longueil",
-                "Québec",
-                "T6Y0K0",
-                "182-323-3432",
-                "baptiste@udem.com");
-        listeProfessionnels.put(professionnel2.getHashInString(), professionnel2);
-        listeAdressesProfessionnels.put(professionnel2.adresseCourriel, professionnel2.getHashInString());
     }
 
     @Override

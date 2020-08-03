@@ -28,66 +28,7 @@ public class CentreDonneesServices implements ICentreDonnees {
     private List<MembreTef> listeMembresTef = new ArrayList<>();
     
 	public CentreDonneesServices() {
-		String idProfessionel1 = "150337313";
-		String idProfessionel2 = "173262475";
-		String idMembre1 = "554365143";
 
-		Service service1 = new Service("Zumba",
-				LocalDateTime.of(LocalDate.of(2020, 1,1), LocalTime.of(8,0,0)),
-				LocalDate.of(2025, 12, 31),
-				LocalDate.of(2020, 7, 19),
-				LocalTime.of(22, 30),
-				DayOfWeek.SUNDAY,
-				25,
-				idProfessionel1,
-				63.25,
-				"Rien à signaler");
-		listeServices.put(service1.getCode(), service1);
-		
-		
-		Service service3 = new Service("Yoga",
-				LocalDateTime.of(LocalDate.of(2020, 3,1), LocalTime.of(7, 30, 0)),
-				LocalDate.of(2015, 11, 30),
-				LocalDate.of(2025, 7, 12),
-				LocalTime.of(18,20),
-				DayOfWeek.MONDAY,
-				25,
-				idProfessionel1,
-				100.00,
-				"Aucun commentaire");
-		listeServices.put(service3.getCode(), service3);
-
-		Service service4 = new Service("Danse", LocalDateTime.of(LocalDate.of(2020, 3,1), LocalTime.of(7, 30, 0)),
-				LocalDate.of(2017, 11, 15),
-				LocalDate.of(2036, 9, 20),
-				LocalTime.of(18,20),
-				DayOfWeek.MONDAY,
-				2,
-				idProfessionel2,
-				50.12,
-				"En refonte");
-		listeServices.put(service4.getCode(), service4);
-
-		
-		// crée une séance au jour d'exécution du programme pour les tests
-		Seance seance1 = new Seance(DayOfWeek.MONDAY, service1.getCode(), service1.getNumeroProfessionnel(), service1);
-		listeSeances.put(seance1.getCodeSeance(), seance1);
-		service1.ajouterSeance(seance1);
-
-		this.mettreAJourSeances();
-
-		
-
-        Inscription inscription1 = new Inscription(now(),
-                seance1.getDate(),
-				idProfessionel1,
-				idMembre1,
-				ControleurClient.nomClient(idMembre1),
-                seance1.getCodeService(),
-                "",
-				seance1.getCodeSeance(),
-				service1.getFraisService());
-        listeInscriptions.put(inscription1.getHashInString(), inscription1);
 	}
 
 	public void ajouterService(Service service) {

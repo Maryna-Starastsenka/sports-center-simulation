@@ -13,16 +13,7 @@ public class CentreDonneesMembre implements ICentreDonnees<Membre> {
 
     public CentreDonneesMembre() {
         // valeurs par défaut
-        /*** MEMBRES ***/
-        Membre membre1 = new Membre("John Doe", LocalDate.of(1970, 2, 2),
-                "456 du Brésil",
-                "Memphré",
-                "Québec",
-                "G1H2Y8",
-                "999-999-9999",
-                "John@doe.com", true);
-        listeMembres.put(membre1.getHashInString(), membre1);
-        listeAdressesMembres.put(membre1.adresseCourriel, membre1.getHashInString());
+
     }
 
     @Override

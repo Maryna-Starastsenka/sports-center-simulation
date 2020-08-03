@@ -32,7 +32,7 @@ public class ControleurClient extends Controleur {
 		switch (typeClient) {
 			case MEMBRE_VALIDE: // membre qui a payé les frais d'adhésion
 			case MEMBRE_SUSPENDU: // membre qui n'a pas payé les frais d'adhésion
-				Membre membre = new Membre(nom, dateNaissance, adresse, ville, province, codePostal, numeroTelephone, adresseCourriel, typeClient.equals("1") ? true : false);
+				Membre membre = new Membre(nom, dateNaissance, adresse, ville, province, codePostal, numeroTelephone, adresseCourriel, typeClient.equals(TypeClient.MEMBRE_VALIDE) ? true : false);
 				client = centreDonneesMembre.creer(membre);
 				break;
 			case PROFESSIONNEL:
@@ -111,12 +111,15 @@ public class ControleurClient extends Controleur {
 			client = centreDonneesProfessionnel.lire(idClient);
 		}
 		if (client != null) {
-			infos = "ID : " + client.getHashInString() + "\n" +
+			infos = "ID : " + idClient + "\n" +
 					"Nom : " + client.getNom() + "\n" +
 					"Date de naissance : " + client.getDateNaissance() + "\n" +
 					"Adresse courriel : " + client.getAdresseCourriel() + "\n" +
 					"Numéro de téléphone : " + client.getNumeroPhone() + "\n" +
-					"Adresse : " + client.getAdresse() + "\n";
+					"Adresse : " + client.getAdresse() + "\n" + 
+					"Ville : " + client.getVille() + "\n" +
+					"Province : " + client.getProvince() + "\n" +
+					"Code postal : " + client.getCodePostal() + "\n";
 		}
 		if (typeClient.equals(TypeClient.MEMBRE)) {
 			Membre membre = (Membre)client;
@@ -148,7 +151,10 @@ public class ControleurClient extends Controleur {
 	}
 	
 	public String getIdDepuisAdresse(String adresseCourriel) {
-		return this.centreDonneesMembre.getIdDepuisAdresse(adresseCourriel);
+		String idClient = this.centreDonneesMembre.getIdDepuisAdresse(adresseCourriel);
+		if(idClient==null)
+			idClient = this.centreDonneesProfessionnel.getIdDepuisAdresse(adresseCourriel);
+		return idClient;
 	}
 
 	public static HashMap<String, Professionnel> getListeProfessionnels() {

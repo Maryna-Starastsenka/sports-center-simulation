@@ -19,6 +19,43 @@ class ControleurClientTests {
 	@BeforeEach
 	void initialisation() {
 		this.controleurClient = new ControleurClient();
+		
+        /*** MEMBRES ***/
+		controleurClient.creerClient(
+        		TypeClient.MEMBRE_VALIDE, 
+        		"John Doe", 
+        		"02-02-1970", 
+        		"John@doe.com", 
+        		"999-999-9999", 
+        		"456 du Brésil", 
+        		"Memphré", 
+        		"Québec", 
+        		"G1H2Y8");
+
+		
+        /*** PROFESSIONNELS ***/
+
+        controleurClient.creerClient(
+        		TypeClient.PROFESSIONNEL, 
+        		"Jean", 
+        		"25-12-1975", 
+        		"Jean@udem.com", 
+        		"987-987-9876", 
+        		"456 rue Michel", 
+        		"Laval", 
+        		"Québec", 
+        		"G2T2T2");
+
+        controleurClient.creerClient(
+        		TypeClient.PROFESSIONNEL, 
+        		"Baptiste", 
+        		"18-06-1970", 
+        		"baptiste@udem.com", 
+        		"182-323-3432", 
+        		"1000 bld Henri", 
+        		"Longueil", 
+        		"Québec", 
+        		"T6Y0K0");
 	}
 
 	@Test
@@ -35,14 +72,17 @@ class ControleurClientTests {
 		String dateNaissance = "02-02-1990";
 		String adresseCourriel = "maryna@udem.com";
 		String numeroTel = "123-123-1234";
-		String adresse = "123 rue Martin, Montreal";
+		String adresse = "123 rue Martin";
+		String ville = "Montreal";
+		String province = "Québec";
+		String codePostal = "H0H0H0";
 		
-		controleurClient.creerClient(typeClient, nom, dateNaissance, adresseCourriel, numeroTel, adresse);
+		controleurClient.creerClient(typeClient, nom, dateNaissance, adresseCourriel, numeroTel, adresse, ville, province, codePostal);
 
 		
-		assertTrue(ControleurClient.authentifier(TypeClient.MEMBRE,Client.getHashInString(adresseCourriel)),"Test membre valide échoué");
-		//assertTrue(centreDonneesClient.estMembreValide(membre.getHashInString()), "Test membre qui paye valide échoué");
-		//assertEquals(membre.getHashInString(), centreDonneesClient.getNumeroClient("maryna@udem.com"), "Test hash numéro échoué");
+		assertTrue(
+				ControleurClient.authentifier(TypeClient.MEMBRE,controleurClient.getIdDepuisAdresse(adresseCourriel)),
+				"Test membre valide échoué");
 
 		//Test inscrire membre suspendu
 		TypeClient typeClient2 = TypeClient.MEMBRE_SUSPENDU;
@@ -51,33 +91,70 @@ class ControleurClientTests {
 		String adresseCourriel2 = "adressegenerique@udem.com";
 		String numeroTel2 = "123-123-1234";
 		String adresse2 = "Yes, Montreal";
+		String ville2 = "Montreal";
+		String province2 = "Québec";
+		String codePostal2 = "H1H1H1";
+
 		
-		controleurClient.creerClient(typeClient2, nom2, dateNaissance2, adresseCourriel2, numeroTel2, adresse2);
-		assertTrue(ControleurClient.authentifier(TypeClient.MEMBRE,Client.getHashInString(adresseCourriel2)),"Test membre suspendu échoué");
-		//assertFalse(centreDonneesClient.estMembreValide(suspendu.getHashInString()), "Test membre suspendu non valide échoué");
+		controleurClient.creerClient(typeClient2, nom2, dateNaissance2, adresseCourriel2, numeroTel2, adresse2, ville2, province2, codePostal2);
+		String getInfo2 = controleurClient.getInformationsClient(TypeClient.MEMBRE, controleurClient.getIdDepuisAdresse(adresseCourriel2));
+		String infos2 = "ID : " + controleurClient.getIdDepuisAdresse(adresseCourriel2) + "\n" +
+				"Nom : " + nom2 + "\n" +
+				"Date de naissance : 1800-02-02\n" +
+				"Adresse courriel : " + adresseCourriel2 + "\n" +
+				"Numéro de téléphone : " + numeroTel2 + "\n" +
+				"Adresse : " + adresse2 + "\n" + 
+				"Ville : " + ville2 + "\n" +
+				"Province : " + province2 + "\n" +
+				"Code postal : " + codePostal2 + "\n" +
+				"Statut : " + "suspendu\n";
+		assertEquals(
+				getInfo2,
+				infos2,
+				"Test membre suspendu échoué");
+
 
 		//
-		//Test inscrire membre suspendu
+		//Test inscrire professionnel
 		TypeClient typeClient3 = TypeClient.PROFESSIONNEL;
 		String nom3 = "Hey toi";
 		String dateNaissance3 = "31-12-1999";
 		String adresseCourriel3 = "farfar@booboo.com";
 		String numeroTel3 = "888-888-8888";
-		String adresse3 = "200 avenue du Pabos, Anse-à-Beaufils";;
+		String adresse3 = "200 avenue du Pabos";
+		String ville3 = "Anse-à-Beaufils";
+		String province3 = "Québec";
+		String codePostal3 = "H1H1H1";
 		
-		controleurClient.creerClient(typeClient3, nom3, dateNaissance3, adresseCourriel3, numeroTel3, adresse3);
-		assertTrue(ControleurClient.authentifier(TypeClient.PROFESSIONNEL,Client.getHashInString(adresseCourriel3)),"Test professionnel échoué");
+		controleurClient.creerClient(typeClient3, nom3, dateNaissance3, adresseCourriel3, numeroTel3, adresse3, ville3, province3, codePostal3);
+		String getInfo3 = controleurClient.getInformationsClient(typeClient3, controleurClient.getIdDepuisAdresse(adresseCourriel3));
+		String infos3 = "ID : " + controleurClient.getIdDepuisAdresse(adresseCourriel3) + "\n" +
+				"Nom : " + nom3 + "\n" +
+				"Date de naissance : 1999-12-31\n" +
+				"Adresse courriel : " + adresseCourriel3 + "\n" +
+				"Numéro de téléphone : " + numeroTel3 + "\n" +
+				"Adresse : " + adresse3 + "\n" + 
+				"Ville : " + ville3 + "\n" +
+				"Province : " + province3 + "\n" +
+				"Code postal : " + codePostal3 + "\n";
+		assertEquals(
+				getInfo3,
+				infos3,
+				"Test professionnel échoué");
 	}
 
 	@Test
 	void testMettreClientAJour() {
 		TypeClient typeClient = TypeClient.MEMBRE;
-		String idClient = Client.getHashInString("John@doe.com");
+		String idClient = controleurClient.getIdDepuisAdresse("John@doe.com");
 		String adresse = "nouvelle adresse";
 		String dateNaissance = "01-01-0001";
 		LocalDate localDate = getDateFromString(dateNaissance);
 		String numeroTel = "001-001-0001";
 		String nom = "Jean";
+		String ville = "Saint-Jean";
+		String province = "Saint-John";
+		String codePostal = "T8T8T8";
 		
 		Client client = controleurClient.lireClient(idClient);
 
@@ -94,6 +171,15 @@ class ControleurClientTests {
 		
 		controleurClient.mettreClientAJour(typeClient, idClient, Champs.TELEPHONE_CLIENT, numeroTel);
 		assertTrue(client.getNumeroPhone().equals(numeroTel), "Test mettre a jour numero tel échoué");
+		
+		controleurClient.mettreClientAJour(typeClient, idClient, Champs.VILLE_CLIENT, ville);
+		assertTrue(client.getVille().equals(ville), "Test mettre a jour ville échoué");
+		
+		controleurClient.mettreClientAJour(typeClient, idClient, Champs.PROVINCE_CLIENT, province);
+		assertTrue(client.getProvince().equals(province), "Test mettre a jour province échoué");
+		
+		controleurClient.mettreClientAJour(typeClient, idClient, Champs.CODEPOSTAL_CLIENT, codePostal);
+		assertTrue(client.getCodePostal().equals(codePostal), "Test mettre a jour code postal échoué");
 		
 		Membre membre = (Membre)client;
 		controleurClient.mettreClientAJour(typeClient, idClient, Champs.STATUT_MEMBRE, "");
@@ -116,10 +202,11 @@ class ControleurClientTests {
 	@Test //TODO
 	void testSupprimerClient() {
 		TypeClient typeClient = TypeClient.MEMBRE;
-		String idClient = Client.getHashInString("John@doe.com");
+		String idClient = controleurClient.getIdDepuisAdresse("John@doe.com");
 		
+		assertNotNull(controleurClient.lireClient(idClient),"Test supprimer : client n'existe pas.");
 		controleurClient.supprimerClient(typeClient, idClient);
-		//assertFalse(controleurClient.estMembre(idClient),"Test supprimer client échoué");
+		assertNull(controleurClient.lireClient(idClient),"Test supprimer client échoué");
 	}
 	
 	@Test
