@@ -260,23 +260,59 @@
   <h2>Tâche 2 : Diagramme de classe UML </h2>
   <pre style="font-family: 'Open Sans';">
   Nous avons choisi un architecture Modèle-vue-contrôleur pour le système #GYM. On va implenenter donc les classes suivantes.
-      1. GUI : classe de la vue.
-      2. Contrôleur : classe du contrôleur qui gère les données du modèle et met à jour la vue lorsque une option du menu est choisie.
-      3. Centre de données : classe du modèle qui permet de manipuler les structures des données.
+      1. Classe abstraite Vue : classe de la vue.
+        1.1. VueClient:
+          1.1.1. VueMembre.
+          1.1.2. VueProfessionnel.
+        1.2. VueService.
+        1.3. VueChoixPlateforme.
+        1.4. VuePlateforme :
+          1.4.1. VuaAgent.
+          1.4.2. VueApplicationMobile.
+        1.5. Vue Administration.
+
+      2. Classe abstraite Controleur : classe du contrôleur qui gère les données du modèle et met à jour la vue lorsque une option du menu est choisie.
+        2.1. ControleurService.
+        2.2. ControleurClient.
+        2.3. ControleurAdmnistration.
+
+      3. ICentredonnees : interface.
+      Les classes du modèle qui permettent de manipuler les structures des données :
+        3.1. CentredonneesServices.
+        3.2. CentredonneesPrefessionnel.
+        3.3. CentredonneesMembre.
+
       4. Client : classe abstraite du modèle qui représente les acteurs principaux.
-      5. Membre hérite Client : classe du modèle qui représente le membre avec accès illimité aux salles de sports et aux services d'un professionnel.
-      6. Professionnel hérite Client : classe du modèle qui représente le professionnel (l'expert en exercice physique ou en santé) qui offre un service aux membres.
-      7. Service : classe du modèle qui représente le service offert aux membres par des professionnels.
-      8. Seance : classe du modèle qui représente la séance du service.
-      9. Inscription : classe du modèle qui représente l'insciption du membre à la séance.
-      10. Confirmation Présence : classe du modèle qui représente la confirmation de de la présence à la séance par le membre.
-      11. Professionnel TEF : classe du modèle qui représente le fichier TEF pour la procédure comptable.
-      12. Rapport de Synthèse : classe du modèle qui représente le rapport de synthèse pour la procédure comptable.
+        4.1. Membre hérite Client : classe du modèle qui représente le membre avec accès illimité aux salles de sports et aux services d'un professionnel.
+        4.2. Professionnel hérite Client : classe du modèle qui représente le professionnel (l'expert en exercice physique ou en santé) qui offre un service aux membres.
+
+      5. Service : classe du modèle qui représente le service offert aux membres par des professionnels.
+
+      6. Seance : classe du modèle qui représente la séance du service.
+
+      7. Inscription : classe du modèle qui représente l'insciption du membre à la séance.
+
+      8. Confirmation Présence : classe du modèle qui représente la confirmation de de la présence à la séance par le membre.
+
+      9. Classe abstraite Tef : classe du modèle qui représente le fichier TEF pour la procédure comptable.
+        9.1. ProfessionnelTef.
+        9.2. MemebreTef.
+
+      10. RapportSynthèse : classe du modèle qui représente le rapport de synthèse pour la procédure comptable.
+
+      11. TypeClient : classe énumération.
+
+      12. Champs : classe énumération.
+
+      13. Jour : classe énumération.
+
+      14. IVerificateur : interface.
+        14.1. Vérificateurs.
   Représentons ci-dessous le diagramme de classe UML.
   </pre>
 
    <figure>
-    <img src="images/diagramme_classe.png" alt="Diagramme de classes" style="width:75%">
+    <img src="images/diagramme_classe.png" alt="Diagramme de classes" style="width:85%">
     <figcaption>
       <i>Figure 2.1 - <a href="Conception\diagrammeClasse.vpp"> Diagramme de classes</a></i>
     </figcaption>

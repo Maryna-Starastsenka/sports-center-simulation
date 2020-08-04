@@ -18,6 +18,7 @@ public class VueAgent extends VuePlateforme {
         this.vueService = new VueService();
     }
 
+    @Override
     public void menuAccueil() {
         effacerEcran();
 
@@ -103,32 +104,4 @@ public class VueAgent extends VuePlateforme {
                 break;
         }
     }
-
-//            case "5":
-//                Vue.afficher("---Confirmation de la présence---");
-//
-//                controleurClient.afficherTousLesMembres();
-//                Vue.afficher("Veuillez entrer le numéro du membre :");
-//                membreId = Vue.getTexteConsole();
-//
-//                if (!controleurClient.validerMembre(membreId)) {
-//                    Vue.afficher("Modele.Membre inconnu. Retour au menu principal.");
-//                    break;
-//                } else if (!controleurClient.membrePasSuspendu(membreId)) {
-//                    Vue.afficher("Modele.Membre suspendu. Retour au menu principal.");
-//                    break;
-//                }
-//                controleurService.confirmerPresence(membreId);
-//                break;
-//            case "7":
-//                HashMap<String, Professionnel> hashMapProfessionnel = controleurClient.getHashMapProfessionnel();
-//                controleurService.procedureComptable(hashMapProfessionnel);
-//                break;
-//            case "8":
-//                controleurClient.modifierStatutMembres();
-//                break;
-//            default:
-//                break;
-//        }
-//    }
 }

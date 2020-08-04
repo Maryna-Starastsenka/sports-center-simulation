@@ -28,12 +28,14 @@ public class CentreDonneesProfessionnel implements ICentreDonnees<Professionnel>
         }
         return null;
     }
+
     public String getIdDepuisAdresse(String adresseCourriel) {
         if (listeAdressesProfessionnels.containsKey(adresseCourriel)) {
             return listeAdressesProfessionnels.get(adresseCourriel);
         }
         return null;
     }
+
     @Override
     public void mettreAJour(String idProfessionnel, Champs champsClient, String valeur) {
         Professionnel professionnel = lire(idProfessionnel);

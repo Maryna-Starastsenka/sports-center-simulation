@@ -2,7 +2,6 @@ package main.controleur;
 
 import main.modele.Membre;
 import main.modele.Professionnel;
-
 import java.util.HashMap;
 
 public class ControleurAdministration extends Controleur {

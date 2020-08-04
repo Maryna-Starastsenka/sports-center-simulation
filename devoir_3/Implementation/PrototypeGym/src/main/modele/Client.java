@@ -76,5 +76,4 @@ public abstract class Client {
 				+ "Numéro de téléphone : " + this.getNumeroPhone() + "\n" + "Adresse : " + this.getAdresse() + "\n"+ this.getVille() + "\n"+ 
 				this.getProvince() + "\n" + this.getCodePostal();
 	}
-
 }
