@@ -168,21 +168,4 @@ public class ControleurClient extends Controleur {
 	public void modifierStatutMembre(HashMap<String, Boolean> listeValidations) {
 		centreDonneesMembre.modifierStatutMembres(listeValidations);
 	}
-	
-//public boolean validerMembre (String id){
-//		return centreDonneesMembre.estMembre(id);
-//}
-//
-//	public boolean membrePasSuspendu (String id) {
-//		return centreDonneesClient.estMembreValide(id);
-//	}
-//
-//	public boolean validerProfessionnel (String id){
-//		return centreDonneesClient.estProfessionnel(id);
-//	}
-//
-//	public HashMap<String, Professionnel> getHashMapProfessionnel(){
-//    	return centreDonneesClient.getHashMapProfessionnel();
-//    }
-//
 }
