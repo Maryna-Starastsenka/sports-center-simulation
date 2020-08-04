@@ -77,8 +77,11 @@ public class CentreDonneesMembre implements ICentreDonnees<Membre> {
     public void modifierStatutMembres(HashMap<String, Boolean> listeValidations) {
     	List<Membre> listeMembreModifier= listeMembres.values().stream().collect(Collectors.toList());
     			for(Membre membre : listeMembreModifier) {
-    				boolean statut = listeValidations.get(membre.getId());
-    				membre.setAPaye(statut);
+    				String id = this.getIdDepuisAdresse(membre.getAdresseCourriel());
+    				if(listeValidations.containsKey(id)) {
+    					Boolean statut = listeValidations.get(id);
+    					membre.setAPaye(statut);
+    				}
     			}
     		}
 

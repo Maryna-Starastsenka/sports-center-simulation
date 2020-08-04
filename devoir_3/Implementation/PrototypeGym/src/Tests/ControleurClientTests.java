@@ -4,8 +4,8 @@
  import static org.junit.jupiter.api.Assertions.*;
 
  import java.time.LocalDate;
+import java.util.HashMap;
 
- 
 import main.controleur.*;
 import main.modele.*;
 import main.vue.*;
@@ -31,6 +31,16 @@ class ControleurClientTests {
         		"Memphré", 
         		"Québec", 
         		"G1H2Y8");
+		controleurClient.creerClient(
+        		TypeClient.MEMBRE_SUSPENDU, 
+        		"Vlad", 
+        		"01-01-1970", 
+        		"gmail@gmail.com", 
+        		"999-999-9999", 
+        		"456 avenue Henri", 
+        		"Las Vegas", 
+        		"Nevada", 
+        		"G1H2Y0");
 
 		
         /*** PROFESSIONNELS ***/
@@ -219,6 +229,24 @@ class ControleurClientTests {
 		String idClient2 = Client.getHashInString("Jean@udem.com");
 		TypeClient typeClient2 = ControleurClient.verifierTypeClient(TypeClient.PROFESSIONNEL,idClient2);
 		assertEquals(typeClient2,TypeClient.PROFESSIONNEL_VALIDE,"Test vérifier type professionnel échoué");
+	}
+	
+	@Test
+	void testModifierStatutMembre() {
+		String idMembre1 = controleurClient.getIdDepuisAdresse("John@doe.com");
+		Membre membre1 = (Membre) controleurClient.lireClient(idMembre1);
+		String idMembre2 = controleurClient.getIdDepuisAdresse("gmail@gmail.com");
+		Membre membre2 = (Membre) controleurClient.lireClient(idMembre2);
+		HashMap<String, Boolean> listeModifs = new HashMap<String, Boolean>();
+		listeModifs.put(idMembre1, false);
+		listeModifs.put(idMembre2, true);
+		
+        assertTrue(membre1.getAPaye(),"Test membre 1 devrait être vrai");
+		assertFalse(membre2.getAPaye(),"Test membre 2 devrait être faux");
+		controleurClient.modifierStatutMembre(listeModifs);
+		assertFalse(membre1.getAPaye(),"Test membre 1 devrait être faux");
+		assertTrue(membre2.getAPaye(),"Test membre 2 devrait être vrai");
+		
 	}
 
 }
