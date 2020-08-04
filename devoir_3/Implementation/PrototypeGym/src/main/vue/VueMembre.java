@@ -33,7 +33,8 @@ public class VueMembre extends VueClient<Membre> {
         }
         return TypeClient.MEMBRE_SUSPENDU;
     }
-    
+
+
     public void seConnecterApp(String adresseCourriel) {
         String idMembre = ControleurClient.seConnecterApp(typeClient, adresseCourriel);
         if (idMembre != null) {

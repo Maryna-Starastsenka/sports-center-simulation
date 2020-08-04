@@ -1,7 +1,6 @@
 package main.modele;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import main.controleur.ControleurClient;
 import main.controleur.ControleurService;
@@ -15,9 +14,6 @@ public class MembreTef extends Tef {
         super(nom, numero, adresse, ville, province, codePostal);
         this.listInscription = new ArrayList<Inscription>();
     }
-
-
-
 
     public void ajouterInscription(Inscription inscription) {
     	this.listInscription.add(inscription);
