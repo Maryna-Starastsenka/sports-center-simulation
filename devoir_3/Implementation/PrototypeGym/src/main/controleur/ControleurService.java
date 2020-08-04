@@ -22,7 +22,7 @@ public class ControleurService extends Controleur {
 	public ControleurService() {
 	}
 
-	public void creerService(String nomService,
+	public Service creerService(String nomService,
 							 String dateDebutServiceString,
 							 String dateFinServiceString,
 							 String heureServiceString,
@@ -52,6 +52,7 @@ public class ControleurService extends Controleur {
 				commentaires);
 
 		centreDonneesServices.ajouterService(service);
+		return service;
 	}
 
 	public void mettreServiceAJour(String idSeance, Champs champs, String valeur) {
@@ -141,7 +142,7 @@ public class ControleurService extends Controleur {
 		String infos = "";
 		
 		seance = centreDonneesServices.lireSeance(idSeance);
-		service = centreDonneesServices.lire(seance.getCodeService());
+		service = seance.getService();
 		
 
 		if (service != null) {

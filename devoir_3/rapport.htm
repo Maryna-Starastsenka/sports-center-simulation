@@ -95,7 +95,7 @@
           Gestion des membres/Inscriptions/ConfirmerPresence(50%)
         </td>
         <td>
-          Gestion des services/Procedure comptable/authentifierClient(50%)
+          Gestion des services/Mise à jour statut membre/authentifierClient(50%)
         </td>
       </tr>
       <tr>
@@ -156,16 +156,43 @@
     
     L'application mobile est fonctionnelle. Il est possible d'ajouter des inscriptions aux séances pour les membres et des confirmations de présence
     pour les professionnels. Le code QR est simulé avec le code membre.
+    
+    Voici un lien vers le fichier exécutable :  <a href="Main.jar" title="Fichier exécutable">lien</a>.
   </pre>
 
 
 
   <h2>Tâche 3 : Tests unitaires </h2>
+   <pre style="font-family: 'Open Sans';">
+    Des tests unitaires ont été faits pour les méthodes publiques suivantes: 
+        Demande d'accès au gym : ControleurClient.verifierTypeClient(type : TypeClient typeClient, idClient : String)
+        Gestion des comptes : ControleurClient.creerClient(type : TypeClient, attributs)
+                              ControleurClient.mettreClientAJour(type : TypeClient, id : String)
+                              ControleurClient.supprimerClient(type : TypeClient, id : String)
+        Mise à jour du statut des membres (RnB) : Controleur.modifierStatutMembre(liste : HashMap<String, Boolean>)
+        Gestion des services : ControleurServices.creerService(attributs d'un service)
+                               ControleurServices.mettreServicesAJour(id : String, champs : Champs, valeur : String)
+                               ControleurServices.supprimerService(id : String)
+        Inscription séance : ControleurServices.InscriptionSeance (idMembre : String, nom : String, idSeance : String)
+        Confirmer présence à la séance : ControleurServices.ConfirmerPresence(idSeance : String, idMembre : String)
+        
+    Voici des liens vers chacune des classes de test : 
+    <a href="Tests/ControleurClientTests.java" title="ControleurClientTests">Lien vers la classe de test pour ControleurClient</a>.
+    <a href="Tests/ControleurServiceTests.java" title="ControleurServiceTests">Lien vers la classe de test pour ControleurService</a>.
+    
+      <figure>
+    <img src="images/JUnitTests.png" alt="Tests réussit" style="width:30%">
+    <figcaption>
+      <i>Figure 3.1 - Tests JUnit réussit.</i>
+    </figcaption>
+  </figure> <br>
+        
+  </pre>
 
 
 
   <h2>Tâche 4 : Livraison et documentation</h2>
-
+    Voici un lien vers le manuel d'utilisateur : <a href="Manuel_utilisateur.txt" title="Manuel d'utilisateur">lien</a>.
 
 
   <h2>Collaboration</h2>
