@@ -1,6 +1,10 @@
 package main.modele;
 
+import java.time.LocalDateTime;
 import java.util.List;
+
+import main.controleur.Verificateurs;
+
 
 public abstract class Tef {
     private String nom;
@@ -49,6 +53,7 @@ public abstract class Tef {
     @Override
     public String toString() {
     	String print = "Nom : " + this.nom + "\n";
+    	print += "Date de facturation : " + Verificateurs.localDateTimeFormatter.format(LocalDateTime.now());
     	print += "Numéro : " + this.numero + "\n";
     	print += "Adresse : " + this.adresse + "\n";
     	print += "Ville : " + this.ville + "\n";

@@ -25,7 +25,7 @@ public class ConfirmationPresence {
 
 	@Override
 	public int hashCode() {
-		return Math.abs(Objects.hash(dateEtHeureActuelles,
+		return Math.abs(Objects.hash(
 				numeroMembre,
 				numeroProfessionnel,
 				codeService,

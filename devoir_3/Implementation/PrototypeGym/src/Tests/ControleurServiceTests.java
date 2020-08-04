@@ -1,28 +1,13 @@
 package Tests;
 
-import static main.controleur.Verificateurs.getDateFromString;
-import static main.controleur.Verificateurs.getDoubleFromString;
-import static main.controleur.Verificateurs.getHeureFromString;
-import static main.controleur.Verificateurs.getIntFromString;
-import static main.controleur.Verificateurs.getJourFromString;
-import static main.controleur.Verificateurs.now;
-import static main.modele.Champs.DATE_FIN_SERVICE;
 import static org.junit.jupiter.api.Assertions.*;
-
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.LinkedList;
-import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
+import java.util.List;
 import main.controleur.*;
 import main.modele.*;
-import main.vue.*;
+
 
 class ControleurServiceTests {
 	
@@ -220,7 +205,15 @@ class ControleurServiceTests {
 
 	@Test
 	void testConfirmerPresence() {
-		fail("Not yet implemented");
+		String professionnelId = "150337313";
+		String idMembre = "554365143";
+		List<String> idSeances = controleurService.obtenirListeSeancesDuProfessionnel(professionnelId);
+		Seance seance = controleurService.lireSeance(idSeances.get(0));
+		String idSeance = seance.getCodeSeance();
+		String commentaire = "Pas de commentaire";
+		
+		assertTrue(controleurService.confirmerPresence(idSeance, idMembre, commentaire),"Test ajout confirmation");
+		assertFalse(controleurService.confirmerPresence(idSeance, idMembre, commentaire),"Test ajout confirmation");
 	}
 
 	@Test
