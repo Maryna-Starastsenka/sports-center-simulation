@@ -139,75 +139,88 @@ public abstract class VueClient<T> extends Vue {
     }
 
     public void mettreAJourClient(String idClient) {
-        enTeteGestionCompte();
+    	enTeteGestionCompte();
 
-        // TODO traiter le cas où l'usager écrit "retour"
-//				while (!validerMembre(idMembre)&&!idMembre.equals("retour")) {
-//					afficher("Numéro de membre invalide. Réessayez.");
-//					idMembre = Vue.getTexteConsole();
-//				}
-//				if(!idMembre.equals("retour")) {
 
-        afficher(controleurClient.getInformationsClient(typeClient, idClient));
+    	afficher(controleurClient.getInformationsClient(typeClient, idClient));
 
-        String action = null;
+    	String action = null;
 
-        afficher("Veuillez choisir l'action");
-        afficher("1. Modifier le nom.");
-        afficher("2. Modifier la date de naissance.");
-        afficher("3. Modifier l'adresse courriel.");
-		afficher("4. Modifier le numéro de téléphone.");
-        afficher("5. Modifier l'adresse.");
+    	afficher("Veuillez choisir l'action");
+    	afficher("1. Modifier le nom.");
+    	afficher("2. Modifier la date de naissance.");
+    	afficher("3. Modifier l'adresse courriel.");
+    	afficher("4. Modifier le numéro de téléphone.");
+    	afficher("5. Modifier l'adresse.");
+    	afficher("6. Modifier la ville.");
+    	afficher("7. Modifier la province");
+    	afficher("8. Modifier le code postal");
 
-        if (this instanceof VueMembre) {
-            afficher("6. Modifier le statut du Membre.");
-            afficher("0. Retour au menu principal.");
+    	if (this instanceof VueMembre) {
+    		afficher("9. Modifier le statut du Membre.");
+    		afficher("0. Retour au menu principal.");
 
-            action = acquisitionReponse(Arrays.asList("1","2","3","4","5","6"));
+    		action = acquisitionReponse(Arrays.asList("1","2","3","4","5","6","7","8","9","0"));
+    		
+    		if(action.equals("9")){
+    			controleurClient.mettreClientAJour(typeClient, idClient, STATUT_MEMBRE, "");
+    			afficher(String.format("%s du %s %s modifié.", STATUT_MEMBRE.name(), clientString, idClient));
+    		}
+    	} else if (this instanceof VueProfessionnel) {
+    		afficher("0. Retour au menu principal.");
+    		action = acquisitionReponse(Arrays.asList("1","2","3","4","5","6","7","8"));
+    	}
 
-            switch (action) {
-                case "6":
-                    controleurClient.mettreClientAJour(typeClient, idClient, STATUT_MEMBRE, "");
-                    afficher(String.format("%s du %s %s modifié.", STATUT_MEMBRE.name(), clientString, idClient));
-                    break;
-            }
-        } else if (this instanceof VueProfessionnel) {
-            afficher("0. Retour au menu principal.");
-            action = acquisitionReponse(Arrays.asList("1","2","3","4","5"));
-        }
-
-        switch (action) {
-            case "1":
-                afficher(String.format("Veuillez entrer le nouveau nom du %s.", clientString));
-                String nom = acquisitionReponse(Verificateurs::nomValide);
-                controleurClient.mettreClientAJour(typeClient, idClient, NOM_CLIENT, nom);
-                afficher(String.format("%s du %s %s modifié.", NOM_CLIENT.name(), clientString, idClient));
-                break;
-            case "2":
-                afficher(String.format("Veuillez entrer la nouvelle date de naissance du %s (jj-mm-aaaa).", clientString));
-                String date = acquisitionReponse(Verificateurs::dateValide);
-                controleurClient.mettreClientAJour(typeClient, idClient, DATE_NAISSANCE_CLIENT, date);
-                afficher(String.format("%s du %s %s modifié.", DATE_NAISSANCE_CLIENT.name(), clientString, idClient));
-                break;
-            case "3":
-                afficher(String.format("Veuillez entrer la nouvelle adresse courriel du %s (xxx@xxx.xxx).", clientString));
-                String adresseCourriel = acquisitionReponse(Verificateurs::courrielValide);
-                controleurClient.mettreClientAJour(typeClient, idClient, ADRESSE_COURRIEL_CLIENT, adresseCourriel);
-                afficher(String.format("%s du %s %s modifié.", ADRESSE_COURRIEL_CLIENT.name(), clientString, idClient));
-                break;
-            case "4":
-                afficher(String.format("Veuillez entrer le nouveau numéro de téléphone du %s (xxx-xxx-xxxx).", clientString));
-                String numero = acquisitionReponse(Verificateurs::telephoneValide);
-                controleurClient.mettreClientAJour(typeClient, idClient, TELEPHONE_CLIENT, numero);
-                afficher(String.format("%s du %s %s modifié.", TELEPHONE_CLIENT.name(), clientString, idClient));
-                break;
-            case "5":
-                afficher(String.format("Veuillez entrer la nouvelle adresse du %s.", clientString));
-                String adresse = acquisitionReponse(Verificateurs::adresseValide);
-                controleurClient.mettreClientAJour(typeClient, idClient, ADRESSE_CLIENT, adresse);
-                afficher(String.format("%s du %s %s modifié.", ADRESSE_CLIENT.name(), clientString, idClient));
-                break;
-        }
+    	switch (action) {
+    	case "1":
+    		afficher(String.format("Veuillez entrer le nouveau nom du %s.", clientString));
+    		String nom = acquisitionReponse(Verificateurs::nomValide);
+    		controleurClient.mettreClientAJour(typeClient, idClient, NOM_CLIENT, nom);
+    		afficher(String.format("%s du %s %s modifié.", NOM_CLIENT.name(), clientString, idClient));
+    		break;
+    	case "2":
+    		afficher(String.format("Veuillez entrer la nouvelle date de naissance du %s (jj-mm-aaaa).", clientString));
+    		String date = acquisitionReponse(Verificateurs::dateValide);
+    		controleurClient.mettreClientAJour(typeClient, idClient, DATE_NAISSANCE_CLIENT, date);
+    		afficher(String.format("%s du %s %s modifié.", DATE_NAISSANCE_CLIENT.name(), clientString, idClient));
+    		break;
+    	case "3":
+    		afficher(String.format("Veuillez entrer la nouvelle adresse courriel du %s (xxx@xxx.xxx).", clientString));
+    		String adresseCourriel = acquisitionReponse(Verificateurs::courrielValide);
+    		controleurClient.mettreClientAJour(typeClient, idClient, ADRESSE_COURRIEL_CLIENT, adresseCourriel);
+    		afficher(String.format("%s du %s %s modifié.", ADRESSE_COURRIEL_CLIENT.name(), clientString, idClient));
+    		break;
+    	case "4":
+    		afficher(String.format("Veuillez entrer le nouveau numéro de téléphone du %s (xxx-xxx-xxxx).", clientString));
+    		String numero = acquisitionReponse(Verificateurs::telephoneValide);
+    		controleurClient.mettreClientAJour(typeClient, idClient, TELEPHONE_CLIENT, numero);
+    		afficher(String.format("%s du %s %s modifié.", TELEPHONE_CLIENT.name(), clientString, idClient));
+    		break;
+    	case "5":
+    		afficher(String.format("Veuillez entrer la nouvelle adresse du %s.", clientString));
+    		String adresse = acquisitionReponse(Verificateurs::adresseValide);
+    		controleurClient.mettreClientAJour(typeClient, idClient, ADRESSE_CLIENT, adresse);
+    		afficher(String.format("%s du %s %s modifié.", ADRESSE_CLIENT.name(), clientString, idClient));
+    		break;
+    	case "6":
+    		afficher(String.format("Veuillez entrer la nouvelle ville du %s.", clientString));
+    		String ville = acquisitionReponse(Verificateurs::villeValide);
+    		controleurClient.mettreClientAJour(typeClient, idClient, VILLE_CLIENT, ville);
+    		afficher(String.format("Ville du %s %s modifié.", clientString, idClient));
+    		break;
+    	case "7":
+    		afficher(String.format("Veuillez entrer la nouvelle province du %s.", clientString));
+    		String province = acquisitionReponse(Verificateurs::provinceValide);
+    		controleurClient.mettreClientAJour(typeClient, idClient, PROVINCE_CLIENT, province);
+    		afficher(String.format("Province du %s %s modifié.", clientString, idClient));
+    		break;
+    	case "8":
+    		afficher(String.format("Veuillez entrer le nouveau code postal du %s.", clientString));
+    		String codePostal = acquisitionReponse(Verificateurs::codePostalValide);
+    		controleurClient.mettreClientAJour(typeClient, idClient, CODEPOSTAL_CLIENT, codePostal);
+    		afficher(String.format("Code postal du %s %s modifié.", clientString, idClient));
+    		break;
+    	}
     }
 
     public void authentifier() {

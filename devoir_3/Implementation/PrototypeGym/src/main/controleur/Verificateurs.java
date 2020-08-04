@@ -109,6 +109,14 @@ public class Verificateurs {
     public static boolean adresseValide (String s){
         return s.length() >= 1;
     }
+    
+    public static boolean villeValide (String s){
+        return s.length() >= 1;
+    }
+    
+    public static boolean provinceValide (String s){
+        return s.length() >= 1;
+    }
 
     public static boolean telephoneValide (String s){
         String regexPattern = "\\d{3}-\\d{3}-\\d{4}";

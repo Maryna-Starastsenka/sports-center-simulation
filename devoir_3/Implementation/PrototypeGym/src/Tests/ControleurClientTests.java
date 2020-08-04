@@ -199,7 +199,7 @@ class ControleurClientTests {
 		
 	}
 
-	@Test //TODO
+	@Test
 	void testSupprimerClient() {
 		TypeClient typeClient = TypeClient.MEMBRE;
 		String idClient = controleurClient.getIdDepuisAdresse("John@doe.com");
