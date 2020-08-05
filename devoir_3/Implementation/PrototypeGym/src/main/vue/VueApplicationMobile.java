@@ -1,11 +1,9 @@
 package main.vue;
 
 import main.controleur.Verificateurs;
-
 import java.util.Arrays;
 
 public class VueApplicationMobile extends VuePlateforme {
-
     VueAdministration vueAdministration;
     VueMembre vueMembre;
     VueProfessionnel vueProfessionnel;
@@ -35,12 +33,8 @@ public class VueApplicationMobile extends VuePlateforme {
         String adresseCourriel = acquisitionReponse(Verificateurs::courrielValide);
 
         switch (reponse) {
-            case "1":
-                vueMembre.seConnecterApp(adresseCourriel);
-                break;
-            case "2":
-                vueProfessionnel.seConnecterApp(adresseCourriel);
-                break;
+            case "1" -> vueMembre.seConnecterApp(adresseCourriel);
+            case "2" -> vueProfessionnel.seConnecterApp(adresseCourriel);
         }
 
         retourMenuPrincipal();

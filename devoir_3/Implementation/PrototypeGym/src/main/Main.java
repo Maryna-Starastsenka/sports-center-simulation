@@ -6,6 +6,8 @@ public class Main {
 
     public static void main(String[] args) {
     	VuePlateforme vue = VueChoixPlateforme.selectionnerOption();
-    	vue.start();
+        if (vue != null) {
+            vue.start();
+        }
     }
 }

@@ -1,9 +1,6 @@
 package main.vue;
 
 import main.controleur.ControleurAdministration;
-import main.controleur.ControleurService;
-import main.modele.ProfessionnelTef;
-
 import java.util.Arrays;
 
 public class VueAdministration extends Vue {

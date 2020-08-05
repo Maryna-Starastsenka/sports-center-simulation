@@ -2,14 +2,11 @@ package main.vue;
 
 import java.util.Arrays;
 
-import main.controleur.ControleurClient;
-import main.modele.TypeClient;
-
 public class VueAgent extends VuePlateforme {
-    VueAdministration vueAdministration;
-    VueMembre vueMembre;
-    VueProfessionnel vueProfessionnel;
-    VueService vueService;
+    private final VueAdministration vueAdministration;
+    private final VueMembre vueMembre;
+    private final VueProfessionnel vueProfessionnel;
+    private final VueService vueService;
 
     public VueAgent() {
         this.vueAdministration = new VueAdministration();
@@ -35,30 +32,14 @@ public class VueAgent extends VuePlateforme {
         String reponse = acquisitionReponse(Arrays.asList("1","2","3","4","5","6","7","8"));
 
         switch (reponse) {
-            case "1":
-                authentification();
-                break;
-            case "2":
-                gestionCompte();
-                break;
-            case "3":
-                vueService.gestionService();
-                break;
-            case "4":
-                vueService.inscriptionSeance();
-                break;
-            case "5":
-                vueService.confirmationPresence();
-                break;
-            case "6":
-                vueService.consultationSeance();
-                break;
-            case "7":
-                vueAdministration.procedureComptable();
-                break;
-            case "8":
-                System.exit(0);
-                break;
+            case "1" -> authentification();
+            case "2" -> gestionCompte();
+            case "3" -> vueService.gestionService();
+            case "4" -> vueService.inscriptionSeance();
+            case "5" -> vueService.confirmationPresence();
+            case "6" -> vueService.consultationSeance();
+            case "7" -> vueAdministration.procedureComptable();
+            case "8" -> System.exit(0);
         }
 
         retourMenuPrincipal();
@@ -75,12 +56,8 @@ public class VueAgent extends VuePlateforme {
         String reponse = acquisitionReponse(Arrays.asList("1","2"));
 
         switch (reponse) {
-            case "1":
-                vueMembre.gestionCompte();
-                break;
-            case "2":
-                vueProfessionnel.gestionCompte();
-                break;
+            case "1" -> vueMembre.gestionCompte();
+            case "2" -> vueProfessionnel.gestionCompte();
         }
     }
 
@@ -96,12 +73,8 @@ public class VueAgent extends VuePlateforme {
         String reponse = acquisitionReponse(Arrays.asList("1","2"));
 
         switch (reponse) {
-            case "1":
-                vueMembre.verifierTypeClient();
-                break;
-            case "2":
-                vueProfessionnel.verifierTypeClient();
-                break;
+            case "1" -> vueMembre.verifierTypeClient();
+            case "2" -> vueProfessionnel.verifierTypeClient();
         }
     }
 }

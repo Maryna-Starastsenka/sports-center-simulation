@@ -2,12 +2,10 @@ package main.vue;
 
 import main.controleur.ControleurClient;
 import main.modele.Client;
-import main.modele.Membre;
 import main.modele.TypeClient;
-
 import java.util.Arrays;
 
-public class VueMembre extends VueClient<Membre> {
+public class VueMembre extends VueClient {
 
     public VueMembre() {
         clientString = "Membre";
@@ -34,7 +32,6 @@ public class VueMembre extends VueClient<Membre> {
         return TypeClient.MEMBRE_SUSPENDU;
     }
 
-
     public void seConnecterApp(String adresseCourriel) {
         String idMembre = ControleurClient.seConnecterApp(typeClient, adresseCourriel);
         if (idMembre != null) {
@@ -47,23 +44,6 @@ public class VueMembre extends VueClient<Membre> {
         } else {
             afficher("L'adresse courriel renseignée n'est pas valide");
         }
-    }
-
-    @Override
-    public void confirmerEnregistrement(String id) {
-        afficher("Enregistrement du membre numéro : " + id);
-    }
-
-    @Override
-    public void accesAutorise(String idMembre) {
-        afficher(String.format("Le membre numéro %s est autorisé à accéder au gym.",
-                idMembre));
-    }
-
-    @Override
-    public void accesRefuse(String idMembre) {
-        afficher(String.format("Le membre numéro %s n'est pas autorisé à accéder au gym.",
-                idMembre));
     }
     
     public void inscriptionApp(String idMembre) {

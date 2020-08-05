@@ -1,16 +1,13 @@
 package main.vue;
 
 import main.controleur.ControleurClient;
-
 import main.controleur.ControleurService;
 import main.controleur.Verificateurs;
 import main.modele.TypeClient;
-
 import java.util.Arrays;
-import java.util.ArrayList;
+import java.util.Collections;
 
-import static main.controleur.Verificateurs.getIntFromString;
-import static main.controleur.Verificateurs.identifiantClientValide;
+import static main.controleur.Verificateurs.*;
 import static main.modele.Champs.*;
 
 public class VueService extends Vue {
@@ -23,6 +20,7 @@ public class VueService extends Vue {
 
     protected void enTeteGestionService() {
         effacerEcran();
+
         afficher("------Gestion d'un service------");
     }
 
@@ -43,12 +41,8 @@ public class VueService extends Vue {
         String reponse = acquisitionReponse(Arrays.asList("1","2"));
 
         switch (reponse) {
-            case "1":
-                creerService(idProfessionnel);
-                break;
-            case "2":
-                gererServiceExistant(idProfessionnel);
-                break;
+            case "1" -> creerService(idProfessionnel);
+            case "2" -> gererServiceExistant(idProfessionnel);
         }
     }
 
@@ -71,12 +65,8 @@ public class VueService extends Vue {
         String reponse = acquisitionReponse(Arrays.asList("1","2"));
 
         switch (reponse) {
-            case "1":
-                mettreAJourService(idSeance);
-                break;
-            case "2":
-                supprimerService(idSeance);
-                break;
+            case "1" -> mettreAJourService(idSeance);
+            case "2" -> supprimerService(idSeance);
         }
     }
 
@@ -85,7 +75,7 @@ public class VueService extends Vue {
 
         afficher(controleurService.getInformationsService(idSeance));
 
-        String action = null;
+        String action;
 
         afficher("Veuillez choisir l'action");
         afficher("1. Modifier le nom de service.");
@@ -101,56 +91,56 @@ public class VueService extends Vue {
         action = acquisitionReponse(Arrays.asList("1","2","3","4","5","6","7","8"));
 
         switch (action) {
-            case "1":
+            case "1" -> {
                 Vue.afficher("Veuillez entrer le nouveau nom du service :");
                 String nomService = acquisitionReponse();
                 controleurService.mettreServiceAJour(idSeance, NOM_SERVICE, nomService);
                 afficher(String.format("%s du service %s modifié.", NOM_SERVICE.name(), idSeance));
-                break;
-            case "2":
+            }
+            case "2" -> {
                 afficher("Veuillez entrer la nouvelle date de début du service (jj-mm-aaaa) :");
                 String dateDebutService = acquisitionReponse(Verificateurs::dateValide);
                 controleurService.mettreServiceAJour(idSeance, DATE_DEBUT_SERVICE, dateDebutService);
                 afficher(String.format("%s du service %s modifié.", DATE_DEBUT_SERVICE.name(), idSeance));
-                break;
-            case "3":
+            }
+            case "3" -> {
                 afficher("Veuillez entrer la nouvelle date de fin du service (jj-mm-aaaa) :");
                 String dateFinService = acquisitionReponse(Verificateurs::dateValide);
                 controleurService.mettreServiceAJour(idSeance, DATE_FIN_SERVICE, dateFinService);
                 afficher(String.format("%s du service %s modifié.", DATE_FIN_SERVICE.name(), idSeance));
-                break;
-            case "4":
+            }
+            case "4" -> {
                 afficher("Veuillez entrer la nouvelle heure du service (hh:mm) :");
                 String heureService = acquisitionReponse(Verificateurs::horaireValide);
                 controleurService.mettreServiceAJour(idSeance, HEURE_SERVICE, heureService);
                 afficher(String.format("%s du service %s modifié.", HEURE_SERVICE.name(), idSeance));
-                break;
-            case "5":
+            }
+            case "5" -> {
                 afficher("Veuillez entrée la nouvelle journée (ex : \"mercredi\") : ");
-                String recurrenceHebdo = acquisitionReponse(Verificateurs::jourSemaineValide);    
+                String recurrenceHebdo = acquisitionReponse(Verificateurs::jourSemaineValide);
                 controleurService.mettreServiceAJour(idSeance, RECURRENCE_HEBDO_SERVICE, recurrenceHebdo);
                 afficher(String.format("%s du service %s modifié.", RECURRENCE_HEBDO_SERVICE.name(), idSeance));
-                break;
-            case "6":
+            }
+            case "6" -> {
                 afficher("Veuillez entrer la nouvelle capacité maximale (1-30) :");
                 String capaciteMaximale = acquisitionReponse((String s) -> Verificateurs.intValide(s)
                         && getIntFromString(s) >= 1
                         && getIntFromString(s) <= 30);
                 controleurService.mettreServiceAJour(idSeance, CAPACITE_MAX_SERVICE, capaciteMaximale);
                 afficher(String.format("%s du service %s modifié.", CAPACITE_MAX_SERVICE.name(), idSeance));
-                break;
-            case "7":
+            }
+            case "7" -> {
                 afficher("Veuillez entrer les frais du service (XXX.XX) :");
                 String fraisService = acquisitionReponse(Verificateurs::fraisServiceValide);
                 controleurService.mettreServiceAJour(idSeance, FRAIS_SERVICE, fraisService);
                 afficher(String.format("%s du service %s modifié.", FRAIS_SERVICE.name(), idSeance));
-                break;
-            case "8":
+            }
+            case "8" -> {
                 afficher("Veuillez entrer le nouveau commentaire :");
                 String commentaires = getTexteConsole();
                 controleurService.mettreServiceAJour(idSeance, COMMENTAIRE_SERVICE, commentaires);
                 afficher(String.format("%s du service %s modifié.", COMMENTAIRE_SERVICE.name(), idSeance));
-                break;
+            }
         }
     }
 
@@ -158,7 +148,7 @@ public class VueService extends Vue {
         afficher("1. Valider suppression.");
         afficher("0. Retour au menu principal.");
 
-        String reponse = acquisitionReponse(Arrays.asList("1"));
+        String reponse = acquisitionReponse(Collections.singletonList("1"));
 
         if (reponse.equals("1")) {
             controleurService.supprimerService(idSeance);
@@ -167,49 +157,38 @@ public class VueService extends Vue {
     }
 
     public void creerService(String idProfessionnel) {
-        String nomService;
-        String dateEtHeureActuelles = null;
-        String dateDebutService = null;
-        String dateFinService = null;
-        String heureService;
-        String recurrenceHebdo;
-        String capaciteMaximale;
-        String numeroProfessionnel = idProfessionnel;
-        String fraisService;
-        String commentaires;
-
         Vue.afficher("Veuillez entrer le nom du service :");
-        nomService = acquisitionReponse();
+        String nomService = acquisitionReponse();
         if (nomService.equals("0")) return;
 
         afficher("Veuillez entrer la date de début du service (jj-mm-aaaa) :");
-        dateDebutService = acquisitionReponse(Verificateurs::dateValide);
+        String dateDebutService = acquisitionReponse(Verificateurs::dateValide);
         if (dateDebutService.equals("0")) return;
 
         afficher("Veuillez entrer la date de fin du service (jj-mm-aaaa) :");
-        dateFinService = acquisitionReponse(Verificateurs::dateValide);
+        String dateFinService = acquisitionReponse(Verificateurs::dateValide);
         if (dateFinService.equals("0")) return;
 
         afficher("Veuillez entrer l'heure du service (hh:mm) :");
-        heureService = acquisitionReponse(Verificateurs::horaireValide);
+        String heureService = acquisitionReponse(Verificateurs::horaireValide);
         if (heureService.equals("0")) return;
 
         afficher("Veuillez entrer la récurrence hebdomadaire (ex : entrez \"mercredi\") :");
-        recurrenceHebdo = acquisitionReponse(Verificateurs::jourSemaineValide);
+        String recurrenceHebdo = acquisitionReponse(Verificateurs::jourSemaineValide);
         if (recurrenceHebdo.equals("0")) return;
 
         afficher("Veuillez entrer la capacité maximale (1-30) :");
-        capaciteMaximale = acquisitionReponse((String s) -> Verificateurs.intValide(s)
+        String capaciteMaximale = acquisitionReponse((String s) -> Verificateurs.intValide(s)
                 && getIntFromString(s) >= 1
                 && getIntFromString(s) <= 30);
         if (capaciteMaximale.equals("0")) return;
 
         afficher("Veuillez entrer les frais du service (XXX.XX) :");
-        fraisService = acquisitionReponse(Verificateurs::fraisServiceValide);
+        String fraisService = acquisitionReponse(Verificateurs::fraisServiceValide);
         if (fraisService.equals("0")) return;
 
         afficher("Veuillez entrer les commentaires (ENTREE pour passer) :");
-        commentaires = getTexteConsole();
+        String commentaires = getTexteConsole();
 
         controleurService.creerService(nomService,
                 dateDebutService,
@@ -217,7 +196,7 @@ public class VueService extends Vue {
                 heureService,
                 recurrenceHebdo,
                 capaciteMaximale,
-                numeroProfessionnel,
+                idProfessionnel,
                 fraisService,
                 commentaires);
 
@@ -225,11 +204,11 @@ public class VueService extends Vue {
     }
 
     public void inscriptionSeance() {
-    	//  afficherTousLesMembres();
     	String membreId = validerTypeClient();
     	if(membreId==null) { return;}
     	inscriptionSeance(membreId);
     }
+
     public void inscriptionSeance(String membreId) {
         effacerEcran();
         afficher("---Inscription à une séance---");
@@ -267,7 +246,6 @@ public class VueService extends Vue {
         } else {
             afficher("Annulation de l'inscription. Retour au menu principal.");
         }
-
     }
 
     public void consultationSeance() {
@@ -301,18 +279,18 @@ public class VueService extends Vue {
 
         TypeClient typeClient = ControleurClient.verifierTypeClient(TypeClient.MEMBRE, idMembre);
         switch (typeClient) {
-            case CLIENT_INVALIDE:
-                afficher("Membre inconnu. Retour au menu principal.");
-                return null;
-            case MEMBRE_SUSPENDU:
+            case MEMBRE_SUSPENDU -> {
                 afficher("Membre suspendu. Retour au menu principal.");
                 return null;
-            case MEMBRE_VALIDE:
-            	afficher("Membre valide.");
-            	return idMembre;
-            default:
-            	afficher("Membre inconnu. Retour au menu principal.");
-            	return null;
+            }
+            case MEMBRE_VALIDE -> {
+                afficher("Membre valide.");
+                return idMembre;
+            }
+            default -> {
+                afficher("Membre inconnu. Retour au menu principal.");
+                return null;
+            }
         }
     }
     
@@ -321,8 +299,7 @@ public class VueService extends Vue {
         afficher(controleurService.obtenirToutesLesSeancesDuJourEnString(Verificateurs.today()));
 
         afficher("Veuillez entrer le numéro de séance ou entrer 0 pour revenir au menu principal :");
-        String idSeance = acquisitionReponse(controleurService.obtenirListeIdSeancesDuJour(Verificateurs.today()));
-        return idSeance;
+        return acquisitionReponse(controleurService.obtenirListeIdSeancesDuJour(Verificateurs.today()));
     }
     
     public void confirmationPresence() {
@@ -340,8 +317,7 @@ public class VueService extends Vue {
 
     	if (!controleurService.inscriptionExiste(idMembre, idSeance)) {
     		afficher("Le membre n'est pas inscrit. Accès refusé.");
-    		return;
-    	} else {
+        } else {
     		afficher("Confirmer la présence ?");
     		afficher("1. Oui");
     		afficher("2. Non");
@@ -359,6 +335,7 @@ public class VueService extends Vue {
     		} else {
     			afficher("Annulation de la confirmation.");
     		}
+
     	}
     }
 

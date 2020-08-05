@@ -1,14 +1,11 @@
 package main.vue;
 
 import main.controleur.IVerificateur;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
 public abstract class Vue {
-//    public ControleurClient controleurClient;
-//    public ControleurService controleurService;
 
     public Vue() {
 
@@ -26,7 +23,7 @@ public abstract class Vue {
                 System.out.print("\033[H\033[2J");
                 System.out.flush();
             }
-        } catch (IOException | InterruptedException ex) {}
+        } catch (IOException | InterruptedException ignored) {}
     }
 
     public static void afficher(String information) {
@@ -62,7 +59,7 @@ public abstract class Vue {
         String reponse;
         do {
             reponse = getTexteConsole();
-        } while(reponse.length() < 1 && !reponse.equals("0"));
+        } while(reponse.length() < 1);
         return reponse;
     }
 
