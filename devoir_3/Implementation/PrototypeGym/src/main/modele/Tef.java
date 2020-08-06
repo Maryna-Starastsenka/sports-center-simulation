@@ -16,6 +16,15 @@ public abstract class Tef {
     private final String province;
     private final String codePostal;
 
+    /**
+     * Constructeur de Tef
+     * @param nom nom du client
+     * @param numero numéro du client
+     * @param adresse adresse du client
+     * @param ville ville du client
+     * @param province province du client
+     * @param codePostal code postal du client
+     */
     public Tef(String nom, String numero, String adresse, String ville, String province, String codePostal) {
         this.nom = nom;
         this.numero = numero;

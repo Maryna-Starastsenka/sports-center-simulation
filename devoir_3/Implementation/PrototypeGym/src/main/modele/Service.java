@@ -27,6 +27,19 @@ public class Service {
 	private String commentaires;
 	private HashMap<String, Seance> seances;
 
+	/**
+	 * Constructeur d'un service
+	 * @param nomService nom du service
+	 * @param dateEtHeureActuelles date et heure au moment de la création du service
+	 * @param dateDebutService date de début du service
+	 * @param dateFinService date de fin du service
+	 * @param heureService horaire du service
+	 * @param recurrenceHebdo jour de récurrence hebdomadaire
+	 * @param capaciteMaximale capacité maximale du service
+	 * @param numeroProfessionnel numéro du professionnel dispensant le service
+	 * @param fraisService montant du service
+	 * @param commentaires commentaires
+	 */
 	public Service(String nomService,
                    LocalDateTime dateEtHeureActuelles,
                    LocalDate dateDebutService,
