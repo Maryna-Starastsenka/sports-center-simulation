@@ -1,10 +1,9 @@
 package main.modele;
 
-import java.util.ArrayList;
-
 import main.controleur.ControleurClient;
 import main.controleur.ControleurService;
-import main.controleur.Verificateurs;
+
+import java.util.ArrayList;
 
 public class MembreTef extends Tef {
 
@@ -12,7 +11,7 @@ public class MembreTef extends Tef {
 
     public MembreTef(String nom, String numero, String adresse, String ville, String province, String codePostal) {
         super(nom, numero, adresse, ville, province, codePostal);
-        this.listInscription = new ArrayList<Inscription>();
+        this.listInscription = new ArrayList<>();
     }
 
     public void ajouterInscription(Inscription inscription) {
@@ -21,14 +20,14 @@ public class MembreTef extends Tef {
     
     @Override
     public String toString() {
-    	String print = super.toString();
+    	StringBuilder print = new StringBuilder(super.toString());
     	if(this.listInscription!=null) {
     		for(Inscription i : this.listInscription) {
-    			print += "Date séance" + i.getDateSeanceString() + "\n";
-    			print += "Nom du professionnel" + ControleurClient.nomClient(i.getNumeroProfessionnel()) + "\n";
-    			print += "Nom du service" + ControleurService.nomService(i.getNumeroProfessionnel())+ "\n";
+    			print.append("Date séance").append(i.getDateSeanceString()).append("\n");
+    			print.append("Nom du professionnel").append(ControleurClient.nomClient(i.getNumeroProfessionnel())).append("\n");
+    			print.append("Nom du service").append(ControleurService.nomService(i.getNumeroProfessionnel())).append("\n");
     		}
     	}
-    	return print;
+    	return print.toString();
     }
 }

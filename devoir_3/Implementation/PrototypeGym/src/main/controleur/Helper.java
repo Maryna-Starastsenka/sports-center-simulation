@@ -1,14 +1,23 @@
 package main.controleur;
 
 import main.modele.Jour;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Verificateurs {
+public class Helper {
+
+    public static DayOfWeek getDayOfWeek(Jour jour) {
+        return switch (jour) {
+            case LUNDI -> DayOfWeek.MONDAY;
+            case MARDI -> DayOfWeek.TUESDAY;
+            case MERCREDI -> DayOfWeek.WEDNESDAY;
+            case JEUDI -> DayOfWeek.THURSDAY;
+            case VENDREDI -> DayOfWeek.FRIDAY;
+            case SAMEDI -> DayOfWeek.SATURDAY;
+            case DIMANCHE -> DayOfWeek.SUNDAY;
+        };
+    }
 
     public static ZoneId zoneId = ZoneId.systemDefault();
     public static DateTimeFormatter localDateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");

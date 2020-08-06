@@ -1,22 +1,17 @@
 package main.modele;
 
-import static main.controleur.Verificateurs.today;
-
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
-
-import main.controleur.Verificateurs;
-
 
 public class Service {
 	private String nomService;
-	private LocalDateTime dateEtHeureActuelles;
+	private final LocalDateTime dateEtHeureActuelles;
 	private LocalDate dateDebutService;
 	private LocalDate dateFinService;
 	private LocalTime heureService;
@@ -25,9 +20,7 @@ public class Service {
 	private String codeService;
 	private double fraisService;
 	private String commentaires;
-
 	private HashMap<String, Seance> seances;
-
 
 	public Service(String nomService,
                    LocalDateTime dateEtHeureActuelles,
@@ -39,9 +32,7 @@ public class Service {
                    String numeroProfessionnel,
                    double fraisService,
                    String commentaires) {
-		
-		
-		
+
 		this.nomService = nomService;
 		this.dateEtHeureActuelles = dateEtHeureActuelles;
 		this.dateDebutService = dateDebutService;
@@ -54,12 +45,10 @@ public class Service {
 		this.commentaires = commentaires;
 		
 		Seance seance = new Seance(recurrenceHebdo, this.codeService, numeroProfessionnel, this);
-		this.seances = new HashMap<String, Seance>();
+		this.seances = new HashMap<>();
 		this.seances.put(seance.getCodeSeance(), seance);		
 	}
 
-	public String getDateActuelleString() { return Verificateurs.localDateTimeFormatter.format(dateEtHeureActuelles);}
-	
 	public LocalDate getDateDebutService() { return dateDebutService; }
 
 	public LocalDate getDateFinService() { return dateFinService; }
@@ -77,10 +66,7 @@ public class Service {
 	}
 	
 	public List<Seance> obtenirListeSeances() {
-		return seances
-				.values()
-				.stream()
-				.collect(Collectors.toList());
+		return new ArrayList<>(seances.values());
 	}
 
 	public String getNomService() { return nomService; }

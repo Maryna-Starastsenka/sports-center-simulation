@@ -1,6 +1,6 @@
 package main.vue;
 
-import main.controleur.Verificateurs;
+import main.controleur.Helper;
 import java.util.Arrays;
 
 public class VueApplicationMobile extends VuePlateforme {
@@ -30,7 +30,7 @@ public class VueApplicationMobile extends VuePlateforme {
         if (reponse.equals("3")) System.exit(0);
 
         afficher("Entrez l'adresse courriel pour vous connecter.");
-        String adresseCourriel = acquisitionReponse(Verificateurs::courrielValide);
+        String adresseCourriel = acquisitionReponse(Helper::courrielValide);
 
         switch (reponse) {
             case "1" -> vueMembre.seConnecterApp(adresseCourriel);

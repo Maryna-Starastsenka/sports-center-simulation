@@ -2,12 +2,12 @@ package main.vue;
 
 import main.controleur.ControleurClient;
 import main.controleur.ControleurService;
-import main.controleur.Verificateurs;
+import main.controleur.Helper;
 import main.modele.TypeClient;
 import java.util.Arrays;
 import java.util.Collections;
 
-import static main.controleur.Verificateurs.*;
+import static main.controleur.Helper.*;
 import static main.modele.Champs.*;
 
 public class VueService extends Vue {
@@ -99,31 +99,31 @@ public class VueService extends Vue {
             }
             case "2" -> {
                 afficher("Veuillez entrer la nouvelle date de début du service (jj-mm-aaaa) :");
-                String dateDebutService = acquisitionReponse(Verificateurs::dateValide);
+                String dateDebutService = acquisitionReponse(Helper::dateValide);
                 controleurService.mettreServiceAJour(idSeance, DATE_DEBUT_SERVICE, dateDebutService);
                 afficher(String.format("%s du service %s modifié.", DATE_DEBUT_SERVICE.name(), idSeance));
             }
             case "3" -> {
                 afficher("Veuillez entrer la nouvelle date de fin du service (jj-mm-aaaa) :");
-                String dateFinService = acquisitionReponse(Verificateurs::dateValide);
+                String dateFinService = acquisitionReponse(Helper::dateValide);
                 controleurService.mettreServiceAJour(idSeance, DATE_FIN_SERVICE, dateFinService);
                 afficher(String.format("%s du service %s modifié.", DATE_FIN_SERVICE.name(), idSeance));
             }
             case "4" -> {
                 afficher("Veuillez entrer la nouvelle heure du service (hh:mm) :");
-                String heureService = acquisitionReponse(Verificateurs::horaireValide);
+                String heureService = acquisitionReponse(Helper::horaireValide);
                 controleurService.mettreServiceAJour(idSeance, HEURE_SERVICE, heureService);
                 afficher(String.format("%s du service %s modifié.", HEURE_SERVICE.name(), idSeance));
             }
             case "5" -> {
                 afficher("Veuillez entrée la nouvelle journée (ex : \"mercredi\") : ");
-                String recurrenceHebdo = acquisitionReponse(Verificateurs::jourSemaineValide);
+                String recurrenceHebdo = acquisitionReponse(Helper::jourSemaineValide);
                 controleurService.mettreServiceAJour(idSeance, RECURRENCE_HEBDO_SERVICE, recurrenceHebdo);
                 afficher(String.format("%s du service %s modifié.", RECURRENCE_HEBDO_SERVICE.name(), idSeance));
             }
             case "6" -> {
                 afficher("Veuillez entrer la nouvelle capacité maximale (1-30) :");
-                String capaciteMaximale = acquisitionReponse((String s) -> Verificateurs.intValide(s)
+                String capaciteMaximale = acquisitionReponse((String s) -> Helper.intValide(s)
                         && getIntFromString(s) >= 1
                         && getIntFromString(s) <= 30);
                 controleurService.mettreServiceAJour(idSeance, CAPACITE_MAX_SERVICE, capaciteMaximale);
@@ -131,7 +131,7 @@ public class VueService extends Vue {
             }
             case "7" -> {
                 afficher("Veuillez entrer les frais du service (XXX.XX) :");
-                String fraisService = acquisitionReponse(Verificateurs::fraisServiceValide);
+                String fraisService = acquisitionReponse(Helper::fraisServiceValide);
                 controleurService.mettreServiceAJour(idSeance, FRAIS_SERVICE, fraisService);
                 afficher(String.format("%s du service %s modifié.", FRAIS_SERVICE.name(), idSeance));
             }
@@ -162,29 +162,29 @@ public class VueService extends Vue {
         if (nomService.equals("0")) return;
 
         afficher("Veuillez entrer la date de début du service (jj-mm-aaaa) :");
-        String dateDebutService = acquisitionReponse(Verificateurs::dateValide);
+        String dateDebutService = acquisitionReponse(Helper::dateValide);
         if (dateDebutService.equals("0")) return;
 
         afficher("Veuillez entrer la date de fin du service (jj-mm-aaaa) :");
-        String dateFinService = acquisitionReponse(Verificateurs::dateValide);
+        String dateFinService = acquisitionReponse(Helper::dateValide);
         if (dateFinService.equals("0")) return;
 
         afficher("Veuillez entrer l'heure du service (hh:mm) :");
-        String heureService = acquisitionReponse(Verificateurs::horaireValide);
+        String heureService = acquisitionReponse(Helper::horaireValide);
         if (heureService.equals("0")) return;
 
         afficher("Veuillez entrer la récurrence hebdomadaire (ex : entrez \"mercredi\") :");
-        String recurrenceHebdo = acquisitionReponse(Verificateurs::jourSemaineValide);
+        String recurrenceHebdo = acquisitionReponse(Helper::jourSemaineValide);
         if (recurrenceHebdo.equals("0")) return;
 
         afficher("Veuillez entrer la capacité maximale (1-30) :");
-        String capaciteMaximale = acquisitionReponse((String s) -> Verificateurs.intValide(s)
+        String capaciteMaximale = acquisitionReponse((String s) -> Helper.intValide(s)
                 && getIntFromString(s) >= 1
                 && getIntFromString(s) <= 30);
         if (capaciteMaximale.equals("0")) return;
 
         afficher("Veuillez entrer les frais du service (XXX.XX) :");
-        String fraisService = acquisitionReponse(Verificateurs::fraisServiceValide);
+        String fraisService = acquisitionReponse(Helper::fraisServiceValide);
         if (fraisService.equals("0")) return;
 
         afficher("Veuillez entrer les commentaires (ENTREE pour passer) :");
@@ -275,7 +275,7 @@ public class VueService extends Vue {
 
     public String validerTypeClient() {
     	afficher("Veuillez entrer le numéro du membre ou scanner le code QR :");
-        String idMembre = acquisitionReponse(Verificateurs::identifiantClientValide);
+        String idMembre = acquisitionReponse(Helper::identifiantClientValide);
 
         TypeClient typeClient = ControleurClient.verifierTypeClient(TypeClient.MEMBRE, idMembre);
         switch (typeClient) {
@@ -295,11 +295,11 @@ public class VueService extends Vue {
     }
     
     public String validerIdSeance() {
-    	afficher("Références des séances disponibles aujourd'hui, le " + Verificateurs.today() + " :");
-        afficher(controleurService.obtenirToutesLesSeancesDuJourEnString(Verificateurs.today()));
+    	afficher("Références des séances disponibles aujourd'hui, le " + Helper.today() + " :");
+        afficher(controleurService.obtenirToutesLesSeancesDuJourEnString(Helper.today()));
 
         afficher("Veuillez entrer le numéro de séance ou entrer 0 pour revenir au menu principal :");
-        return acquisitionReponse(controleurService.obtenirListeIdSeancesDuJour(Verificateurs.today()));
+        return acquisitionReponse(controleurService.obtenirListeIdSeancesDuJour(Helper.today()));
     }
     
     public void confirmationPresence() {

@@ -1,14 +1,14 @@
 package main.vue;
 
 import main.controleur.ControleurClient;
-import main.controleur.Verificateurs;
+import main.controleur.Helper;
 import main.modele.TypeClient;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Objects;
 
 import static main.modele.Champs.*;
-import static main.controleur.Verificateurs.*;
+import static main.controleur.Helper.*;
 
 public abstract class VueClient extends Vue {
 
@@ -57,7 +57,7 @@ public abstract class VueClient extends Vue {
         nom = acquisitionReponse();
 
         afficher("Veuillez entrer la date de naissance (jj-mm-aaaa):");
-        dateNaissanceString = acquisitionReponse(Verificateurs::dateValide);
+        dateNaissanceString = acquisitionReponse(Helper::dateValide);
 
         afficher("Veuillez entrer l'adresse :");
         adresse = acquisitionReponse();
@@ -69,13 +69,13 @@ public abstract class VueClient extends Vue {
         province = acquisitionReponse();
         
         afficher("Veuillez entrer le code postal (XXXXXX) :");
-        codePostal = acquisitionReponse(Verificateurs::codePostalValide).toUpperCase();
+        codePostal = acquisitionReponse(Helper::codePostalValide).toUpperCase();
 
         afficher("Veuillez entrer le numéro de téléphone (XXX-XXX-XXXX):");
-        numeroTelephone = acquisitionReponse(Verificateurs::telephoneValide);
+        numeroTelephone = acquisitionReponse(Helper::telephoneValide);
 
         afficher("Veuillez entrer l'adresse courriel (xxx@xxx.xxx) :");
-        adresseCourriel = acquisitionReponse(Verificateurs::courrielValide);
+        adresseCourriel = acquisitionReponse(Helper::courrielValide);
         
         TypeClient typeClient = getTypeClientPrecis();
 
@@ -167,49 +167,49 @@ public abstract class VueClient extends Vue {
         switch (Objects.requireNonNull(action)) {
             case "1" -> {
                 afficher(String.format("Veuillez entrer le nouveau nom du %s.", clientString));
-                String nom = acquisitionReponse(Verificateurs::nomValide);
+                String nom = acquisitionReponse(Helper::nomValide);
                 controleurClient.mettreClientAJour(typeClient, idClient, NOM_CLIENT, nom);
                 afficher(String.format("%s du %s %s modifié.", NOM_CLIENT.name(), clientString, idClient));
             }
             case "2" -> {
                 afficher(String.format("Veuillez entrer la nouvelle date de naissance du %s (jj-mm-aaaa).", clientString));
-                String date = acquisitionReponse(Verificateurs::dateValide);
+                String date = acquisitionReponse(Helper::dateValide);
                 controleurClient.mettreClientAJour(typeClient, idClient, DATE_NAISSANCE_CLIENT, date);
                 afficher(String.format("%s du %s %s modifié.", DATE_NAISSANCE_CLIENT.name(), clientString, idClient));
             }
             case "3" -> {
                 afficher(String.format("Veuillez entrer la nouvelle adresse courriel du %s (xxx@xxx.xxx).", clientString));
-                String adresseCourriel = acquisitionReponse(Verificateurs::courrielValide);
+                String adresseCourriel = acquisitionReponse(Helper::courrielValide);
                 controleurClient.mettreClientAJour(typeClient, idClient, ADRESSE_COURRIEL_CLIENT, adresseCourriel);
                 afficher(String.format("%s du %s %s modifié.", ADRESSE_COURRIEL_CLIENT.name(), clientString, idClient));
             }
             case "4" -> {
                 afficher(String.format("Veuillez entrer le nouveau numéro de téléphone du %s (xxx-xxx-xxxx).", clientString));
-                String numero = acquisitionReponse(Verificateurs::telephoneValide);
+                String numero = acquisitionReponse(Helper::telephoneValide);
                 controleurClient.mettreClientAJour(typeClient, idClient, TELEPHONE_CLIENT, numero);
                 afficher(String.format("%s du %s %s modifié.", TELEPHONE_CLIENT.name(), clientString, idClient));
             }
             case "5" -> {
                 afficher(String.format("Veuillez entrer la nouvelle adresse du %s.", clientString));
-                String adresse = acquisitionReponse(Verificateurs::adresseValide);
+                String adresse = acquisitionReponse(Helper::adresseValide);
                 controleurClient.mettreClientAJour(typeClient, idClient, ADRESSE_CLIENT, adresse);
                 afficher(String.format("%s du %s %s modifié.", ADRESSE_CLIENT.name(), clientString, idClient));
             }
             case "6" -> {
                 afficher(String.format("Veuillez entrer la nouvelle ville du %s.", clientString));
-                String ville = acquisitionReponse(Verificateurs::villeValide);
+                String ville = acquisitionReponse(Helper::villeValide);
                 controleurClient.mettreClientAJour(typeClient, idClient, VILLE_CLIENT, ville);
                 afficher(String.format("Ville du %s %s modifié.", clientString, idClient));
             }
             case "7" -> {
                 afficher(String.format("Veuillez entrer la nouvelle province du %s.", clientString));
-                String province = acquisitionReponse(Verificateurs::provinceValide);
+                String province = acquisitionReponse(Helper::provinceValide);
                 controleurClient.mettreClientAJour(typeClient, idClient, PROVINCE_CLIENT, province);
                 afficher(String.format("Province du %s %s modifié.", clientString, idClient));
             }
             case "8" -> {
                 afficher(String.format("Veuillez entrer le nouveau code postal du %s.", clientString));
-                String codePostal = acquisitionReponse(Verificateurs::codePostalValide);
+                String codePostal = acquisitionReponse(Helper::codePostalValide);
                 controleurClient.mettreClientAJour(typeClient, idClient, CODEPOSTAL_CLIENT, codePostal);
                 afficher(String.format("Code postal du %s %s modifié.", clientString, idClient));
             }
@@ -227,7 +227,7 @@ public abstract class VueClient extends Vue {
 
     public void verifierTypeClient() {
         afficher(String.format("Entrez l'identifiant du %s (9 chiffres) :", clientString));
-        String reponse = acquisitionReponse(Verificateurs::identifiantClientValide);
+        String reponse = acquisitionReponse(Helper::identifiantClientValide);
         String typeClientVerifie = String.valueOf(ControleurClient.verifierTypeClient(typeClient, reponse));
 
         switch (typeClientVerifie) {

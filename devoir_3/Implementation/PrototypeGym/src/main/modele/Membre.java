@@ -1,15 +1,13 @@
 package main.modele;
 
 import java.time.LocalDate;
-import java.util.HashMap;
 
 public class Membre extends Client {
 
 	private boolean aPaye;
-	private HashMap<String, Inscription> inscriptions;
 
-	public Membre(String nom, LocalDate dateNaissance, String adresse, String ville, String province, String codePostal, String numeroPhone, String adresseCourriel,
-				  boolean aPaye) {
+	public Membre(String nom, LocalDate dateNaissance, String adresse, String ville, String province, String codePostal,
+				  String numeroPhone, String adresseCourriel, boolean aPaye) {
 		this.nom = nom;
 		this.dateNaissance = dateNaissance;
 		this.adresse = adresse;
@@ -21,7 +19,7 @@ public class Membre extends Client {
 		this.aPaye = aPaye;
 	}
 
-	public boolean getAPaye() {return aPaye; }
+	public boolean getAPaye() { return aPaye; }
 
 	public void setAPaye(boolean aPaye) { this.aPaye = aPaye; }
 

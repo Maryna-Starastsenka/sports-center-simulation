@@ -1,9 +1,6 @@
 package main.modele;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import main.controleur.Verificateurs;
 
 public class ProfessionnelTef extends Tef {
  
@@ -14,7 +11,7 @@ public class ProfessionnelTef extends Tef {
     public ProfessionnelTef(String nom, String numero, String adresse, String ville, String province, String codePostal, int nombreServices) {
         super(nom, numero, adresse, ville, province, codePostal);
         this.nombreServices = nombreServices;
-        this.listInscription = new ArrayList<Inscription>();
+        this.listInscription = new ArrayList<>();
     }
 
     public double getMontant() {
@@ -40,17 +37,17 @@ public class ProfessionnelTef extends Tef {
     
     @Override
     public String toString() {
-    	String print = super.toString();
+    	StringBuilder print = new StringBuilder(super.toString());
     	if(this.listInscription!=null) {
     		for(Inscription i : this.listInscription) {
-    			print += "Date séance" + i.getDateSeanceString() + "\n";
-    			print += "Date inscriptions" + i.getDateEtHeureActuelleString() + "\n";
-    			print += "Nom du membre" + i.getNomMembre() + "\n";
-    			print += "Numéro du membre" + i.getNumeroMembre() + "\n";
-    			print += "Code de la séance" + i.getCodeSeance() + "\n";
-    			print += "Montant à payer" + i.getMontant() + "\n";
+    			print.append("Date séance").append(i.getDateSeanceString()).append("\n");
+    			print.append("Date inscriptions").append(i.getDateEtHeureActuelleString()).append("\n");
+    			print.append("Nom du membre").append(i.getNomMembre()).append("\n");
+    			print.append("Numéro du membre").append(i.getNumeroMembre()).append("\n");
+    			print.append("Code de la séance").append(i.getCodeSeance()).append("\n");
+    			print.append("Montant à payer").append(i.getMontant()).append("\n");
     		}
     	}
-    	return print;
+    	return print.toString();
     }
 }

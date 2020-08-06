@@ -1,7 +1,6 @@
 package main.modele;
 
-import main.controleur.Verificateurs;
-
+import main.controleur.Helper;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -54,17 +53,17 @@ public abstract class Client {
 
 	@Override
 	public int hashCode() {
-		return Math.abs(Objects.hash(this.adresseCourriel) % 1000000000); // 9 chiffres max
-	}
-	
-	public static int hashCode(String adresseCourriel) {
-		return Math.abs(Objects.hash(adresseCourriel) % 1000000000); // 9 chiffres max
+		return hashCode(adresseCourriel);
 	}
 
 	public String getHashInString() {
 		return String.format("%09d", this.hashCode());
 	}
-	
+
+	public static int hashCode(String adresseCourriel) {
+		return Math.abs(Objects.hash(adresseCourriel) % 1000000000); // 9 chiffres max
+	}
+
 	public static String getHashInString(String adresseCourriel) {
 		return String.format("%09d", hashCode(adresseCourriel));
 	}
@@ -72,7 +71,7 @@ public abstract class Client {
 	@Override
 	public String toString() {
 		return "Nom : " + this.getNom() + "\n" + "Date de naissance : "
-				+ Verificateurs.localDateFormatter.format(this.getDateNaissance())+ "\n" + "Adresse courriel : " + this.getAdresseCourriel() + "\n"
+				+ Helper.localDateFormatter.format(this.getDateNaissance())+ "\n" + "Adresse courriel : " + this.getAdresseCourriel() + "\n"
 				+ "Numéro de téléphone : " + this.getNumeroPhone() + "\n" + "Adresse : " + this.getAdresse() + "\n"+ "Ville : " + this.getVille() + "\n"+
 				"Province : " + this.getProvince() + "\n" + "Code postal : " + this.getCodePostal() + "\n";
 	}

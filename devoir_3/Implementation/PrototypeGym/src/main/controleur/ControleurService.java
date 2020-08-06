@@ -7,7 +7,7 @@ import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.List;
 
-import static main.controleur.Verificateurs.getIntFromString;
+import static main.controleur.Helper.getIntFromString;
 
 public class ControleurService extends Controleur {
 
@@ -27,10 +27,10 @@ public class ControleurService extends Controleur {
 							 String fraisServiceString,
 							 String commentaires) {
 
-		LocalDateTime dateEtHeureActuelles = Verificateurs.now();
-		LocalDate dateDebutService = LocalDate.from(Verificateurs.localDateFormatter.parse(dateDebutServiceString));
-		LocalDate dateFinService = LocalDate.from(Verificateurs.localDateFormatter.parse(dateFinServiceString));
-		LocalTime heureService = LocalTime.from(Verificateurs.localTimeFormatter.parse(heureServiceString));
+		LocalDateTime dateEtHeureActuelles = Helper.now();
+		LocalDate dateDebutService = LocalDate.from(Helper.localDateFormatter.parse(dateDebutServiceString));
+		LocalDate dateFinService = LocalDate.from(Helper.localDateFormatter.parse(dateFinServiceString));
+		LocalTime heureService = LocalTime.from(Helper.localTimeFormatter.parse(heureServiceString));
 		Jour recurrenceHebdo = Jour.valueOf(recurrenceHebdoString.toUpperCase());
 		int capaciteMaximale = getIntFromString(capaciteMaximaleString);
 		double fraisService = Double.parseDouble(fraisServiceString);
@@ -40,7 +40,7 @@ public class ControleurService extends Controleur {
 				dateDebutService,
 				dateFinService,
 				heureService,
-				centreDonneesServices.getDayOfWeek(recurrenceHebdo),
+				Helper.getDayOfWeek(recurrenceHebdo),
 				capaciteMaximale,
 				numeroProfessionnel,
 				fraisService,
@@ -75,7 +75,7 @@ public class ControleurService extends Controleur {
 					.append(" (service de ")
 					.append(centreDonneesServices.getService(s.getCodeService()).getNomService())
 					.append(") : le ")
-					.append(Verificateurs.localDateFormatter.format(s.getDate()))
+					.append(Helper.localDateFormatter.format(s.getDate()))
 					.append("\n");
 		}
 		return concatenation.toString();

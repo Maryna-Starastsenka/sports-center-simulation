@@ -1,7 +1,7 @@
 package main.modele;
 
 public interface ICentreDonnees<T> {
-    T creer(T client);
+    void creer(T client);
     T lire(String id);
     void mettreAJour(String id, Champs champs, String valeur);
     void supprimer(String id);

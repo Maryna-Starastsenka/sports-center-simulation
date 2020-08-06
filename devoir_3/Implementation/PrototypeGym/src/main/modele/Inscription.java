@@ -1,6 +1,6 @@
 package main.modele;
 
-import main.controleur.Verificateurs;
+import main.controleur.Helper;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -18,8 +18,9 @@ public class Inscription {
 	private double montant;
 	private String nomMembre;
 
-	public Inscription(LocalDateTime dateEtHeureActuelles, LocalDate dateSeance, String numeroProfessionnel, String numeroMembre,
-					   String nomMembre, String codeService, String commentaires, String codeSeance, double montant) {
+	public Inscription(LocalDateTime dateEtHeureActuelles, LocalDate dateSeance, String numeroProfessionnel,
+					   String numeroMembre, String nomMembre, String codeService, String commentaires,
+					   String codeSeance, double montant) {
 		this.dateEtHeureActuelles = dateEtHeureActuelles;
 		this.dateSeance = dateSeance;
 		this.numeroProfessionnel = numeroProfessionnel;
@@ -64,7 +65,7 @@ public class Inscription {
 	}
 
 	public String getDateEtHeureActuelleString() {
-		return Verificateurs.localDateTimeFormatter.format(dateEtHeureActuelles);
+		return Helper.localDateTimeFormatter.format(dateEtHeureActuelles);
 	}
 
 	@Override
@@ -82,7 +83,7 @@ public class Inscription {
 	}
 
 	public String getDateSeanceString() {
-		return Verificateurs.localDateFormatter.format(dateSeance);
+		return Helper.localDateFormatter.format(dateSeance);
 	}
 
 	@Override

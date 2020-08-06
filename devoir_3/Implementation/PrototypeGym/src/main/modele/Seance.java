@@ -1,16 +1,13 @@
 package main.modele;
 
-import main.controleur.Verificateurs;
-
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
-import java.util.HashMap;
 import java.util.Objects;
 
 public class Seance {
 	private DayOfWeek recurrence;
-	private LocalDate date;
+	private final LocalDate date;
 	private String codeService;
 	private Service service;
 	private String codeProfessionnel;
@@ -42,30 +39,17 @@ public class Seance {
 	public Service getService() {
 		return service;
 	}
-	
-	public String dateString() {
-		return Verificateurs.localDateFormatter.format(date);
-	}
 
 	public String getRecurrenceString() {
-		switch (recurrence) {
-		case MONDAY:
-			return Jour.LUNDI.toString();
-		case TUESDAY:
-			return Jour.MARDI.toString();
-		case WEDNESDAY:
-			return Jour.MERCREDI.toString();
-		case THURSDAY:
-			return Jour.JEUDI.toString();
-		case FRIDAY:
-			return Jour.VENDREDI.toString();
-		case SATURDAY:
-			return Jour.SAMEDI.toString();
-		case SUNDAY:
-			return Jour.DIMANCHE.toString();
-		default:
-			return null;
-		}
+		return switch (recurrence) {
+			case MONDAY -> Jour.LUNDI.toString();
+			case TUESDAY -> Jour.MARDI.toString();
+			case WEDNESDAY -> Jour.MERCREDI.toString();
+			case THURSDAY -> Jour.JEUDI.toString();
+			case FRIDAY -> Jour.VENDREDI.toString();
+			case SATURDAY -> Jour.SAMEDI.toString();
+			case SUNDAY -> Jour.DIMANCHE.toString();
+		};
 	}
 
 	public String getCodeService() {

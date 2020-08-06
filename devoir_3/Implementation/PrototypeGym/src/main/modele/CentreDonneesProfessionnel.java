@@ -1,10 +1,10 @@
 package main.modele;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static main.controleur.Verificateurs.getDateFromString;
+import static main.controleur.Helper.getDateFromString;
 
 public class CentreDonneesProfessionnel implements ICentreDonnees<Professionnel> {
     private HashMap<String, Professionnel> listeProfessionnels;
@@ -16,9 +16,8 @@ public class CentreDonneesProfessionnel implements ICentreDonnees<Professionnel>
     }
 
     @Override
-    public Professionnel creer(Professionnel professionnel) {
+    public void creer(Professionnel professionnel) {
         ajouterClient(professionnel);
-        return professionnel;
     }
 
     @Override
@@ -41,33 +40,19 @@ public class CentreDonneesProfessionnel implements ICentreDonnees<Professionnel>
         Professionnel professionnel = lire(idProfessionnel);
 
         switch (champsClient) {
-            case NOM_CLIENT:
-                professionnel.setNom(valeur);
-                break;
-            case DATE_NAISSANCE_CLIENT:
-                professionnel.setDateNaissance(getDateFromString(valeur));
-                break;
-            case ADRESSE_COURRIEL_CLIENT:
-                //String ancienneAdresse = professionnel.getAdresseCourriel();
+            case NOM_CLIENT -> professionnel.setNom(valeur);
+            case DATE_NAISSANCE_CLIENT -> professionnel.setDateNaissance(getDateFromString(valeur));
+            case ADRESSE_COURRIEL_CLIENT -> {
                 String ancienneAdresse = professionnel.getAdresseCourriel();
                 professionnel.setAdresseCourriel(valeur);
                 listeAdressesProfessionnels.remove(ancienneAdresse);
                 listeAdressesProfessionnels.put(valeur, idProfessionnel);
-                break;
-            case TELEPHONE_CLIENT:
-                professionnel.setNumeroPhone(valeur);
-                break;
-            case ADRESSE_CLIENT:
-                professionnel.setAdresse(valeur);
-                break;
-            case VILLE_CLIENT:
-                professionnel.setVille(valeur);
-                break;
-            case PROVINCE_CLIENT:
-                professionnel.setProvince(valeur);
-                break;
-            case CODEPOSTAL_CLIENT:
-                professionnel.setCodePostal(valeur);
+            }
+            case TELEPHONE_CLIENT -> professionnel.setNumeroPhone(valeur);
+            case ADRESSE_CLIENT -> professionnel.setAdresse(valeur);
+            case VILLE_CLIENT -> professionnel.setVille(valeur);
+            case PROVINCE_CLIENT -> professionnel.setProvince(valeur);
+            case CODEPOSTAL_CLIENT -> professionnel.setCodePostal(valeur);
         }
     }
 
@@ -88,7 +73,7 @@ public class CentreDonneesProfessionnel implements ICentreDonnees<Professionnel>
     }
 
     public List<Client> getClients() {
-        return listeProfessionnels.values().stream().collect(Collectors.toList());
+        return new ArrayList<>(listeProfessionnels.values());
     }
 
     public HashMap<String, Professionnel> getListeProfessionnels() {

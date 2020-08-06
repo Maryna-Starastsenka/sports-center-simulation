@@ -1,19 +1,15 @@
 package main.modele;
 
-import jdk.jshell.spi.ExecutionControl;
-import main.controleur.ControleurClient;
-
+import main.controleur.Helper;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static main.controleur.Verificateurs.*;
+import static main.controleur.Helper.*;
 
 public class CentreDonneesServices implements ICentreDonnees {
 
@@ -58,13 +54,13 @@ public class CentreDonneesServices implements ICentreDonnees {
 		return listeSeances.get(idSeance).getCodeService();
 	}
 	
-	public void supprimerService(String serviceEntre) {
-        listeServices.remove(serviceEntre);
+	public void supprimerService(String serviceId) {
+        listeServices.remove(serviceId);
     }
 	
 	public void mettreAJourSeances() {
 		List<Service> services = this.getServices();
-		HashMap<String, Seance> nouvelleListe = new HashMap<String, Seance>();
+		HashMap<String, Seance> nouvelleListe = new HashMap<>();
 		for(Service service : services) {
 			List<Seance> seances = service.obtenirListeSeances();
 			for(Seance seance : seances) {
@@ -188,17 +184,12 @@ public class CentreDonneesServices implements ICentreDonnees {
 				ProfessionnelTef proTef = new ProfessionnelTef(pro.getNom(), idProfessionnel, pro.getAdresse(), pro.getVille(),
 						pro.getProvince(), pro.getCodePostal(), getListeServicesPro(idProfessionnel).size());
 				professionnelsAPayer.put(pro.getHashInString(), proTef);
-				professionnelsAPayer.get(pro.getHashInString()).ajouterInscription(i);
-			} else {
-				professionnelsAPayer.get(pro.getHashInString()).ajouterInscription(i);
 			}
+			professionnelsAPayer.get(pro.getHashInString()).ajouterInscription(i);
 
 		}
 		
-		listeProfessionnelsTef = professionnelsAPayer
-				.values()
-				.stream()
-				.collect(Collectors.toList());
+		listeProfessionnelsTef = new ArrayList<>(professionnelsAPayer.values());
 	}
 	
 	public void genererTefMembre(HashMap<String, Membre> listeMembres) {
@@ -215,17 +206,12 @@ public class CentreDonneesServices implements ICentreDonnees {
 				MembreTef membreTef = new MembreTef(membre.getNom(), idMembre, membre.getAdresse(), membre.getVille(),
 						membre.getProvince(), membre.getCodePostal());
 				membresPaye.put(membre.getHashInString(), membreTef);
-				membresPaye.get(membre.getHashInString()).ajouterInscription(i);
-			} else {
-				membresPaye.get(membre.getHashInString()).ajouterInscription(i);
 			}
+			membresPaye.get(membre.getHashInString()).ajouterInscription(i);
 
 		}
 		
-		listeMembresTef = membresPaye
-				.values()
-				.stream()
-				.collect(Collectors.toList());
+		listeMembresTef = new ArrayList<>(membresPaye.values());
 	}
 
 	public RapportSynthese genererRapportSynthese(HashMap<String, Professionnel> listeProfessionnels) {
@@ -239,12 +225,11 @@ public class CentreDonneesServices implements ICentreDonnees {
 	}
 
 	public List<Service> getServices() {
-		return listeServices.values().stream().collect(Collectors.toList());
+		return new ArrayList<>(listeServices.values());
 	}
 
 	@Override
-	public Object creer(Object client) {
-		return null;
+	public void creer(Object client) {
 	}
 
 	@Override
@@ -267,44 +252,32 @@ public class CentreDonneesServices implements ICentreDonnees {
 		Service service = lireSeance(idSeance).getService();
 
 		switch (champsService) {
-			case NOM_SERVICE:
+			case NOM_SERVICE -> {
 				String idService = service.getCode();
 				service.setNomService(valeur);
 				listeServices.remove(idService);
 				listeServices.put(service.getCode(), service);
 				mettreAJourSeances();
-				break;
-			case DATE_DEBUT_SERVICE:
-				service.setDateDebutService(getDateFromString(valeur));
-				break;
-			case DATE_FIN_SERVICE:
-				service.setDateFinService(getDateFromString(valeur));
-				break;
-			case HEURE_SERVICE:
-				service.setHeureService(getHeureFromString(valeur));
-				break;
-			case RECURRENCE_HEBDO_SERVICE:
-				listeSeances.get(idSeance).setRecurrence(getDayOfWeek(getJourFromString(valeur)));
+			}
+			case DATE_DEBUT_SERVICE -> service.setDateDebutService(getDateFromString(valeur));
+			case DATE_FIN_SERVICE -> service.setDateFinService(getDateFromString(valeur));
+			case HEURE_SERVICE -> service.setHeureService(getHeureFromString(valeur));
+			case RECURRENCE_HEBDO_SERVICE -> {
+				listeSeances.get(idSeance).setRecurrence(Helper.getDayOfWeek(getJourFromString(valeur)));
 				mettreAJourSeances();
-				break;
-			case CAPACITE_MAX_SERVICE:
-				service.setCapaciteMax(getIntFromString(valeur));
-				break;
-			case FRAIS_SERVICE:
-				service.setFrais(getDoubleFromString(valeur));
-				break;
-			case COMMENTAIRE_SERVICE:
-				service.setCommentaires(valeur);
-				break;
+			}
+			case CAPACITE_MAX_SERVICE -> service.setCapaciteMax(getIntFromString(valeur));
+			case FRAIS_SERVICE -> service.setFrais(getDoubleFromString(valeur));
+			case COMMENTAIRE_SERVICE -> service.setCommentaires(valeur);
 		}
 	}
 
 	@Override
-	public void supprimer(String id) { 
-		Seance seance = listeSeances.get(id);
+	public void supprimer(String seanceId) {
+		Seance seance = listeSeances.get(seanceId);
 		Service service = listeServices.get(seance.getCodeService());
-		listeSeances.remove(id); 
-		service.enleverSeance(id);
+		listeSeances.remove(seanceId);
+		service.enleverSeance(seanceId);
 		if(service.obtenirListeSeances().size()==0)
 			listeServices.remove(service.getCode());
 		}
@@ -314,27 +287,10 @@ public class CentreDonneesServices implements ICentreDonnees {
 
 	}
 
-	public List<Client> getClients() throws ExecutionControl.NotImplementedException {
-		throw new ExecutionControl.NotImplementedException("not implemented");
-	}
-
 	public Inscription getInscription(String inscriptionId) {
 		if (listeInscriptions.containsKey(inscriptionId)) {
 			return listeInscriptions.get(inscriptionId);
 		}
 		return null;
 	}
-	
-	public DayOfWeek getDayOfWeek(Jour jour) {
-		return switch (jour) {
-			case LUNDI -> DayOfWeek.MONDAY;
-			case MARDI -> DayOfWeek.TUESDAY;
-			case MERCREDI -> DayOfWeek.WEDNESDAY;
-			case JEUDI -> DayOfWeek.THURSDAY;
-			case VENDREDI -> DayOfWeek.FRIDAY;
-			case SAMEDI -> DayOfWeek.SATURDAY;
-			case DIMANCHE -> DayOfWeek.SUNDAY;
-		};
-	}
-	
 }

@@ -1,19 +1,16 @@
 package main.modele;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
-import main.controleur.Verificateurs;
-
+import main.controleur.Helper;
 
 public abstract class Tef {
-    private String nom;
-    private String numero;
-    private String adresse;
-    private String ville;
-    private String province;
-    private String codePostal;
-
+    private final String nom;
+    private final String numero;
+    private final String adresse;
+    private final String ville;
+    private final String province;
+    private final String codePostal;
 
     public Tef(String nom, String numero, String adresse, String ville, String province, String codePostal) {
         this.nom = nom;
@@ -22,7 +19,6 @@ public abstract class Tef {
         this.ville = ville;
         this.province = province;
         this.codePostal = codePostal;
-
     }
 
     public String getNom() {
@@ -48,18 +44,14 @@ public abstract class Tef {
     public String getCodePostal() {
         return codePostal;
     }
-    
-    
+
     @Override
     public String toString() {
-    	String print = "Nom : " + this.nom + "\n";
-    	print += "Date de facturation : " + Verificateurs.localDateTimeFormatter.format(LocalDateTime.now());
-    	print += "Numéro : " + this.numero + "\n";
-    	print += "Adresse : " + this.adresse + "\n";
-    	print += "Ville : " + this.ville + "\n";
-    	print += "Province : " + this.province + "\n";
-    	print += "Code postal : " + this.codePostal + "\n";
-    	return print;
+        return "Nom : " + this.nom + "\n" +
+                ("Date de facturation : " + Helper.localDateTimeFormatter.format(LocalDateTime.now())) +
+                ("Numéro : " + this.numero + "\n") +
+                ("Adresse : " + this.adresse + "\n") + ("Ville : " + this.ville + "\n") +
+                ("Province : " + this.province + "\n") + ("Code postal : " + this.codePostal + "\n");
     }
 
 }

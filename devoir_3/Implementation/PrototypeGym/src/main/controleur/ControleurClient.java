@@ -24,7 +24,7 @@ public class ControleurClient extends Controleur {
 							String ville,
 							String province,
 							String codePostal) {
-		LocalDate dateNaissance = Verificateurs.getDateFromString(dateNaissanceString);
+		LocalDate dateNaissance = Helper.getDateFromString(dateNaissanceString);
 		switch (typeClient) {
 			case MEMBRE_VALIDE, MEMBRE_SUSPENDU -> {
 				Membre membre = new Membre(nom, dateNaissance, adresse, ville, province, codePostal, numeroTelephone,

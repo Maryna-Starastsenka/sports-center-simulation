@@ -1,10 +1,9 @@
 package main.modele;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RapportSynthese {
-    private List<ProfessionnelTef> proTef = new ArrayList<>();
+    private List<ProfessionnelTef> proTef;
     private int nombreTotalProfessionnels;
     private int nombreTotalServices;
     private double totalFrais;
@@ -37,18 +36,18 @@ public class RapportSynthese {
     
     @Override
     public String toString() {
-    	String print = "Rapport de synthèse \n";
-    	print += "Liste des professionnels à payer : \n";
+    	StringBuilder print = new StringBuilder("Rapport de synthèse \n");
+    	print.append("Liste des professionnels à payer : \n");
     	for(ProfessionnelTef pro : proTef) {
-    		print += String.format("-%s (%s) doit recevoir %.2f$ pour les %s services qu'il a donnés cette semaine.",
+    		print.append(String.format("-%s (%s) doit recevoir %.2f$ pour les %s services qu'il a donnés cette semaine.",
                     pro.getNom(),
                     pro.getNumero(),
                     pro.getMontant(),
-                    pro.getNombreServices()) + "\n";
+                    pro.getNombreServices())).append("\n");
     	}
-    	print += "\n* Nombre total de professionnels à payer : " + nombreTotalProfessionnels;
-        print += "\n* Nombre total de services : " + nombreTotalServices;
-        print += "\n* Nombre total des frais à payer : " + totalFrais + "$ \n";
-    	return print;
+    	print.append("\n* Nombre total de professionnels à payer : ").append(nombreTotalProfessionnels);
+        print.append("\n* Nombre total de services : ").append(nombreTotalServices);
+        print.append("\n* Nombre total des frais à payer : ").append(totalFrais).append("$ \n");
+    	return print.toString();
     }
 }
