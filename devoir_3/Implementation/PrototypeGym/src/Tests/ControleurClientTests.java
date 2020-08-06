@@ -165,7 +165,7 @@ class ControleurClientTests {
 		String province = "Saint-John";
 		String codePostal = "T8T8T8";
 		
-		Client client = controleurClient.lireClient(idClient);
+		Client client = controleurClient.lireMembre(idClient);
 
 		controleurClient.mettreClientAJour(typeClient, idClient, Champs.NOM_CLIENT, nom);
 		assertTrue(client.getNom().equals(nom), "Test mettre a jour nom échoué");
@@ -198,48 +198,68 @@ class ControleurClientTests {
 		String nouvelleAdresse = "salut@gmail.com";
 		
 		controleurClient.mettreClientAJour(typeClient, idClient, Champs.ADRESSE_COURRIEL_CLIENT, nouvelleAdresse);
-		assertEquals(nouvelleAdresse, controleurClient.lireClient(idClient).getAdresseCourriel(), "Test mettre a jour adresse courriel. Nouveau client non ajouté.");
+		assertEquals(nouvelleAdresse, controleurClient.lireMembre(idClient).getAdresseCourriel(), "Test mettre a jour adresse courriel. Nouveau client non ajouté.");
 		assertNotNull(controleurClient.getIdDepuisAdresse(nouvelleAdresse), "Test mettre a jour, nouveau courriel pas ajouté");
 		assertNull(controleurClient.getIdDepuisAdresse("John@doe.com"), "Test mettre a jour, ancien courriel non supprimé");
 		
 		idClient = Client.getHashInString("salut@gmail.com");
-		assertNull(controleurClient.lireClient(idClient), "Test mettre a jour adresse courriel. Client créer en double.");
+		assertNull(controleurClient.lireMembre(idClient), "Test mettre a jour adresse courriel. Client créer en double.");
 
 		
 	}
 
 	@Test
 	void testSupprimerClient() {
-		TypeClient typeClient = TypeClient.MEMBRE;
-		String idClient = controleurClient.getIdDepuisAdresse("John@doe.com");
+		//Test supprimer un membre
+		TypeClient typeMembre = TypeClient.MEMBRE;
+		String idMembre = controleurClient.getIdDepuisAdresse("John@doe.com");
 		
-		assertNotNull(controleurClient.lireClient(idClient),"Test supprimer : client n'existe pas.");
-		controleurClient.supprimerClient(typeClient, idClient);
-		assertNull(controleurClient.lireClient(idClient),"Test supprimer client échoué");
+		assertNotNull(controleurClient.lireMembre(idMembre),"Test supprimer membre : client n'existe pas.");
+		controleurClient.supprimerClient(typeMembre, idMembre);
+		assertNull(controleurClient.lireMembre(idMembre),"Test supprimer membre échoué");
+		
+		
+		//Test supprimer un professionnel
+		TypeClient typeProfessionnel = TypeClient.PROFESSIONNEL;
+		String idProfessionnel = controleurClient.getIdDepuisAdresse("Jean@udem.com");
+		
+		assertNotNull(controleurClient.lireProfessionnel(idProfessionnel),"Test supprimer professionnel : client n'existe pas.");
+		controleurClient.supprimerClient(typeProfessionnel, idProfessionnel);
+		assertNull(controleurClient.lireProfessionnel(idProfessionnel),"Test supprimer professionnel échoué");
 	}
 	
 	@Test
 	void testVerifierTypeClient() {
-		String idClient = Client.getHashInString("John@doe.com");
-		TypeClient typeClient = ControleurClient.verifierTypeClient(TypeClient.MEMBRE,idClient);
-		assertEquals(TypeClient.MEMBRE_VALIDE, typeClient,"Test vérifier type vrai échoué");
-		assertFalse(typeClient.equals(TypeClient.MEMBRE_SUSPENDU),"Test vérifier type faux échoué");
+		//Vérifier qu'un membre est valide
+		String idMembre = Client.getHashInString("John@doe.com");
+		TypeClient typeClient = ControleurClient.verifierTypeClient(TypeClient.MEMBRE,idMembre);
+		assertEquals(TypeClient.MEMBRE_VALIDE, typeClient,"Test échoué :  vérifier qu'une membre valide est validé");
+		assertFalse(typeClient.equals(TypeClient.MEMBRE_SUSPENDU),"Test échoué : vérifier qu'un membre valide n'est pas suspendu");
+		
+		//Vérifier qu'un membre est suspendu
+		String idSuspendu = Client.getHashInString("gmail@gmail.com");
+		TypeClient typeClient2 = ControleurClient.verifierTypeClient(TypeClient.MEMBRE,idSuspendu);
+		assertEquals(TypeClient.MEMBRE_SUSPENDU, typeClient2,"Test échoué : vérifier qu'un membre suspendu n'a pas accès");
+		assertFalse(typeClient2.equals(TypeClient.MEMBRE_VALIDE),"Test échoué : vérifier qu'un membre suspendu n'est pas valide");
+		
 
-		String idClient2 = Client.getHashInString("Jean@udem.com");
-		TypeClient typeClient2 = ControleurClient.verifierTypeClient(TypeClient.PROFESSIONNEL,idClient2);
-		assertEquals(TypeClient.PROFESSIONNEL_VALIDE, typeClient2,"Test vérifier type professionnel échoué");
+		//Vérifier qu'un professionnel est valide
+		String idProfessionnel = Client.getHashInString("Jean@udem.com");
+		TypeClient typeClient3 = ControleurClient.verifierTypeClient(TypeClient.PROFESSIONNEL,idProfessionnel);
+		assertEquals(TypeClient.PROFESSIONNEL_VALIDE, typeClient3,"Test échoué : vérifier un professionnel");
 	}
 	
 	@Test
 	void testModifierStatutMembre() {
 		String idMembre1 = controleurClient.getIdDepuisAdresse("John@doe.com");
-		Membre membre1 = (Membre) controleurClient.lireClient(idMembre1);
+		Membre membre1 = (Membre) controleurClient.lireMembre(idMembre1);
 		String idMembre2 = controleurClient.getIdDepuisAdresse("gmail@gmail.com");
-		Membre membre2 = (Membre) controleurClient.lireClient(idMembre2);
+		Membre membre2 = (Membre) controleurClient.lireMembre(idMembre2);
 		HashMap<String, Boolean> listeModifs = new HashMap<String, Boolean>();
 		listeModifs.put(idMembre1, false);
 		listeModifs.put(idMembre2, true);
 		
+		//On s'assure qu'on change bien le statut des membres en passant la HashMap de booléen
         assertTrue(membre1.getAPaye(),"Test membre 1 devrait être vrai");
 		assertFalse(membre2.getAPaye(),"Test membre 2 devrait être faux");
 		controleurClient.modifierStatutMembre(listeModifs);

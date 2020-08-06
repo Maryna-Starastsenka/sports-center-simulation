@@ -50,7 +50,7 @@ public class VueMembre extends VueClient {
         String idMembre = ControleurClient.seConnecterApp(typeClient, adresseCourriel);
         if (idMembre != null) {
             afficher("Bienvenue au #GYM");
-            Client client = controleurClient.lireClient(idMembre);
+            Client client = controleurClient.lireMembre(idMembre);
             afficher("Nom du membre : " + client.getNom());
             afficher("Numéro du membre : " + idMembre);
             afficher("code QR");

@@ -194,12 +194,21 @@ public class ControleurClient extends Controleur {
 	}
 
 	/**
-	 * Demande au Centre de données de retourné le client qui a le numéro unique spécifié
-	 * @param idClient numéro unique du client
-	 * @return client recherché
+	 * Demande au Centre de données de retourné le membre qui a le numéro unique spécifié
+	 * @param idMembre numéro unique du membre
+	 * @return membre recherché
 	 */
-	public Client lireClient(String idClient) {
-		return centreDonneesMembre.lire(idClient);
+	public Client lireMembre(String idMembre) {
+		return centreDonneesMembre.lire(idMembre);
+	}
+	
+	/**
+	 * Demande au Centre de données de retourné le professionnel qui a le numéro unique spécifié
+	 * @param idProfessionnel numéro unique du professionnel
+	 * @return professionnel recherché
+	 */
+	public Client lireProfessionnel(String idProfessionnel) {
+		return centreDonneesProfessionnel.lire(idProfessionnel);
 	}
 
 	/**
