@@ -291,5 +291,13 @@ public class ControleurService extends Controleur {
 		Service service = centreDonneesServices.lire(idService);
 		return service.getNomService();
 	}
+	
+	public List<Service> obtenirListeServices(){
+		return centreDonneesServices.getListeServices();
+	}
+	
+	public List<Seance> obtenirListeSeances(){
+		return centreDonneesServices.getListeSeances();
+	}
 
 }
