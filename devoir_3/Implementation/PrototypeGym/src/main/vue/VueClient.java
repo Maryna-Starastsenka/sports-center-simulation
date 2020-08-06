@@ -10,6 +10,11 @@ import java.util.Objects;
 import static main.modele.Champs.*;
 import static main.controleur.Helper.*;
 
+/**
+ * Classe abstraite Vue Client hérite la classe Vue. Permet d'afficher les options du menu de gestion d'un client.
+ * @author Maryna Starastsenka
+ * @author Alex Defoy
+ */
 public abstract class VueClient extends Vue {
 
     protected String clientString = "Client";
@@ -17,6 +22,10 @@ public abstract class VueClient extends Vue {
     ControleurClient controleurClient;
     protected VueService vueService;
 
+    /**
+     * Retourne le type de client
+     * @return type de client
+     */
     public abstract TypeClient getTypeClientPrecis();
 
     protected void enTeteGestionCompte() {
@@ -25,6 +34,9 @@ public abstract class VueClient extends Vue {
         afficher(String.format("------Gestion d'un compte %s------", clientString));
     }
 
+    /**
+     * Affiche le menu pour la gestion d'un compte du client
+     */
     protected void gestionCompte() {
         enTeteGestionCompte();
 
@@ -40,6 +52,9 @@ public abstract class VueClient extends Vue {
         }
     }
 
+    /**
+     * Affiche le formulaire de nouveau compte et demande au contrôleur de créer un nouveau client
+     */
     public void creerClient() {
         String nom;
         String dateNaissanceString;
@@ -95,6 +110,9 @@ public abstract class VueClient extends Vue {
         }
     }
 
+    /**
+     * Affiche le menu qui permet de gérer un compte existant
+     */
     public void gererCompteExistant() {
         enTeteGestionCompte();
 
@@ -120,6 +138,10 @@ public abstract class VueClient extends Vue {
         }
     }
 
+    /**
+     * Affiche le menu de suppression de compte et fait un appel au contrôleur pour supprimer le compte
+     * @param idClient numéro unique du client (membre ou professionnel) à supprimer
+     */
     private void supprimerClient(String idClient) {
         afficher("1. Valider suppression.");
         afficher("0. Retour au menu principal.");
@@ -132,6 +154,10 @@ public abstract class VueClient extends Vue {
         }
     }
 
+    /**
+     * Affiche le menu de mise à jour d'un compte et demande au contrôleur de modifier le compte
+     * @param idClient numéro unique du client (membre ou professionnel) à modifier
+     */
     public void mettreAJourClient(String idClient) {
     	enTeteGestionCompte();
 
@@ -216,6 +242,10 @@ public abstract class VueClient extends Vue {
         }
     }
 
+    /**
+     * Demande au contrôleur de vérifier l'adresse courriel du client quand il veut se connecter à l'application modile
+     * @param adresseCourriel adresse courriel du client (membre ou professionnel)
+     */
     public void seConnecterApp(String adresseCourriel) {
         String idClient = ControleurClient.seConnecterApp(typeClient, adresseCourriel);
         if (idClient != null) {
@@ -225,6 +255,9 @@ public abstract class VueClient extends Vue {
         }
     }
 
+    /**
+     * Demande au contrôleur de vérifier le type de client quand il veut accèder à la salle de sport
+     */
     public void verifierTypeClient() {
         afficher(String.format("Entrez l'identifiant du %s (9 chiffres) :", clientString));
         String reponse = acquisitionReponse(Helper::identifiantClientValide);

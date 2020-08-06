@@ -2,12 +2,21 @@ package main.vue;
 
 import java.util.Arrays;
 
+/**
+ * Classe Vue Agent hérite la classe Vue Plateforme. Permet d'afficher les options du menu
+ * disponibles pour l'agent.
+ * @author Maryna Starastsenka
+ * @author Alex Defoy
+ */
 public class VueAgent extends VuePlateforme {
     private final VueAdministration vueAdministration;
     private final VueMembre vueMembre;
     private final VueProfessionnel vueProfessionnel;
     private final VueService vueService;
 
+    /**
+     * Constructeur de VueAgent
+     */
     public VueAgent() {
         this.vueAdministration = new VueAdministration();
         this.vueMembre = new VueMembre();
@@ -45,6 +54,9 @@ public class VueAgent extends VuePlateforme {
         retourMenuPrincipal();
     }
 
+    /**
+     * Affiche le menu de gestion d'un compte
+     */
     public void gestionCompte() {
         effacerEcran();
 

@@ -5,12 +5,23 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Classe abstraite de la vue
+ * @author Maryna Starastsenka
+ * @author Alex Defoy
+ */
 public abstract class Vue {
 
+    /**
+     * Contructeur de Vue
+     */
     public Vue() {
 
     }
 
+    /**
+     * Efface l'écran dans la console
+     */
     public static void effacerEcran() {
         try {
             if (System.getProperty("os.name").contains("Windows")) {
@@ -26,16 +37,29 @@ public abstract class Vue {
         } catch (IOException | InterruptedException ignored) {}
     }
 
+    /**
+     * Affiche l'information dans la console
+     * @param information information à afficher dans la console
+     */
     public static void afficher(String information) {
         System.out.println(information);
     }
 
+    /**
+     * Prend la ligne dans la console
+     * @return information saisie dans la console
+     */
     public static String getTexteConsole() {
         System.out.print("> ");
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
 
+    /**
+     * Lit la console tant que la condition n'est pas respectée
+     * @param verificateur condition de la validation d'information
+     * @return information saisie dans la console qui respecte la condition
+     */
     public static String acquisitionReponse(IVerificateur verificateur) {
         String reponse;
         do {
@@ -44,6 +68,13 @@ public abstract class Vue {
         return reponse;
     }
 
+    /**
+     * Lit la console tant que la condition n'est pas respectée et affiche le message d'erreur si
+     * l'information est invalide
+     * @param verificateur condition de la validation d'information
+     * @param messageErreur message d'erreur pour signaler que l'information saisie n'est pas valide
+     * @return information saisie dans la console qui respecte la condition
+     */
     public static String acquisitionReponse(IVerificateur verificateur, String messageErreur) {
         String reponse = null;
         do {
@@ -55,6 +86,10 @@ public abstract class Vue {
         return reponse;
     }
 
+    /**
+     * Lit la console tant que l'entrée n'est pas saisie
+     * @return information saisie dans la console
+     */
     public static String acquisitionReponse() {
         String reponse;
         do {
@@ -63,6 +98,11 @@ public abstract class Vue {
         return reponse;
     }
 
+    /**
+     * Lit la console tant que la réponse ne correspond pas à la liste des réponses proposées
+     * @param jeuDeReponses liste des réponses possibles
+     * @return reponse saisie dans la console
+     */
     public static String acquisitionReponse(List<String> jeuDeReponses) {
         String reponse;
         do {

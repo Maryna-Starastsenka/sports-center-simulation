@@ -4,6 +4,11 @@ import java.util.Arrays;
 import main.controleur.ControleurClient;
 import main.modele.TypeClient;
 
+/**
+ * Classe Vue Professionnel hérite la classe Vue Client. Permet d'afficher les options du menu de gestion d'un professionnel.
+ * @author Maryna Starastsenka
+ * @author Alex Defoy
+ */
 public class VueProfessionnel extends VueClient {
 	
     public VueProfessionnel() {
@@ -17,7 +22,7 @@ public class VueProfessionnel extends VueClient {
     public TypeClient getTypeClientPrecis() {
         return TypeClient.PROFESSIONNEL;
     }
-    
+
     public void seConnecterApp(String adresseCourriel) {
         String idProfessionnel = ControleurClient.seConnecterApp(typeClient, adresseCourriel);
         if (idProfessionnel != null) {
@@ -28,7 +33,11 @@ public class VueProfessionnel extends VueClient {
             afficher("L'adresse courriel renseignée n'est pas valide");
         }
     }
-    
+
+    /**
+     * Affiche le menu de confirmation de présence effectuée par un professionnel
+     * @param idSeance code de la séance
+     */
     public void confirmerPresences(String idSeance) {
     	afficher("------Voulez-vous confirmer une présence?------");
         afficher("1. Confirmer présence");

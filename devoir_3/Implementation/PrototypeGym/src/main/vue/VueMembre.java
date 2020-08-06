@@ -5,8 +5,16 @@ import main.modele.Client;
 import main.modele.TypeClient;
 import java.util.Arrays;
 
+/**
+ * Classe Vue Membre hérite la classe Vue Client. Permet d'afficher les options du menu de gestion d'un membre.
+ * @author Maryna Starastsenka
+ * @author Alex Defoy
+ */
 public class VueMembre extends VueClient {
 
+    /**
+     * Constructeur de VueMembre
+     */
     public VueMembre() {
         clientString = "Membre";
         typeClient = TypeClient.MEMBRE;
@@ -14,6 +22,10 @@ public class VueMembre extends VueClient {
         vueService = new VueService();
     }
 
+    /**
+     * Retourne le type de client
+     * @return type de client "membre valide" s'il a payé les frais d'adhésion. sinon, type de client "membre suspendu"
+     */
     @Override
     public TypeClient getTypeClientPrecis() {
         afficher("Inscrivez-vous un membre qui a payé les frais d'adhésion ?");
@@ -45,7 +57,11 @@ public class VueMembre extends VueClient {
             afficher("L'adresse courriel renseignée n'est pas valide");
         }
     }
-    
+
+    /**
+     * Fait un appel à la méthode qui affiche le menu d'inscription aux séance si le membre confirme son choix
+     * @param idMembre numéro unique du membre
+     */
     public void inscriptionApp(String idMembre) {
     	afficher("------Voulez-vous inscrire à une séance?------");
     	afficher("1. Inscription séance");

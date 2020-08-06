@@ -10,20 +10,35 @@ import java.util.Collections;
 import static main.controleur.Helper.*;
 import static main.modele.Champs.*;
 
+/**
+ * Classe Vue Service hérite la classe Vue. Permet d'afficher les options du menu de gestion des services,
+ * des séances, des inscriptions, des confirmations de la présence.
+ * @author Maryna Starastsenka
+ * @author Alex Defoy
+ */
 public class VueService extends Vue {
 
     ControleurService controleurService;
 
+    /**
+     * Controleur de VueService
+     */
     public VueService() {
         this.controleurService = new ControleurService();
     }
 
+    /**
+     * Affiche le message si la gestion d'un service est chosie
+     */
     protected void enTeteGestionService() {
         effacerEcran();
 
         afficher("------Gestion d'un service------");
     }
 
+    /**
+     * Affiche les options disponobles pour la gestion d'un service
+     */
     protected void gestionService() {
         enTeteGestionService();
 
@@ -46,6 +61,10 @@ public class VueService extends Vue {
         }
     }
 
+    /**
+     * Affiche les options disponobles pour la gestion d'un service existant
+     * @param idProfessionnel numéro unique du professionnel qui veut modifier ou supprimer ses séances
+     */
     private void gererServiceExistant(String idProfessionnel) {
         enTeteGestionService();
 
@@ -70,6 +89,11 @@ public class VueService extends Vue {
         }
     }
 
+    /**
+     * Affiche les options disponobles pour la modification de la séance existante fait un appel au contrôleur
+     * pour mettre à jour la séance
+     * @param idSeance code de la séance à modifier
+     */
     private void mettreAJourService(String idSeance) {
         enTeteGestionService();
 
@@ -144,6 +168,10 @@ public class VueService extends Vue {
         }
     }
 
+    /**
+     * Affiche le menu de suppression de la séance existante et fait un appel au contrôleur pour supprimer la séance
+     * @param idSeance code de la séance à supprimer
+     */
     private void supprimerService(String idSeance) {
         afficher("1. Valider suppression.");
         afficher("0. Retour au menu principal.");
@@ -156,6 +184,10 @@ public class VueService extends Vue {
         }
     }
 
+    /**
+     * Affiche le menu qui permet de créer un nouveau service
+     * @param idProfessionnel numéro unique du professionnel que créer un nouveau service
+     */
     public void creerService(String idProfessionnel) {
         Vue.afficher("Veuillez entrer le nom du service :");
         String nomService = acquisitionReponse();
@@ -203,12 +235,20 @@ public class VueService extends Vue {
         Vue.afficher("Service créé");
     }
 
+    /**
+     * Fait un appel de la méthode pour l'inscription à la séance si le numéro du membre
+     * est valide et non supendu
+     */
     public void inscriptionSeance() {
     	String membreId = validerTypeClient();
     	if(membreId==null) { return;}
     	inscriptionSeance(membreId);
     }
 
+    /**
+     * Affiche le menu qui permet aux membre de s'inscrire aux séances disponible ce jour-ci
+     * @param membreId numéro unique du membre
+     */
     public void inscriptionSeance(String membreId) {
         effacerEcran();
         afficher("---Inscription à une séance---");
@@ -248,6 +288,10 @@ public class VueService extends Vue {
         }
     }
 
+    /**
+     * Fait un appel de la méthode qui affiche les séances et les inscriptions à la séance du professionnel
+     * si le numéro du professionnel saisie dans la console est valide
+     */
     public void consultationSeance() {
         effacerEcran();
         afficher("Veuillez entrer le numéro du professionnel ou entrez 0 pour revenir au menu principal.");
@@ -256,7 +300,12 @@ public class VueService extends Vue {
         if (idProfessionnel.equals("0")) return;
         afficherSeance(idProfessionnel);
     }
-    
+
+    /**
+     * Affiche les séances du professionnel et la liste des inscriptions à la séance choisie
+     * @param idProfessionnel numéro unique du professionnel
+     * @return liste des séances du professionnel
+     */
     public String afficherSeance(String idProfessionnel) {
         afficher("---Consultation d'une séance---");
 
@@ -273,6 +322,10 @@ public class VueService extends Vue {
         return idSeance;
     }
 
+    /**
+     * Affiche le menu qui permet de véfirie le statut du membre : membre valide, suspendu ou inconnu
+     * @return numéro du membre si le membre est valide. Sinon, retourne null
+     */
     public String validerTypeClient() {
     	afficher("Veuillez entrer le numéro du membre ou scanner le code QR :");
         String idMembre = acquisitionReponse(Helper::identifiantClientValide);
@@ -293,7 +346,12 @@ public class VueService extends Vue {
             }
         }
     }
-    
+
+    /**
+     * Affiche les séances auxquelles le membre peut s'inscrire et démande de vérifier que le numéro
+     * de la séance chosie est valide
+     * @return code de la séance à laquelle le membre veut s'inscrire
+     */
     public String validerIdSeance() {
     	afficher("Références des séances disponibles aujourd'hui, le " + Helper.today() + " :");
         afficher(controleurService.obtenirToutesLesSeancesDuJourEnString(Helper.today()));
@@ -301,7 +359,10 @@ public class VueService extends Vue {
         afficher("Veuillez entrer le numéro de séance ou entrer 0 pour revenir au menu principal :");
         return acquisitionReponse(controleurService.obtenirListeIdSeancesDuJour(Helper.today()));
     }
-    
+
+    /**
+     * Fait un appel de la méthode que confirme la présence si le code de la séance saisi est valide
+     */
     public void confirmationPresence() {
         afficher("---Confirmation de la présence---");
 
@@ -310,6 +371,10 @@ public class VueService extends Vue {
         confirmationPresence(idSeance);
     }
 
+    /**
+     * Affiche le menu qui permet de confirmer la présence du membre
+     * @param idSeance code de la séance à laquelle le membre est inscrit
+     */
     public void confirmationPresence(String idSeance) {
     	
     	String idMembre = validerTypeClient();
