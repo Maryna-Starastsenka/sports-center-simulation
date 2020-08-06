@@ -3,6 +3,11 @@ package main.modele;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * Classe ConfirmationPresence qui constitue un enregistrement de présence confirmée
+ * @author Maryna Starastsenka
+ * @author Alex Defoy
+ */
 public class ConfirmationPresence {
 
 	private LocalDateTime dateEtHeureActuelles;

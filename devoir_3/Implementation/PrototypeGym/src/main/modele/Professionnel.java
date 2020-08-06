@@ -1,8 +1,12 @@
 package main.modele;
 
 import java.time.LocalDate;
-import java.util.HashMap;
 
+/**
+ * Classe Professionnel qui hérite de Client. Un Professionnel est un client du #GYM qui fournit un service
+ * @author Maryna Starastsenka
+ * @author Alex Defoy
+ */
 public class Professionnel extends Client {
 
 	public Professionnel (String nom, LocalDate dateNaissance, String adresse, String ville, String province, String codePostal, String numeroPhone, String adresseCourriel) {

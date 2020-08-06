@@ -3,9 +3,13 @@ package main.modele;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import static main.controleur.Helper.getDateFromString;
 
+/**
+ * Classe CentreDonneesProfessionnel qui implémente ICentreDonnees<Professionnel>. Répertoire des professionnels
+ * @author Maryna Starastsenka
+ * @author Alex Defoy
+ */
 public class CentreDonneesProfessionnel implements ICentreDonnees<Professionnel> {
     private HashMap<String, Professionnel> listeProfessionnels;
     private HashMap<String, String> listeAdressesProfessionnels;

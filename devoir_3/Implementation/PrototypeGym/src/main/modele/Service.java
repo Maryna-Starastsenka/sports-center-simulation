@@ -9,6 +9,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Classe Service. Enregistrement des informations propres à un service
+ * @author Maryna Starastsenka
+ * @author Alex Defoy
+ */
 public class Service {
 	private String nomService;
 	private final LocalDateTime dateEtHeureActuelles;

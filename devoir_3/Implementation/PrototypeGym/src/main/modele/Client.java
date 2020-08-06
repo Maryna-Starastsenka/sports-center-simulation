@@ -4,6 +4,11 @@ import main.controleur.Helper;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * Classe abstraite Client dont héritent les membres et les professionnels
+ * @author Maryna Starastsenka
+ * @author Alex Defoy
+ */
 public abstract class Client {
 	protected String id;
 	protected String nom;

@@ -2,6 +2,12 @@ package main.modele;
 
 import java.util.List;
 
+/**
+ * Classe RapportSynthese. Permet la centralisation de l'information nécessaire
+ * à la génération d'un rapport de synthèse
+ * @author Maryna Starastsenka
+ * @author Alex Defoy
+ */
 public class RapportSynthese {
     private List<ProfessionnelTef> proTef;
     private int nombreTotalProfessionnels;

@@ -2,6 +2,11 @@ package main.modele;
 
 import java.util.ArrayList;
 
+/**
+ * Classe ProfessionnelTef qui hérite de Tef. TEF d'un professionnel
+ * @author Maryna Starastsenka
+ * @author Alex Defoy
+ */
 public class ProfessionnelTef extends Tef {
  
 	private double montant;

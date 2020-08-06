@@ -1,7 +1,7 @@
 package main.modele;
 
 /**
- * Interface de Cendre de Données
+ * Interface de Centre de Données qui permet la manipulation des données enregistrées
  * @author Maryna Starastsenka
  * @author Alex Defoy
  */

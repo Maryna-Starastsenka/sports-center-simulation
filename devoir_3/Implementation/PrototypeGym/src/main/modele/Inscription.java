@@ -1,11 +1,15 @@
 package main.modele;
 
 import main.controleur.Helper;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * Classe Inscription qui constitue un enregistrement d'une inscription
+ * @author Maryna Starastsenka
+ * @author Alex Defoy
+ */
 public class Inscription {
 
 	private LocalDateTime dateEtHeureActuelles;

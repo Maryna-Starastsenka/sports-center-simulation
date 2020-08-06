@@ -5,6 +5,11 @@ import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Objects;
 
+/**
+ * Classe Seance. Enregistrement des informations propres à une séance
+ * @author Maryna Starastsenka
+ * @author Alex Defoy
+ */
 public class Seance {
 	private DayOfWeek recurrence;
 	private final LocalDate date;
