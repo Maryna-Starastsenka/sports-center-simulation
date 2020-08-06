@@ -11,6 +11,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 import static main.controleur.Helper.*;
 
+/**
+ * Classe CentreDonneesServices qui implémente ICentreDonnees brut. Répertoire des services
+ * @author Maryna Starastsenka
+ * @author Alex Defoy
+ */
 public class CentreDonneesServices implements ICentreDonnees {
 
 	private HashMap<String, Service> listeServices;

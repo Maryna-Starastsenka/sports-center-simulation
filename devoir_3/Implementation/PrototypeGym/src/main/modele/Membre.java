@@ -2,6 +2,11 @@ package main.modele;
 
 import java.time.LocalDate;
 
+/**
+ * Classe Membre qui hérite de Client. Un membre est un usager du #GYM
+ * @author Maryna Starastsenka
+ * @author Alex Defoy
+ */
 public class Membre extends Client {
 
 	private boolean aPaye;

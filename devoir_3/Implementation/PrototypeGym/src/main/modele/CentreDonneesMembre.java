@@ -5,6 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import static main.controleur.Helper.getDateFromString;
 
+/**
+ * Classe CentreDonneesMembre qui implémente ICentreDonnees<Membre>. Répertoire des membres
+ * @author Maryna Starastsenka
+ * @author Alex Defoy
+ */
 public class CentreDonneesMembre implements ICentreDonnees<Membre> {
     private HashMap<String, Membre> listeMembres;
     private HashMap<String, String> listeAdressesMembres;

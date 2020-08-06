@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Classe Contôleur Client hérite la classe Contôleur. Gère le flux de données du modèle client (membre et
+ * Classe ControleurClient qui hérite de la classe Controleur. Gère le flux de données du modèle client (membre et
  * professionnel) et met à jour la vue lorsque les données changent
  * @author Maryna Starastsenka
  * @author Alex Defoy
@@ -17,7 +17,7 @@ public class ControleurClient extends Controleur {
 	private static CentreDonneesProfessionnel centreDonneesProfessionnel = new CentreDonneesProfessionnel();
 
 	/**
-	 * Constructeur de ControleurClient
+	 * Constructeur de ControleurClient qui instancie les centres de données (modèle)
 	 */
 	public ControleurClient() {
 		centreDonneesMembre = new CentreDonneesMembre();
@@ -25,16 +25,16 @@ public class ControleurClient extends Controleur {
 	}
 
 	/**
-	 * Instanciation du client
+	 * Instanciation du client et enregistrement dans le centre de données
 	 * @param typeClient tyde de client
-	 * @param nom nom de client
-	 * @param dateNaissanceString date de naissance de client
-	 * @param adresseCourriel adresse courriel de client
-	 * @param numeroTelephone numéro de téléphone de client
-	 * @param adresse adresse de client
-	 * @param ville ville
-	 * @param province province
-	 * @param codePostal code postal de client
+	 * @param nom nom du client
+	 * @param dateNaissanceString date de naissance du client
+	 * @param adresseCourriel adresse courriel du client
+	 * @param numeroTelephone numéro de téléphone du client
+	 * @param adresse adresse du client
+	 * @param ville ville du client
+	 * @param province province du client
+	 * @param codePostal code postal du client
 	 */
 	public void creerClient(TypeClient typeClient,
 							String nom,
@@ -92,7 +92,7 @@ public class ControleurClient extends Controleur {
 	 * Demande au Centre de données de retourner le client associé au numéro unique
 	 * @param typeClient type de client
 	 * @param idClient numéro unique du client
-	 * @return client possédant le numéro unique. si le client n'est pas retrouvé, retourne null.
+	 * @return client possédant un numéro unique d'identification. Si le client n'est pas retrouvé, retourne null.
 	 */
 	public static boolean authentifier(TypeClient typeClient, String idClient) {
 		Client client = null;
@@ -108,7 +108,7 @@ public class ControleurClient extends Controleur {
 	 * Demande au Centre de données de retourner le numéro unique du client assosié à son adresse courriel
 	 * @param typeClient tyde de client
 	 * @param adresseCourriel adresse courriel de client
-	 * @return numéro unique du client, si son adresse courriel est retrouvée. sinon, retourne null
+	 * @return numéro unique du client si son adresse courriel est retrouvée. Sinon, retourne null
 	 */
 	public static String seConnecterApp(TypeClient typeClient, String adresseCourriel) {
 		if (typeClient.equals(TypeClient.MEMBRE)) {
@@ -141,7 +141,7 @@ public class ControleurClient extends Controleur {
 		return TypeClient.CLIENT_INVALIDE;
 	}
 
-	/** Retourn le nom du client assisié à son numéro unique
+	/** Obtenir le nom du client associé à son numéro unique
 	 * @param idClient numéro unique du client
 	 * @return nom du client
 	 */
@@ -151,7 +151,7 @@ public class ControleurClient extends Controleur {
 	}
 
 	/**
-	 * Retourne l'inforamtion sur le client en utilisant son numéro unique
+	 * Obtenir de l'information sur le client en utilisant son numéro unique
 	 * @param typeClient type de client
 	 * @param idClient numéro unique du client
 	 * @return information sur le client
@@ -171,7 +171,7 @@ public class ControleurClient extends Controleur {
 	}
 
 	/**
-	 * Retourne la liste des clients existants selon le type de client
+	 * Obtenir la liste des clients existants selon leur type
 	 * @param typeClient type de client
 	 * @return liste des clients
 	 */
@@ -212,7 +212,7 @@ public class ControleurClient extends Controleur {
 	}
 
 	/**
-	 * Demande au Centre de données de retourné le numéro unique du client assosié à son adresse courriel
+	 * Demande au Centre de données de retourner le numéro unique du client assosié à son adresse courriel
 	 * @param adresseCourriel adresse courriel du client
 	 * @return numéro unique du client
 	 */
@@ -232,7 +232,7 @@ public class ControleurClient extends Controleur {
 	}
 
 	/** Demande de modifier le statut des membres (suspendu ou non) spécifiés dans la liste
-	 * @param listeValidations liste des membre avec le statut à modifier
+	 * @param listeValidations liste des membres avec le statut à modifier
 	 */
 	public void modifierStatutMembre(HashMap<String, Boolean> listeValidations) {
 		centreDonneesMembre.modifierStatutMembres(listeValidations);

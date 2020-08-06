@@ -1,5 +1,10 @@
 package main.modele;
 
+/**
+ * Enum des types de client généraux ou détaillés
+ * @author Maryna Starastsenka
+ * @author Alex Defoy
+ */
 public enum TypeClient {
     MEMBRE,
     PROFESSIONNEL,

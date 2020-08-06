@@ -1,9 +1,13 @@
 package main.modele;
 
 import java.time.LocalDateTime;
-
 import main.controleur.Helper;
 
+/**
+ * Classe abstraite Tef. Enregistrement des informations nécessaires au TEF
+ * @author Maryna Starastsenka
+ * @author Alex Defoy
+ */
 public abstract class Tef {
     private final String nom;
     private final String numero;

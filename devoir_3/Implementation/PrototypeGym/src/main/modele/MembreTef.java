@@ -2,9 +2,13 @@ package main.modele;
 
 import main.controleur.ControleurClient;
 import main.controleur.ControleurService;
-
 import java.util.ArrayList;
 
+/**
+ * Classe MembreTef qui hérite de Tef. TEF d'un membre
+ * @author Maryna Starastsenka
+ * @author Alex Defoy
+ */
 public class MembreTef extends Tef {
 
     private ArrayList<Inscription> listInscription;
@@ -24,8 +28,10 @@ public class MembreTef extends Tef {
     	if(this.listInscription!=null) {
     		for(Inscription i : this.listInscription) {
     			print.append("Date séance").append(i.getDateSeanceString()).append("\n");
-    			print.append("Nom du professionnel").append(ControleurClient.nomClient(i.getNumeroProfessionnel())).append("\n");
-    			print.append("Nom du service").append(ControleurService.nomService(i.getNumeroProfessionnel())).append("\n");
+    			print.append("Nom du professionnel")
+                        .append(ControleurClient.nomClient(i.getNumeroProfessionnel())).append("\n");
+    			print.append("Nom du service")
+                        .append(ControleurService.nomService(i.getNumeroProfessionnel())).append("\n");
     		}
     	}
     	return print.toString();

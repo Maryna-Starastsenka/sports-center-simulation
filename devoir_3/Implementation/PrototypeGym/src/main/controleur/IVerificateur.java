@@ -6,5 +6,10 @@ package main.controleur;
  * @author Alex Defoy
  */
 public interface IVerificateur {
+    /**
+     * Méthode de vérification dont la signature est utilisée pour valider les entrées
+     * @param s entrée
+     * @return vrai si l'entrée est valide
+     */
     boolean verifier(String s);
 }

@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.List;
-
 import static main.controleur.Helper.getIntFromString;
 
 /**
@@ -20,14 +19,14 @@ public class ControleurService extends Controleur {
 	protected static CentreDonneesServices centreDonneesServices = new CentreDonneesServices();
 
 	/**
-	 * Constructeur de ControleurService
+	 * Constructeur de ControleurService qui instancie le centre de données de services
 	 */
 	public ControleurService() {
 		ControleurService.centreDonneesServices = new CentreDonneesServices();
 	}
 
 	/**
-	 * Demande au Centre de données d'instancier le service
+	 * Demande au Centre de données de créer un nouveau service
 	 * @param nomService nom du service
 	 * @param dateDebutServiceString date de début du service
 	 * @param dateFinServiceString date de fin du service
@@ -91,32 +90,32 @@ public class ControleurService extends Controleur {
 	}
 
 	/**
-	 * Demande au Centre de données d'instancier l'inscription
+	 * Demande au Centre d'inscrire un membre à une séance
 	 * @param membreId numéro unique du membre
 	 * @param nomClient nom du client
 	 * @param seanceId code de la séance
 	 * @param commentaire commentaire
-	 * @return service instancié
+	 * @return id de l'inscription à la séance
 	 */
 	public String inscriptionSeance(String membreId, String nomClient, String seanceId, String commentaire) {
 		return centreDonneesServices.inscrireMembreASeance(membreId, nomClient, seanceId, commentaire).getHashInString();
 	}
 
 	/**
-	 * Demande au Centre de données d'instancier la confirmation de présence
+	 * Demande au Centre de données de confirmer la présence d'un membre à une séance
 	 * @param idSeance code de la séance
 	 * @param idMembre numéro unique du membre
 	 * @param commentaire commentaire
-	 * @return vrai si la confirmation de présence est crée. sinon, retourne faux
+	 * @return vrai si la confirmation de présence est créée. Sinon, retourne faux
 	 */
 	public boolean confirmerPresence(String idSeance, String idMembre, String commentaire) {
 		return centreDonneesServices.confirmationPresence(idSeance, idMembre, commentaire);
 	}
 
 	/**
-	 * Demande au Centre de données la liste des séances disponible ce jour-ci et la retourne en string
+	 * Demande au Centre de données la liste des séances disponibles ce jour-ci et la retourne en string
 	 * @param jour jour actuel
-	 * @return liste des séances disponible ce jour-ci en string
+	 * @return liste des séances disponibles ce jour-ci en string
 	 */
 	public String obtenirToutesLesSeancesDuJourEnString(LocalDate jour) {
 		var seances = centreDonneesServices.getListeSeances(jour);
@@ -134,9 +133,10 @@ public class ControleurService extends Controleur {
 	}
 
 	/**
-	 * Demande au Centre de données la liste des séances disponible ce jour-ci et retourne la liste des codes de la séance
-	 * @param jour jour actuel
-	 * @return liste des code des séances disponibles ce jour-ci
+	 * Demande au Centre de données la liste des séances disponibles le jour spécifié et retourne la liste
+	 * des codes de la séance
+	 * @param jour jour pour lequel on souhaite obtenir les séances
+	 * @return liste des code des séances disponibles le jour spécifié
 	 */
 	public List<String> obtenirListeIdSeancesDuJour(LocalDate jour) {
 		var listeSeances = centreDonneesServices.getListeSeances(jour);
@@ -197,7 +197,7 @@ public class ControleurService extends Controleur {
 	}
 
 	/**
-	 * Demande au Centre de données le service assicié au code de la séance et retourne ses frais
+	 * Demande au Centre de données le service associé au code de la séance et retourne ses frais
 	 * @param seanceId code de la séance
 	 * @return frais du service
 	 */
@@ -208,7 +208,7 @@ public class ControleurService extends Controleur {
 	}
 
 	/**
-	 * Demande au Centre de données la séance assiciée au code de la séance et retourne ses informations
+	 * Demande au Centre de données la séance associée au code de la séance et retourne ses informations
 	 * @param seanceId code de la séance
 	 * @return information sur la séance
 	 */
@@ -221,7 +221,7 @@ public class ControleurService extends Controleur {
 	}
 
 	/**
-	 * Demande au Centre de données l'inscription assiciée au code et retourne ses informations
+	 * Demande au Centre de données l'inscription associée au code et retourne ses informations
 	 * @param inscriptionId code de l'inscription
 	 * @return information sur l'inscription
 	 */
@@ -236,7 +236,7 @@ public class ControleurService extends Controleur {
 	}
 
 	/**
-	 * Demande au Centre de données la liste des inscription à la séance et la retourne en string
+	 * Demande au Centre de données la liste des inscriptions à la séance et la retourne en string
 	 * @param idSeance code de la séance
 	 * @return liste des inscriptions à la séance en string
 	 */
@@ -283,7 +283,7 @@ public class ControleurService extends Controleur {
 	}
 
 	/**
-	 * Retourne le nom du service
+	 * Obtenir le nom du service
 	 * @param idService code du service
 	 * @return nom du service
 	 */

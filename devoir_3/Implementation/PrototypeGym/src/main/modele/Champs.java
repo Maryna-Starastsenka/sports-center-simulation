@@ -1,5 +1,10 @@
 package main.modele;
 
+/**
+ * Enum des champs d'enregistrement des clients et services
+ * @author Maryna Starastsenka
+ * @author Alex Defoy
+ */
 public enum Champs {
     NOM_CLIENT,
     TELEPHONE_CLIENT,

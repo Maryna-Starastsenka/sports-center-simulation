@@ -6,5 +6,4 @@ package main.controleur;
  * @author Alex Defoy
  */
 public abstract class Controleur {
-
 }
