@@ -3,9 +3,8 @@ package main.vue;
 import main.controleur.Helper;
 import java.util.Arrays;
 
-
 /**
- * Classe Vue Application Mobile hérite la classe Vue Plateforme. Permet d'afficher les options du menu
+ * Classe Vue Application Mobile qui hérite de la classe Vue Plateforme. Permet d'afficher les options du menu
  * disponibles pour la simulation de l'application mobile.
  * @author Maryna Starastsenka
  * @author Alex Defoy

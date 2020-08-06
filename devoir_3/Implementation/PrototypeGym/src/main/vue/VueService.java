@@ -186,7 +186,7 @@ public class VueService extends Vue {
 
     /**
      * Affiche le menu qui permet de créer un nouveau service
-     * @param idProfessionnel numéro unique du professionnel que créer un nouveau service
+     * @param idProfessionnel numéro unique du professionnel qui crée un nouveau service
      */
     public void creerService(String idProfessionnel) {
         Vue.afficher("Veuillez entrer le nom du service :");
@@ -290,7 +290,7 @@ public class VueService extends Vue {
 
     /**
      * Fait un appel de la méthode qui affiche les séances et les inscriptions à la séance du professionnel
-     * si le numéro du professionnel saisie dans la console est valide
+     * si le numéro du professionnel saisi dans la console est valide
      */
     public void consultationSeance() {
         effacerEcran();
@@ -361,7 +361,7 @@ public class VueService extends Vue {
     }
 
     /**
-     * Fait un appel de la méthode que confirme la présence si le code de la séance saisi est valide
+     * Fait un appel de la méthode qui confirme la présence si le code de la séance saisi est valide
      */
     public void confirmationPresence() {
         afficher("---Confirmation de la présence---");

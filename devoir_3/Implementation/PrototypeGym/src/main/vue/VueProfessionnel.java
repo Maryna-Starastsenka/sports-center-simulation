@@ -5,17 +5,18 @@ import main.controleur.ControleurClient;
 import main.modele.TypeClient;
 
 /**
- * Classe Vue Professionnel hérite la classe Vue Client. Permet d'afficher les options du menu de gestion d'un professionnel.
+ * Classe VueProfessionnel hérite de la classe VueClient. Permet d'afficher les options du menu de gestion d'un professionnel.
  * @author Maryna Starastsenka
  * @author Alex Defoy
  */
 public class VueProfessionnel extends VueClient {
-	
+
+    /**
+     * Constructeur de VueProfessionnel qui définit le type de client à Professionnel
+     */
     public VueProfessionnel() {
         clientString = "Professionnel";
         typeClient = TypeClient.PROFESSIONNEL;
-        controleurClient = new ControleurClient();
-        vueService = new VueService();
     }
 
     @Override

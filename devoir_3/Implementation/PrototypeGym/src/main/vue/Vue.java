@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Classe abstraite de la vue
+ * Classe abstraite dont héritent toutes les vues
  * @author Maryna Starastsenka
  * @author Alex Defoy
  */
@@ -16,11 +16,11 @@ public abstract class Vue {
      * Contructeur de Vue
      */
     public Vue() {
-
     }
 
     /**
-     * Efface l'écran dans la console
+     * Efface l'écran dans la console en prenant en compte l'OS
+     * Dans Windows, on efface vraiment ce que contient la console alors que sur UNIX on scrolle la vue
      */
     public static void effacerEcran() {
         try {
@@ -38,16 +38,16 @@ public abstract class Vue {
     }
 
     /**
-     * Affiche l'information dans la console
-     * @param information information à afficher dans la console
+     * Affiche du texte dans la console en sautant une ligne à la fin
+     * @param information information/texte à afficher dans la console
      */
     public static void afficher(String information) {
         System.out.println(information);
     }
 
     /**
-     * Prend la ligne dans la console
-     * @return information saisie dans la console
+     * Indique à l'usager qu'on attend qu'il écrive quelque chose dans la console et récupération de son entrée
+     * @return information saisie dans la console quand l'usager appuie sur la touche ENTREE
      */
     public static String getTexteConsole() {
         System.out.print("> ");
@@ -57,7 +57,8 @@ public abstract class Vue {
 
     /**
      * Lit la console tant que la condition n'est pas respectée
-     * @param verificateur condition de la validation d'information
+     * et que l'usager ne souhaite pas revenir au menu principal (touche 0)
+     * @param verificateur condition de validation de l'information
      * @return information saisie dans la console qui respecte la condition
      */
     public static String acquisitionReponse(IVerificateur verificateur) {
@@ -69,8 +70,9 @@ public abstract class Vue {
     }
 
     /**
-     * Lit la console tant que la condition n'est pas respectée et affiche le message d'erreur si
-     * l'information est invalide
+     * Lit la console tant que la condition n'est pas respectée et que
+     * l'usager ne souhaite pas revenir au menu principal (touche 0)
+     * et affiche un message d'erreur tant que l'information est invalide
      * @param verificateur condition de la validation d'information
      * @param messageErreur message d'erreur pour signaler que l'information saisie n'est pas valide
      * @return information saisie dans la console qui respecte la condition
@@ -87,7 +89,7 @@ public abstract class Vue {
     }
 
     /**
-     * Lit la console tant que l'entrée n'est pas saisie
+     * Lit la console tant que l'entrée validée de l'utilisateur ne comporte pas au moins un caractère
      * @return information saisie dans la console
      */
     public static String acquisitionReponse() {
@@ -99,9 +101,10 @@ public abstract class Vue {
     }
 
     /**
-     * Lit la console tant que la réponse ne correspond pas à la liste des réponses proposées
-     * @param jeuDeReponses liste des réponses possibles
-     * @return reponse saisie dans la console
+     * Lit la console tant que la réponse ne correspond pas à la liste des réponses proposées et que l'usager
+     * ne souhaite pas revenir au menu principal (touche 0)
+     * @param jeuDeReponses liste des réponses acceptées
+     * @return réponse saisie dans la console
      */
     public static String acquisitionReponse(List<String> jeuDeReponses) {
         String reponse;
