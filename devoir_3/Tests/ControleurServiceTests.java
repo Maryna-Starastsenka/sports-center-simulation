@@ -1,13 +1,13 @@
 package Tests;
 
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.api.*;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 import main.controleur.*;
 import main.modele.*;
-
 
 class ControleurServiceTests {
 	
@@ -18,6 +18,7 @@ class ControleurServiceTests {
 	void initialisation() {
 		this.controleurService = new ControleurService();
 		this.controleurClient = new ControleurClient();
+
 		/*** MEMBRES ***/
 		controleurClient.creerClient(
         		TypeClient.MEMBRE_VALIDE, 
@@ -78,7 +79,7 @@ class ControleurServiceTests {
 				"18:20",
 				"lundi",
 				"20",
-				idProfessionel1,
+				idProfessionel2,
 				"100.00",
 				"Rien à signaler");
 
@@ -108,14 +109,14 @@ class ControleurServiceTests {
 				"Rien à signaler");
 		
 
-		List<String> listeSeances =  controleurService.obtenirListeSeancesDuProfessionnel(idProfessionel1);
+		List<String> listeSeances =  controleurService.obtenirListeSeancesDuProfessionnel(idProfessionel2);
 		controleurService.inscriptionSeance(idMembre1, controleurClient.nomClient(idMembre1), listeSeances.get(0), "J'ai hâte!");
-		
 	}
 
 	@Test
 	void testCreerService() {
 
+		//Création d'un nouveau service
 		String nomService = "danse";
 		String dateDebutServiceString = "01-08-2020";
 		String dateFinServiceString = "01-08-2021";
@@ -125,72 +126,122 @@ class ControleurServiceTests {
 		String numeroProfessionnel = "150337313";
 		String fraisServiceString = "050.50";
 		String commentaires = "non";
-
-
-		
 		Service service = controleurService.creerService(nomService, dateDebutServiceString, dateFinServiceString, heureServiceString, 
 				recurrenceHebdoString, capaciteMaximaleString, numeroProfessionnel, fraisServiceString, commentaires);
 
-		Seance seance = service.obtenirListeSeances().get(0);
+		//Vérifier qu'une séance a bien été ajoutée
+		List<Seance> seances = service.obtenirListeSeances();
+		Seance seance = null;
+		for(Seance s : seances) {
+			if (s.getRecurrence().equals(DayOfWeek.WEDNESDAY)&&s.getService().equals(service))
+				seance = s;
+		}
+		assertNotNull(seance, "Test échoué :  la séance n'est pas ajouté dans la liste de séances du service.");
+		
+		//Test que les informations du service concordent
 		String codeSeance = seance.getCodeSeance();
-
-		 
-		String infoService = "ID : " + codeSeance + "\n" +
-				"Nom de service : danse\n" +
-				"Date de début de service : 2020-08-01\n" +
-				"Date de fin de service : 2021-08-01\n" +
-				"Heure de service : 08:30\n" +
-				"Récurrence hebdomadaire : WEDNESDAY\n" +
-				"Capacité maximale : 25\n" +
-				"Numéro de professionnel : 150337313\n" +
-				"Frais de service : 50.5\n" +
-				"Commentaire : non\n";
-
-		assertEquals(controleurService.getInformationsService(codeSeance),infoService, "Test créer service échoué");
-
+		String infoService = "Numéro de séance : " + codeSeance + "\n" +
+			"Numéro de professionnel de séance : " + numeroProfessionnel + "\n" +
+			"Récurrence hebdomadaire : MERCREDI" + "\n" +
+			"Nom de service : danse" + "\n" +
+			"Date de début de service : 2020-08-01" + "\n" +
+			"Date de fin de service : 2021-08-01" + "\n" +
+			"Heure de service : 08:30" + "\n" +
+			"Capacité maximale : 25" + "\n" +
+			"Numéro de professionnel : " + numeroProfessionnel + "\n" +
+			"Frais de service : 50.5" + "\n" +
+			"Commentaire : non" + "\n";
+		assertEquals(infoService, controleurService.getInformationsService(codeSeance), "Test créer service, les informations ne sont pas bonnes.");
+		
+		//Test que deux séances pareils, mais avec deux différents professionnels ne devraient pas être pareils.
+		String numeroProfessionnel2 = "250337313";
+		Service service2 = controleurService.creerService(nomService, dateDebutServiceString, dateFinServiceString, heureServiceString, 
+				recurrenceHebdoString, capaciteMaximaleString, numeroProfessionnel2, fraisServiceString, commentaires);		
+		seances = service2.obtenirListeSeances();
+		Seance seance2 = null;
+		for(Seance s : seances) {
+			if (s.getRecurrence().equals(DayOfWeek.WEDNESDAY)&&s.getService().equals(service2))
+				seance2 = s;
+		}
+		assertNotEquals(seance.getCodeSeance(),seance2.getCodeSeance(),"Tests :  deux séances pareilles fait par deux professionnels différents ne devraient pas être pareilles");
+		
+		List<Seance> seancesCentreDonnees= controleurService.obtenirListeSeances();
+		assertTrue(seancesCentreDonnees.contains(seance),"Test échoué: la séance n'est pas ajoutée dans la liste de CentreDonneesService");
+		assertTrue(seancesCentreDonnees.contains(seance2),"Test échoué: la séance2 n'est pas ajoutée dans la liste de CentreDonneesService");
 	}
 
 	@Test
 	void testMettreServiceAJour() {
 
-		List<String> seancesId = controleurService.obtenirListeSeancesDuProfessionnel("150337313");
+		String idProfessionnel = "150337313";
+		List<String> seancesId = controleurService.obtenirListeSeancesDuProfessionnel(idProfessionnel);
 		Seance seance = controleurService.lireSeance(seancesId.get(0));
 		String idSeance = seance.getCodeSeance();
-
-		controleurService.mettreServiceAJour(idSeance, Champs.NOM_SERVICE, "Massage");
-		idSeance = seance.getCodeSeance();
-		controleurService.mettreServiceAJour(idSeance, Champs.DATE_DEBUT_SERVICE, "02-03-2020");
-		controleurService.mettreServiceAJour(idSeance, Champs.DATE_FIN_SERVICE, "03-03-2020");
-		controleurService.mettreServiceAJour(idSeance, Champs.HEURE_SERVICE, "09:15");
-		controleurService.mettreServiceAJour(idSeance, Champs.RECURRENCE_HEBDO_SERVICE, "Mardi");
-		 idSeance = seance.getCodeSeance();
-		controleurService.mettreServiceAJour(idSeance, Champs.CAPACITE_MAX_SERVICE, "30");
-		controleurService.mettreServiceAJour(idSeance, Champs.FRAIS_SERVICE, "60.00");
-		controleurService.mettreServiceAJour(idSeance, Champs.COMMENTAIRE_SERVICE, "Oui");
-
-		String infoService = "ID : "+seance.getCodeSeance() + "\n" +
-				"Nom de service : Massage\n" +
-				"Date de début de service : 2020-03-02\n" +
-				"Date de fin de service : 2020-03-03\n" +
-				"Heure de service : 09:15\n" +
-				"Récurrence hebdomadaire : TUESDAY\n" +
-				"Capacité maximale : 30\n" +
-				"Numéro de professionnel : 150337313\n" +
-				"Frais de service : 60.0\n" +
-				"Commentaire : Oui\n";
 		
-		assertEquals(controleurService.getInformationsService(idSeance),infoService, "Test modifier service échoué");
+		//Mise à jour du nom du service et de son code et du code de ses séances.
+		controleurService.mettreServiceAJour(idSeance, Champs.NOM_SERVICE, "Massage");
+		String idSeance2 = seance.getCodeSeance();
+		assertNotEquals(idSeance,idSeance2,"Test échoué : Le code de séance n'a pas été modifié après le changement de service.");
+		assertNull(controleurService.lireSeance(idSeance), "Test échoué :  ancienne séance pas supprimée.");
+		assertNotNull(controleurService.lireSeance(idSeance2), "Test échoué :  séance modifiée pas ajoutée.");
+
+		//Mise à jour de la récurrence d'une séance et modification du code de la séance.
+		controleurService.mettreServiceAJour(idSeance2, Champs.RECURRENCE_HEBDO_SERVICE, "Vendredi");
+		String idSeance3 = seance.getCodeSeance();
+		assertNotEquals(idSeance2,idSeance3,"Test échoué : Le code de séance n'a pas été modifié après le changement de récurrence.");
+		assertNull(controleurService.lireSeance(idSeance2), "Test échoué :  ancienne séance pas supprimée.");
+		assertNotNull(controleurService.lireSeance(idSeance3), "Test échoué :  séance modifiée pas ajoutée.");
+		
+		//Modifications des autres informations
+		controleurService.mettreServiceAJour(idSeance3, Champs.DATE_DEBUT_SERVICE, "02-03-2020");
+		controleurService.mettreServiceAJour(idSeance3, Champs.DATE_FIN_SERVICE, "03-03-2025");
+		controleurService.mettreServiceAJour(idSeance3, Champs.HEURE_SERVICE, "09:15");
+		controleurService.mettreServiceAJour(idSeance3, Champs.CAPACITE_MAX_SERVICE, "30");
+		controleurService.mettreServiceAJour(idSeance3, Champs.FRAIS_SERVICE, "60.00");
+		controleurService.mettreServiceAJour(idSeance3, Champs.COMMENTAIRE_SERVICE, "Oui");
+
+		//Vérification que toutes les informations correspondent
+		String infoService = "Numéro de séance : " + seance.getCodeSeance() + "\n" +
+		"Numéro de professionnel de séance : " + idProfessionnel + "\n" +
+		"Récurrence hebdomadaire : VENDREDI" + "\n" +
+		"Nom de service : Massage" + "\n" +
+		"Date de début de service : 2020-03-02" + "\n" +
+		"Date de fin de service : 2025-03-03" + "\n" +
+		"Heure de service : 09:15" + "\n" +
+		"Capacité maximale : 30" + "\n" +
+		"Numéro de professionnel : 150337313" + "\n" +
+		"Frais de service : 60.0" + "\n" +
+		"Commentaire : Oui" + "\n";
+		assertEquals(infoService, controleurService.getInformationsService(idSeance3), "Test échoué : les informations n'ont pas été bien modifiées.");
 	}
 
 	@Test
 	void testSupprimerService() {
-		List<String> seancesId = controleurService.obtenirListeSeancesDuProfessionnel("150337313");
-		Seance seance = controleurService.lireSeance(seancesId.get(0));
-		String idSeance = seance.getCodeSeance();
+		//Trouver un service qui a plus qu'une séance pour les tests
+		List<Service> services = controleurService.obtenirListeServices();
+		Service serviceASupprimer = null;
+		for(Service s : services) {
+			if(s.obtenirListeSeances().size()>1) {
+				serviceASupprimer = s;
+			}
+		}
+		assertNotNull(serviceASupprimer, "Aucun service avec plus d'une séance à tester");
 		
-		assertNotNull(controleurService.lireSeance(idSeance),"Test supprimer service. Service n'existe pas");
+		//Supprimer une séance du service sans supprimer le service
+		Seance seanceASupprimer = serviceASupprimer.obtenirListeSeances().get(0);
+		String idSeance = seanceASupprimer.getCodeSeance();
+		assertNotNull(controleurService.lireSeance(idSeance),"Test supprimer une séance. La séance n'existe pas.");
 		controleurService.supprimerService(idSeance);
-		assertNull(controleurService.lireSeance(idSeance),"Test supprimer service. Service pas supprimé.");
+		assertNull(controleurService.lireSeance(idSeance),"Test supprimer séance. La séance n'est pas supprimé.");
+		assertTrue(serviceASupprimer.obtenirListeSeances().size()==1, "Test échoué : le service ne devrait avoir plus qu'une séance.");
+		
+		//Supprimer la dernière séance devrait supprimer le service
+		seanceASupprimer = serviceASupprimer.obtenirListeSeances().get(0);
+		idSeance = seanceASupprimer.getCodeSeance();
+		controleurService.supprimerService(idSeance);
+		assertNull(controleurService.lireSeance(idSeance),"Test supprimer service. La dernière séance n'est pas supprimé.");
+		services = controleurService.obtenirListeServices();
+		assertFalse(services.contains(serviceASupprimer), "Le service n'a pas été supprimé");
 	}
 
 	@Test
@@ -206,19 +257,20 @@ class ControleurServiceTests {
 		assertFalse(controleurService.inscriptionExiste(membreId, idSeance), "Test inscription échoué");
 		controleurService.inscriptionSeance(membreId, controleurClient.nomClient(membreId), idSeance, commentaire);
 		assertTrue(controleurService.inscriptionExiste(membreId, idSeance), "Test inscription échoué");
-
 	}
 
 	@Test
 	void testConfirmerPresence() {
-		String professionnelId = "150337313";
+		String professionnelId = "173262475";
 		String idMembre = "554365143";
 		List<String> idSeances = controleurService.obtenirListeSeancesDuProfessionnel(professionnelId);
 		Seance seance = controleurService.lireSeance(idSeances.get(0));
 		String idSeance = seance.getCodeSeance();
 		String commentaire = "Pas de commentaire";
 		
+		//Test que la confirmation est bien ajoutée
 		assertTrue(controleurService.confirmerPresence(idSeance, idMembre, commentaire),"Test ajout confirmation");
+		//Test que la confirmation ne peut pas être ajoutée une deuxième fois.
 		assertFalse(controleurService.confirmerPresence(idSeance, idMembre, commentaire),"Test ajout confirmation");
 	}
 

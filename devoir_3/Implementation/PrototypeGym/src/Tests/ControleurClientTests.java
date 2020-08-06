@@ -167,6 +167,7 @@ class ControleurClientTests {
 		
 		Client client = controleurClient.lireMembre(idClient);
 
+		//Test que chque information est bien modifiée
 		controleurClient.mettreClientAJour(typeClient, idClient, Champs.NOM_CLIENT, nom);
 		assertTrue(client.getNom().equals(nom), "Test mettre a jour nom échoué");
 		
@@ -195,6 +196,8 @@ class ControleurClientTests {
 		assertFalse(membre.getAPaye(), "Test mettre a jour statut échoué");
 		
 		
+		//Test sur le changement d'une adresse courriel. 
+		//Puisque le code de membre est trouvé avec le courriel, on s'assure qu'on peut trouver le membre après
 		String nouvelleAdresse = "salut@gmail.com";
 		
 		controleurClient.mettreClientAJour(typeClient, idClient, Champs.ADRESSE_COURRIEL_CLIENT, nouvelleAdresse);

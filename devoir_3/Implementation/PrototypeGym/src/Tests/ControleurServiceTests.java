@@ -79,7 +79,7 @@ class ControleurServiceTests {
 				"18:20",
 				"lundi",
 				"20",
-				idProfessionel1,
+				idProfessionel2,
 				"100.00",
 				"Rien à signaler");
 
@@ -109,7 +109,7 @@ class ControleurServiceTests {
 				"Rien à signaler");
 		
 
-		List<String> listeSeances =  controleurService.obtenirListeSeancesDuProfessionnel(idProfessionel1);
+		List<String> listeSeances =  controleurService.obtenirListeSeancesDuProfessionnel(idProfessionel2);
 		controleurService.inscriptionSeance(idMembre1, controleurClient.nomClient(idMembre1), listeSeances.get(0), "J'ai hâte!");
 	}
 
@@ -261,7 +261,7 @@ class ControleurServiceTests {
 
 	@Test
 	void testConfirmerPresence() {
-		String professionnelId = "150337313";
+		String professionnelId = "173262475";
 		String idMembre = "554365143";
 		List<String> idSeances = controleurService.obtenirListeSeancesDuProfessionnel(professionnelId);
 		Seance seance = controleurService.lireSeance(idSeances.get(0));

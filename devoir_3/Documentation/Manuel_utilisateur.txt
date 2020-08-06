@@ -1,8 +1,13 @@
-Le programme simule l’utilisation du logiciel et de l’application. Le texte est affiché dans la console et pour faire les choix, il faut entrer des chiffres, des mots ou des lettres et appuyer sur ENTRÉE. 
-À chaque étape, des choix sont offerts. Pour choisir il faut entrer le chiffre correspondant au choix et appuyer sur ENTRÉE.
-À chaque étape, les instructions sur quoi entrer ou comment sont affichées.
+MANUEL D'UTILISATEUR
+
+GÉNÉRAL : 
+Le programme simule l’utilisation du logiciel et de l’application. 
+Du texte est affiché dans la console. Pour se déplacer entre les menus du logiciel, il faut entrer le chiffre correspondant au choix et appuyer sur ENTRÉE.
+Pour entrer les informations lorsque demandées, il faut taper les informations et appuyer sur ENTRÉE.
+À chaque étape, les instructions sur quoi entrer ou comment sont affichées. Il faut parfois respecter un format qui est spécifié entre parenthèse.
 
  
+FONCTIONNEMENT : 
 Le menu principal est affiché. Il faut choisir entre huit options : 
     
     1. Demander accès au gym.
@@ -26,13 +31,16 @@ Le menu principal est affiché. Il faut choisir entre huit options :
     3 Gestion d'un service
         Il faut d'abord entrer le numéro du professionel.
         Ensuite, on choisit si on ajoute, modifie ou supprime le service.
-	Les étapes sont similaires à la gestion de service.
+	Les étapes sont similaires à la gestion de compte.
+	Lorsque l'on ajoute un même service la même journée et par un même professionnel, il ne sera pas ajouté.
+	Si on ajoute un même service par un professionnel, mais une journée différente, alors on ajoutera une deuxième séance.
+	Si on modifie le nom d'un service, le nom d'un profesionnel ou la journée d'une séance, on changera le numéro des séances.
         
     4 Inscription à une séance.
 	Il faut entrer le numéro de membre. 
 	Si le numéro du membre n'est pas valide, on retourne au menu principal.
         Les séances du jour seront affichées.
-	Il fauat choisir une séance ou entrer 0 pour retourner au menu principal.
+	Il faut choisir une séance ou entrer 0 pour retourner au menu principal.
         On offre la possibilité d'ajouter un commentaire sur l'inscription.
         Si le client ne paie pas, il ne sera pas inscrit.
 
@@ -41,6 +49,7 @@ Le menu principal est affiché. Il faut choisir entre huit options :
         Il faut entrer le numéro du membre puis confirmer la présence.
 	Si le numéro du membre n'est pas valide ou s'il n'est pas inscrit, on retourne au menu principal.
         Il est possible d'ajouter un commentaire.
+	Si la confirmation existe déjà, la nouvelle confirmation sera refusée.
     
     6 Consultation d'une séance
         Il suffit d'entrer le numéro du professionnel et le numéro de la séance.
