@@ -8,7 +8,6 @@ import java.util.HashMap;
 
 import main.controleur.*;
 import main.modele.*;
-import main.vue.*;
 import org.junit.jupiter.api.*;
 
 
@@ -110,7 +109,7 @@ class ControleurClientTests {
 		String getInfo2 = controleurClient.getInformationsClient(TypeClient.MEMBRE, controleurClient.getIdDepuisAdresse(adresseCourriel2));
 		String infos2 = "ID : " + controleurClient.getIdDepuisAdresse(adresseCourriel2) + "\n" +
 				"Nom : " + nom2 + "\n" +
-				"Date de naissance : 1800-02-02\n" +
+				"Date de naissance : 02-02-1800\n" +
 				"Adresse courriel : " + adresseCourriel2 + "\n" +
 				"Numéro de téléphone : " + numeroTel2 + "\n" +
 				"Adresse : " + adresse2 + "\n" + 
@@ -119,8 +118,8 @@ class ControleurClientTests {
 				"Code postal : " + codePostal2 + "\n" +
 				"Statut : " + "suspendu\n";
 		assertEquals(
-				getInfo2,
 				infos2,
+				getInfo2,
 				"Test membre suspendu échoué");
 
 
@@ -140,7 +139,7 @@ class ControleurClientTests {
 		String getInfo3 = controleurClient.getInformationsClient(typeClient3, controleurClient.getIdDepuisAdresse(adresseCourriel3));
 		String infos3 = "ID : " + controleurClient.getIdDepuisAdresse(adresseCourriel3) + "\n" +
 				"Nom : " + nom3 + "\n" +
-				"Date de naissance : 1999-12-31\n" +
+				"Date de naissance : 31-12-1999\n" +
 				"Adresse courriel : " + adresseCourriel3 + "\n" +
 				"Numéro de téléphone : " + numeroTel3 + "\n" +
 				"Adresse : " + adresse3 + "\n" + 
@@ -148,8 +147,8 @@ class ControleurClientTests {
 				"Province : " + province3 + "\n" +
 				"Code postal : " + codePostal3 + "\n";
 		assertEquals(
-				getInfo3,
 				infos3,
+				getInfo3,
 				"Test professionnel échoué");
 	}
 
@@ -199,7 +198,7 @@ class ControleurClientTests {
 		String nouvelleAdresse = "salut@gmail.com";
 		
 		controleurClient.mettreClientAJour(typeClient, idClient, Champs.ADRESSE_COURRIEL_CLIENT, nouvelleAdresse);
-		assertEquals(controleurClient.lireClient(idClient).getAdresseCourriel(), nouvelleAdresse, "Test mettre a jour adresse courriel. Nouveau client non ajouté.");
+		assertEquals(nouvelleAdresse, controleurClient.lireClient(idClient).getAdresseCourriel(), "Test mettre a jour adresse courriel. Nouveau client non ajouté.");
 		assertNotNull(controleurClient.getIdDepuisAdresse(nouvelleAdresse), "Test mettre a jour, nouveau courriel pas ajouté");
 		assertNull(controleurClient.getIdDepuisAdresse("John@doe.com"), "Test mettre a jour, ancien courriel non supprimé");
 		
@@ -223,12 +222,12 @@ class ControleurClientTests {
 	void testVerifierTypeClient() {
 		String idClient = Client.getHashInString("John@doe.com");
 		TypeClient typeClient = ControleurClient.verifierTypeClient(TypeClient.MEMBRE,idClient);
-		assertEquals(typeClient,TypeClient.MEMBRE_VALIDE,"Test vérifier type vrai échoué");
+		assertEquals(TypeClient.MEMBRE_VALIDE, typeClient,"Test vérifier type vrai échoué");
 		assertFalse(typeClient.equals(TypeClient.MEMBRE_SUSPENDU),"Test vérifier type faux échoué");
 
 		String idClient2 = Client.getHashInString("Jean@udem.com");
 		TypeClient typeClient2 = ControleurClient.verifierTypeClient(TypeClient.PROFESSIONNEL,idClient2);
-		assertEquals(typeClient2,TypeClient.PROFESSIONNEL_VALIDE,"Test vérifier type professionnel échoué");
+		assertEquals(TypeClient.PROFESSIONNEL_VALIDE, typeClient2,"Test vérifier type professionnel échoué");
 	}
 	
 	@Test

@@ -85,6 +85,13 @@ public class Inscription {
 		return Verificateurs.localDateFormatter.format(dateSeance);
 	}
 
-
-
+	@Override
+	public String toString() {
+		return "Date et heure d'inscription : " + getDateEtHeureActuelleString() + "\n" +
+				"Date de la séance : " + getDateSeanceString() + "\n" +
+				"Numéro de professionnel : " + getNumeroProfessionnel() + "\n" +
+				"Numéro de membre : " + getNumeroMembre() + "\n" +
+				"Code de service : " + getCodeService() + "\n" +
+				"Commentaires : " + getCommentaires() + "\n";
+	}
 }

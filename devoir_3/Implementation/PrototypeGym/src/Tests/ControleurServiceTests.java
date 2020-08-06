@@ -1,13 +1,13 @@
 package Tests;
 
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.api.*;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 import main.controleur.*;
 import main.modele.*;
-
 
 class ControleurServiceTests {
 	
@@ -18,6 +18,7 @@ class ControleurServiceTests {
 	void initialisation() {
 		this.controleurService = new ControleurService();
 		this.controleurClient = new ControleurClient();
+
 		/*** MEMBRES ***/
 		controleurClient.creerClient(
         		TypeClient.MEMBRE_VALIDE, 
@@ -110,7 +111,6 @@ class ControleurServiceTests {
 
 		List<String> listeSeances =  controleurService.obtenirListeSeancesDuProfessionnel(idProfessionel1);
 		controleurService.inscriptionSeance(idMembre1, controleurClient.nomClient(idMembre1), listeSeances.get(0), "J'ai hâte!");
-		
 	}
 
 	@Test
@@ -126,60 +126,59 @@ class ControleurServiceTests {
 		String fraisServiceString = "050.50";
 		String commentaires = "non";
 
-
-		
 		Service service = controleurService.creerService(nomService, dateDebutServiceString, dateFinServiceString, heureServiceString, 
 				recurrenceHebdoString, capaciteMaximaleString, numeroProfessionnel, fraisServiceString, commentaires);
 
 		Seance seance = service.obtenirListeSeances().get(0);
 		String codeSeance = seance.getCodeSeance();
 
-		 
-		String infoService = "ID : " + codeSeance + "\n" +
-				"Nom de service : danse\n" +
-				"Date de début de service : 2020-08-01\n" +
-				"Date de fin de service : 2021-08-01\n" +
-				"Heure de service : 08:30\n" +
-				"Récurrence hebdomadaire : WEDNESDAY\n" +
-				"Capacité maximale : 25\n" +
-				"Numéro de professionnel : 150337313\n" +
-				"Frais de service : 50.5\n" +
-				"Commentaire : non\n";
+		String infoService = "Numéro de séance : " + codeSeance + "\n" +
+			"Numéro de professionnel de séance : " + numeroProfessionnel + "\n" +
+			"Récurrence hebdomadaire : MERCREDI" + "\n" +
+			"Nom de service : danse" + "\n" +
+			"Date de début de service : 2020-08-01" + "\n" +
+			"Date de fin de service : 2021-08-01" + "\n" +
+			"Heure de service : 08:30" + "\n" +
+			"Capacité maximale : 25" + "\n" +
+			"Numéro de professionnel : " + numeroProfessionnel + "\n" +
+			"Frais de service : 50.5" + "\n" +
+			"Commentaire : non" + "\n";
 
-		assertEquals(controleurService.getInformationsService(codeSeance),infoService, "Test créer service échoué");
-
+		assertEquals(infoService, controleurService.getInformationsService(codeSeance), "Test créer service échoué");
 	}
 
 	@Test
 	void testMettreServiceAJour() {
 
-		List<String> seancesId = controleurService.obtenirListeSeancesDuProfessionnel("150337313");
+		String idProfessionnel = "150337313";
+		List<String> seancesId = controleurService.obtenirListeSeancesDuProfessionnel(idProfessionnel);
 		Seance seance = controleurService.lireSeance(seancesId.get(0));
 		String idSeance = seance.getCodeSeance();
 
 		controleurService.mettreServiceAJour(idSeance, Champs.NOM_SERVICE, "Massage");
 		idSeance = seance.getCodeSeance();
 		controleurService.mettreServiceAJour(idSeance, Champs.DATE_DEBUT_SERVICE, "02-03-2020");
-		controleurService.mettreServiceAJour(idSeance, Champs.DATE_FIN_SERVICE, "03-03-2020");
+		controleurService.mettreServiceAJour(idSeance, Champs.DATE_FIN_SERVICE, "03-03-2025");
 		controleurService.mettreServiceAJour(idSeance, Champs.HEURE_SERVICE, "09:15");
-		controleurService.mettreServiceAJour(idSeance, Champs.RECURRENCE_HEBDO_SERVICE, "Mardi");
+		controleurService.mettreServiceAJour(idSeance, Champs.RECURRENCE_HEBDO_SERVICE, "Mercredi");
 		 idSeance = seance.getCodeSeance();
 		controleurService.mettreServiceAJour(idSeance, Champs.CAPACITE_MAX_SERVICE, "30");
 		controleurService.mettreServiceAJour(idSeance, Champs.FRAIS_SERVICE, "60.00");
 		controleurService.mettreServiceAJour(idSeance, Champs.COMMENTAIRE_SERVICE, "Oui");
 
-		String infoService = "ID : "+seance.getCodeSeance() + "\n" +
-				"Nom de service : Massage\n" +
-				"Date de début de service : 2020-03-02\n" +
-				"Date de fin de service : 2020-03-03\n" +
-				"Heure de service : 09:15\n" +
-				"Récurrence hebdomadaire : TUESDAY\n" +
-				"Capacité maximale : 30\n" +
-				"Numéro de professionnel : 150337313\n" +
-				"Frais de service : 60.0\n" +
-				"Commentaire : Oui\n";
-		
-		assertEquals(controleurService.getInformationsService(idSeance),infoService, "Test modifier service échoué");
+		String infoService = "Numéro de séance : " + seance.getCodeSeance() + "\n" +
+		"Numéro de professionnel de séance : " + idProfessionnel + "\n" +
+		"Récurrence hebdomadaire : MERCREDI" + "\n" +
+		"Nom de service : Massage" + "\n" +
+		"Date de début de service : 2020-03-02" + "\n" +
+		"Date de fin de service : 2025-03-03" + "\n" +
+		"Heure de service : 09:15" + "\n" +
+		"Capacité maximale : 30" + "\n" +
+		"Numéro de professionnel : 150337313" + "\n" +
+		"Frais de service : 60.0" + "\n" +
+		"Commentaire : Oui" + "\n";
+
+		assertEquals(infoService, controleurService.getInformationsService(idSeance), "Test modifier service échoué");
 	}
 
 	@Test
@@ -206,7 +205,6 @@ class ControleurServiceTests {
 		assertFalse(controleurService.inscriptionExiste(membreId, idSeance), "Test inscription échoué");
 		controleurService.inscriptionSeance(membreId, controleurClient.nomClient(membreId), idSeance, commentaire);
 		assertTrue(controleurService.inscriptionExiste(membreId, idSeance), "Test inscription échoué");
-
 	}
 
 	@Test

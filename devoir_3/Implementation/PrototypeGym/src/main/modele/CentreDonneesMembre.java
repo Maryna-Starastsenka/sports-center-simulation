@@ -8,12 +8,12 @@ import java.util.stream.Collectors;
 import static main.controleur.Verificateurs.getDateFromString;
 
 public class CentreDonneesMembre implements ICentreDonnees<Membre> {
-    private HashMap<String, Membre> listeMembres = new HashMap<>();
-    private HashMap<String, String> listeAdressesMembres = new HashMap<>();
+    private HashMap<String, Membre> listeMembres;
+    private HashMap<String, String> listeAdressesMembres;
 
     public CentreDonneesMembre() {
-        // valeurs par défaut
-
+        this.listeMembres = new HashMap<>();
+        this.listeAdressesMembres = new HashMap<>();
     }
 
     @Override

@@ -136,4 +136,16 @@ public class Service {
 	public void setCommentaires(String valeur) {
 		this.commentaires = valeur;
 	}
+
+	@Override
+	public String toString() {
+		return "Nom de service : " + getNomService() + "\n" +
+				"Date de début de service : " + getDateDebutService() + "\n" +
+				"Date de fin de service : " + getDateFinService() + "\n" +
+				"Heure de service : " + getHeureService() + "\n" +
+				"Capacité maximale : " + getCapaciteMaximale() + "\n" +
+				"Numéro de professionnel : " + getNumeroProfessionnel() + "\n" +
+				"Frais de service : " + getFraisService() + "\n" +
+				"Commentaire : " + getCommentaires() + "\n";
+	}
 }

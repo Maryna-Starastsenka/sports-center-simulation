@@ -72,11 +72,6 @@ public class Seance {
 		return codeService;
 	}
 
-	@Override
-	public int hashCode() {
-		return Math.abs(Objects.hash(recurrence) % 100); // 2 chiffres max
-	}
-
 	public String getCodeSeance() {
 		return codeService + this.getHashInString()+ codeProfessionnel.substring(7);
 	}
@@ -87,5 +82,17 @@ public class Seance {
 
 	public String getHashInString() {
 		return String.format("%02d", this.hashCode());
+	}
+
+	@Override
+	public int hashCode() {
+		return Math.abs(Objects.hash(recurrence) % 100); // 2 chiffres max
+	}
+
+	@Override
+	public String toString() {
+		return "Numéro de séance : " + getCodeSeance() + "\n" +
+			"Numéro de professionnel de séance : " + getCodeProfessionnel() + "\n" +
+			"Récurrence hebdomadaire : " + getRecurrenceString() + "\n";
 	}
 }

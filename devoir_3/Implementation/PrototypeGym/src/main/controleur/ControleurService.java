@@ -1,25 +1,20 @@
 package main.controleur;
 
 import main.modele.*;
-import main.vue.*;
-
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
 import static main.controleur.Verificateurs.getIntFromString;
-import static main.controleur.Verificateurs.getJourFromString;
 
 public class ControleurService extends Controleur {
 
 	protected static CentreDonneesServices centreDonneesServices = new CentreDonneesServices();
 
 	public ControleurService() {
+		ControleurService.centreDonneesServices = new CentreDonneesServices();
 	}
 
 	public Service creerService(String nomService,
@@ -63,19 +58,6 @@ public class ControleurService extends Controleur {
 			centreDonneesServices.supprimer(idSeance);
 	}
 
-	public String getListeService(String idProfessionnel) {
-		List<Service> services = centreDonneesServices.getListeServicesPro(idProfessionnel);
-
-		String servicesString = "";
-
-		if (services.size() != 0) {
-			for (Service s : services) {
-				servicesString += s.getNomService() + " " + s.getCode() + "; ";
-			}
-		}
-		return servicesString;
-	}
-
 	public String inscriptionSeance(String membreId, String nomClient, String seanceId, String commentaire) {
 		return centreDonneesServices.inscrireMembreASeance(membreId, nomClient, seanceId, commentaire).getHashInString();
 	}
@@ -84,26 +66,19 @@ public class ControleurService extends Controleur {
 		return centreDonneesServices.confirmationPresence(idSeance, idMembre, commentaire);
 	}
 
-	private void afficherServicesProfessionnel(List<Service> servicesDuProfessionnel) {
-		Vue.effacerEcran();
-
-		Vue.afficher("------Services du professionnel------");
-		Vue.afficher("Liste des services disponibles pour ce professionnel :");
-		for (Service s : servicesDuProfessionnel) {
-			Vue.afficher(s.getCode() + " (" + s.getNomService() + ")");
-		}
-	}
-
 	public String obtenirToutesLesSeancesDuJourEnString(LocalDate jour) {
 		var seances = centreDonneesServices.getListeSeances(jour);
-		String concatenation = "";
+		StringBuilder concatenation = new StringBuilder();
 		for (Seance s : seances) {
-			concatenation += s.getCodeSeance() + " (service de " +
-					centreDonneesServices.getService(s.getCodeService()).getNomService() +
-					") : le " +
-					Verificateurs.localDateFormatter.format(s.getDate()) + "\n";
+			concatenation
+					.append(s.getCodeSeance())
+					.append(" (service de ")
+					.append(centreDonneesServices.getService(s.getCodeService()).getNomService())
+					.append(") : le ")
+					.append(Verificateurs.localDateFormatter.format(s.getDate()))
+					.append("\n");
 		}
-		return concatenation;
+		return concatenation.toString();
 	}
 
 	public List<String> obtenirListeIdSeancesDuJour(LocalDate jour) {
@@ -117,14 +92,17 @@ public class ControleurService extends Controleur {
 
 	public String obtenirToutesLesSeancesDuProfessionnelEnString(String idProfessionnel) {
 		var seances = centreDonneesServices.getListeSeancesPro(idProfessionnel);
-		String concatenation = "";
+		StringBuilder concatenation = new StringBuilder();
 		for (Seance s : seances) {
-			concatenation += s.getCodeSeance() + " (service de " +
-					centreDonneesServices.getService(s.getCodeService()).getNomService() +
-					") : le " +
-					s.getRecurrenceString() + "\n";
+			concatenation
+					.append(s.getCodeSeance())
+					.append(" (service de ")
+					.append(centreDonneesServices.getService(s.getCodeService()).getNomService())
+					.append(") : le ")
+					.append(s.getRecurrenceString())
+					.append("\n");
 		}
-		return concatenation;
+		return concatenation.toString();
 	}
 
 	public List<String> obtenirListeSeancesDuProfessionnel(String idProfessionnel) {
@@ -137,26 +115,12 @@ public class ControleurService extends Controleur {
 	}
 
 	public String getInformationsService(String idSeance) {
-		Service service = null;
-		Seance seance = null;
 		String infos = "";
-		
-		seance = centreDonneesServices.lireSeance(idSeance);
-		service = seance.getService();
-		
 
-		if (service != null) {
-			infos = "ID : " + seance.getCodeSeance() + "\n" +
-					"Nom de service : " + service.getNomService() + "\n" +
-					"Date de début de service : " + service.getDateDebutService() + "\n" +
-					"Date de fin de service : " + service.getDateFinService() + "\n" +
-					"Heure de service : " + service.getHeureService() + "\n" +
-					"Récurrence hebdomadaire : " + seance.getRecurrence() + "\n" +
-					"Capacité maximale : " + service.getCapaciteMaximale() + "\n" +
-					"Numéro de professionnel : " + service.getNumeroProfessionnel() + "\n" +
-					"Frais de service : " + service.getFraisService() + "\n" +
-					"Commentaire : " + service.getCommentaires() + "\n";
-		}
+		Seance seance = centreDonneesServices.lireSeance(idSeance);
+		Service service = seance.getService();
+
+		if (service != null) infos = seance.toString() + service.toString();
 		return infos;
 	}
 
@@ -170,12 +134,7 @@ public class ControleurService extends Controleur {
 		Seance seance = centreDonneesServices.getSeance(seanceId);
 		String infos = "";
 
-		if (seance != null) {
-			infos = "Code séance : " + seance.getCodeSeance() + "\n" +
-					"Code professionnel : " + seance.getCodeProfessionnel() + "\n" +
-					"Journée : " + seance.getRecurrenceString() + "\n" + 
-					"Date de la séance : " + seance.dateString() + "\n";
-		}
+		if (seance != null) infos = seance.toString();
 		return infos;
 	}
 
@@ -184,25 +143,23 @@ public class ControleurService extends Controleur {
 		String infos = "";
 
 		if (inscription != null) {
-			infos = "Date et heure d'inscription : " + inscription.getDateEtHeureActuelleString() + "\n" +
-					"Date de la séance : " + inscription.getDateSeanceString() + "\n" +
-					"Numéro de professionnel : " + inscription.getNumeroProfessionnel() + "\n" +
-					"Numéro de membre : " + inscription.getNumeroMembre() + "\n" +
-					"Code de service : " + inscription.getCodeService() + "\n" +
-					"Commentaires : " + inscription.getCommentaires() + "\n";
+			infos = inscription.toString();
 		}
 		return infos;
 	}
 
 	public String obtenirInscriptionsASeanceEnString(String idSeance) {
 		var listeInscriptions = obtenirInscriptionsASeance(idSeance);
-		String inscriptions = "";
+		StringBuilder inscriptions = new StringBuilder();
 		for (Inscription inscription : listeInscriptions) {
-			inscriptions += "Membre " + inscription.getNumeroMembre() +
-					(inscription.getCommentaires().length() != 0 ? "; Commentaires : " : "") +
-					inscription.getCommentaires() + "\n";
+			inscriptions
+					.append("Membre ")
+					.append(inscription.getNumeroMembre())
+					.append(inscription.getCommentaires().length() != 0 ? "; Commentaires : " : "")
+					.append(inscription.getCommentaires())
+					.append("\n");
 		}
-		return inscriptions;
+		return inscriptions.toString();
 	}
 
 	public List<Inscription> obtenirInscriptionsASeance(String idSeance) {
@@ -212,19 +169,11 @@ public class ControleurService extends Controleur {
 	public boolean inscriptionExiste(String idMembre, String idSeance) {
 		return centreDonneesServices.inscriptionExiste(idMembre, idSeance);
 	}
-	
-	public Service lire(String idService) {
-		return centreDonneesServices.lire(idService);
-	}
-	
+
 	public Seance lireSeance(String idSeance) {
 		return centreDonneesServices.lireSeance(idSeance);
 	}
 
-	public String getIDServiceFromSeance(String idSeance) {
-		return centreDonneesServices.getIDServiceFromSeance(idSeance);
-	}
-	
 	public static String nomService(String idService) {
 		Service service = centreDonneesServices.lire(idService);
 		return service.getNomService();

@@ -17,18 +17,22 @@ import static main.controleur.Verificateurs.*;
 
 public class CentreDonneesServices implements ICentreDonnees {
 
-	private HashMap<String, Service> listeServices = new HashMap<>();
-    private HashMap<String, Seance> listeSeances = new HashMap<>();
+	private HashMap<String, Service> listeServices;
+    private HashMap<String, Seance> listeSeances;
     
-	private HashMap<String, Inscription> listeInscriptions = new HashMap<>();
-    private HashMap<String, ConfirmationPresence> listeConfirmationsPresence = new HashMap<>();
-  
+	private HashMap<String, Inscription> listeInscriptions;
+    private HashMap<String, ConfirmationPresence> listeConfirmationsPresence;
     
-    private List<ProfessionnelTef> listeProfessionnelsTef = new ArrayList<>();
-    private List<MembreTef> listeMembresTef = new ArrayList<>();
+    private List<ProfessionnelTef> listeProfessionnelsTef;
+    private List<MembreTef> listeMembresTef;
     
 	public CentreDonneesServices() {
-
+		this.listeServices = new HashMap<>();
+		this.listeSeances = new HashMap<>();
+		this.listeInscriptions = new HashMap<>();
+		this.listeConfirmationsPresence = new HashMap<>();
+		this.listeProfessionnelsTef = new ArrayList<>();
+		this.listeMembresTef = new ArrayList<>();
 	}
 
 	public void ajouterService(Service service) {
@@ -322,24 +326,15 @@ public class CentreDonneesServices implements ICentreDonnees {
 	}
 	
 	public DayOfWeek getDayOfWeek(Jour jour) {
-		switch (jour) {
-		case LUNDI:
-			return DayOfWeek.MONDAY;
-		case MARDI:
-			return DayOfWeek.TUESDAY;
-		case MERCREDI:
-			return DayOfWeek.WEDNESDAY;
-		case JEUDI:
-			return DayOfWeek.THURSDAY;
-		case VENDREDI:
-			return DayOfWeek.FRIDAY;
-		case SAMEDI:
-			return DayOfWeek.SATURDAY;
-		case DIMANCHE:
-			return DayOfWeek.SUNDAY;
-		default:
-			return null;
-		}
+		return switch (jour) {
+			case LUNDI -> DayOfWeek.MONDAY;
+			case MARDI -> DayOfWeek.TUESDAY;
+			case MERCREDI -> DayOfWeek.WEDNESDAY;
+			case JEUDI -> DayOfWeek.THURSDAY;
+			case VENDREDI -> DayOfWeek.FRIDAY;
+			case SAMEDI -> DayOfWeek.SATURDAY;
+			case DIMANCHE -> DayOfWeek.SUNDAY;
+		};
 	}
 	
 }

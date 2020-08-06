@@ -1,6 +1,5 @@
 package main.modele;
 
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,11 +7,12 @@ import java.util.stream.Collectors;
 import static main.controleur.Verificateurs.getDateFromString;
 
 public class CentreDonneesProfessionnel implements ICentreDonnees<Professionnel> {
-    private HashMap<String, Professionnel> listeProfessionnels = new HashMap<>();
-    private HashMap<String, String> listeAdressesProfessionnels = new HashMap<>();
+    private HashMap<String, Professionnel> listeProfessionnels;
+    private HashMap<String, String> listeAdressesProfessionnels;
 
     public CentreDonneesProfessionnel() {
-
+        listeProfessionnels = new HashMap<>();
+        listeAdressesProfessionnels = new HashMap<>();
     }
 
     @Override

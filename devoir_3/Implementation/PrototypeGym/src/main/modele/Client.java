@@ -73,7 +73,7 @@ public abstract class Client {
 	public String toString() {
 		return "Nom : " + this.getNom() + "\n" + "Date de naissance : "
 				+ Verificateurs.localDateFormatter.format(this.getDateNaissance())+ "\n" + "Adresse courriel : " + this.getAdresseCourriel() + "\n"
-				+ "Numéro de téléphone : " + this.getNumeroPhone() + "\n" + "Adresse : " + this.getAdresse() + "\n"+ this.getVille() + "\n"+ 
-				this.getProvince() + "\n" + this.getCodePostal();
+				+ "Numéro de téléphone : " + this.getNumeroPhone() + "\n" + "Adresse : " + this.getAdresse() + "\n"+ "Ville : " + this.getVille() + "\n"+
+				"Province : " + this.getProvince() + "\n" + "Code postal : " + this.getCodePostal() + "\n";
 	}
 }

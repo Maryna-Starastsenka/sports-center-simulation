@@ -17,10 +17,4 @@ public class Professionnel extends Client {
 		this.numeroPhone = numeroPhone;
 		this.adresseCourriel = adresseCourriel;
 	}
-
-	@Override
-	public String toString() {
-		return "Modele.Professionnel numéro : " + getHashInString() + ".";
-	}
-	
 }

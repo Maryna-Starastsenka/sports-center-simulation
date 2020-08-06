@@ -1,12 +1,9 @@
 package main.controleur;
 
 import main.modele.*;
-import main.vue.*;
-
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
-
 
 public class ControleurClient extends Controleur {
 
@@ -28,21 +25,18 @@ public class ControleurClient extends Controleur {
 							String province,
 							String codePostal) {
 		LocalDate dateNaissance = Verificateurs.getDateFromString(dateNaissanceString);
-		Client client = null;
 		switch (typeClient) {
-			case MEMBRE_VALIDE: // membre qui a payé les frais d'adhésion
-			case MEMBRE_SUSPENDU: // membre qui n'a pas payé les frais d'adhésion
-				Membre membre = new Membre(nom, dateNaissance, adresse, ville, province, codePostal, numeroTelephone, adresseCourriel, typeClient.equals(TypeClient.MEMBRE_VALIDE) ? true : false);
-				client = centreDonneesMembre.creer(membre);
-				break;
-			case PROFESSIONNEL:
-				Professionnel professionnel = new Professionnel(nom, dateNaissance, adresse, ville, province, codePostal, numeroTelephone, adresseCourriel);
-				client = centreDonneesProfessionnel.creer(professionnel);
-				break;
+			case MEMBRE_VALIDE, MEMBRE_SUSPENDU -> {
+				Membre membre = new Membre(nom, dateNaissance, adresse, ville, province, codePostal, numeroTelephone,
+						adresseCourriel, typeClient.equals(TypeClient.MEMBRE_VALIDE));
+				centreDonneesMembre.creer(membre);
+			}
+			case PROFESSIONNEL -> {
+				Professionnel professionnel = new Professionnel(nom, dateNaissance, adresse, ville, province,
+						codePostal, numeroTelephone, adresseCourriel);
+				centreDonneesProfessionnel.creer(professionnel);
+			}
 		}
-//		if (typeClient.equals(TypeClient.MEMBRE_VALIDE) || typeClient.equals(TypeClient.PROFESSIONNEL)) {
-//			vueClient.confirmerEnregistrement(client.getHashInString()); // TODO à gérer, surtout avec les membres suspendus
-//		}
 	}
 
 	public void mettreClientAJour(TypeClient typeClient, String idClient, Champs champs, String valeur) {
@@ -72,13 +66,12 @@ public class ControleurClient extends Controleur {
 	}
 
 	public static String seConnecterApp(TypeClient typeClient, String adresseCourriel) {
-		String idClient = null;
 		if (typeClient.equals(TypeClient.MEMBRE)) {
-			return idClient = (centreDonneesMembre.getIdDepuisAdresse(adresseCourriel));
+			return centreDonneesMembre.getIdDepuisAdresse(adresseCourriel);
 		} else if (typeClient.equals(TypeClient.PROFESSIONNEL)) {
-			return idClient = (centreDonneesProfessionnel.getIdDepuisAdresse(adresseCourriel));
+			return centreDonneesProfessionnel.getIdDepuisAdresse(adresseCourriel);
 		}
-		return idClient;
+		return null;
 	}
 
 	public static TypeClient verifierTypeClient(TypeClient typeClient, String idClient) {
@@ -111,19 +104,7 @@ public class ControleurClient extends Controleur {
 			client = centreDonneesProfessionnel.lire(idClient);
 		}
 		if (client != null) {
-			infos = "ID : " + idClient + "\n" +
-					"Nom : " + client.getNom() + "\n" +
-					"Date de naissance : " + client.getDateNaissance() + "\n" +
-					"Adresse courriel : " + client.getAdresseCourriel() + "\n" +
-					"Numéro de téléphone : " + client.getNumeroPhone() + "\n" +
-					"Adresse : " + client.getAdresse() + "\n" + 
-					"Ville : " + client.getVille() + "\n" +
-					"Province : " + client.getProvince() + "\n" +
-					"Code postal : " + client.getCodePostal() + "\n";
-		}
-		if (typeClient.equals(TypeClient.MEMBRE)) {
-			Membre membre = (Membre)client;
-			infos += "Statut : " + (membre.getAPaye() ? "valide (a payé)\n" : "suspendu\n");
+			infos = "ID : " + idClient + "\n" + client.toString();
 		}
 		return infos;
 	}
@@ -136,35 +117,31 @@ public class ControleurClient extends Controleur {
 			clients = centreDonneesProfessionnel.getClients();
 		}
 
-		String clientsString = "";
+		StringBuilder clientsString = new StringBuilder();
 
-		if (clients.size() != 0) {
+		if (clients != null && clients.size() != 0) {
 			for (Client c : clients) {
-				clientsString += c.getHashInString() + "; ";
+				clientsString.append(c.getHashInString()).append("; ");
 			}
 		}
-		return clientsString;
+		return clientsString.toString();
 	}
 
 	public Client lireClient(String idClient) {
-		return this.centreDonneesMembre.lire(idClient);
+		return centreDonneesMembre.lire(idClient);
 	}
 	
 	public String getIdDepuisAdresse(String adresseCourriel) {
-		String idClient = this.centreDonneesMembre.getIdDepuisAdresse(adresseCourriel);
+		String idClient = centreDonneesMembre.getIdDepuisAdresse(adresseCourriel);
 		if(idClient==null)
-			idClient = this.centreDonneesProfessionnel.getIdDepuisAdresse(adresseCourriel);
+			idClient = centreDonneesProfessionnel.getIdDepuisAdresse(adresseCourriel);
 		return idClient;
 	}
 
 	public static HashMap<String, Professionnel> getListeProfessionnels() {
 		return centreDonneesProfessionnel.getListeProfessionnels();
 	}
-	
-	public static HashMap<String, Membre> getListeMembres() {
-		return centreDonneesMembre.getListeMembres();
-	}
-	
+
 	public void modifierStatutMembre(HashMap<String, Boolean> listeValidations) {
 		centreDonneesMembre.modifierStatutMembres(listeValidations);
 	}

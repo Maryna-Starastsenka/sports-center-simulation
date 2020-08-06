@@ -27,7 +27,7 @@ public class Membre extends Client {
 
 	@Override
 	public String toString() {
-		return super.toString() + "Modele.Membre valide : " + this.getAPaye() + "\n";
+		return super.toString() + "Statut : " + (getAPaye() ? "valide (a payé)\n" : "suspendu\n");
 	}
 
 }

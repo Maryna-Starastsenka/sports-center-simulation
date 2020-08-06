@@ -1,7 +1,6 @@
 package main.controleur;
 
 import main.modele.Jour;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -58,7 +57,7 @@ public class Verificateurs {
     }
 
     public static boolean courrielValide (String s) {
-        String regexPattern = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+        String regexPattern = "^[\\w-_.+]*[\\w-_.]@([\\w]+\\.)+[\\w]+[\\w]$";
         return s.matches(regexPattern);
     }
 
@@ -82,14 +81,6 @@ public class Verificateurs {
 
     public static boolean identifiantClientValide(String s) {
         return s != null && s.length() == 9 && intValide(s);
-    }
-
-    public static boolean identifiantServiceValide(String s) {
-        return s != null && s.length() == 3 && intValide(s);
-    }
-    
-    public static boolean identifiantSeanceValide(String s) {
-        return s != null && s.length() == 7 && intValide(s);
     }
 
     public static boolean fraisServiceValide(String s) {
