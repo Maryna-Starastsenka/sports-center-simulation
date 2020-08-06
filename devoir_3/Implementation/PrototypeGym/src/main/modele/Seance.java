@@ -39,6 +39,10 @@ public class Seance {
 	public Service getService() {
 		return service;
 	}
+	
+	public void setService(Service service) {
+		this.service = service;
+	}
 
 	public String getRecurrenceString() {
 		return switch (recurrence) {

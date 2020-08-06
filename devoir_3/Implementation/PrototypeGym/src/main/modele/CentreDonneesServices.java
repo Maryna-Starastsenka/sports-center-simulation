@@ -32,13 +32,19 @@ public class CentreDonneesServices implements ICentreDonnees {
 	}
 
 	public void ajouterService(Service service) {
-		if (!listeServices.containsKey(service.getCode())) 
-			listeServices.put(service.getCode(), service);
-		
 		List<Seance> seances = service.obtenirListeSeances();
-		for(Seance seance : seances) {
-			listeSeances.put(seance.getCodeSeance(), seance);
-			listeServices.get(service.getCode()).ajouterSeance(seance);
+		
+		if (!listeServices.containsKey(service.getCode())) {
+			listeServices.put(service.getCode(), service);
+			if(seances.size()==1) {
+				listeSeances.put(seances.get(0).getCodeSeance(), seances.get(0));
+			}
+		} else {
+			Service serviceDejaAjoute = listeServices.get(service.getCode());
+			Seance ajoutDeSeance = seances.get(0);
+			ajoutDeSeance.setService(serviceDejaAjoute);
+			serviceDejaAjoute.ajouterSeance(ajoutDeSeance);
+			listeSeances.put(ajoutDeSeance.getCodeSeance(), ajoutDeSeance);
 		}
 	}
 	
@@ -293,4 +299,20 @@ public class CentreDonneesServices implements ICentreDonnees {
 		}
 		return null;
 	}
+	
+	
+	public List<Service> getListeServices() {
+		return listeServices
+				.values()
+				.stream()
+				.collect(Collectors.toList());
+	}
+	
+	public List<Seance> getListeSeances() {
+		return listeSeances
+				.values()
+				.stream()
+				.collect(Collectors.toList());
+	}
+	
 }
