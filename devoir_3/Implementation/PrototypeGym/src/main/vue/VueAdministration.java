@@ -13,7 +13,7 @@ public class VueAdministration extends Vue {
     ControleurAdministration controleurAdministration;
 
     /**
-     * Controleur de VueAdministration
+         * Constructeur de Vue Administration qui initialise le contrôleur associé
      */
     public VueAdministration() { this.controleurAdministration = new ControleurAdministration(); }
 

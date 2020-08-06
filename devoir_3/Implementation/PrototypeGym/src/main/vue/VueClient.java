@@ -11,7 +11,7 @@ import static main.modele.Champs.*;
 import static main.controleur.Helper.*;
 
 /**
- * Classe abstraite Vue Client hérite la classe Vue. Permet d'afficher les options du menu de gestion d'un client.
+ * Classe abstraite Vue Client qui hérite de la classe Vue. Permet d'afficher les options du menu de gestion d'un client.
  * @author Maryna Starastsenka
  * @author Alex Defoy
  */
@@ -23,14 +23,24 @@ public abstract class VueClient extends Vue {
     protected VueService vueService;
 
     /**
+     * Constructeur de VueClient qui instancie le contrôleur associé et la VueService
+     */
+    public VueClient() {
+        controleurClient = new ControleurClient();
+        vueService = new VueService();
+    }
+
+    /**
      * Retourne le type de client
      * @return type de client
      */
     public abstract TypeClient getTypeClientPrecis();
 
+    /**
+     * Message d'en-tête de la VueClient
+     */
     protected void enTeteGestionCompte() {
         effacerEcran();
-
         afficher(String.format("------Gestion d'un compte %s------", clientString));
     }
 
@@ -243,8 +253,8 @@ public abstract class VueClient extends Vue {
     }
 
     /**
-     * Demande au contrôleur de vérifier l'adresse courriel du client quand il veut se connecter à l'application modile
-     * @param adresseCourriel adresse courriel du client (membre ou professionnel)
+     * Demande au contrôleur de vérifier l'adresse courriel du client quand il veut se connecter à l'application mobile
+     * @param adresseCourriel adresse courriel unique du client (membre ou professionnel)
      */
     public void seConnecterApp(String adresseCourriel) {
         String idClient = ControleurClient.seConnecterApp(typeClient, adresseCourriel);
@@ -257,6 +267,7 @@ public abstract class VueClient extends Vue {
 
     /**
      * Demande au contrôleur de vérifier le type de client quand il veut accèder à la salle de sport
+     * (accès valide, membre suspendu, client invalide)
      */
     public void verifierTypeClient() {
         afficher(String.format("Entrez l'identifiant du %s (9 chiffres) :", clientString));

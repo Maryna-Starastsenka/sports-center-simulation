@@ -3,22 +3,22 @@ package main.vue;
 import java.util.Arrays;
 
 /**
- * Classe Vue Choix Plateforme hérite la classe Vue. Permet de faire le choix entre.
- * le logiciel pour pour l'agent et l'application mobile
+ * Classe Vue Choix Plateforme qui hérite de la classe Vue. Permet de faire le choix entre
+ * le logiciel pour pour l'agent et l'application mobile.
  * @author Maryna Starastsenka
  * @author Alex Defoy
  */
 public class VueChoixPlateforme extends Vue {
 
     /**
-     * Constructeur de VueChoixPlateforme
+     * Constructeur de Vue ChoixPlateforme
      */
     public VueChoixPlateforme() {
     }
 
     /**
      * Affiche le choix des plateformes et instancie la plateforme choisie
-     * @return instance de VueAgent ou de VueApplicationMobile
+     * @return instance de Vue Agent ou de Vue ApplicationMobile
      */
     public static VuePlateforme selectionnerOption() {
         effacerEcran();

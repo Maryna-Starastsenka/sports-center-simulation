@@ -1,7 +1,7 @@
 package main.vue;
 
 /**
- * Classe abstraite Vue Plateforme hérite la classe Vue.
+ * Classe abstraite Vue Plateforme qui hérite de la classe Vue.
  * @author Maryna Starastsenka
  * @author Alex Defoy
  */
@@ -13,12 +13,12 @@ public abstract class VuePlateforme extends Vue {
     public abstract void menuAccueil();
 
     /**
-     * Fait l''authentification d'un client
+     * Authentifie un client dans le système
      */
     public abstract void authentification();
 
     /**
-     * Demarre le logiciel et fait un appel de l'affichage du menu d'accueil
+     * Demarre le logiciel à partir du menu d'accueil en boucle tant que l'utilisateur ne quitte pas l'application
      */
     public void start() {
         while (true) {

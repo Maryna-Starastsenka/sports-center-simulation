@@ -6,20 +6,18 @@ import main.modele.TypeClient;
 import java.util.Arrays;
 
 /**
- * Classe Vue Membre hérite la classe Vue Client. Permet d'afficher les options du menu de gestion d'un membre.
+ * Classe Vue Membre qui hérite de la classe Vue Client. Permet d'afficher les options du menu de gestion d'un membre.
  * @author Maryna Starastsenka
  * @author Alex Defoy
  */
 public class VueMembre extends VueClient {
 
     /**
-     * Constructeur de VueMembre
+     * Constructeur de Vue Membre qui définit le type de client à Membre
      */
     public VueMembre() {
         clientString = "Membre";
         typeClient = TypeClient.MEMBRE;
-        controleurClient = new ControleurClient();
-        vueService = new VueService();
     }
 
     /**
@@ -44,6 +42,10 @@ public class VueMembre extends VueClient {
         return TypeClient.MEMBRE_SUSPENDU;
     }
 
+    /**
+     * Accueillir le client et lui permettre de s'authentifier avec son courriel pour entrer dans l'app
+     * @param adresseCourriel adresse courriel unique du client (membre ou professionnel)
+     */
     public void seConnecterApp(String adresseCourriel) {
         String idMembre = ControleurClient.seConnecterApp(typeClient, adresseCourriel);
         if (idMembre != null) {
@@ -59,7 +61,7 @@ public class VueMembre extends VueClient {
     }
 
     /**
-     * Fait un appel à la méthode qui affiche le menu d'inscription aux séance si le membre confirme son choix
+     * Fait un appel à la méthode qui affiche le menu d'inscription aux séances si le membre confirme son choix
      * @param idMembre numéro unique du membre
      */
     public void inscriptionApp(String idMembre) {
