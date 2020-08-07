@@ -292,10 +292,18 @@ public class ControleurService extends Controleur {
 		return service.getNomService();
 	}
 	
+	/**
+	 * Obtenir une liste de tous les services
+	 * @return liste des services
+	 */
 	public List<Service> obtenirListeServices(){
 		return centreDonneesServices.getListeServices();
 	}
 	
+	/**
+	 * Obtenir une liste de toutes les séances.
+	 * @return liste des séances
+	 */
 	public List<Seance> obtenirListeSeances(){
 		return centreDonneesServices.getListeSeances();
 	}

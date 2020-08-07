@@ -53,7 +53,7 @@ public class RapportSynthese {
      */
     @Override
     public String toString() {
-    	StringBuilder print = new StringBuilder("Rapport de synthèse \n");
+    	StringBuilder print = new StringBuilder("RAPPORT DE SYNTHÈSE :\n");
     	print.append("Liste des professionnels à payer : \n");
     	for(ProfessionnelTef pro : proTef) {
     		print.append(String.format("-%s (%s) doit recevoir %.2f$ pour les %s services qu'il a donnés cette semaine.",

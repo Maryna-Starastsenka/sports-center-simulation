@@ -42,13 +42,15 @@ public class MembreTef extends Tef {
     @Override
     public String toString() {
     	StringBuilder print = new StringBuilder(super.toString());
+    	int j=1;
     	if(this.listInscription!=null) {
     		for(Inscription i : this.listInscription) {
+    			print.append("\nInscription ").append(j++).append(" : \n");
     			print.append("Date séance : ").append(i.getDateSeanceString()).append("\n");
     			print.append("Nom du professionnel : ")
-                        .append(ControleurClient.nomClient(i.getNumeroProfessionnel())).append("\n");
+                        .append(ControleurClient.nomProfessionnel(i.getNumeroProfessionnel())).append("\n");
     			print.append("Nom du service : ")
-                        .append(ControleurService.nomService(i.getNumeroProfessionnel())).append("\n\n");
+                        .append(ControleurService.nomService(i.getCodeService())).append("\n");
     		}
     	}
     	return print.toString();

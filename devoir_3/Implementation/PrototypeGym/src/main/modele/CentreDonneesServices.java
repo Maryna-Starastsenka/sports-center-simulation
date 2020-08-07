@@ -257,6 +257,7 @@ public class CentreDonneesServices implements ICentreDonnees {
 	/**
 	 * Génère les fichiers TEF pour les professionnels
 	 * @param listeProfessionnels liste des professionnels
+     * @return liste TEF professionnels
 	 */
 	public List<ProfessionnelTef> genererTefProfessionnel(HashMap<String, Professionnel> listeProfessionnels) {
 		LocalDate dateDebut = LocalDate.now().minusDays(8).with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
@@ -285,6 +286,7 @@ public class CentreDonneesServices implements ICentreDonnees {
 	/**
 	 * Génère les fichiers TEF pour les membres
 	 * @param listeMembres liste des membres
+	 * @return liste TEF membre
 	 */
 	public List<MembreTef> genererTefMembre(HashMap<String, Membre> listeMembres) {
 		LocalDate dateDebut = LocalDate.now().minusDays(8).with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
@@ -324,6 +326,10 @@ public class CentreDonneesServices implements ICentreDonnees {
 				fraisTotaux);
 	}
 
+	/**
+	 * Renvoie la liste de tous les services.
+	 * @return liste des services
+	 */
 	public List<Service> getServices() {
 		return new ArrayList<>(listeServices.values());
 	}

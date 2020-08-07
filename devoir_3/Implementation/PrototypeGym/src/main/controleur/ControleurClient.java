@@ -141,12 +141,21 @@ public class ControleurClient extends Controleur {
 		return TypeClient.CLIENT_INVALIDE;
 	}
 
-	/** Obtenir le nom du client associé à son numéro unique
-	 * @param idClient numéro unique du client
-	 * @return nom du client
+	/** Obtenir le nom du membre associé à son numéro unique
+	 * @param idMembre numéro unique du membre
+	 * @return nom du membre
 	 */
-	public static String nomClient(String idClient) {
-		Client client = centreDonneesMembre.lire(idClient);
+	public static String nomClient(String idMembre) {
+		Client client = centreDonneesMembre.lire(idMembre);
+		return client.getNom();
+	}
+	
+	/** Obtenir le nom du professionnel associé à son numéro unique
+	 * @param idProfessionnel numéro unique du professionnel
+	 * @return nom du professionnel
+	 */
+	public static String nomProfessionnel(String idProfessionnel) {
+		Client client = centreDonneesProfessionnel.lire(idProfessionnel);
 		return client.getNom();
 	}
 
