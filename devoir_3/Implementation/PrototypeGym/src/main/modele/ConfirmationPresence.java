@@ -15,7 +15,15 @@ public class ConfirmationPresence {
 	private String numeroProfessionnel;
 	private String codeService;
 	private String commentaires;
-	
+
+	/**
+	 * Constructeur de ConfirmationPresence
+	 * @param dateEtHeureActuelles date et heur actuelles
+	 * @param numeroMembre numéro du membre
+	 * @param numeroProfessionnel numéro du professionnel
+	 * @param codeService code du service
+	 * @param commentaires commentaires
+	 */
 	public ConfirmationPresence(LocalDateTime dateEtHeureActuelles,
 								String numeroMembre,
 								String numeroProfessionnel,
@@ -34,7 +42,7 @@ public class ConfirmationPresence {
 				numeroMembre,
 				numeroProfessionnel,
 				codeService,
-				commentaires) % 10000); // 4 chiffres max
+				commentaires) % 10000);
 	}
 
 	protected String getHashInString() {

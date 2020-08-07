@@ -26,7 +26,10 @@ public class CentreDonneesServices implements ICentreDonnees {
     
     private List<ProfessionnelTef> listeProfessionnelsTef;
     private List<MembreTef> listeMembresTef;
-    
+
+	/**
+	 * Constructeur de CentreDonneesServices
+	 */
 	public CentreDonneesServices() {
 		this.listeServices = new HashMap<>();
 		this.listeSeances = new HashMap<>();
@@ -36,6 +39,10 @@ public class CentreDonneesServices implements ICentreDonnees {
 		this.listeMembresTef = new ArrayList<>();
 	}
 
+	/**
+	 * Ajoute le service dans le liste des services
+	 * @param service service
+	 */
 	public void ajouterService(Service service) {
 		List<Seance> seances = service.obtenirListeSeances();
 		
@@ -64,11 +71,18 @@ public class CentreDonneesServices implements ICentreDonnees {
 	public String getIDServiceFromSeance(String idSeance) {
 		return listeSeances.get(idSeance).getCodeService();
 	}
-	
+
+	/**
+	 * Retire le service de la liste des services
+	 * @param serviceId code du service
+	 */
 	public void supprimerService(String serviceId) {
         listeServices.remove(serviceId);
     }
-	
+
+	/**
+	 * Met à jour les séances
+	 */
 	public void mettreAJourSeances() {
 		List<Service> services = this.getServices();
 		HashMap<String, Seance> nouvelleListe = new HashMap<>();
@@ -80,7 +94,12 @@ public class CentreDonneesServices implements ICentreDonnees {
 		}
 		listeSeances = nouvelleListe;
 	}
-	
+
+	/**
+	 * Retourne la liste des services fournis par le professionnel
+	 * @param idProfessionnel numéro unique du professionnel
+	 * @return liste des services fournis par le professionnel
+	 */
 	public List<Service> getListeServicesPro(String idProfessionnel) {
         return listeServices
                 .values()
@@ -89,6 +108,11 @@ public class CentreDonneesServices implements ICentreDonnees {
                 .collect(Collectors.toList());
     }
 
+	/**
+	 * Retourne la liste des séances du professionnel
+	 * @param idProfessionnel numéro unique du professionnel
+	 * @return liste des séances du professionnel
+	 */
 	public List<Seance> getListeSeancesPro(String idProfessionnel) {
 		return listeSeances
 				.values()
@@ -96,7 +120,12 @@ public class CentreDonneesServices implements ICentreDonnees {
 				.filter(x -> x.getCodeProfessionnel().equals(idProfessionnel))
 				.collect(Collectors.toList());
 	}
-	
+
+	/**
+	 * Retourne la liste des séances disponibles ce jour-ci
+	 * @param jour jour actuel
+	 * @return liste des séances disponibles ce jour-ci
+	 */
 	public List<Seance> getListeSeances(LocalDate jour) {
         return listeSeances
                 .values()
@@ -104,7 +133,15 @@ public class CentreDonneesServices implements ICentreDonnees {
                 .filter(x -> x.getDate().equals(jour))
                 .collect(Collectors.toList());
     }
-	
+
+	/**
+	 * Retourne l'inscription du membre à la séance
+	 * @param idMembre numéro unique du membre
+	 * @param nomClient nom du client
+	 * @param idSeance code de la séance
+	 * @param commentaires commentaires
+	 * @return inscription du membre à la séance
+	 */
 	public Inscription inscrireMembreASeance(String idMembre, String nomClient, String idSeance, String commentaires) {
         Seance seance = listeSeances.get(idSeance);
         Service service = listeServices.get(seance.getCodeService());
@@ -123,7 +160,13 @@ public class CentreDonneesServices implements ICentreDonnees {
         }
         return inscription;
     }
-	
+
+	/**
+	 * Vérifie si le membre est inscrit à la séance
+	 * @param idMembre numéro du membre
+	 * @param idSeance code de la séance
+	 * @return vrai si le membre est inscrit à la séance. Sinon, retourne faux
+	 */
 	public boolean inscriptionExiste(String idMembre, String idSeance) {
         List<Inscription> inscriptions = null;
         if (listeServices.containsKey(getSeance(idSeance).getCodeService())) {
@@ -136,7 +179,12 @@ public class CentreDonneesServices implements ICentreDonnees {
         }
         return inscriptions != null && inscriptions.size() >= 1;
     }
-	
+
+	/**
+	 * Retourne la liste des inscriptions associées au numéro du professionnel
+	 * @param idProfessionnel numéro du professionnel
+	 * @return liste des inscriptions associées au numéro du professionnel
+	 */
 	public List<Inscription> getListeInscriptionsPro(String idProfessionnel) {
         return listeInscriptions
                 .values()
@@ -145,6 +193,11 @@ public class CentreDonneesServices implements ICentreDonnees {
                 .collect(Collectors.toList());
     }
 
+	/**
+	 * Retourne la liste des inscriptions à la séance
+	 * @param idSeance code de la séance
+	 * @return liste des inscriptions à la séance
+	 */
 	public List<Inscription> getListeInscriptionsSeance(String idSeance) {
 		return listeInscriptions
 				.values()
@@ -153,7 +206,14 @@ public class CentreDonneesServices implements ICentreDonnees {
 				.collect(Collectors.toList());
 	}
 
-	
+
+	/**
+	 * Confirme la présence d'un membre à une séance
+	 * @param idSeance code de la séance
+	 * @param idMembre numéro du membre
+	 * @param commentaires commentaires
+	 * @return vrai si la confirmation de présence est créée. Sinon, retourne faux
+	 */
 	public boolean confirmationPresence(String idSeance, String idMembre, String commentaires) {
         String codeService = listeSeances.get(idSeance).getCodeService();
         String numeroProfessionnel = listeServices.get(codeService).getNumeroProfessionnel();
@@ -164,7 +224,13 @@ public class CentreDonneesServices implements ICentreDonnees {
         }
 		return false;
 	}
-	
+
+	/**
+	 * Retourne la liste des séances entre les deux dates
+	 * @param debut date de début
+	 * @param fin date de fin
+	 * @return liste des séances entre les deux dates
+	 */
 	public List<Seance> getSeancesEntre(LocalDate debut, LocalDate fin) {
         return listeSeances
                 .values()
@@ -172,7 +238,13 @@ public class CentreDonneesServices implements ICentreDonnees {
                 .filter(x -> x.getDate().compareTo(debut) >= 0 && x.getDate().compareTo(fin) <= 0)
                 .collect(Collectors.toList());
     }
-	
+
+	/**
+	 * Retourne la liste des inscriptions entre les deux dates
+	 * @param debut date de début
+	 * @param fin date de fin
+	 * @return liste des inscriptions entre les deux dates
+	 */
 	public List<Inscription> getInscriptionsEntre(LocalDate debut, LocalDate fin) {
         return listeInscriptions
                 .values()
@@ -181,6 +253,10 @@ public class CentreDonneesServices implements ICentreDonnees {
                 .collect(Collectors.toList());
     }
 
+	/**
+	 * Génère les fichiers TEF pour les professionnels
+	 * @param listeProfessionnels liste des professionnels
+	 */
 	public void genererTefProfessionnel(HashMap<String, Professionnel> listeProfessionnels) {
 		LocalDate dateDebut = LocalDate.now().minusDays(8).with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
 		LocalDate dateFin = dateDebut.with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
@@ -202,7 +278,11 @@ public class CentreDonneesServices implements ICentreDonnees {
 		
 		listeProfessionnelsTef = new ArrayList<>(professionnelsAPayer.values());
 	}
-	
+
+	/**
+	 * Génère les fichiers TEF pour les membres
+	 * @param listeMembres liste des membres
+	 */
 	public void genererTefMembre(HashMap<String, Membre> listeMembres) {
 		LocalDate dateDebut = LocalDate.now().minusDays(8).with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
 		LocalDate dateFin = dateDebut.with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
@@ -225,6 +305,11 @@ public class CentreDonneesServices implements ICentreDonnees {
 		listeMembresTef = new ArrayList<>(membresPaye.values());
 	}
 
+	/**
+	 * Génère le rapport de synthèse
+	 * @param listeProfessionnels liste des professionnels
+	 * @return rapport de synthèse
+	 */
 	public RapportSynthese genererRapportSynthese(HashMap<String, Professionnel> listeProfessionnels) {
 		genererTefProfessionnel(listeProfessionnels);
 		int nombreTotalServices = listeProfessionnelsTef.stream().mapToInt(ProfessionnelTef::getNombreServices).sum();
@@ -239,10 +324,19 @@ public class CentreDonneesServices implements ICentreDonnees {
 		return new ArrayList<>(listeServices.values());
 	}
 
+	/**
+	 * Crée un client
+	 * @param client client
+	 */
 	@Override
 	public void creer(Object client) {
 	}
 
+	/**
+	 * Retourne le service
+	 * @param id numéro du client
+	 * @return service
+	 */
 	@Override
 	public Service lire(String id) {
 		if (listeServices.containsKey(id)) {
@@ -250,7 +344,12 @@ public class CentreDonneesServices implements ICentreDonnees {
 		}
 		return null;
 	}
-	
+
+	/**
+	 * Retourne la séance
+	 * @param id code de la séance
+	 * @return séance
+	 */
 	public Seance lireSeance(String id) {
 		if (listeSeances.containsKey(id)) {
 			return listeSeances.get(id);
@@ -258,6 +357,12 @@ public class CentreDonneesServices implements ICentreDonnees {
 		return null;
 	}
 
+	/**
+	 * Met à jour les informations sur la service
+	 * @param idSeance code de la séance
+	 * @param champsService type d'information à modifier
+	 * @param valeur nouvelle valuer
+	 */
 	@Override
 	public void mettreAJour(String idSeance, Champs champsService, String valeur) {
 		Service service = lireSeance(idSeance).getService();
@@ -283,6 +388,10 @@ public class CentreDonneesServices implements ICentreDonnees {
 		}
 	}
 
+	/**
+	 * Retire la séance de la listes des séances
+	 * @param seanceId code de la séance
+	 */
 	@Override
 	public void supprimer(String seanceId) {
 		Seance seance = listeSeances.get(seanceId);
@@ -298,21 +407,34 @@ public class CentreDonneesServices implements ICentreDonnees {
 
 	}
 
+	/**
+	 * Retourne l'inscription associée au code
+	 * @param inscriptionId code de l'inscription
+	 * @return inscription
+	 */
 	public Inscription getInscription(String inscriptionId) {
 		if (listeInscriptions.containsKey(inscriptionId)) {
 			return listeInscriptions.get(inscriptionId);
 		}
 		return null;
 	}
-	
-	
+
+
+	/**
+	 * Retourne la liste des services
+	 * @return liste des services
+	 */
 	public List<Service> getListeServices() {
 		return listeServices
 				.values()
 				.stream()
 				.collect(Collectors.toList());
 	}
-	
+
+	/**
+	 * Retourne la liste des séances
+	 * @return liste des séances
+	 */
 	public List<Seance> getListeSeances() {
 		return listeSeances
 				.values()

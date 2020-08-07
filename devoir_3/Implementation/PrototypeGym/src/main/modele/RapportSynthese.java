@@ -14,6 +14,13 @@ public class RapportSynthese {
     private int nombreTotalServices;
     private double totalFrais;
 
+    /**
+     * Constructeur de RapportSynthese
+     * @param proTef liste des TEF professionnel
+     * @param nombreTotalProfessionnels nombre total des professionnels
+     * @param nombreTotalServices nombre total des services
+     * @param totalFrais total des frais de service
+     */
     public RapportSynthese(List<ProfessionnelTef> proTef,
                            int nombreTotalProfessionnels,
                            int nombreTotalServices,
@@ -39,7 +46,11 @@ public class RapportSynthese {
     public int getNombreTotalProfessionnels() {
         return nombreTotalProfessionnels;
     }
-    
+
+    /**
+     * Retourne le rapport de synthèse en string
+     * @return rapport de synthèse
+     */
     @Override
     public String toString() {
     	StringBuilder print = new StringBuilder("Rapport de synthèse \n");

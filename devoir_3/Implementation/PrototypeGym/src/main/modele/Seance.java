@@ -17,6 +17,13 @@ public class Seance {
 	private Service service;
 	private String codeProfessionnel;
 
+	/**
+	 * Constriucteur de Seance
+	 * @param recurrence récurrence hebdomadaire du service
+	 * @param codeService code du service
+	 * @param codeProfessionnel numéro unique du professionnel
+	 * @param service service
+	 */
 	public Seance(DayOfWeek recurrence, String codeService, String codeProfessionnel, Service service) {
 		this.recurrence = recurrence;
 		this.date = LocalDate.now().minusDays(1).with(TemporalAdjusters.next(recurrence));
@@ -25,30 +32,57 @@ public class Seance {
 		this.service = service;
 	}
 
+	/**
+	 * Retourne la récurrence hebdomadaire du service
+	 * @return récurrence hebdomadaire du service
+	 */
 	public DayOfWeek getRecurrence() {
 		return recurrence;
 	}
-	
+
+	/**
+	 * Assigne la récurrence hebdomadaire du service
+	 * @param valeur jour de la semaine
+	 */
 	public void setRecurrence(DayOfWeek valeur) {
 		this.recurrence = valeur;
 	}
-	
+
+	/**
+	 * Assigne le code du service
+	 */
 	public void setCodeService() {
 		this.codeService = this.service.getCode();
 	}
-	
+
+	/**
+	 * Retourne la date de la séance
+	 * @return date de la séance
+	 */
 	public LocalDate getDate() {
 		return date;
 	}
-	
+
+	/**
+	 * Retourne le service
+	 * @return service
+	 */
 	public Service getService() {
 		return service;
 	}
-	
+
+	/**
+	 * Assigne le service
+	 * @param service service
+	 */
 	public void setService(Service service) {
 		this.service = service;
 	}
 
+	/**
+	 * Retourne le jour de la semaine en français
+	 * @return jour de la semmaine en français en string
+	 */
 	public String getRecurrenceString() {
 		return switch (recurrence) {
 			case MONDAY -> Jour.LUNDI.toString();
@@ -78,10 +112,12 @@ public class Seance {
 	}
 
 	@Override
-	public int hashCode() {
-		return Math.abs(Objects.hash(recurrence) % 100); // 2 chiffres max
-	}
+	public int hashCode() { return Math.abs(Objects.hash(recurrence) % 100); }
 
+	/**
+	 * Retourne les informations sur la séance en string
+	 * @return informations sur la séance
+	 */
 	@Override
 	public String toString() {
 		return "Numéro de séance : " + getCodeSeance() + "\n" +

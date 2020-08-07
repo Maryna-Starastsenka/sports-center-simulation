@@ -9,7 +9,19 @@ import java.time.LocalDate;
  */
 public class Professionnel extends Client {
 
-	public Professionnel (String nom, LocalDate dateNaissance, String adresse, String ville, String province, String codePostal, String numeroPhone, String adresseCourriel) {
+	/**
+	 * Constructeur de Professionnel
+	 * @param nom nom du professionnel
+	 * @param dateNaissance date de naissance du professionnel
+	 * @param adresse adresse du professionnel
+	 * @param ville ville du professionnel
+	 * @param province province du professionnel
+	 * @param codePostal code postal du professionnel
+	 * @param numeroPhone numéro de téléphone du professionnel
+	 * @param adresseCourriel adresse courriel du professionnel
+	 */
+	public Professionnel (String nom, LocalDate dateNaissance, String adresse, String ville, String province,
+						  String codePostal, String numeroPhone, String adresseCourriel) {
 		this.nom = nom;
 		this.dateNaissance = dateNaissance;
 		this.adresse = adresse;

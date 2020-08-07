@@ -75,14 +75,26 @@ public class Service {
 		return heureService;
 	}
 
+	/**
+	 * Ajoute la séance dans la liste des séances
+	 * @param seance seance
+	 */
 	public void ajouterSeance(Seance seance) {
 		this.seances.put(seance.getCodeSeance(), seance);
 	}
-	
+
+	/**
+	 * Retire la séance dans la liste des séances
+	 * @param id code de la séance
+	 */
 	public void enleverSeance(String id) {
 		this.seances.remove(id);
 	}
-	
+
+	/**
+	 * Retourne la liste des séances
+	 * @return liste des séances
+	 */
 	public List<Seance> obtenirListeSeances() {
 		return new ArrayList<>(seances.values());
 	}
@@ -105,7 +117,7 @@ public class Service {
 
 	@Override
 	public int hashCode() {
-		return Math.abs((Objects.hash(nomService) + Objects.hash(numeroProfessionnel)) % 1000); // 3 chiffres max
+		return Math.abs((Objects.hash(nomService) + Objects.hash(numeroProfessionnel)) % 1000);
 	}
 
 	protected String getHashInString() {
@@ -141,6 +153,10 @@ public class Service {
 		this.commentaires = valeur;
 	}
 
+	/**
+	 * Retourne les informations sur le service en string
+	 * @return informations sur le service
+	 */
 	@Override
 	public String toString() {
 		return "Nom de service : " + getNomService() + "\n" +

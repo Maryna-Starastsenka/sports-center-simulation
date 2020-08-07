@@ -14,16 +14,29 @@ public class CentreDonneesProfessionnel implements ICentreDonnees<Professionnel>
     private HashMap<String, Professionnel> listeProfessionnels;
     private HashMap<String, String> listeAdressesProfessionnels;
 
+    /**
+     * Constructeur de CentreDonneesProfessionnel qui initialise la liste des professionnels et
+     * la liste des adresses courriel des professionnels
+     */
     public CentreDonneesProfessionnel() {
         listeProfessionnels = new HashMap<>();
         listeAdressesProfessionnels = new HashMap<>();
     }
 
+    /**
+     * Fait un appel de la méthode quu ajoute un nouveau client dans la liste des professionnels
+     * @param professionnel
+     */
     @Override
     public void creer(Professionnel professionnel) {
         ajouterClient(professionnel);
     }
 
+    /**
+     * Retourne le professionnel associé au numéro unique
+     * @param id numéro unique du professionnel
+     * @return professionnel
+     */
     @Override
     public Professionnel lire(String id) {
         if (listeProfessionnels.containsKey(id)) {
@@ -32,6 +45,11 @@ public class CentreDonneesProfessionnel implements ICentreDonnees<Professionnel>
         return null;
     }
 
+    /**
+     * Retourne le numéro du professionnel assisié à l'adresse courriel
+     * @param adresseCourriel adresse courriel du professionnel
+     * @return numéro du professionnel
+     */
     public String getIdDepuisAdresse(String adresseCourriel) {
         if (listeAdressesProfessionnels.containsKey(adresseCourriel)) {
             return listeAdressesProfessionnels.get(adresseCourriel);
@@ -39,6 +57,12 @@ public class CentreDonneesProfessionnel implements ICentreDonnees<Professionnel>
         return null;
     }
 
+    /**
+     * Met à jour les informations sur le professionnel
+     * @param idProfessionnel numéro unique du professionnel
+     * @param champsClient type d'information à modifier
+     * @param valeur nouvelle valuer
+     */
     @Override
     public void mettreAJour(String idProfessionnel, Champs champsClient, String valeur) {
         Professionnel professionnel = lire(idProfessionnel);
@@ -60,6 +84,10 @@ public class CentreDonneesProfessionnel implements ICentreDonnees<Professionnel>
         }
     }
 
+    /**
+     * Supprime le professionnel de la liste des professionnels
+     * @param id numéro unique du professionnel
+     */
     @Override
     public void supprimer(String id) {
         String adresseCourriel = listeProfessionnels.get(id).getAdresseCourriel();
@@ -67,6 +95,10 @@ public class CentreDonneesProfessionnel implements ICentreDonnees<Professionnel>
         listeAdressesProfessionnels.remove(adresseCourriel);
     }
 
+    /**
+     * Fait un appel de la méthode quu ajoute un nouveau professionnel dans la liste des professionnels
+     * @param professionnel professionnel
+     */
     @Override
     public void ajouterClient(Professionnel professionnel) {
         if (!listeProfessionnels.containsKey(professionnel.getHashInString()) &&
@@ -76,10 +108,18 @@ public class CentreDonneesProfessionnel implements ICentreDonnees<Professionnel>
         }
     }
 
+    /**
+     * Retourne la liste des professionnels existants
+     * @return liste des professionnels
+     */
     public List<Client> getClients() {
         return new ArrayList<>(listeProfessionnels.values());
     }
 
+    /**
+     * Retourne la liste des professionnels existants
+     * @return liste des professionnels
+     */
     public HashMap<String, Professionnel> getListeProfessionnels() {
         return listeProfessionnels;
     }
