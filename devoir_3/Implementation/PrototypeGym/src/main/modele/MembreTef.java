@@ -13,15 +13,32 @@ public class MembreTef extends Tef {
 
     private ArrayList<Inscription> listInscription;
 
+    /**
+     * Constructeur de MembreTef
+     * @param nom nom du membre
+     * @param numero numéro unique du membre
+     * @param adresse adresse du membre
+     * @param ville ville du membre
+     * @param province province du membre
+     * @param codePostal code postal du membre
+     */
     public MembreTef(String nom, String numero, String adresse, String ville, String province, String codePostal) {
         super(nom, numero, adresse, ville, province, codePostal);
         this.listInscription = new ArrayList<>();
     }
 
+    /**
+     * Ajoute l'inscription dans la liste des inscriptions
+     * @param inscription inscription
+     */
     public void ajouterInscription(Inscription inscription) {
     	this.listInscription.add(inscription);
     }
-    
+
+    /**
+     * Retourne les informations sur l'inscription en string
+     * @return informations sur l'inscription
+     */
     @Override
     public String toString() {
     	StringBuilder print = new StringBuilder(super.toString());

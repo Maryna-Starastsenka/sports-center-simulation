@@ -22,6 +22,18 @@ public class Inscription {
 	private double montant;
 	private String nomMembre;
 
+	/**
+	 * Constructeur d'Inscription
+	 * @param dateEtHeureActuelles date et heure actuelles
+	 * @param dateSeance date de séance
+	 * @param numeroProfessionnel numéro du professionnel
+	 * @param numeroMembre numéro du membre
+	 * @param nomMembre nom du membre
+	 * @param codeService code du service
+	 * @param commentaires commentaires
+	 * @param codeSeance code de la séance
+	 * @param montant frais du service
+	 */
 	public Inscription(LocalDateTime dateEtHeureActuelles, LocalDate dateSeance, String numeroProfessionnel,
 					   String numeroMembre, String nomMembre, String codeService, String commentaires,
 					   String codeSeance, double montant) {
@@ -47,7 +59,7 @@ public class Inscription {
 	public String getNumeroMembre() {
 		return numeroMembre;
 	}
-	
+
 	public String getNomMembre() {
 		return nomMembre;
 	}
@@ -63,7 +75,7 @@ public class Inscription {
 	public String getCodeSeance() {
 		return codeSeance;
 	}
-	
+
 	public double getMontant() {
 		return montant;
 	}
@@ -79,7 +91,7 @@ public class Inscription {
 				numeroProfessionnel,
 				numeroMembre,
 				codeService,
-				codeSeance) % 10000); // 4 chiffres max
+				codeSeance) % 10000);
 	}
 
 	public String getHashInString() {
@@ -90,6 +102,10 @@ public class Inscription {
 		return Helper.localDateFormatter.format(dateSeance);
 	}
 
+	/**
+	 * Retourne les informations sur l'inscription en string
+	 * @return informations sur l'inscription
+	 */
 	@Override
 	public String toString() {
 		return "Date et heure d'inscription : " + getDateEtHeureActuelleString() + "\n" +

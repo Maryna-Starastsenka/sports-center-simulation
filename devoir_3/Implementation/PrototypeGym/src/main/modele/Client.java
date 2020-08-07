@@ -31,13 +31,13 @@ public abstract class Client {
 	public String getNumeroPhone() { return numeroPhone; }
 
 	public String getAdresse() { return adresse; }
-	
+
 	public String getVille() { return ville; }
 
 	public String getProvince() { return province; }
-	
+
 	public String getCodePostal() { return codePostal; }
-	
+
 	public void setNom(String nom) { this.nom = nom; }
 
 	public void setId(String id) { this.id = id; }
@@ -49,11 +49,11 @@ public abstract class Client {
 	public void setNumeroPhone(String numeroPhone) { this.numeroPhone = numeroPhone; }
 
 	public void setAdresse(String adresse) { this.adresse = adresse; }
-	
+
 	public void setVille(String ville) { this.ville = ville; }
 
 	public void setProvince(String province) { this.province = province; }
-	
+
 	public void setCodePostal(String codePostal) { this.codePostal = codePostal; }
 
 	@Override
@@ -66,13 +66,17 @@ public abstract class Client {
 	}
 
 	public static int hashCode(String adresseCourriel) {
-		return Math.abs(Objects.hash(adresseCourriel) % 1000000000); // 9 chiffres max
+		return Math.abs(Objects.hash(adresseCourriel) % 1000000000);
 	}
 
 	public static String getHashInString(String adresseCourriel) {
 		return String.format("%09d", hashCode(adresseCourriel));
 	}
 
+	/**
+	 * Retourne les informations sur le membre en string
+	 * @return informations sur le membre
+	 */
 	@Override
 	public String toString() {
 		return "Nom : " + this.getNom() + "\n" + "Date de naissance : "
