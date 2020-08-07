@@ -32,6 +32,9 @@ public class VueAdministration extends Vue {
         if (reponse.equals("1")) {
             afficher(controleurAdministration.genererRapportSynthese());
             afficher("\nUne copie du rapport a été envoyée au gérant.");
+            afficher("Exemple du format des TEF : ");
+            afficher(controleurAdministration.genererProfessionnelsTef());
+            afficher(controleurAdministration.genererMembresTef());
         } else {
             afficher("Annulation de la génération du rapport de synthèse. Retour au menu principal.");
         }

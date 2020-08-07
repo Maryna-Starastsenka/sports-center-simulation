@@ -29,28 +29,28 @@ public class ControleurAdministration extends Controleur {
     
     /**
      * Génère le TEF des membres
-     * @return la liste des TEF des membres en STRING
+     * @return TEF professionnels
      */
     public String genererProfessionnelsTef() {
         HashMap<String, Professionnel> listeProfessionnels = ControleurClient.getListeProfessionnels();
         List<ProfessionnelTef> tef = ControleurService.centreDonneesServices.genererTefProfessionnel(listeProfessionnels);
-        String rapport = "";
+        String rapport = "TEF DES PROFESSIONNELS : \n";
         for(ProfessionnelTef p : tef){
-            rapport +=p.toString();
+            rapport +=p.toString()+"\n";
         }
         return rapport.toString()+ "\n";
     }
     
     /**
      * Génère le rapport de synthèse
-     * @return  la liste des TEF des professionnels en STRING
+     * @return TEF membres
      */
     public String genererMembresTef() {
         HashMap<String, Membre> listeMembres = ControleurClient.getListeMembres();
         List<MembreTef> tef = ControleurService.centreDonneesServices.genererTefMembre(listeMembres);
-        String rapport = "";
+        String rapport = "TEF DES MEMBRES : \n";
         for(MembreTef m : tef){
-            rapport += m.toString();
+            rapport += m.toString()+"\n";
         } 
         return rapport.toString()+ "\n";
     }
