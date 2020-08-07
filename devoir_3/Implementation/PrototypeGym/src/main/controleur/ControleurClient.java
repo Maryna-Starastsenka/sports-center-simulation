@@ -230,6 +230,14 @@ public class ControleurClient extends Controleur {
 	public static HashMap<String, Professionnel> getListeProfessionnels() {
 		return centreDonneesProfessionnel.getListeProfessionnels();
 	}
+	
+	/**
+	 * Demande au Centre de données Professionnel de retourner la liste des professionnels existants
+	 * @return liste des professionnels
+	 */
+	public static HashMap<String, Membre> getListeMembres() {
+		return centreDonneesMembre.getListeMembres();
+	}
 
 	/** Demande de modifier le statut des membres (suspendu ou non) spécifiés dans la liste
 	 * @param listeValidations liste des membres avec le statut à modifier

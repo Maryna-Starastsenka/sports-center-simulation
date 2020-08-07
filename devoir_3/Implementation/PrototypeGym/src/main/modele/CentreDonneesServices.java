@@ -181,7 +181,7 @@ public class CentreDonneesServices implements ICentreDonnees {
                 .collect(Collectors.toList());
     }
 
-	public void genererTefProfessionnel(HashMap<String, Professionnel> listeProfessionnels) {
+	public List<ProfessionnelTef> genererTefProfessionnel(HashMap<String, Professionnel> listeProfessionnels) {
 		LocalDate dateDebut = LocalDate.now().minusDays(8).with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
 		LocalDate dateFin = dateDebut.with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
 
@@ -200,10 +200,11 @@ public class CentreDonneesServices implements ICentreDonnees {
 
 		}
 		
-		listeProfessionnelsTef = new ArrayList<>(professionnelsAPayer.values());
+		 listeProfessionnelsTef = new ArrayList<>(professionnelsAPayer.values());
+		 return listeProfessionnelsTef;
 	}
 	
-	public void genererTefMembre(HashMap<String, Membre> listeMembres) {
+	public List<MembreTef> genererTefMembre(HashMap<String, Membre> listeMembres) {
 		LocalDate dateDebut = LocalDate.now().minusDays(8).with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
 		LocalDate dateFin = dateDebut.with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
 
@@ -223,6 +224,7 @@ public class CentreDonneesServices implements ICentreDonnees {
 		}
 		
 		listeMembresTef = new ArrayList<>(membresPaye.values());
+		return listeMembresTef;
 	}
 
 	public RapportSynthese genererRapportSynthese(HashMap<String, Professionnel> listeProfessionnels) {

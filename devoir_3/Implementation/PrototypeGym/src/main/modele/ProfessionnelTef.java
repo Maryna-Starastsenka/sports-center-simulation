@@ -42,15 +42,17 @@ public class ProfessionnelTef extends Tef {
     
     @Override
     public String toString() {
+    	int j = 1;
     	StringBuilder print = new StringBuilder(super.toString());
     	if(this.listInscription!=null) {
     		for(Inscription i : this.listInscription) {
-    			print.append("Date séance").append(i.getDateSeanceString()).append("\n");
-    			print.append("Date inscriptions").append(i.getDateEtHeureActuelleString()).append("\n");
-    			print.append("Nom du membre").append(i.getNomMembre()).append("\n");
-    			print.append("Numéro du membre").append(i.getNumeroMembre()).append("\n");
-    			print.append("Code de la séance").append(i.getCodeSeance()).append("\n");
-    			print.append("Montant à payer").append(i.getMontant()).append("\n");
+    			print.append("\nInscription ").append(j++).append(" : \n");
+    			print.append("Date séance : ").append(i.getDateSeanceString()).append("\n");
+    			print.append("Date inscriptions : ").append(i.getDateEtHeureActuelleString()).append("\n");
+    			print.append("Nom du membre : ").append(i.getNomMembre()).append("\n");
+    			print.append("Numéro du membre : ").append(i.getNumeroMembre()).append("\n");
+    			print.append("Code de la séance : ").append(i.getCodeSeance()).append("\n");
+    			print.append("Montant à payer : ").append(i.getMontant()).append("\n");
     		}
     	}
     	return print.toString();

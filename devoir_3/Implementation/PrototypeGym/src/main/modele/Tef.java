@@ -61,7 +61,7 @@ public abstract class Tef {
     @Override
     public String toString() {
         return "Nom : " + this.nom + "\n" +
-                ("Date de facturation : " + Helper.localDateTimeFormatter.format(LocalDateTime.now())) +
+                ("Date de facturation : " + Helper.localDateTimeFormatter.format(LocalDateTime.now()) + "\n") +
                 ("Numéro : " + this.numero + "\n") +
                 ("Adresse : " + this.adresse + "\n") + ("Ville : " + this.ville + "\n") +
                 ("Province : " + this.province + "\n") + ("Code postal : " + this.codePostal + "\n");

@@ -27,11 +27,11 @@ public class MembreTef extends Tef {
     	StringBuilder print = new StringBuilder(super.toString());
     	if(this.listInscription!=null) {
     		for(Inscription i : this.listInscription) {
-    			print.append("Date séance").append(i.getDateSeanceString()).append("\n");
-    			print.append("Nom du professionnel")
+    			print.append("Date séance : ").append(i.getDateSeanceString()).append("\n");
+    			print.append("Nom du professionnel : ")
                         .append(ControleurClient.nomClient(i.getNumeroProfessionnel())).append("\n");
-    			print.append("Nom du service")
-                        .append(ControleurService.nomService(i.getNumeroProfessionnel())).append("\n");
+    			print.append("Nom du service : ")
+                        .append(ControleurService.nomService(i.getNumeroProfessionnel())).append("\n\n");
     		}
     	}
     	return print.toString();
