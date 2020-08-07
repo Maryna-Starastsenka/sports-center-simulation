@@ -18,7 +18,7 @@ public class Seance {
 	private String codeProfessionnel;
 
 	/**
-	 * Constriucteur de Seance
+	 * Constructeur de Seance
 	 * @param recurrence récurrence hebdomadaire du service
 	 * @param codeService code du service
 	 * @param codeProfessionnel numéro unique du professionnel
@@ -32,49 +32,26 @@ public class Seance {
 		this.service = service;
 	}
 
-	/**
-	 * Retourne la récurrence hebdomadaire du service
-	 * @return récurrence hebdomadaire du service
-	 */
 	public DayOfWeek getRecurrence() {
 		return recurrence;
 	}
 
-	/**
-	 * Assigne la récurrence hebdomadaire du service
-	 * @param valeur jour de la semaine
-	 */
 	public void setRecurrence(DayOfWeek valeur) {
 		this.recurrence = valeur;
 	}
 
-	/**
-	 * Assigne le code du service
-	 */
 	public void setCodeService() {
 		this.codeService = this.service.getCode();
 	}
 
-	/**
-	 * Retourne la date de la séance
-	 * @return date de la séance
-	 */
 	public LocalDate getDate() {
 		return date;
 	}
 
-	/**
-	 * Retourne le service
-	 * @return service
-	 */
 	public Service getService() {
 		return service;
 	}
 
-	/**
-	 * Assigne le service
-	 * @param service service
-	 */
 	public void setService(Service service) {
 		this.service = service;
 	}

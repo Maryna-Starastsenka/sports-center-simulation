@@ -21,7 +21,7 @@ public class Membre extends Client {
 	 * @param codePostal code postal du membre
 	 * @param numeroPhone numéro de téléphone du membre
 	 * @param adresseCourriel adresse courriel du membre
-	 * @param aPaye statut du membre (frais d'adhésion sont payé ou pas)
+	 * @param aPaye statut du membre (frais d'adhésion sont payés ou pas)
 	 */
 	public Membre(String nom, LocalDate dateNaissance, String adresse, String ville, String province, String codePostal,
 				  String numeroPhone, String adresseCourriel, boolean aPaye) {

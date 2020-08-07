@@ -16,7 +16,7 @@ public class CentreDonneesMembre implements ICentreDonnees<Membre> {
 
     /**
      * Constructeur de CentreDonneesMembre qui initialise la liste des membres et
-     * la liste des adresses courriel des membres
+     * la liste des adresses courriels des membres
      */
     public CentreDonneesMembre() {
         this.listeMembres = new HashMap<>();
@@ -24,7 +24,7 @@ public class CentreDonneesMembre implements ICentreDonnees<Membre> {
     }
 
     /**
-     * Retourne le numéro du membre assisié à l'adresse courriel
+     * Retourne le numéro du membre associé à l'adresse courriel
      * @param adresseCourriel adresse courriel du membre
      * @return numéro du membre
      */
@@ -39,7 +39,7 @@ public class CentreDonneesMembre implements ICentreDonnees<Membre> {
      * Met à jour les informations sur le client
      * @param idMembre numéro unique du membre
      * @param champsClient type d'information à modifier
-     * @param valeur nouvelle valuer
+     * @param valeur nouvelle valeur
      */
     @Override
     public void mettreAJour(String idMembre, Champs champsClient, String valeur) {
@@ -65,7 +65,7 @@ public class CentreDonneesMembre implements ICentreDonnees<Membre> {
 
     /**
      * Modifie le statut des membres (suspendu ou non) spécifiés dans la liste
-     * @param listeValidations
+     * @param listeValidations liste des membres avec le statut modifié
      */
     public void modifierStatutMembres(HashMap<String, Boolean> listeValidations) {
     	List<Membre> listeMembreModifier= new ArrayList<>(listeMembres.values());
@@ -119,7 +119,7 @@ public class CentreDonneesMembre implements ICentreDonnees<Membre> {
     }
 
     /**
-     * Fait un appel de la méthode quu ajoute un nouveau client dans la liste des membres
+     * Fait un appel de la méthode qui ajoute un nouveau client dans la liste des membres
      * @param membre membre
      */
     @Override

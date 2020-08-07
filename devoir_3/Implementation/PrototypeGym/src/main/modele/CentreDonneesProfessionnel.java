@@ -16,7 +16,7 @@ public class CentreDonneesProfessionnel implements ICentreDonnees<Professionnel>
 
     /**
      * Constructeur de CentreDonneesProfessionnel qui initialise la liste des professionnels et
-     * la liste des adresses courriel des professionnels
+     * la liste des adresses courriels des professionnels
      */
     public CentreDonneesProfessionnel() {
         listeProfessionnels = new HashMap<>();
@@ -46,7 +46,7 @@ public class CentreDonneesProfessionnel implements ICentreDonnees<Professionnel>
     }
 
     /**
-     * Retourne le numéro du professionnel assisié à l'adresse courriel
+     * Retourne le numéro du professionnel associé à l'adresse courriel
      * @param adresseCourriel adresse courriel du professionnel
      * @return numéro du professionnel
      */
@@ -61,7 +61,7 @@ public class CentreDonneesProfessionnel implements ICentreDonnees<Professionnel>
      * Met à jour les informations sur le professionnel
      * @param idProfessionnel numéro unique du professionnel
      * @param champsClient type d'information à modifier
-     * @param valeur nouvelle valuer
+     * @param valeur nouvelle valeur
      */
     @Override
     public void mettreAJour(String idProfessionnel, Champs champsClient, String valeur) {
@@ -96,7 +96,7 @@ public class CentreDonneesProfessionnel implements ICentreDonnees<Professionnel>
     }
 
     /**
-     * Fait un appel de la méthode quu ajoute un nouveau professionnel dans la liste des professionnels
+     * Fait un appel de la méthode qui ajoute un nouveau professionnel dans la liste des professionnels
      * @param professionnel professionnel
      */
     @Override

@@ -18,7 +18,7 @@ public class ConfirmationPresence {
 
 	/**
 	 * Constructeur de ConfirmationPresence
-	 * @param dateEtHeureActuelles date et heur actuelles
+	 * @param dateEtHeureActuelles date et heure actuelles
 	 * @param numeroMembre numéro du membre
 	 * @param numeroProfessionnel numéro du professionnel
 	 * @param codeService code du service

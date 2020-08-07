@@ -40,7 +40,7 @@ public class CentreDonneesServices implements ICentreDonnees {
 	}
 
 	/**
-	 * Ajoute le service dans le liste des services
+	 * Ajoute le service dans la liste des services
 	 * @param service service
 	 */
 	public void ajouterService(Service service) {
@@ -122,9 +122,9 @@ public class CentreDonneesServices implements ICentreDonnees {
 	}
 
 	/**
-	 * Retourne la liste des séances disponibles ce jour-ci
-	 * @param jour jour actuel
-	 * @return liste des séances disponibles ce jour-ci
+	 * Retourne la liste des séances disponibles un jour donné
+	 * @param jour jour auquel on souhaite obtenir la liste des séances
+	 * @return liste des séances disponibles le jour spécifié
 	 */
 	public List<Seance> getListeSeances(LocalDate jour) {
         return listeSeances
@@ -226,10 +226,10 @@ public class CentreDonneesServices implements ICentreDonnees {
 	}
 
 	/**
-	 * Retourne la liste des séances entre les deux dates
+	 * Retourne la liste des séances entre deux dates
 	 * @param debut date de début
 	 * @param fin date de fin
-	 * @return liste des séances entre les deux dates
+	 * @return liste des séances entre les deux dates spécifiées
 	 */
 	public List<Seance> getSeancesEntre(LocalDate debut, LocalDate fin) {
         return listeSeances
@@ -240,10 +240,10 @@ public class CentreDonneesServices implements ICentreDonnees {
     }
 
 	/**
-	 * Retourne la liste des inscriptions entre les deux dates
+	 * Retourne la liste des inscriptions entre deux dates
 	 * @param debut date de début
 	 * @param fin date de fin
-	 * @return liste des inscriptions entre les deux dates
+	 * @return liste des inscriptions entre les deux dates spécifiées
 	 */
 	public List<Inscription> getInscriptionsEntre(LocalDate debut, LocalDate fin) {
         return listeInscriptions
@@ -281,7 +281,6 @@ public class CentreDonneesServices implements ICentreDonnees {
 		 listeProfessionnelsTef = new ArrayList<>(professionnelsAPayer.values());
 		 return listeProfessionnelsTef;
 	}
-
 
 	/**
 	 * Génère les fichiers TEF pour les membres
@@ -368,10 +367,10 @@ public class CentreDonneesServices implements ICentreDonnees {
 	}
 
 	/**
-	 * Met à jour les informations sur la service
+	 * Met à jour les informations sur le service
 	 * @param idSeance code de la séance
 	 * @param champsService type d'information à modifier
-	 * @param valeur nouvelle valuer
+	 * @param valeur nouvelle valeur
 	 */
 	@Override
 	public void mettreAJour(String idSeance, Champs champsService, String valeur) {
@@ -429,16 +428,12 @@ public class CentreDonneesServices implements ICentreDonnees {
 		return null;
 	}
 
-
 	/**
 	 * Retourne la liste des services
 	 * @return liste des services
 	 */
 	public List<Service> getListeServices() {
-		return listeServices
-				.values()
-				.stream()
-				.collect(Collectors.toList());
+		return new ArrayList<>(listeServices.values());
 	}
 
 	/**
@@ -446,10 +441,7 @@ public class CentreDonneesServices implements ICentreDonnees {
 	 * @return liste des séances
 	 */
 	public List<Seance> getListeSeances() {
-		return listeSeances
-				.values()
-				.stream()
-				.collect(Collectors.toList());
+		return new ArrayList<>(listeSeances.values());
 	}
 	
 }
