@@ -34,7 +34,7 @@
     <br />
     <span style="font-weight: bold;">Courriel : </span>alex.defoy@umontreal.ca
     <br />
-    <span style="font-weight: bold;">Temps mis : </span>XX heures
+    <span style="font-weight: bold;">Temps mis : </span>50 heures
   </p>
   <p>
     <span style="font-weight: bold;">Nom : </span>Maryna Starastsenka
@@ -43,12 +43,12 @@
     <br />
     <span style="font-weight: bold;">Courriel : </span>maryna.starastsenka@umontreal.ca
     <br />
-    <span style="font-weight: bold;">Temps mis : </span>XX heures
+    <span style="font-weight: bold;">Temps mis : </span>50 heures
   </p>
   <h2>
     Distribution des tâches</h2>
   <p>
-    <span style="font-weight: bold;">Soumetteur : Defoy Alex</span>
+    <span style="font-weight: bold;">Soumetteur : Maryna Starastsenka</span>
   </p>
   <table cellpadding="7px">
     <thead>
@@ -70,10 +70,10 @@
           Mise à jour des artéfacts
         </td>
         <td>
-          (%)
+          Gestion des membres/Inscription séance/Confirmer Présence(50%)
         </td>
         <td>
-          (%)
+          Gestion des services/Procédure comptable/Diagramme de classes(50%)
         </td>
       </tr>
       <tr>
@@ -81,10 +81,10 @@
           Implémentation en Java
         </td>
         <td>
-          (%)
+          Gestion de services et séances/Application mobile/TEF(40%)
         </td>
         <td>
-          (%)
+          Réorganisation de la structure/Gestion de membres/Vue(60%)
         </td>
       </tr>
       <tr>
@@ -92,10 +92,10 @@
           Tests unitaires
         </td>
         <td>
-          (%)
+          Gestion des membres/Inscriptions/ConfirmerPresence(50%)
         </td>
         <td>
-          (%)
+          Gestion des services/Mise à jour statut membre/authentifierClient(50%)
         </td>
       </tr>
       <tr>
@@ -103,10 +103,10 @@
           Livraison et documentation
         </td>
         <td>
-          (%)
+          Manuel d'instruction/JAR(75%)
         </td>
         <td>
-          (%)
+          JavaDoc(25%)
         </td>
       </tr>
     </tbody>
@@ -120,99 +120,88 @@
   <h2>
     Tâche 1 : Mise à jour des artéfacts</h2>
     <pre style="font-family: 'Open Sans';">
-    
-    **** Pour me souvenir de ce que j'ai modifié***
-    Mis tout ce qui est professionnel, membre centre données client. Les rapports et TEF sont dans Centredonnéesservices. Ajout d'un attribut liste de services pour professionnel.
-    
-    CONTROLEUR : a deux attributs, controleurClient et controleurServices. Gère le menu principal. Enlevé gérerMenuAccesGym et mis dans demanderAcces.
-                Enlevé gérerGestionCompte et mis le switch dans gestionCompte.
-                
-                Modifié cas d'utilisation Inscription séance et confirmer présence. Demander le numéro du membre est en premier maintenant
-                La validation des numéros de client et professionnel dans controleur n'est pas gérer toujours de la même façon. (boucle while dans gestions ervice)
-                J'ai mis la procédure comptable dans CentreDonneesServices, mais il a fallu que j'aille chercher le hashmap des professionnels de CentreDonneesClient pour 
-                    le donner à CentreDoneesServices pour faire les TEF.
-    ****
+        Workflow d'analyse :
+            Peu de modifications ont été apportées aux artéfacts de l'analyse.
+            Deux horloges ont été ajoutées au diagramme d'analyse principal pour les cas automatiques.
+            La première étape de l'inscription à une séance est maintenant la vérification du numéro de membre plutôt que le choix de la séance.
+            Dans le cas d'utilisation de la procédure comptable, on crée maintenant aussi un fichier TEF pour les membres.
+            Pour ce qui est des informations supplémentaires demandées lors de l'inscription, ces changements n'ont pas d'impact sur l'analyse.
+            L'application mobile n'est pas analysée dans ce workflow.
+            <a href="rapportDevoir1.htm" title="Premier rapport">Lien vers le premier rapport</a>.</p>
 
-    MODIFICATIONS
-
-        Artéfacts :
-        1. Modifier diagramme d'activité principal pour ajouter le temps.
-        2. Modifier le diagramme de classe :
-          2.1. Relier CentreDonnes avec les classes Service, Client etc.
-          2.2. Ajouter les nouveaux classes (vue + contrôleur)
-        3. Modifier le diagramme de séquences selon les remarques qui ont été faites
-
-        Générales :
-        1. Séparer Controleur, Vue (?) et CentreDonnées en deux pour spécialiser services et clients
-        2. Ajouter l'option application mobile ou desktop avant le menu principale. On affiche pas le même menu principale selon l'un ou l'autre.
-            Le client
-
-        Inscription :
-        1. Compte facebook pour l'inscription : précondition? Bizarre..
-        2. Utilisation de compte FB valide => courriel.
-        3. Les clients s'inscrive à partir de l'application avec son compte FB (on peut toujours laisser la façon avec l'agent aussi).
-        4. Ajouter la création d'un code QR pour le mobile.
-
-        Accès :
-        1. Accès au gym se fait avec le code.
-        2. Si le membre est valide, affichage des info + QR code sur l'écrane de l'app
-        (Il n'est pas nécessaire de générer des codes QR, vous pouvez simplement utiliser les codes qu'ils représentent pour les simuler.)
-
-        Inscription :
-        1. Inscription à partir de l'app mobile.
-
-        Création de la séance :
-        1. Changer la création d'un numéro de service (plutôt séance ?) : particularités selon le cours.
-
-        Consultation des séances :
-        1. Les profesisonnels consulte les inscriptions avec l'app mobile en utilisant son compte FB.
-
-        Confirmation de la présence :
-        1. Confirmation se fait par le professionnel sur son application avec le code QR.
-        2. Recherche se fait par le code de séance (avant c'était par le code de service).
-        3. Lecture du code QR d'un membre.
-        4. La confirmation inclut le code de la séance (avant c'était le code du service).
-
-        Procedure comptable :
-        1. Ajouter la création des factures envoyées aux membres et professionnels à chaque semaine.
-        2. Chaque rapport de membre doit être écrit dans son propre fichier ; le nom du fichier doit commencer par le nom du membre, suivi de la date du rapport.
-        Il en est de même pour les rapports de professionnels.
+        Workflow de conception :
+            Beaucoup de modificiations ont été apportées à la conception.
+            Avec l'ampleur des classes il a fallu en séparer beaucoup.
+            Le logiciel a été séparé en trois paquets : vue, modèle, contrôleur.
+            Les contrôleurs font le lien entre la vue et le modèle.
+            Plusieurs classes vues ont été créées pour mieux fragmenter le code et spécialiser les classes.
+            Les Centres de données sont séparés en deux. Les séparer en plus de classes aurait augmenté le couplage.
+            Les services ont maintenant un code à 3 chiffres qui ne dépend que du nom du service.
+            Les codes de séance ont maintenant 7 chiffres. Ils sont modifiés si le code de service change ou la journée de la séance change.
+            <a href="rapportDevoir2.htm" title="Deuxième rapport">Lien vers le deuxième rapport</a>.</p>
 
     </pre>
-
-    <p>Représentons ci-dessous les modifications des artifacts. La version complète du deuxième rapport modifié est disponible
-    <a href="rapportDevoir2.htm" title="deuxième rapport">ici</a>.</p>
-
-    <pre style="font-family: 'Open Sans';">
-
-    <span style="font-weight: bold;">1. Cas d'utilisation</span>
-
-    <span style="font-weight: bold;">2. Diagramme de classes</span>
-
-    <span style="font-weight: bold;">3. Diagrammes de séquence</span>
-
 
 
     </pre>
 
   <h2>Tâche 2 : Implémentation en Java</h2>
   <pre style="font-family: 'Open Sans';">
+    Les fonctions qui doivent être appelées automatiquement sont créées. Il n'y a par contre pas d'horloge qui les appelle présentement.
+    Il est possible d'appeler genererTef() et genererRapportSynthese dans la classe ControleurAdministration. Ces classes vont appeler
+    des méthodes de la classe CentreDonneesService pour générer les rapports.
+    Pour ce qui est de la modification du statut des membres, une méthode est créée dans ControleurClient. La méthode s'appelle
+    modifierStatutMembre et reçoit en paramètres une HashMap qui contient les numéros des clients et un booléen qui représente si le
+    membre est valide ou non.
 
+    L'application mobile est fonctionnelle. Il est possible d'ajouter des inscriptions aux séances pour les membres et des confirmations de présence
+    pour les professionnels. Le code QR est simulé avec le code membre.
+
+    Voici un lien vers le fichier exécutable :  <a href="Main.jar" title="Fichier exécutable">lien</a>.
   </pre>
 
 
 
   <h2>Tâche 3 : Tests unitaires </h2>
+   <pre style="font-family: 'Open Sans';">
+    Des tests unitaires ont été faits pour les méthodes publiques suivantes:
+        Demande d'accès au gym : ControleurClient.verifierTypeClient(type : TypeClient typeClient, idClient : String)
+        Gestion des comptes : ControleurClient.creerClient(type : TypeClient, attributs)
+                              ControleurClient.mettreClientAJour(type : TypeClient, id : String)
+                              ControleurClient.supprimerClient(type : TypeClient, id : String)
+        Mise à jour du statut des membres (RnB) : Controleur.modifierStatutMembre(liste : HashMap<String, Boolean>)
+        Gestion des services : ControleurServices.creerService(attributs d'un service)
+                               ControleurServices.mettreServicesAJour(id : String, champs : Champs, valeur : String)
+                               ControleurServices.supprimerService(id : String)
+        Inscription séance : ControleurServices.InscriptionSeance (idMembre : String, nom : String, idSeance : String)
+        Confirmer présence à la séance : ControleurServices.ConfirmerPresence(idSeance : String, idMembre : String)
+
+    Voici des liens vers chacune des classes de test :
+    <a href="Tests/ControleurClientTests.java" title="ControleurClientTests">Lien vers la classe de test pour ControleurClient</a>.
+    <a href="Tests/ControleurServiceTests.java" title="ControleurServiceTests">Lien vers la classe de test pour ControleurService</a>.
+
+      <figure>
+    <img src="images/JUnitTests.png" alt="Tests réussit" style="width:30%">
+    <figcaption>
+      <i>Figure 3.1 - Tests JUnit réussis.</i>
+    </figcaption>
+  </figure>
+  </pre>
 
 
 
   <h2>Tâche 4 : Livraison et documentation</h2>
-
-
+    Voici un lien vers le manuel d'utilisateur : <a href="Documentation/Manuel_utilisateur.pdf" title="Manuel d'utilisateur">lien</a>. <br>
+    Voici un lien vers les JavaDocs : <a href="Documentation/JavaDocs/index.html" title="JavaDocs">lien</a>.
 
   <h2>Collaboration</h2>
 
-
+  <figure>
+    <img src="images/Statistiques_bitbucket_3.png" alt="Statistiques du dépôt BitBucket" style="width:80%">
+    <figcaption>
+      <i>Figure 4.1 - Statistiques du dépôt BitBucket</i>
+    </figcaption>
+  </figure> <br>
 
 
 </body>

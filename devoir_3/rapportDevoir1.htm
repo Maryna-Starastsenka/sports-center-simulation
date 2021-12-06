@@ -294,23 +294,23 @@
     <span style="font-weight: bold;">Scénario principal :</span>
     1. Le logiciel affiche le menu
     2. L'agent choisit Inscription à une séance.
-    3. Le Répertoire des Services renvoie les séances disponibles.
-    4. Le membre choisit une séance.
-    5. Le membre donne son numéro pour l'inscription.
-      5.1. Le logiciel valide le numéro de membre.
+    3. Le membre donne son numéro pour l'inscription.
+      3.1. Le logiciel valide le numéro de membre.
+    4. Le Répertoire des Services renvoie les séances disponibles.
+    5. Le membre choisit une séance.
     6. Afficher le frais du service.
     7. Le membre confirme l'inscription.
     8. Le membre effectue le paiement du service.
     9. Le logiciel enregistre l'inscription.
     10. Le logiciel confirme l'inscription.
     <span style="font-weight: bold;">Scénarios alternatifs :</span>
+    3.1.a.1 Le numéro de membre n'est pas valide. "Numéro invalide" est affiché.
+    3.1.a.2 Le logiciel retourne au menu.
     4a.1 Le client ne trouve pas de séances intéressantes ou il n'y a aucune séance disponible.
     4a.2 Fin de l'inscription.
-      5.1b.1. Le numéro de membre n'est pas valide. "Numéro invalide" est affiché.
-      5.1b.2. Le membre veut continuer l'inscription, logiciel retourne à l'étape 5.
-      5.1c.2. Le membre ne veut plus continuer l'inscription, on annule la demande d'inscription.
-      5.1d.1. "Membre suspendu" est affiché.
-      5.1d.2. L'inscription est refusé.
+    5.c.1. Le membre ne veut plus continuer l'inscription, on annule la demande d'inscription.
+    5.d.2. "Membre suspendu" est affiché.
+    5.d.3. L'inscription est refusé.
     8e. Le service est trop chère et le membre veut choisir un autre service.
       8e.1. Logiciel retourne à l'étape 3.
       8f.1. Le membre ne veut plus s'inscrire à une séance.
@@ -505,6 +505,7 @@
     1. La Requête de génération de rapports est enclenché automatiquement le vendredi à minuit.
     2. Le Répertoire de service fournit les services de la semaine.
     3. Le logiciel crée un fichier de données de transfert électronique de fond pour chaque professionnel.
+    4. Le logiciel crée un fichier de données pour chaque membre qui a reçu au moins un service.
     4. Le logiciel enregistre les données.
     5. Le logiciel crée le rapport de synthèse de la dernière semaine.
     6. Le logiciel enregistre les données dans le Centre de données.
